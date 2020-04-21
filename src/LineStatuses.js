@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LineStatus from './LineStatus';
 import axios from 'axios';
+import './LineStatuses.scss';
 
 class LineStatuses extends Component {
   constructor(props){
@@ -11,6 +12,10 @@ class LineStatuses extends Component {
     }
   }
 
+  componentDidMount(){
+    this.getStatuses()
+  }
+
   async getStatuses(){
     let lines = []
 
@@ -18,11 +23,53 @@ class LineStatuses extends Component {
       headers : {Accept: 'application/json'}
     })
     let response = responseTubeStatuses.data.sort()
-    console.log(response)
     response.map(line => {
-      lines.push({line: line.name, status: line.lineStatuses[0].reason})
+      lines.push({
+        key: line.id,
+        id: line.id,
+        lineName: line.name,
+        status: line.lineStatuses[0].statusSeverityDescription,
+        reason: line.lineStatuses[0].reason
+      })
     })
-    console.log(lines)
+    this.setState({tube: lines})
+    // , color: `${Colors.line.id}`
+  }
+
+  render(){
+    const { tube } = this.state
+    const tubeStatuses = tube.map( tubeLine => (
+      <LineStatus key={tubeLine.id} line={tubeLine}/>
+    ))
+    return(
+      <div>
+        <h3 className='pageHeader'>Line Statuses</h3>
+        <main className='LineStatuses'>
+          {tubeStatuses}
+        </main>
+      </div>
+
+    )
+  }
+}
+
+export default LineStatuses;
+
+// function getLines() {
+//   $lines.empty()
+//   console.log('Getting Line information')
+//   $.ajax({
+//     method: 'GET',
+//     url: 'https://api.tfl.gov.uk/line/mode/tube/status'
+//   })
+//     .then(response => {
+//       lines = response
+//       lines.sort()
+//       console.log(lines)
+//       displayLines()
+//     })
+// }
+
 
 
     // try {
@@ -44,32 +91,4 @@ class LineStatuses extends Component {
     //   alert(error)
     //   this.setState({loading:false})
     // }
-  }
-
-  render(){
-    this.getStatuses();
-    return(
-      <div>
-        Statuses Page
-        <LineStatus/>
-      </div>
-    )
-  }
-}
-
-export default LineStatuses;
-
-// function getLines() {
-//   $lines.empty()
-//   console.log('Getting Line information')
-//   $.ajax({
-//     method: 'GET',
-//     url: 'https://api.tfl.gov.uk/line/mode/tube/status'
-//   })
-//     .then(response => {
-//       lines = response
-//       lines.sort()
-//       console.log(lines)
-//       displayLines()
-//     })
-// }
+  

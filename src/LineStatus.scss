@@ -1,0 +1,108 @@
+$color_TFL: rgb(000,025,168);
+$color_Emirates: rgb(220,036,031);
+$color_Buses: rgb(220,036,031);
+$color_DLR: rgb(000,175,173);
+$color_Overground: rgb(239,123,016);
+$color_Bakerloo: rgb(178,099,000);
+$color_Central: rgb(220,036,031);
+$color_Circle: rgb(255,211,041);
+$color_District: rgb(000,125,050);
+$color_Northern: rgb(000,000,000);
+$color_Metropolitan: rgb(155,000,088);
+$color_Jubilee: rgb(161,165,167);
+$color_Hammersmith: rgb(244,169,190);
+$color_Piccadilly: rgb(000,025,168);
+$color_Victoria: rgb(000,152,216);
+$color_Waterloo: rgb(147,206,186);
+
+$borderDev : 0px;
+$spacing: 20px;
+
+.card {
+  font-size: 12pt;
+  background-color: #eee;
+  border-radius: 15px;
+  /* border: 1px solid rgba(0, 0, 0,0.9); */
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+  height: 200px;
+  padding: 10px;
+}
+
+.line, form {
+  display: flex;
+  flex-direction: column;
+
+  .details {
+    border: $borderDev solid dodgerblue;
+    width: 100%;
+    // height: 100%;
+
+    .row {
+      border: $borderDev solid lightblue;
+      display: flex;
+      flex-direction: row;
+
+      &.lineColor {
+        height: 30px;
+        margin-bottom: 5px;
+        border-radius: 5px 5px 0 0;
+      }
+      &.Bakerloo {background-color: $color_Bakerloo;}
+      &.Central {background-color: $color_Central;}
+      &.Circle {background-color: $color_Circle;}
+      &.District {background-color: $color_District;}
+      &.Northern {background-color: $color_Northern;}
+      &.Metropolitan {background-color: $color_Metropolitan;}
+      &.Jubilee {background-color: $color_Jubilee;}
+      &.Hammersmith {background-color: $color_Hammersmith;}
+      &.Piccadilly {background-color: $color_Piccadilly;}
+      &.Victoria {background-color: $color_Victoria;}
+      &.Waterloo {background-color: $color_Waterloo;}
+
+      &.lineName {
+        margin-bottom: 5px;
+      }
+
+      .name {
+        border: $borderDev solid orange;
+      }
+      .status {
+        flex: 1;
+        text-align:right;
+        padding-top: 3px;
+      }
+
+      .labels {
+        width: 20%;
+        text-align: right;
+        padding-right: 7px;
+        font-weight: 600;
+      }
+      .data {
+        flex: 1;
+      }
+
+        img {
+          margin: 10px auto;
+          width: 50%;
+          box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+        }
+        p {
+          // font-size: 0.8em;
+          border: $borderDev solid orange;
+          // max-width: 100px;
+          word-wrap: break-word;
+          overflow: auto;
+        }
+
+
+    }
+
+  }
+
+}
+
+
+.hidden {
+	display: none;
+}
