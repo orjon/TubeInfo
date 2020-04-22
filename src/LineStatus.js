@@ -11,7 +11,7 @@ class LineStatus extends Component {
         disruptionReason = disruptionReason.substring(cropIndex)
       }
     return(
-      <div className='LineStatus'>
+      <div className='LineStatus' onClick={this.props.handleClick}>
         <div className={`card line ${line.id}`}>
           <div className='details'>
             <div className={`row lineColor ${line.lineName}`}></div>

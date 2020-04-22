@@ -15,7 +15,7 @@ $color_Piccadilly: rgb(000,025,168);
 $color_Victoria: rgb(000,152,216);
 $color_Waterloo: rgb(147,206,186);
 
-$borderDev : 0px;
+$borderDev : 1px;
 $spacing: 20px;
 
 .card {
@@ -26,6 +26,7 @@ $spacing: 20px;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
   height: 200px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .line, form {
