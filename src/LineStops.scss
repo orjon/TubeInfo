@@ -1,4 +1,4 @@
-$borderDev : 1px;
+$borderDev : 0px;
 $spacing: 20px;
 
 * {
@@ -16,6 +16,7 @@ a {
 }
 
 main {
+  color: white;
   width: 400px;
   flex: 1;
   height: 100%;
