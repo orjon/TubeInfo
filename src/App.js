@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      tubeLines: []
+      tubeLines: [],
     }
     this.getStops = this.getStops.bind(this)
     this.getStatuses = this.getStatuses.bind(this)
@@ -27,41 +27,15 @@ class App extends Component {
   }
 
 
-
-
-  //  async getInfo(){
-  //   let lines = []
-  //   let response = await axios.get('https://api.tfl.gov.uk/line/mode/tube/status', {
-  //     headers : {Accept: 'application/json'}
-  //   })
-  //   let linesInfo = response.data.sort()
-  //   // console.log(linesInfo);
-  //   linesInfo.map(line => 
-  //     lines.push({
-  //       key: line.id,
-  //       id: line.id,
-  //       lineName: line.name,
-  //       status: line.lineStatuses[0].statusSeverityDescription,
-  //       reason: line.lineStatuses[0].reason
-  //     })
-  //   )
-  //   console.log(lines);
-  //   this.setState({tubeLines: lines})
-  //   // this.findLineIndex('central')
-  // }
-
-
   async getStatuses(){
     const { apiString } = this.props
     let lines = []
     // let lineObj = {}
-    let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/3000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
     console.log('Statuses received')
-    // console.log(response)
     let linesInfo = response.data.sort()
-    // console.log(linesInfo);
     linesInfo.map(line => 
       lines.push({
         key: line.id,
@@ -85,39 +59,15 @@ class App extends Component {
   }
 
 
+  
+  async getStops(lineId){
+    console.log('IN GETSTOPS')
+    console.log('Line:', lineId)
+    let lineIndex = this.findLineIndex(lineId)
 
-  // async getAllStops(){
-  //   console.log('Getting stops')
-  //   let stops = []
-  //   let response =''
-  //   this.state.tubeLines.map(line => (
-  //     response = await axios.get(`https://api.tfl.gov.uk/Line/${line.lineName}/StopPoints?tflOperatedNationalRailStationsOnly=false`, {
-  //     headers : {Accept: 'application/json'}
-  //   })
-  //   ))
-  //   let lineStops = response.data
-  //   let thisLine = line, lineStops
-  //   console.log(thisLine)
-  //   // lineStops.map(stop => 
-  //   //   stops.push({
-  //   //     key: stop.id,
-  //   //     id: stop.id,
-  //   //     stopName: stop.commonName
-  //   //   })
-  //   // )
-    
-  //   console.log(stops)
-  //   // this.findLineIndex(line)
-  //   // this.setState({tubeLines.line: lines})
-  // }
-
-  async getStops(line){
-    let lineIndex = this.findLineIndex(line)
-    console.log('getStops Line[',lineIndex,']: ', line)
-    let { tubeLines } = this.state.tubeLines
     const { apiString } = this.props
     let stops = []
-    let response = await axios.get(`https://api.tfl.gov.uk/Line/${line}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
+    let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
     let lineStops = response.data
@@ -128,9 +78,14 @@ class App extends Component {
         stopName: stop.commonName
       })
     )
-    console.log(this.state.tubeLines[lineIndex].lineName)
-    console.log('getStops:', stops)
-    // this.setState({ tubeLines[line].stops: lines})
+
+    let lines = this.state.tubeLines
+    lines[lineIndex].stops = [...stops]
+    // console.log(this.state.tubeLines[lineIndex].lineName)
+    console.log('Stops:', stops)
+    console.log('allLines:', lines)
+    // this.setState({ tubeLines: lines})
+    console.log('OUT GETSTOPS')
     return stops;
   }
 
@@ -178,9 +133,8 @@ class App extends Component {
               <LineStops
                 tubeLines={this.state.tubeLines}
                 line={this.findLine(routeProps.match.params.id)}
-                // apiString={this.props.apiString}
+                lineIndex={this.findLineIndex(routeProps.match.params.id)}
                 getStops={this.getStops}
-                getStatuses={this.getStatuses}
                 />
             )}
           />
@@ -208,3 +162,27 @@ export default App;
   //    console.log('User', userResponse.data);
   //    console.log('Repositories', reposResponse.data);
   //  }));
+
+
+
+
+  //  async getInfo(){
+  //   let lines = []
+  //   let response = await axios.get('http://slowwly.robertomurray.co.uk/delay/3000/url/https://api.tfl.gov.uk/line/mode/tube/status', {
+  //     headers : {Accept: 'application/json'}
+  //   })
+  //   let linesInfo = response.data.sort()
+  //   // console.log(linesInfo);
+  //   linesInfo.map(line => 
+  //     lines.push({
+  //       key: line.id,
+  //       id: line.id,
+  //       lineName: line.name,
+  //       status: line.lineStatuses[0].statusSeverityDescription,
+  //       reason: line.lineStatuses[0].reason
+  //     })
+  //   )
+  //   console.log(lines);
+  //   this.setState({tubeLines: lines})
+  //   // this.findLineIndex('central')
+  // }

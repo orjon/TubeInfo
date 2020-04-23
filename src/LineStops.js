@@ -9,6 +9,13 @@ class LineStops extends Component{
     }
   }
 
+  constructor(props){
+    super(props);
+    this.state = {
+      tubeLines: this.props.tubeLines
+    }
+  }
+
   componentDidMount(){
 
   }
@@ -17,20 +24,28 @@ class LineStops extends Component{
 
   render(){
     console.log('IN STOPS')
-    const { line } = this.props
-    const lineStops = this.props.getStops(line.id)
-    if (this.props.tubeLines.length === 0){
-      this.props.getStatuses()
-    }
+    const { line, lineIndex } = this.props
+    console.log(line.stops.length)
+    let lineStops = []
+    // if (this.props.tubeLines.length === 0){
+    //   this.props.getStatuses()
+    // }
+
+    // if (this.props.tubeLines[lineIndex].stops.length === 0){
+    //   this.props.getStatuses()
+    // }
+
+
+    lineStops = this.props.getStops(line.id)
     // console.log('This line stops are: ', lineStops)
     return(
       <div>
         <h3 className='pageHeader'>Line Stops: {line.lineName}</h3>
         <main className='LineStops'>
           info
-          {line.stops.map(stop => 
+          {/* {this.state.tubeLines[lineIndex].stops.map(stop => 
             console.log(stop.stopName)
-          )}
+          )} */}
         </main>
       </div>
     )
