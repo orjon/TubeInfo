@@ -1,7 +1,4 @@
-$color_TFL: rgb(017,059,146);
-
-$borderDev : 0px;
-$spacing: 20px;
+@import 'Variables';
 
 * {
 	box-sizing: border-box;
@@ -30,9 +27,14 @@ a {
     margin-bottom: $spacing/2;
   }
 
+  section{
+    flex: 1;
+    border: $borderDev solid yellow;
+  }
+
   footer {
     text-align: right;
-    margin: 10px 0px;
+    margin-top: $spacing/2;
     border: $borderDev solid yellow;
     a {
       color:white;
@@ -41,19 +43,19 @@ a {
 
 
   @media screen and (min-width: 860px){
-    header, footer {
+    header, section, footer {
       width: 820px;
     }
     }
     
     @media screen and (min-width: 1280px){
-    header, footer  {
+    header, section, footer  {
       width: 1240px;
     }
     }
     
     @media screen and (min-width: 1700px){
-    header, footer  {
+    header, section, footer  {
       width: 1660px;
     }
   }

@@ -1,28 +1,10 @@
-$color_TFL: rgb(000,025,168);
-
-$borderDev : 0px;
-$spacing: 20px;
-
-* {
-	box-sizing: border-box;
-  margin: 0px;
-	font-family: sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color:black;
-}
-
-.pageHeader{
-  margin-bottom: $spacing/2;
-}
+@import 'Variables';
 
 main {
   color: black;
   width: 400px;
   flex: 1;
-  border: $borderDev solid yellow;
+  border: $borderDev solid lime;
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: $spacing;

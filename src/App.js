@@ -31,7 +31,7 @@ class App extends Component {
     const { apiString } = this.props
     let lines = []
     // let lineObj = {}
-    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/3000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1500/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
     console.log('Statuses received')
@@ -84,7 +84,7 @@ class App extends Component {
     // console.log(this.state.tubeLines[lineIndex].lineName)
     console.log('Stops:', stops)
     console.log('allLines:', lines)
-    // this.setState({ tubeLines: lines})
+    this.setState({ tubeLines: lines})
     console.log('OUT GETSTOPS')
     return stops;
   }
@@ -112,6 +112,7 @@ class App extends Component {
           <Nav />
         </header>
         <Switch>
+         
         <Route
             exact
             path='/'
@@ -131,11 +132,11 @@ class App extends Component {
             path='/line/:id'
             render={(routeProps) => (
               <LineStops
-                tubeLines={this.state.tubeLines}
-                line={this.findLine(routeProps.match.params.id)}
-                lineIndex={this.findLineIndex(routeProps.match.params.id)}
+                allLines={this.state.tubeLines}
+                thisLine={this.findLine(routeProps.match.params.id)}
+                thisLineIndex={this.findLineIndex(routeProps.match.params.id)}
                 getStops={this.getStops}
-                />
+              />
             )}
           />
   

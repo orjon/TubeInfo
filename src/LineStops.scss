@@ -1,26 +1,12 @@
-$borderDev : 0px;
-$spacing: 20px;
+@import 'Variables';
 
-* {
-	box-sizing: border-box;
-  margin: 0px;
-	font-family: sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
-
-.pageHeader{
-  margin-bottom: $spacing/2;
-}
 
 main {
   color: white;
   width: 400px;
   flex: 1;
   height: 100%;
-  border: $borderDev solid yellow;
+  border: $borderDev solid cyan;
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: $spacing;

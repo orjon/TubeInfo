@@ -1,22 +1,4 @@
-$color_TFL: rgb(000,025,168);
-$color_Emirates: rgb(220,036,031);
-$color_Buses: rgb(220,036,031);
-$color_DLR: rgb(000,175,173);
-$color_Overground: rgb(239,123,016);
-$color_Bakerloo: rgb(178,099,000);
-$color_Central: rgb(220,036,031);
-$color_Circle: rgb(255,211,041);
-$color_District: rgb(000,125,050);
-$color_Northern: rgb(000,000,000);
-$color_Metropolitan: rgb(155,000,088);
-$color_Jubilee: rgb(161,165,167);
-$color_Hammersmith: rgb(244,169,190);
-$color_Piccadilly: rgb(000,025,168);
-$color_Victoria: rgb(000,152,216);
-$color_Waterloo: rgb(147,206,186);
-
-$borderDev : 0px;
-$spacing: 20px;
+@import 'Variables';
 
 .card {
   font-size: 12pt;

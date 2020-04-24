@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LineStatus from './LineStatus';
+import './Sections.scss';
 import './LineStatuses.scss';
 
 class LineStatuses extends Component {
@@ -14,12 +15,12 @@ class LineStatuses extends Component {
       <LineStatus key={tubeLine.id} line={tubeLine} handleClick={() => this.goToLine(tubeLine.id)}/>
     ))
     return(
-      <div>
-        <h3 className='pageHeader'>Line Statuses</h3>
-        <main className='LineStatuses'>
+      <section>
+        <h3 className='sectionHeader'>Line Statuses</h3>
+        <main>
           {tubeStatuses}
         </main>
-      </div>
+      </section>
 
     )
   }

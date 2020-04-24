@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Sections.scss';
 import './LineStops.scss';
 
 class LineStops extends Component{
@@ -12,42 +13,41 @@ class LineStops extends Component{
   constructor(props){
     super(props);
     this.state = {
-      tubeLines: this.props.tubeLines
+      tubeLines: this.props.allLines
     }
   }
 
   componentDidMount(){
-
+    if (this.props.thisLine.stops.length === 0) {
+      this.props.getStops(this.props.thisLine.id)
+    }
   }
 
 
 
   render(){
     console.log('IN STOPS')
-    const { line, lineIndex } = this.props
-    console.log(line.stops.length)
-    let lineStops = []
+    const { thisLine, thisLineIndex } = this.props
     // if (this.props.tubeLines.length === 0){
     //   this.props.getStatuses()
-    // }
+    // }xs
 
     // if (this.props.tubeLines[lineIndex].stops.length === 0){
     //   this.props.getStatuses()
     // }
 
 
-    lineStops = this.props.getStops(line.id)
+    // lineStops = this.props.getStops(line.id)
     // console.log('This line stops are: ', lineStops)
     return(
-      <div>
-        <h3 className='pageHeader'>Line Stops: {line.lineName}</h3>
+      <section>
+        <h3 className='sectionHeader'>Line Stops: {thisLine.lineName}</h3>
         <main className='LineStops'>
-          info
-          {/* {this.state.tubeLines[lineIndex].stops.map(stop => 
-            console.log(stop.stopName)
-          )} */}
+          {this.state.tubeLines[thisLineIndex].stops.map(stop => 
+            <p key={stop.id}>{stop.stopName}</p>
+          )}
         </main>
-      </div>
+      </section>
     )
   }
 }
