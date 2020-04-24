@@ -117,7 +117,10 @@ class App extends Component {
             exact
             path='/'
             render={(routeProps) => (
-              <LineStatuses {...routeProps} tubeLines={this.state.tubeLines}/>
+              <LineStatuses
+                {...routeProps}
+                tubeLines={this.state.tubeLines}
+                />
             )}
           />
           <Route
@@ -133,8 +136,8 @@ class App extends Component {
             render={(routeProps) => (
               <LineStops
                 allLines={this.state.tubeLines}
-                thisLine={this.findLine(routeProps.match.params.id)}
-                thisLineIndex={this.findLineIndex(routeProps.match.params.id)}
+                line={this.findLine(routeProps.match.params.id)}
+                lineIndex={this.findLineIndex(routeProps.match.params.id)}
                 getStops={this.getStops}
               />
             )}

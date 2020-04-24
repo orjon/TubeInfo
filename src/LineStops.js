@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Sections.scss';
 import './LineStops.scss';
+import LineStop from './LineStop';
 
 class LineStops extends Component{
   static defaultProps={
@@ -18,8 +19,8 @@ class LineStops extends Component{
   }
 
   componentDidMount(){
-    if (this.props.thisLine.stops.length === 0) {
-      this.props.getStops(this.props.thisLine.id)
+    if (this.props.line.stops.length === 0) {
+      this.props.getStops(this.props.line.id)
     }
   }
 
@@ -27,7 +28,11 @@ class LineStops extends Component{
 
   render(){
     console.log('IN STOPS')
-    const { thisLine, thisLineIndex } = this.props
+    const { line, lineIndex } = this.props
+
+    let lineStops = this.state.tubeLines[lineIndex].stops.map(stop => 
+      <LineStop stop={stop} />
+    )
     // if (this.props.tubeLines.length === 0){
     //   this.props.getStatuses()
     // }xs
@@ -40,12 +45,25 @@ class LineStops extends Component{
     // lineStops = this.props.getStops(line.id)
     // console.log('This line stops are: ', lineStops)
     return(
+
       <section>
-        <h3 className='sectionHeader'>Line Stops: {thisLine.lineName}</h3>
+        <h3 className='sectionHeader'>Underground Line Stations</h3>
         <main className='LineStops'>
-          {this.state.tubeLines[thisLineIndex].stops.map(stop => 
-            <p key={stop.id}>{stop.stopName}</p>
-          )}
+          <div className={`card line ${line.id}`}>
+            <div className='details'>
+              <div className={`row lineColor ${line.lineName}`}></div>
+              <div className='row lineName'>
+                <h3 className='name'>{line.lineName}</h3>
+                <p className='status'>Stations: {line.stops.length}</p>
+              </div>
+              <div className='row'>
+                <div className='data'>
+                  {lineStops}
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </main>
       </section>
     )
@@ -53,3 +71,10 @@ class LineStops extends Component{
 }
 
 export default LineStops;
+
+{/* <LineStops
+allLines={this.state.tubeLines}
+line={this.findLine(routeProps.match.params.id)}
+lineIndex={this.findLineIndex(routeProps.match.params.id)}
+getStops={this.getStops}
+/> */}
