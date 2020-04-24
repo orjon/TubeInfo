@@ -30,7 +30,6 @@ class App extends Component {
   async getStatuses(){
     const { apiString } = this.props
     let lines = []
-    // let lineObj = {}
     let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1500/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
@@ -43,17 +42,9 @@ class App extends Component {
         lineName: line.name,
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: line.lineStatuses[0].reason,
-        // stops: this.getStops(line.id)
         stops: []
       })
     )
-
-    // Convert data to be ojbects with id as key
-    // for (let i=0; i < lines.length; i++){
-    //   lineObj[lines[i].id] = lines[i]
-    // }
-    // console.log(lineObj)
-
     this.setState({tubeLines: lines})
     console.log(this.state.tubeLines)
   }
@@ -61,10 +52,7 @@ class App extends Component {
 
   
   async getStops(lineId){
-    console.log('IN GETSTOPS')
-    console.log('Line:', lineId)
     let lineIndex = this.findLineIndex(lineId)
-
     const { apiString } = this.props
     let stops = []
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
@@ -78,14 +66,9 @@ class App extends Component {
         stopName: stop.commonName
       })
     )
-
     let lines = this.state.tubeLines
     lines[lineIndex].stops = [...stops]
-    // console.log(this.state.tubeLines[lineIndex].lineName)
-    console.log('Stops:', stops)
-    console.log('allLines:', lines)
     this.setState({ tubeLines: lines})
-    console.log('OUT GETSTOPS')
     return stops;
   }
 
@@ -135,6 +118,7 @@ class App extends Component {
             path='/line/:id'
             render={(routeProps) => (
               <LineStops
+                {...routeProps} 
                 allLines={this.state.tubeLines}
                 line={this.findLine(routeProps.match.params.id)}
                 lineIndex={this.findLineIndex(routeProps.match.params.id)}

@@ -24,31 +24,24 @@ class LineStops extends Component{
     }
   }
 
+  goToStatuses = () => {
+    this.props.history.push(`/`);
+  }
+  
+
 
 
   render(){
-    console.log('IN STOPS')
     const { line, lineIndex } = this.props
 
     let lineStops = this.state.tubeLines[lineIndex].stops.map(stop => 
-      <LineStop stop={stop} />
+      <LineStop key={stop.id} stop={stop} />
     )
-    // if (this.props.tubeLines.length === 0){
-    //   this.props.getStatuses()
-    // }xs
 
-    // if (this.props.tubeLines[lineIndex].stops.length === 0){
-    //   this.props.getStatuses()
-    // }
-
-
-    // lineStops = this.props.getStops(line.id)
-    // console.log('This line stops are: ', lineStops)
     return(
-
       <section>
         <h3 className='sectionHeader'>Underground Line Stations</h3>
-        <main className='LineStops'>
+        <main className='LineStops' onClick={this.goToStatuses}>
           <div className={`card line ${line.id}`}>
             <div className='details'>
               <div className={`row lineColor ${line.lineName}`}></div>
@@ -71,10 +64,3 @@ class LineStops extends Component{
 }
 
 export default LineStops;
-
-{/* <LineStops
-allLines={this.state.tubeLines}
-line={this.findLine(routeProps.match.params.id)}
-lineIndex={this.findLineIndex(routeProps.match.params.id)}
-getStops={this.getStops}
-/> */}
