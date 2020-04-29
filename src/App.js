@@ -34,15 +34,17 @@ class App extends Component {
     }
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)
-      console.log(lines[i].stations.length)
       for (let j=0; j<lines[i].stations.length; j++){
         lines[i].stations[j].line = lines[i].id
         stations = this.addStation(lines[i].stations[j], stations)
       }
-      console.log(stations)
+      
     }
 
     
+    stations.sort( this.compare );
+
+    console.log(stations.sort())
 
     this.setState({
       tubeLines: lines,
@@ -51,12 +53,22 @@ class App extends Component {
   }
 
   addStation(newStation, stations){
+    // There are 382 total stops on all lines.
     let found = undefined
     found = stations.find(station => station.id === newStation.id);
     found && console.log('Found!', newStation.name)
-    !found && console.log('New!', newStation.name)
     stations = [...stations, newStation]
     return stations
+  }
+
+  compare( stationA, stationB ) {
+    if ( stationA.name < stationB.name ){
+      return -1;
+    }
+    if ( stationA.name > stationB.name ){
+      return 1;
+    }
+    return 0;
   }
 
 
@@ -76,7 +88,7 @@ class App extends Component {
       lines.push({
         key: line.id,
         id: line.id,
-        lineName: line.name,
+        name: line.name,
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: line.lineStatuses[0].reason,
         stopOrder: [],

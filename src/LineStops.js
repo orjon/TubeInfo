@@ -44,9 +44,9 @@ class LineStops extends Component{
         <main className='LineStops' onClick={this.goToStatuses}>
           <div className={`card line ${line.id}`}>
             <div className='details'>
-              <div className={`row lineColor ${line.lineName}`}></div>
+              <div className={`row lineColor ${line.name}`}></div>
               <div className='row lineName'>
-                <h3 className='name'>{line.lineName}</h3>
+                <h3 className='name'>{line.name}</h3>
                 <p className='status'>Stations: {line.stations.length}</p>
               </div>
               <div className='row'>

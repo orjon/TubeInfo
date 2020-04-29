@@ -14,9 +14,9 @@ class LineStatus extends Component {
       <div className='LineStatus' onClick={this.props.handleClick}>
         <div className={`card line ${line.id}`}>
           <div className='details'>
-            <div className={`row lineColor ${line.lineName}`}></div>
+            <div className={`row lineColor ${line.name}`}></div>
             <div className='row lineName'>
-              <h3 className='name'>{line.lineName}</h3>
+              <h3 className='name'>{line.name}</h3>
               <p className='status'>{line.status}</p>
             </div>
             <div className='row'>
