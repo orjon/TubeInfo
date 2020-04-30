@@ -6,28 +6,30 @@ import LineStop from './LineStop';
 class LineStops extends Component{
   static defaultProps={
     line: {
-      lineName: '',
-      stops: []
+      id: 'loading...',
+      name: 'loading...',
+      stations: []
+    },
+    tubeLines: {
+
     }
   }
 
-  constructor(props){
-    super(props);
-    this.state = {
-      tubeLines: this.props.allLines
-    }
-  }
 
   goToStatuses = () => {
     this.props.history.push(`/`);
   }
+
+  goToStation(id){
+    this.props.history.push(`/station/${id}`);
+  }
   
 
   render(){
-    const { line, lineIndex } = this.props
+    const { line } = this.props
 
-    let lineStops = this.state.tubeLines[lineIndex].stations.map(station => 
-      <LineStop key={station.id} station={station} />
+    let lineStops = line.stations.map(station => 
+      <LineStop key={station.id} station={station} handleClick={() => this.goToStation(station.url)}/>
     )
 
     return(

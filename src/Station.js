@@ -23,12 +23,10 @@ class Station extends Component {
     return(
       <section>
         <h3 className='sectionHeader'>Station Details</h3>
-        <main className='LineStops' onClick={this.goToStatuses}>
-          {station.name}
-          {/* <div className={`card line`}> 
-          ${station.id}
+        <main className='LineStops'>
+          <div className={`card line`}> 
             <div className='details'>
-              <div className={`row lineColor ${station.name}`}></div>
+              {/* <div className={`row lineColor ${station.name}`}></div> */}
               <div className='row lineName'>
                 <h3 className='name'>{station.name}</h3>
                 <p className='status'>Stations: </p>
@@ -39,7 +37,7 @@ class Station extends Component {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           
         </main>
       </section>

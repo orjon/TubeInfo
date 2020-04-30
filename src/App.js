@@ -194,7 +194,7 @@ class App extends Component {
             render={(routeProps) => (
               <LineStops
                 {...routeProps} 
-                allLines={this.state.tubeLines}
+                // tubeLines={this.state.tubeLines}
                 line={this.findLine(routeProps.match.params.id)}
                 lineIndex={this.findLineIndex(routeProps.match.params.id)}
               />
