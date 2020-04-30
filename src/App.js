@@ -85,7 +85,6 @@ class App extends Component {
 
 
   async getStations(lineId){
-    // let lineIndex = this.findLineIndex(lineId)
     const { apiString } = this.props
     let lineStations = []
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
@@ -124,10 +123,12 @@ class App extends Component {
 
   addStation(newStation, stations){
     // There are 382 total stops on all lines.
-    let found = undefined
-    found = stations.find(station => station.id === newStation.id);
-    // found && console.log('Found!', newStation.name)
-    stations = [...stations, newStation]
+    let foundIndex = stations.findIndex(station => station.id === newStation.id);
+    if (foundIndex !== -1){
+      stations[foundIndex].lines.push(newStation.lines[0])
+    } else {
+      stations = [...stations, newStation]
+    }
     return stations
   }
 

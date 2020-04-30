@@ -11,6 +11,7 @@ class Station extends Component {
       lines: []
     }
   }
+
   goToStatuses = () => {
     this.props.history.push(`/`);
   }
@@ -23,8 +24,9 @@ class Station extends Component {
       <section>
         <h3 className='sectionHeader'>Station Details</h3>
         <main className='LineStops' onClick={this.goToStatuses}>
-          <div className={`card line`}> 
-          {/* ${station.id} */}
+          {station.name}
+          {/* <div className={`card line`}> 
+          ${station.id}
             <div className='details'>
               <div className={`row lineColor ${station.name}`}></div>
               <div className='row lineName'>
@@ -37,7 +39,7 @@ class Station extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           
         </main>
       </section>
