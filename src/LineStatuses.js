@@ -16,7 +16,7 @@ class LineStatuses extends Component {
     ))
     return(
       <section>
-        <h3 className='sectionHeader'>Underground Line Statuses</h3>
+        <h3 className='sectionHeader'>Line Statuses</h3>
         <main className='gridContainer'>
           {tubeStatuses}
         </main>

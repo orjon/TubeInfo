@@ -7,7 +7,8 @@
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
   //Fixed Card height?
   // height: 200px;
-  padding: 10px;
+  padding: 15px;
+  // padding-bottom: 10px;
   cursor: pointer;
 }
 
@@ -28,7 +29,7 @@
       &.lineColor {
         height: 30px;
         margin-bottom: 5px;
-        border-radius: 5px 5px 0 0;
+        // border-radius: 5px 5px 0 0;
       }
       &.Bakerloo {background-color: $color_Bakerloo;}
       &.Central {background-color: $color_Central;}

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Nav from './Nav';
 import LineStops from './LineStops'
 import LineStatuses from './LineStatuses';
+import Station from './Station';
 import './App.scss';
 
 
@@ -35,46 +36,19 @@ class App extends Component {
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)
       for (let j=0; j<lines[i].stations.length; j++){
-        lines[i].stations[j].line = lines[i].id
+        lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
       
     }
-
-    
     stations.sort( this.compare );
-
     console.log(stations.sort())
-
     this.setState({
       tubeLines: lines,
       stations: stations
     })
   }
 
-  addStation(newStation, stations){
-    // There are 382 total stops on all lines.
-    let found = undefined
-    found = stations.find(station => station.id === newStation.id);
-    found && console.log('Found!', newStation.name)
-    stations = [...stations, newStation]
-    return stations
-  }
-
-  compare( stationA, stationB ) {
-    if ( stationA.name < stationB.name ){
-      return -1;
-    }
-    if ( stationA.name > stationB.name ){
-      return 1;
-    }
-    return 0;
-  }
-
-
-//   let myObjects = [{"name":"a", "value":0}, {"name":"b", "value":1},{"name":"c", "value":2}];
-// let found = myObjects.find(e => e.name === "a");
-// console.log(found);
 
   async getStatuses(){
     const { apiString } = this.props
@@ -82,7 +56,7 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    console.log('Got Statuses')
+    // console.log('Got Statuses')
     let linesInfo = response.data
     linesInfo.map(line => 
       lines.push({
@@ -104,11 +78,10 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/Route/Sequence/all?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    console.log('Got Order ', {lineId})
-    let stopOrder = response.data
+    // console.log('Got Order ', {lineId})
+    let stopOrder = response.data.orderedLineRoutes
     return stopOrder
   }
-
 
 
   async getStations(lineId){
@@ -118,15 +91,54 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    console.log('Got Stations:', {lineId})
-    response.data.map(station => 
-      lineStations.push({
+    // console.log('Got Stations:', {lineId})
+    // console.log('Line Stations:', response.data)
+    response.data.map(station => {
+      let stationName = this.trimStationName(station.commonName)
+      let stationUrl = this.kebabCase(stationName)
+      return lineStations.push({
         key: station.id,
         id: station.id,
-        name: station.commonName
+        url: stationUrl,
+        name: stationName,
+        lat: station.lat,
+        lon: station.lon
       })
-    )
+    })
     return lineStations;
+  }
+
+  trimStationName(stationName){
+    let trimmedStationName = stationName.replace('Underground Station', '')
+    let cropIndex1 = trimmedStationName.indexOf('(') + 2
+    if (cropIndex1 !== 0){
+      trimmedStationName = trimmedStationName.slice(0, (cropIndex1-2))
+    } 
+    return trimmedStationName
+  }
+
+  kebabCase(inputString){
+    let outputString = inputString.toLowerCase().replace(/ /g, '-')
+    return outputString
+  }
+
+  addStation(newStation, stations){
+    // There are 382 total stops on all lines.
+    let found = undefined
+    found = stations.find(station => station.id === newStation.id);
+    // found && console.log('Found!', newStation.name)
+    stations = [...stations, newStation]
+    return stations
+  }
+
+  compare( stationA, stationB ) {
+    if ( stationA.name < stationB.name ){
+      return -1;
+    }
+    if ( stationA.name > stationB.name ){
+      return 1;
+    }
+    return 0;
   }
 
   //returns single line based on id
@@ -136,14 +148,17 @@ class App extends Component {
     })
   }
 
-
+  findStation = (stationToFind) => {
+    return this.state.stations.find(function(station){
+      return station.url === stationToFind;
+    })
+  }
 
 
   findLineIndex = (lineToFind) => {
     let index = this.state.tubeLines.findIndex(line => line.id === lineToFind)
     return index
   }
-
 
 
   render(){
@@ -181,7 +196,16 @@ class App extends Component {
                 allLines={this.state.tubeLines}
                 line={this.findLine(routeProps.match.params.id)}
                 lineIndex={this.findLineIndex(routeProps.match.params.id)}
-                getStops={this.getStops}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/station/:id'
+            render={(routeProps) => (
+              <Station
+                {...routeProps} 
+                station={this.findStation(routeProps.match.params.id)}
               />
             )}
           />

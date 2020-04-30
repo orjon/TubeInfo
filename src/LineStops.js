@@ -18,18 +18,10 @@ class LineStops extends Component{
     }
   }
 
-  componentDidMount(){
-    // if (this.props.line.stops.length === 0) {
-    //   this.props.getStops(this.props.line.id)
-    // }
-  }
-
   goToStatuses = () => {
     this.props.history.push(`/`);
   }
   
-
-
 
   render(){
     const { line, lineIndex } = this.props
@@ -40,7 +32,7 @@ class LineStops extends Component{
 
     return(
       <section>
-        <h3 className='sectionHeader'>Underground Line Stations</h3>
+        <h3 className='sectionHeader'>Line Details</h3>
         <main className='LineStops' onClick={this.goToStatuses}>
           <div className={`card line ${line.id}`}>
             <div className='details'>
