@@ -26,22 +26,13 @@
       display: flex;
       flex-direction: row;
 
+
       &.lineColor {
         height: 30px;
         // margin-bottom: 5px;
         // border-radius: 5px 5px 0 0;
       }
-      &.bakerloo {background-color: $color_Bakerloo;}
-      &.central {background-color: $color_Central;}
-      &.circle {background-color: $color_Circle;}
-      &.district {background-color: $color_District;}
-      &.northern {background-color: $color_Northern;}
-      &.metropolitan {background-color: $color_Metropolitan;}
-      &.jubilee {background-color: $color_Jubilee;}
-      &.hammersmith-city {background-color: $color_Hammersmith;}
-      &.piccadilly {background-color: $color_Piccadilly;}
-      &.victoria {background-color: $color_Victoria;}
-      &.waterloo-city {background-color: $color_Waterloo;}
+
 
       &.lineName {
         margin-bottom: 5px;
@@ -89,3 +80,15 @@
   }
 
 }
+
+.bakerloo {background-color: $color_Bakerloo;}
+.central {background-color: $color_Central;}
+.circle {background-color: $color_Circle;}
+.district {background-color: $color_District;}
+.northern {background-color: $color_Northern;}
+.metropolitan {background-color: $color_Metropolitan;}
+.jubilee {background-color: $color_Jubilee;}
+.hammersmith-city {background-color: $color_Hammersmith;}
+.piccadilly {background-color: $color_Piccadilly;}
+.victoria {background-color: $color_Victoria;}
+.waterloo-city {background-color: $color_Waterloo;}

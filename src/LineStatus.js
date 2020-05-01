@@ -12,7 +12,7 @@ class LineStatus extends Component {
       }
     return(
       <div className='LineStatus' onClick={this.props.handleClick}>
-        <div className={`card line ${line.id}`}>
+        <div className={`card line`}>
           <div className='details'>
             <div className={`row lineColor ${line.id}`}></div>
             <div className='row lineName'>

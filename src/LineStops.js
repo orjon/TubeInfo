@@ -37,7 +37,7 @@ class LineStops extends Component{
         <h3 className='sectionHeader'>Line Details</h3>
         <main className='LineStops'> 
         {/* //onClick={this.goToStatuses} */}
-          <div className={`card line ${line.id}`}>
+          <div className={`card line`}>
             <div className='details'>
               <div className={`row lineColor ${line.id}`}></div>
               <div className='row lineName'>
