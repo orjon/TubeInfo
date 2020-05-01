@@ -103,7 +103,7 @@ class App extends Component {
         url: stationUrl,
         name: stationName,
         lat: station.lat,
-        lon: station.lon
+        lng: station.lon
       })
     })
     return lineStations;

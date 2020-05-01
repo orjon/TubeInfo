@@ -9,7 +9,7 @@ class Station extends Component {
       url: 'loading...',
       name: 'loading...',
       lat: 0,
-      lon: 0,
+      lng: 0,
       lines: []
     }
   }
@@ -19,26 +19,17 @@ class Station extends Component {
     this.state = {
       location: {
         lat: this.props.station.lat,
-        lng: this.props.station.lon
+        lng: this.props.station.lng
       }
     };
-    this.markers = []
   }
 
-
-  componentDidMount() {
-    // const map = 
-    // new mapboxgl.Map({
-    //   container: this.mapContainer,
-    //   style: 'mapbox://styles/mapbox/streets-v11',
-    //   center: [this.state.lng, this.state.lat],
-    //   zoom: this.state.zoom
-    // });
-  }
 
   goToStatuses = () => {
     this.props.history.push(`/`);
   }
+  
+
 
 
 
@@ -49,7 +40,14 @@ class Station extends Component {
       <div key={line} className={`row lineColor ${line}`}>{line.name}</div>
     )
 
-    
+    let lat = station.lat + '°N'
+    let lng = station.lng
+
+    if (lng >= 0) {
+        lng = lng + '°E'
+    } else{
+      lng = - lng + '°W'
+    } 
 
     return(
       <section>
@@ -59,20 +57,13 @@ class Station extends Component {
             <div className='details'>
               <div className='row lineName'>
                 <h3 className='name'>{station.name}</h3>
-                <p className='status'>Stations: </p>
+                <p className='status'>{lat} {lng} </p>
               </div>
               {this.state.location &&
                 <Map
                   location={this.state.location}
                 />
               }
-              {/* {this.state.points &&
-                <Map
-                  center={this.mapCenter}
-                  points={this.state.points}
-                  onClick={this.handleClick}
-                />
-              } */}
               {lineBars}
               <div className='row'>
                 <div className='data'>
