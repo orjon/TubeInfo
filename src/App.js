@@ -23,7 +23,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-
     if (this.state.tubeLines.length === 0){
       this.getInfo()
     }

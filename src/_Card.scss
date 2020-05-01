@@ -28,7 +28,7 @@
 
       &.lineColor {
         height: 30px;
-        margin-bottom: 5px;
+        // margin-bottom: 5px;
         // border-radius: 5px 5px 0 0;
       }
       &.bakerloo {background-color: $color_Bakerloo;}
@@ -45,6 +45,10 @@
 
       &.lineName {
         margin-bottom: 5px;
+      }
+
+      &.map {
+        height: 400px;
       }
 
       .name {
