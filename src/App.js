@@ -10,8 +10,10 @@ import './App.scss';
 
 class App extends Component {
   static defaultProps = {
-    apiString: `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
+    apiString: `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`,
+    mapboxToken: process.env.REACT_APP_MAPBOX_TOKEN
   }
+
   constructor(props){
     super(props);
     this.state={
@@ -21,6 +23,7 @@ class App extends Component {
   }
 
   componentDidMount(){
+
     if (this.state.tubeLines.length === 0){
       this.getInfo()
     }

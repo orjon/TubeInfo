@@ -20,13 +20,18 @@ class Station extends Component {
   render(){
     const { station } = this.props
 
+    let lineBars = station.lines.map(line => 
+      <div key={line} className={`row lineColor ${line}`}>{line.name}</div>
+    )
+    
+
     return(
       <section>
         <h3 className='sectionHeader'>Station Details</h3>
         <main className='LineStops'>
           <div className={`card line`}> 
             <div className='details'>
-              {/* <div className={`row lineColor ${station.name}`}></div> */}
+              {lineBars}
               <div className='row lineName'>
                 <h3 className='name'>{station.name}</h3>
                 <p className='status'>Stations: </p>

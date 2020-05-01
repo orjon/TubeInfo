@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './LineStop.scss';
 
 class LineStop extends Component{
@@ -8,7 +9,11 @@ class LineStop extends Component{
     let station = this.props.station
   
     return(
-      <div className='LineStop'>{station.name} ({station.id}): next @ </div>
+      <div className='LineStop'>
+        <Link to={`/station/${station.url}`} onClick={e => e.stopPropagation }>
+          {station.name} ({station.id})
+        </Link>
+      </div>
     )
   }
 }

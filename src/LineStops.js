@@ -29,16 +29,17 @@ class LineStops extends Component{
     const { line } = this.props
 
     let lineStops = line.stations.map(station => 
-      <LineStop key={station.id} station={station} handleClick={() => this.goToStation(station.url)}/>
+      <LineStop key={station.id} station={station}/>
     )
 
     return(
       <section>
         <h3 className='sectionHeader'>Line Details</h3>
-        <main className='LineStops' onClick={this.goToStatuses}>
+        <main className='LineStops'> 
+        {/* //onClick={this.goToStatuses} */}
           <div className={`card line ${line.id}`}>
             <div className='details'>
-              <div className={`row lineColor ${line.name}`}></div>
+              <div className={`row lineColor ${line.id}`}></div>
               <div className='row lineName'>
                 <h3 className='name'>{line.name}</h3>
                 <p className='status'>Stations: {line.stations.length}</p>
