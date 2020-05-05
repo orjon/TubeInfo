@@ -18,7 +18,7 @@ class App extends Component {
     super(props);
     this.state={
       tubeLines: [],
-      stations:[]
+      stations: []
     }
   }
 
@@ -30,19 +30,26 @@ class App extends Component {
 
 
   async getInfo(){
-    let lines = await this.getStatuses()
     let stations = []
-    for (let i=0; i<lines.length; i++){
-      lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-    }
+    console.log('Getting statuses...')
+    let lines = await this.getStatuses()
+    //----------------------------------
+    // console.log('Getting stop orders...')
+    // for (let i=0; i<lines.length; i++){
+    //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
+    // }
+    //----------------------------------
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)
       for (let j=0; j<lines[i].stations.length; j++){
         lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
-      
+      // for (let k=0; k<stations.length; k++){
+      //   stations[k].arrivals = await this.getArrivals(stations[k].id)
+      // }
     }
+    // console.log(this.findStationFromId('940GZZLUBBB'))
     stations.sort( this.compare );
     console.log(stations.sort())
     this.setState({
@@ -58,7 +65,6 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    // console.log('Got Statuses')
     let linesInfo = response.data
     linesInfo.map(line => 
       lines.push({
@@ -80,7 +86,7 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/Route/Sequence/all?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    // console.log('Got Order ', {lineId})
+    // console.log('Got:', lineId)
     let stopOrder = response.data.orderedLineRoutes
     return stopOrder
   }
@@ -103,11 +109,40 @@ class App extends Component {
         url: stationUrl,
         name: stationName,
         lat: station.lat,
-        lng: station.lon
+        lng: station.lon,
+        arrivals: []
       })
     })
     return lineStations;
   }
+
+  // async getArrivals(stationId){
+  //   const { apiString } = this.props
+  //   let { arrivals } = this.state
+  //   let stationIndex = this.findStationFromId(stationId)
+  //   console.log('Station Index:',stationIndex)
+  //   let stationArrivals = []
+  //   let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1000/url/https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
+  //     headers : {Accept: 'application/json'}
+  //   })
+  //   // console.log('Got Stations:', {lineId})
+  //   // stationArrivals = response.data
+  //   response.data.map(arrival => 
+  //     stationArrivals.push({
+  //       lineName: arrival.lineName,
+  //       lineId: arrival.lineId,
+  //       platform: arrival.platformName,
+  //       desintation: arrival.destination,
+  //       towards: arrival.towards,
+  //       expected: arrival.expectedArrival
+  //     })
+  //   )
+  //   console.log(arrivals)
+  //   // stations[stationIndex].arrivals = arrivals
+  //   this.setState({
+  //     arrivals: stations
+  //   })
+  // }
 
   trimStationName(stationName){
     let trimmedStationName = stationName.replace('Underground Station', '')
@@ -119,7 +154,7 @@ class App extends Component {
   }
 
   kebabCase(inputString){
-    let outputString = inputString.toLowerCase().replace(/ /g, '-')
+    let outputString = inputString.toLowerCase().replace(/ /g, '-').replace(/'/g, '')
     return outputString
   }
 
@@ -151,10 +186,14 @@ class App extends Component {
     })
   }
 
-  findStation = (stationToFind) => {
+  findStationFromUrl = (stationToFind) => {
     return this.state.stations.find(function(station){
       return station.url === stationToFind;
     })
+  }
+
+  findStationFromId = (stationToFind) => {
+    return this.state.stations.findIndex( station => station.id === stationToFind);
   }
 
 
@@ -187,7 +226,10 @@ class App extends Component {
             exact
             path='/tube/status'
             render={(routeProps) => (
-              <LineStatuses {...routeProps} tubeLines={this.state.tubeLines}/>
+              <LineStatuses
+                {...routeProps}
+                tubeLines={this.state.tubeLines}
+              />
             )}
           />
           <Route
@@ -204,11 +246,13 @@ class App extends Component {
           />
           <Route
             exact
-            path='/station/:id'
+            path='/station/:url'
             render={(routeProps) => (
               <Station
                 {...routeProps} 
-                station={this.findStation(routeProps.match.params.id)}
+                apiString={this.props.apiString}
+                station={this.findStationFromUrl(routeProps.match.params.url)}
+                // arrivals={this.getArrivals((this.findStationFromUrl(routeProps.match.params.url)).id)}
               />
             )}
           />

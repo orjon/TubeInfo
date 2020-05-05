@@ -3,6 +3,10 @@
 @import 'Variables';
 @import 'Card';
 
+.LineStatus {
+	cursor: pointer;
+}
+
 .hidden {
 	display: none;
 }

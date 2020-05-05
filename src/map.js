@@ -6,8 +6,8 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: this.props.location.lng,
-      lat: this.props.location.lat,
+      lng: this.props.lng,
+      lat: this.props.lat,
       zoom: 15
     };
     this.markers = []
