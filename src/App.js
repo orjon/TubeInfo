@@ -116,34 +116,6 @@ class App extends Component {
     return lineStations;
   }
 
-  // async getArrivals(stationId){
-  //   const { apiString } = this.props
-  //   let { arrivals } = this.state
-  //   let stationIndex = this.findStationFromId(stationId)
-  //   console.log('Station Index:',stationIndex)
-  //   let stationArrivals = []
-  //   let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1000/url/https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
-  //     headers : {Accept: 'application/json'}
-  //   })
-  //   // console.log('Got Stations:', {lineId})
-  //   // stationArrivals = response.data
-  //   response.data.map(arrival => 
-  //     stationArrivals.push({
-  //       lineName: arrival.lineName,
-  //       lineId: arrival.lineId,
-  //       platform: arrival.platformName,
-  //       desintation: arrival.destination,
-  //       towards: arrival.towards,
-  //       expected: arrival.expectedArrival
-  //     })
-  //   )
-  //   console.log(arrivals)
-  //   // stations[stationIndex].arrivals = arrivals
-  //   this.setState({
-  //     arrivals: stations
-  //   })
-  // }
-
   trimStationName(stationName){
     let trimmedStationName = stationName.replace('Underground Station', '')
     let cropIndex1 = trimmedStationName.indexOf('(') + 2
@@ -252,7 +224,6 @@ class App extends Component {
                 {...routeProps} 
                 apiString={this.props.apiString}
                 station={this.findStationFromUrl(routeProps.match.params.url)}
-                // arrivals={this.getArrivals((this.findStationFromUrl(routeProps.match.params.url)).id)}
               />
             )}
           />

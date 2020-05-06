@@ -25,7 +25,12 @@
       border: $borderDev solid lightblue;
       display: flex;
       flex-direction: column;
-      width: 100%;
+      // width: 100%;
+
+      &.end {
+        flex: 1;
+        text-align: right;
+      }
     }
 
     .row {

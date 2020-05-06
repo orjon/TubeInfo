@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Map from './Map';
+import Arrivals from './Arrivals';
 
 class Station extends Component {
   static defaultProps={
@@ -52,10 +53,6 @@ class Station extends Component {
   }
 
 
-
-
-
-
   goToStatuses = () => {
     this.props.history.push(`/`);
   }
@@ -72,44 +69,58 @@ class Station extends Component {
 
   render(){
     const { station } = this.props
+
   
 
-    let lineBars = station.lines.map(line => 
-      <div key={line} className={`row lineColor ${line}`}>{line.name}</div>
+    let lines = station.lines.map(line => 
+      <Arrivals key={line} line={line} arrivals={this.state.arrivals}/>
+      // <div key={line} className={`row lineColor ${line}`}>{line.name}</div>
     )
+
+
     let location = this.formatLocation(station.lat, station.lng)
 
-    let arrivals = this.state.arrivals.map(arrival => 
-      <div>{arrival.lineName} towards {arrival.towards} : expected {arrival.expected}</div>
-    )
+    // let arrivals = this.state.arrivals.map(arrival => 
+    //   <div>{arrival.lineName} towards {arrival.towards} : expected {arrival.expected}</div>
+    // )
+
+    // this.state.stations.find(function(station){
+    //   return station.url === stationToFind;
+    // })
+
+
+    // family.filter(person => person.age > 18);
+
 
     return(
       <section>
         <h3 className='sectionHeader'>Station Details</h3>
         <main className='LineStops'>
-          <div className={`card line`}> 
+          <div className='card line'> 
             <div className='details'>
               <div className='row lineName'>
                 <h3 className='name'>{station.name} [{station.id}]</h3>
                 <p className='status'>{location.lat} {location.lng}</p>
               </div>
-              <div className='row'>
+              {lines}
+              {/* <div className='row'>
                 <div className='column'>
-                  {lineBars}
+                 {lines}
                 </div>
-                <div className='column'>
+                
+              </div> */}
+
+              <div className='row'>
+                <div className='data'>
+
+                </div>
+              </div>
+              <div className='row'>
                   <Map
                     lat={station.lat}
                     lng={station.lng}
                   />
                 </div>
-              </div>
-              <div className='row'>
-                <div className='data'>
-                  arrivals!
-                  {arrivals}
-                </div>
-              </div>
             </div>
           </div>
           
