@@ -33,7 +33,7 @@ class Station extends Component {
     const { apiString } = this.props
     const stationId = this.props.station.id
     let arrivals = []
-    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1000/url/https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
+    let response = await axios.get(`https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
     response.data.map(arrival => 
@@ -46,7 +46,10 @@ class Station extends Component {
         expected: arrival.expectedArrival
       })
     )
-    console.log(arrivals)
+    // let response2 = await axios.get(`https://api.tfl.gov.uk/Place/Address/Streets/n179pn?${apiString}`, {
+    //   headers : {Accept: 'application/json'}
+    // })
+    // console.log(response2.data)
     this.setState({
       arrivals: arrivals
     })

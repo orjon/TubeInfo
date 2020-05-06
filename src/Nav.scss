@@ -1,5 +1,29 @@
+@import 'Variables';
+
 .Nav{
+  display: flex;
+  flex-direction: row;
+
   a {
     color: white;
+    flex: 1;
+    border: $borderDev solid green;
+  }
+  Link{
+    border: $borderDev solid red;
+  }
+  .dateTime{
+    display: flex;
+    flex-direction: column;
+    border: $borderDev solid red;
+    text-align: right;
+  }
+  .Time {
+    border: $borderDev solid orange;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  .Date {
+    border: $borderDev solid orange;
   }
 }
