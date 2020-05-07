@@ -1,0 +1,17 @@
+@import 'Variables';
+@import 'CardGrid';
+@import 'CardSingle';
+
+
+.sectionTitle{
+  margin-bottom: $spacing/4;
+  border: $borderDev solid lime;
+  overflow: hidden;
+}
+
+.sectionBody{
+  margin-bottom: $spacing/4;
+  border: $borderDev solid lime;
+  overflow: hidden;
+  flex: 1;
+}

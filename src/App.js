@@ -34,10 +34,10 @@ class App extends Component {
     console.log('Getting statuses...')
     let lines = await this.getStatuses()
     //----------------------------------
-    // console.log('Getting stop orders...')
-    // for (let i=0; i<lines.length; i++){
-    //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-    // }
+    console.log('Getting stop orders...')
+    for (let i=0; i<lines.length; i++){
+      lines[i].stopOrder = await this.getStopOrder(lines[i].id)
+    }
     //----------------------------------
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)

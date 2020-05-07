@@ -11,7 +11,7 @@ class Station extends Component {
       name: 'loading...',
       lat: 0,
       lng: 0,
-      lines: [],
+      lines: []
     }
   }
 
@@ -21,12 +21,6 @@ class Station extends Component {
       arrivals:[]
     }
     this.getArrivals = this.getArrivals.bind(this)
-  }
-
-  componentDidMount(){
-    if (this.props.station.id !== 'loading...') {
-      this.getArrivals()
-    }
   }
 
   async getArrivals(){
@@ -51,7 +45,7 @@ class Station extends Component {
     // })
     // console.log(response2.data)
     this.setState({
-      arrivals: arrivals
+      arrivals: [...arrivals]
     })
   }
 
@@ -73,45 +67,28 @@ class Station extends Component {
   render(){
     const { station } = this.props
 
-  
-
     let lines = station.lines.map(line => 
       <Arrivals key={line} line={line} arrivals={this.state.arrivals}/>
-      // <div key={line} className={`row lineColor ${line}`}>{line.name}</div>
     )
+
+    if (this.props.station.id !== 'loading...') {
+      this.getArrivals()
+    }
 
 
     let location = this.formatLocation(station.lat, station.lng)
 
-    // let arrivals = this.state.arrivals.map(arrival => 
-    //   <div>{arrival.lineName} towards {arrival.towards} : expected {arrival.expected}</div>
-    // )
-
-    // this.state.stations.find(function(station){
-    //   return station.url === stationToFind;
-    // })
-
-
-    // family.filter(person => person.age > 18);
-
 
     return(
       <section>
-        <h3 className='sectionHeader'>Station Details</h3>
+        <div className='sectionTitle'>Station Details</div>
         <main className='LineStops'>
-          <div className='card line'> 
-            <div className='details'>
+          <div className='card'> 
               <div className='row lineName'>
-                <h3 className='name'>{station.name} [{station.id}]</h3>
+                <h3 className='cardLabel'>{station.name} [{station.id}]</h3>
                 <p className='status'>{location.lat} {location.lng}</p>
               </div>
               {lines}
-              {/* <div className='row'>
-                <div className='column'>
-                 {lines}
-                </div>
-                
-              </div> */}
 
               <div className='row'>
                 <div className='data'>
@@ -125,7 +102,6 @@ class Station extends Component {
                   />
                 </div>
             </div>
-          </div>
           
         </main>
       </section>

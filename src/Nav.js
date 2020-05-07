@@ -15,7 +15,7 @@ class Nav extends Component {
     return(
       <div className='Nav'>
         <Link to='/'>
-          <h1>Transport for London API</h1>
+          <div className='AppTitle'>Transport for London API</div>
         </Link>
         <div className='dateTime'>
           <Clock className = 'Time'format={'HH:mm'} ticking={true}/>

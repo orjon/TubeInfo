@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import LineStatus from './LineStatus';
-import './Sections.scss';
-import './LineStatuses.scss';
+import './Section.scss';
 
 class LineStatuses extends Component {
  
@@ -16,10 +15,10 @@ class LineStatuses extends Component {
     ))
     return(
       <section>
-        <h3 className='sectionHeader'>Line Statuses</h3>
-        <main className='gridContainer'>
+        <div className='sectionTitle'>Line Statuses</div>
+        <div className='sectionBody CardGrid'>
           {tubeStatuses}
-        </main>
+        </div>
       </section>
 
     )

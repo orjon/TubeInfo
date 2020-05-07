@@ -1,4 +1,4 @@
-$borderDev : 0px;
+$borderDev : 1px;
 $spacing: 20px;
 
 $color_FontMain: rgb(50, 50, 50);
@@ -20,5 +20,42 @@ $color_Hammersmith: rgb(244,169,190);
 $color_Piccadilly: rgb(000,025,168);
 $color_Victoria: rgb(000,152,216);
 $color_Waterloo: rgb(147,206,186);
+
+.AppTitle{
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.Time {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.Date {
+  font-size: 0.8rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+}
+
+.card {
+  font-size: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  border: $borderDev solid orange;
+}
+
+.data {
+  text-align: justify;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+.hidden {
+	display: none;
+}
+
 
 

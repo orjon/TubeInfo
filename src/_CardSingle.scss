@@ -1,7 +1,7 @@
 @import 'Variables';
 
 
-main {
+.CardSingle {
   color: white;
   width: 400px;
   flex: 1;
@@ -16,7 +16,7 @@ main {
 
 
 @media screen and (min-width: 860px){
-  main {
+  .CardSingle {
     width: 820px;
     // grid-template-columns: 1fr 1fr;
     grid-template-columns: 1fr;
@@ -24,7 +24,7 @@ main {
   }
   
   @media screen and (min-width: 1280px){
-  main, footer  {
+  .CardSingle, footer  {
     width: 1240px;
     // grid-template-columns: 1fr 1fr 1fr;
     grid-template-columns: 1fr;
@@ -32,10 +32,9 @@ main {
   }
   
   @media screen and (min-width: 1700px){
-  main {
+  .CardSingle {
     width: 1660px;
     // grid-template-columns: 1fr 1fr 1fr  1fr;
     grid-template-columns: 1fr;
   }
 }
-

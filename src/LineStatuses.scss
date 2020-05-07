@@ -1,37 +1,3 @@
-@import 'Variables';
-
-.gridContainer {
-  color: black;
-  width: 400px;
-  flex: 1;
-  max-height: 100%;
-  border: $borderDev solid lime;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-column-gap: $spacing;
-  grid-row-gap: $spacing;
-  overflow-y:auto;
-}
 
 
-@media screen and (min-width: 860px){
-  .gridContainer {
-    width: 820px;
-    grid-template-columns: 1fr 1fr;
-  }
-  }
-  
-  @media screen and (min-width: 1280px){
-  .gridContainer  {
-    width: 1240px;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  }
-  
-  @media screen and (min-width: 1700px){
-  .gridContainer {
-    width: 1660px;
-    grid-template-columns: 1fr 1fr 1fr  1fr;
-  }
-}
 

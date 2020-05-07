@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './Sections.scss';
-import './LineStops.scss';
+import './Section.scss';
 import LineStop from './LineStop';
 
 class LineStops extends Component{
@@ -11,10 +10,8 @@ class LineStops extends Component{
       stations: []
     },
     tubeLines: {
-
     }
   }
-
 
   goToStatuses = () => {
     this.props.history.push(`/`);
@@ -34,25 +31,21 @@ class LineStops extends Component{
 
     return(
       <section>
-        <h3 className='sectionHeader'>Line Details</h3>
-        <main className='LineStops'> 
-        {/* //onClick={this.goToStatuses} */}
-          <div className={`card line`}>
-            <div className='details'>
-              <div className={`row lineColor ${line.id}`}></div>
-              <div className='row lineName'>
-                <h3 className='name'>{line.name}</h3>
-                <p className='status'>Stations: {line.stations.length}</p>
-              </div>
-              <div className='row'>
-                <div className='data'>
-                  {lineStops}
-                </div>
+        <div className='sectionTitle'>Line Details</div>
+        <div className='CardSingle'> 
+          <div className='card'>
+            <div className={`row lineColor ${line.id}`}></div>
+            <div className='row titleRow'>
+              <h3 className='name'>{line.name}</h3>
+              <p className='status'>Stations: {line.stations.length}</p>
+            </div>
+            <div className='row'>
+              <div className='data'>
+                {lineStops}
               </div>
             </div>
           </div>
-          
-        </main>
+        </div>
       </section>
     )
   }
