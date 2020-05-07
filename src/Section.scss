@@ -10,8 +10,16 @@
 }
 
 .sectionBody{
-  margin-bottom: $spacing/4;
   border: $borderDev solid lime;
   overflow: hidden;
   flex: 1;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  p {
+    font-size: 20pt;
+  }
+}
+
+.sectionBody::-webkit-scrollbar {
+display: none;
 }

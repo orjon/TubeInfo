@@ -11,13 +11,6 @@
   grid-template-columns: 1fr;
   grid-column-gap: $spacing;
   grid-row-gap: $spacing;
-
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-}
-
-.CardGrid::-webkit-scrollbar {
-  display: none;
 }
 
 

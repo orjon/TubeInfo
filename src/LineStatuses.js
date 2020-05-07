@@ -16,8 +16,16 @@ class LineStatuses extends Component {
     return(
       <section>
         <div className='sectionTitle'>Line Statuses</div>
-        <div className='sectionBody CardGrid'>
-          {tubeStatuses}
+        <div className='sectionBody'>
+          {/* {tubeStatuses} */}
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus libero magnam, dicta ullam reprehenderit nam labore aliquam commodi iusto eaque facilis molestias nostrum. Culpa saepe minima excepturi illo, eos nobis?</p>
+        
         </div>
       </section>
 
