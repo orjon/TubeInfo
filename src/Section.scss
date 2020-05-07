@@ -2,24 +2,21 @@
 @import 'CardGrid';
 @import 'CardSingle';
 
-
 .sectionTitle{
   margin-bottom: $spacing/4;
-  border: $borderDev solid lime;
-  overflow: hidden;
+  border: $borderDev solid green;
 }
 
 .sectionBody{
-  border: $borderDev solid lime;
-  overflow: hidden;
+  border: $borderDev solid green;
   flex: 1;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  p {
-    font-size: 20pt;
-  }
 }
 
 .sectionBody::-webkit-scrollbar {
 display: none;
 }
+
+
+

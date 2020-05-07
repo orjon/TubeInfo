@@ -38,20 +38,22 @@ $color_Waterloo: rgb(147,206,186);
   font-size: 1.25rem;
 }
 
-.card {
+.Card {
   font-size: 1rem;
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    border: $borderDev solid orange;
+  }
+  .data {
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+  }
 }
 
-.cardTitle {
-  font-size: 1.5rem;
-  border: $borderDev solid orange;
-}
 
-.data {
-  text-align: justify;
-  word-wrap: break-word;
-  font-size: 0.9rem;
-}
 
 .hidden {
 	display: none;

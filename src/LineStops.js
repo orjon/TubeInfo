@@ -33,11 +33,11 @@ class LineStops extends Component{
       <section>
         <div className='sectionTitle'>Line Details</div>
         <div className='CardSingle'> 
-          <div className='card'>
+          <div className='Card'>
             <div className={`row lineColor ${line.id}`}></div>
-            <div className='row titleRow'>
-              <h3 className='name'>{line.name}</h3>
-              <p className='status'>Stations: {line.stations.length}</p>
+            <div className='row'>
+              <div className='title'>{line.name}</div>
+              <div className='status'>Stations: {line.stations.length}</div>
             </div>
             <div className='row'>
               <div className='data'>

@@ -12,11 +12,11 @@ class LineStatus extends Component {
       }
     return(
       <div className='LineStatus' onClick={this.props.handleClick}>
-        <div className='card'>
+        <div className='Card'>
           <div className={`row lineColor ${line.id}`}></div>
-          <div className='row titleRow'>
-            <h3 className='name'>{line.name}</h3>
-            <p className='status'>{line.status}</p>
+          <div className='row'>
+            <div className='title'>{line.name}</div>
+            <div className='status'>{line.status}</div>
           </div>
           <div className='row'>
             <div className='data'>

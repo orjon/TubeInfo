@@ -5,6 +5,7 @@ import Nav from './Nav';
 import LineStops from './LineStops'
 import LineStatuses from './LineStatuses';
 import Station from './Station';
+import Test from './Test';
 import './App.scss';
 
 
@@ -99,18 +100,19 @@ class App extends Component {
       headers : {Accept: 'application/json'}
     })
     // console.log('Got Stations:', {lineId})
-    // console.log('Line Stations:', response.data)
+    console.log('Line Stations:', response.data[1].additionalProperties)
     response.data.map(station => {
-      let stationName = this.trimStationName(station.commonName)
-      let stationUrl = this.kebabCase(stationName)
+      let address = station.additionalProperties.find(x => x.key === 'Address')
       return lineStations.push({
         key: station.id,
         id: station.id,
-        url: stationUrl,
-        name: stationName,
+        url: this.kebabCase(this.trimStationName(station.commonName)),
+        name: this.trimStationName(station.commonName),
         lat: station.lat,
         lng: station.lon,
-        arrivals: []
+        address: address,
+        facilities: {
+        }
       })
     })
     return lineStations;
@@ -183,7 +185,6 @@ class App extends Component {
           <Nav />
         </header>
         <Switch>
-         
         <Route
             exact
             path='/'
@@ -227,7 +228,17 @@ class App extends Component {
               />
             )}
           />
-  
+          <Route
+            exact
+            path='/test'
+            render={(routeProps) => (
+              <Test
+                {...routeProps} 
+                stations={this.state.stations}
+              />
+            )}
+          />
+
         </Switch>
   
         <footer className='right'>
@@ -242,36 +253,109 @@ class App extends Component {
 
 export default App;
 
-
-  // axios.all([
-  //   axios.get('https://api.github.com/users/abc');
-  //   axios.get('https://api.github.com/users/abc/repos')
-  //  ])
-  //  .then(axios.spread(function (userResponse, reposResponse) {
-  //    console.log('User', userResponse.data);
-  //    console.log('Repositories', reposResponse.data);
-  //  }));
-
-
-
-
-  //  async getInfo(){
-  //   let lines = []
-  //   let response = await axios.get('http://slowwly.robertomurray.co.uk/delay/3000/url/https://api.tfl.gov.uk/line/mode/tube/status', {
-  //     headers : {Accept: 'application/json'}
-  //   })
-  //   let linesInfo = response.data.sort()
-  //   // console.log(linesInfo);
-  //   linesInfo.map(line => 
-  //     lines.push({
-  //       key: line.id,
-  //       id: line.id,
-  //       lineName: line.name,
-  //       status: line.lineStatuses[0].statusSeverityDescription,
-  //       reason: line.lineStatuses[0].reason
-  //     })
-  //   )
-  //   console.log(lines);
-  //   this.setState({tubeLines: lines})
-  //   // this.findLineIndex('central')
-  // }
+// [
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Accessibility",
+//     "availableKeys": [
+//       "SpecificEntranceRequired",
+//       "TaxiRankOutsideStation",
+//       "SpecificEntranceInstructions",
+//       "Toilet",
+//       "AddtionalInformation",
+//       "LimitedCapacityLift",
+//       "AccessViaLift",
+//       "BlueBadgeCarParkSpaces",
+//       "ToiletNote"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Address",
+//     "availableKeys": [
+//       "Address",
+//       "PhoneNo"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Direction",
+//     "availableKeys": [
+//       "Towards",
+//       "CompassPoint"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Facility",
+//     "availableKeys": [
+//       "Boarding Ramp",
+//       "Lifts",
+//       "Boarding Ramps",
+//       "Escalators",
+//       "Cash Machines",
+//       "Waiting Room",
+//       "Bridge",
+//       "Car park",
+//       "Euro Cash Machines",
+//       "Payphones",
+//       "ASDA Click and Collect",
+//       "Ticket Halls",
+//       "Amazon Lockers",
+//       "Other Facilities",
+//       "Help Points",
+//       "WiFi",
+//       "Gates",
+//       "Toilets",
+//       "Left Luggage",
+//       "Photo Booths"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Geo",
+//     "availableKeys": [
+//       "Zone"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "NearestPlaces",
+//     "availableKeys": [
+//       "SourceSystemPlaceId"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "Opening Time",
+//     "availableKeys": [
+//       "SatFrom",
+//       "MonFriTo",
+//       "SatTo",
+//       "SunTo",
+//       "MonFriFrom",
+//       "SunFrom"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "ServiceInfo",
+//     "availableKeys": [
+//       "Night"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "StationOwnedByTfl",
+//     "availableKeys": [
+//       "OwnedByTfl"
+//     ]
+//   },
+//   {
+//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
+//     "category": "VisitorCentre",
+//     "availableKeys": [
+//       "Location"
+//     ]
+//   }
+// ]

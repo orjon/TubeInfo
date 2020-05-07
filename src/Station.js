@@ -9,6 +9,7 @@ class Station extends Component {
       id: 'loading...',
       url: 'loading...',
       name: 'loading...',
+      address: '',
       lat: 0,
       lng: 0,
       lines: []
@@ -40,10 +41,6 @@ class Station extends Component {
         expected: arrival.expectedArrival
       })
     )
-    // let response2 = await axios.get(`https://api.tfl.gov.uk/Place/Address/Streets/n179pn?${apiString}`, {
-    //   headers : {Accept: 'application/json'}
-    // })
-    // console.log(response2.data)
     this.setState({
       arrivals: [...arrivals]
     })
@@ -64,6 +61,10 @@ class Station extends Component {
     return {lat: lat, lng: lng}
   }
 
+  formatAddress(address){
+    return address
+  }
+
   render(){
     const { station } = this.props
 
@@ -75,35 +76,35 @@ class Station extends Component {
       this.getArrivals()
     }
 
-
     let location = this.formatLocation(station.lat, station.lng)
+    let address = this.formatAddress(station.address.value)
 
 
     return(
       <section>
         <div className='sectionTitle'>Station Details</div>
-        <main className='LineStops'>
-          <div className='card'> 
-              <div className='row lineName'>
-                <h3 className='cardLabel'>{station.name} [{station.id}]</h3>
-                <p className='status'>{location.lat} {location.lng}</p>
-              </div>
-              {lines}
-
-              <div className='row'>
-                <div className='data'>
-
-                </div>
-              </div>
-              <div className='row'>
-                  <Map
-                    lat={station.lat}
-                    lng={station.lng}
-                  />
-                </div>
+        <div className='LineStops'>
+          <div className='Card'> 
+            <div className='row'>
+              <div className='title'>{station.name}</div>
+              <div className='status'>{location.lat} {location.lng}</div>
             </div>
-          
-        </main>
+            <div className='row'>
+              {address}
+            </div>
+              {lines}
+            <div className='row'>
+              <Map
+                lat={station.lat}
+                lng={station.lng}
+              />
+            </div>
+            <div className='row'>
+             Station ID: {station.id}
+            </div>
+          </div>
+            
+        </div>
       </section>
     )
   }

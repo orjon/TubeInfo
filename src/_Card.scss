@@ -1,4 +1,4 @@
-.card {
+.Card {
   background-color: #eee;
   color: $color_FontMain;
   border-radius: 15px;
@@ -56,7 +56,7 @@
     }
     .data {
       flex: 1;
-      height: 100px;
+      // height: 100px;
       overflow-y: scroll;
       -ms-overflow-style: none;
     }
