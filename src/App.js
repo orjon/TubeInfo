@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch} from 'react-router-dom';
 import axios from 'axios';
+import { kebabCase } from './Helpers';
 import Nav from './Nav';
 import LineStops from './LineStops'
 import LineStatuses from './LineStatuses';
 import Station from './Station';
-import Test from './Test';
 import './App.scss';
 
 
@@ -19,7 +19,8 @@ class App extends Component {
     super(props);
     this.state={
       tubeLines: [],
-      stations: []
+      stations: [],
+      stationsId: []
     }
   }
 
@@ -31,7 +32,6 @@ class App extends Component {
 
 
   async getInfo(){
-    let stations = []
     console.log('Getting statuses...')
     let lines = await this.getStatuses()
     //----------------------------------
@@ -40,17 +40,14 @@ class App extends Component {
       lines[i].stopOrder = await this.getStopOrder(lines[i].id)
     }
     //----------------------------------
+    let stations = []
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)
       for (let j=0; j<lines[i].stations.length; j++){
         lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
-      // for (let k=0; k<stations.length; k++){
-      //   stations[k].arrivals = await this.getArrivals(stations[k].id)
-      // }
     }
-    // console.log(this.findStationFromId('940GZZLUBBB'))
     stations.sort( this.compare );
     console.log(stations.sort())
     this.setState({
@@ -92,6 +89,15 @@ class App extends Component {
     return stopOrder
   }
 
+  checkProperties(property){
+    if (property){
+      property = property.value
+      return property
+    } 
+    property = undefined
+    return property
+  }
+
 
   async getStations(lineId){
     const { apiString } = this.props
@@ -99,24 +105,83 @@ class App extends Component {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    // console.log('Got Stations:', {lineId})
-    console.log('Line Stations:', response.data[1].additionalProperties)
+    // console.log('Line Stations:', response.data[1].additionalProperties)
     response.data.map(station => {
-      let address = station.additionalProperties.find(x => x.key === 'Address')
+      let contact = [
+        {key: 'Address', value: undefined},
+        {key: 'PhoneNo', value: undefined}
+      ]
+      let properties = [
+        {key: 'Boarding Ramp', value: undefined},
+        {key: 'Cash Machines', value: undefined},
+        {key: 'Waiting Room', value: undefined},
+        {key: 'Lifts', value: undefined},
+        {key: 'Escalators', value: undefined},
+        {key: 'ASDA Click and Collect', value: undefined},
+        {key: 'Ticket Halls', value: undefined},
+        {key: 'Car park', value: undefined},
+        {key: 'Amazon Lockers', value: undefined},
+        {key: 'Euro Cash Machines', value: undefined},
+        {key: 'Payphones', value: undefined},
+        {key: 'Gates', value: undefined},
+        {key: 'Toilets', value: undefined},
+        {key: 'Help Points', value: undefined},
+        {key: 'WiFi', value: undefined},
+        {key: 'Left Luggage', value: undefined},
+        {key: 'Photo Booths', value: undefined},
+        {key: 'TaxiRankOutsideStation', value: undefined}
+      ]
+
+      let validProperties = []
+      let rejectedValues = ['no', '0']
+
+      properties.forEach(property => {
+        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+        if (propertyObject && !rejectedValues.includes(propertyObject.value)){
+          property.value = propertyObject.value
+          validProperties.push(property)
+          return
+        } 
+      });
+
+
+      let validContacts = []
+
+      contact.forEach(property => {
+        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+        if (propertyObject){
+          if (!rejectedValues.includes(propertyObject.value)){
+            property.value = propertyObject.value
+            validContacts.push(property)
+            return
+          }
+        } 
+      });
+
+    
+      // if (address) {
+      //   address = address.value
+      //   postCode = address.slice((address.lastIndexOf(','))+1)
+      // }
+      // let phone = properties.find(x => x.key === 'PhoneNo')
+      // let CarPark = false
+
       return lineStations.push({
         key: station.id,
         id: station.id,
-        url: this.kebabCase(this.trimStationName(station.commonName)),
+        url: kebabCase(this.trimStationName(station.commonName)),
         name: this.trimStationName(station.commonName),
         lat: station.lat,
         lng: station.lon,
-        address: address,
-        facilities: {
-        }
+        contact: [...validContacts],
+        facilities: validProperties
       })
     })
     return lineStations;
   }
+
+
+
 
   trimStationName(stationName){
     let trimmedStationName = stationName.replace('Underground Station', '')
@@ -127,13 +192,8 @@ class App extends Component {
     return trimmedStationName
   }
 
-  kebabCase(inputString){
-    let outputString = inputString.toLowerCase().replace(/ /g, '-').replace(/'/g, '')
-    return outputString
-  }
 
   addStation(newStation, stations){
-    // There are 382 total stops on all lines.
     let foundIndex = stations.findIndex(station => station.id === newStation.id);
     if (foundIndex !== -1){
       stations[foundIndex].lines.push(newStation.lines[0])
@@ -178,7 +238,6 @@ class App extends Component {
 
 
   render(){
-    //this.getStopOrder('northern');
     return (
       <div className='App'>
         <header>
@@ -225,16 +284,6 @@ class App extends Component {
                 {...routeProps} 
                 apiString={this.props.apiString}
                 station={this.findStationFromUrl(routeProps.match.params.url)}
-              />
-            )}
-          />
-          <Route
-            exact
-            path='/test'
-            render={(routeProps) => (
-              <Test
-                {...routeProps} 
-                stations={this.state.stations}
               />
             )}
           />
@@ -287,7 +336,7 @@ export default App;
 //   },
 //   {
 //     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Facility",
+//     "category": "key",
 //     "availableKeys": [
 //       "Boarding Ramp",
 //       "Lifts",

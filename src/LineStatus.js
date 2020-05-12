@@ -15,7 +15,7 @@ class LineStatus extends Component {
         <div className='Card'>
           <div className={`row lineColor ${line.id}`}></div>
           <div className='row'>
-            <div className='title'>{line.name}</div>
+            <h1>{line.name}</h1>
             <div className='status'>{line.status}</div>
           </div>
           <div className='row'>

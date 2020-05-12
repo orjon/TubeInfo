@@ -6,7 +6,7 @@ import Arrivals from './Arrivals';
 class Station extends Component {
   static defaultProps={
     station: {
-      id: 'loading...',
+      id: undefined,
       url: 'loading...',
       name: 'loading...',
       address: '',
@@ -46,6 +46,10 @@ class Station extends Component {
     })
   }
 
+  componentDidMount(){
+    this.getArrivals()
+  }
+
 
   goToStatuses = () => {
     this.props.history.push(`/`);
@@ -71,13 +75,12 @@ class Station extends Component {
     let lines = station.lines.map(line => 
       <Arrivals key={line} line={line} arrivals={this.state.arrivals}/>
     )
+    console.log('Station')
+    console.log('station Id: ', station.id)
 
-    if (this.props.station.id !== 'loading...') {
-      this.getArrivals()
-    }
 
     let location = this.formatLocation(station.lat, station.lng)
-    let address = this.formatAddress(station.address.value)
+    let address = this.formatAddress(station.contact)
 
 
     return(
@@ -86,13 +89,23 @@ class Station extends Component {
         <div className='LineStops'>
           <div className='Card'> 
             <div className='row'>
-              <div className='title'>{station.name}</div>
-              <div className='status'>{location.lat} {location.lng}</div>
+              <h1>{station.name}</h1>
             </div>
             <div className='row'>
-              {address}
+              <div className='column w50'>
+                <h2>Address</h2>
+                <p>
+                  ...Address...
+                </p>
+              </div>
+              <div className='column w50'>
+                <h2>Telephone</h2>
+                <p>
+                  0207 xxx xxx xxx
+                </p>
+              </div>
+              
             </div>
-              {lines}
             <div className='row'>
               <Map
                 lat={station.lat}
@@ -100,8 +113,10 @@ class Station extends Component {
               />
             </div>
             <div className='row'>
-             Station ID: {station.id}
+              <div>{location.lat} {location.lng}</div>
+              <div className='code'>Station ID: {station.id}</div>
             </div>
+            {lines}
           </div>
             
         </div>

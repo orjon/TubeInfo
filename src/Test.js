@@ -10,13 +10,14 @@ class Test extends Component {
 
     const { stations } = this.props
 
-    // let addresses = stations.map( station =>
-    //   <p>{station.address.value}</p>
-    // )
+    let addresses = stations.map( station =>
+      <p>{station.address.value}</p>
+    )
 
     return(
       <div>
-        {/* {addresses} */}
+        {addresses}
+        test
       </div>
     )
   }
