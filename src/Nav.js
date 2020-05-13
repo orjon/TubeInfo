@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Nav.scss';
 import Clock from 'react-live-clock';
 
+
 class Nav extends Component {
   constructor(props){
     super(props);
@@ -12,6 +13,7 @@ class Nav extends Component {
   }
 
   render(){
+    const dateToFormat = '1976-04-19T12:59-0500';
     return(
       <div className='Nav'>
         <Link to='/'>

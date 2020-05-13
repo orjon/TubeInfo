@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import './LineArrivals.scss';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
-class Arrivals extends Component{
+class LineArrivals extends Component{
 
 
   render(){
@@ -15,7 +17,11 @@ class Arrivals extends Component{
       .map(arrival => 
         <div className='row' key={uuid()}>
           <div className='column'>{arrival.towards}</div>
-          <div className='column end'>{arrival.expected}</div>
+          {/* <div className='column end'>{arrival.expected}</div> */}
+          <div className='column end'>
+            <Moment fromNow>{arrival.expected}</Moment>
+          </div>
+          
         </div>
       )
 
@@ -31,12 +37,16 @@ class Arrivals extends Component{
             </div>
 
           </Link>
-          {(line.status !== 'Planned Closure') &&
             <div className='row'>
               <h4 className='column infoLabel'>Towards</h4>
               <h4 className='column infoLabel end'>Expected Arrival</h4>
             </div>
-           }
+          {/* {(line.status !== 'Planned Closure') &&
+            <div className='row'>
+              <h4 className='column infoLabel'>Towards</h4>
+              <h4 className='column infoLabel end'>Expected Arrival</h4>
+            </div>
+           } */}
           {/* <div className={`row lineRowDivide`}></div> */}
           {arrivals}
           {/* <div className={`row lineRowDivide`}></div> */}
@@ -45,7 +55,7 @@ class Arrivals extends Component{
   }
 }
 
-export default Arrivals;
+export default LineArrivals;
 
 {/* <div className='row LineArrivals'>
 <div className='columnm w100'>
