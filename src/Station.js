@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Map from './Map';
-import Arrivals from './Arrivals';
+import LineArrivals from './LineArrivals';
+import './Section.scss';
+import './Station.scss';
 
 class Station extends Component {
   static defaultProps={
@@ -69,15 +71,17 @@ class Station extends Component {
     return address
   }
 
+  lineName(tubeLines, line){
+    let index = tubeLines.findIndex(lineX => lineX.id === line);
+    return tubeLines[index]
+  }
+
   render(){
-    const { station } = this.props
+    const { station, tubeLines } = this.props
 
-    let lines = station.lines.map(line => 
-      <Arrivals key={line} line={line} arrivals={this.state.arrivals}/>
+    let lineArrivals = station.lines.map(line => 
+      <LineArrivals key={line} line={this.lineName(tubeLines, line)} arrivals={this.state.arrivals}/>
     )
-    console.log('Station')
-    console.log('station Id: ', station.id)
-
 
     let location = this.formatLocation(station.lat, station.lng)
     let address = this.formatAddress(station.contact)
@@ -85,12 +89,13 @@ class Station extends Component {
 
     return(
       <section>
-        <div className='sectionTitle'>Station Details</div>
-        <div className='LineStops'>
+        {/* <div className='sectionTitle'>Station Details</div> */}
+        <div className='CardSingle'>
           <div className='Card'> 
-            <div className='row'>
+            <div className='row titleRow'>
               <h1>{station.name}</h1>
             </div>
+            {lineArrivals}
             <div className='row'>
               <div className='column w50'>
                 <h2>Address</h2>
@@ -116,7 +121,6 @@ class Station extends Component {
               <div>{location.lat} {location.lng}</div>
               <div className='code'>Station ID: {station.id}</div>
             </div>
-            {lines}
           </div>
             
         </div>

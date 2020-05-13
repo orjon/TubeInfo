@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './Section.scss';
+import { Link } from 'react-router-dom';
 import LineStop from './LineStop';
+import './Section.scss';
 
 class LineStops extends Component{
   static defaultProps={
@@ -17,11 +18,6 @@ class LineStops extends Component{
     this.props.history.push(`/`);
   }
 
-  goToStation(id){
-    this.props.history.push(`/station/${id}`);
-  }
-  
-
   render(){
     const { line } = this.props
 
@@ -31,11 +27,11 @@ class LineStops extends Component{
 
     return(
       <section>
-        <div className='sectionTitle'>Line Details</div>
+        {/* <div className='sectionTitle'>Line Details</div> */}
         <div className='CardSingle'> 
           <div className='Card'>
             <div className={`row lineColor ${line.id}`}></div>
-            <div className='row'>
+            <div className='row titleRow'>
               <h1>{line.name}</h1>
               <div className='status'>Stations: {line.stations.length}</div>
             </div>

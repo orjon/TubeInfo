@@ -20,7 +20,6 @@ class App extends Component {
     this.state={
       tubeLines: [],
       stations: [],
-      stationsId: []
     }
   }
 
@@ -47,6 +46,7 @@ class App extends Component {
         lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
+      console.log('lines in stations', )
     }
     stations.sort( this.compare );
     console.log(stations.sort())
@@ -270,7 +270,6 @@ class App extends Component {
             render={(routeProps) => (
               <LineStops
                 {...routeProps} 
-                // tubeLines={this.state.tubeLines}
                 line={this.findLine(routeProps.match.params.id)}
                 lineIndex={this.findLineIndex(routeProps.match.params.id)}
               />
@@ -284,6 +283,7 @@ class App extends Component {
                 {...routeProps} 
                 apiString={this.props.apiString}
                 station={this.findStationFromUrl(routeProps.match.params.url)}
+                tubeLines={this.state.tubeLines}
               />
             )}
           />

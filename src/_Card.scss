@@ -1,3 +1,5 @@
+@import 'Variables';
+
 .Card {
   background-color: #eee;
   color: $color_FontMain;
@@ -12,19 +14,20 @@
   width: 100%;
   // height: 100%;
 
-
   .row {
     border: $borderDev solid darkgrey;
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
+
     width: 100%;
 
     &.lineColor {
-      height: 30px;
+      height: $spacing;
     }
 
     &.titleRow {
-      margin: 5px 0;
+      margin: ($spacing/4) 0;
     }
 
     &.map {
@@ -34,7 +37,8 @@
     .status {
       flex: 1;
       text-align:right;
-      padding-top: 3px;
+
+      // padding-top: 3px;
     }
 
     .code {
@@ -75,13 +79,6 @@
 
   }
 }
-
-
-
-
-
-
-
 
 
 .bakerloo {background-color: $color_Bakerloo;}

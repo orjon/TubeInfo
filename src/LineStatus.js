@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './LineStatus.scss';
+import { Link } from 'react-router-dom';
+import './_Card.scss';
 
 class LineStatus extends Component {
   render(){
@@ -11,19 +12,21 @@ class LineStatus extends Component {
         disruptionReason = disruptionReason.substring(cropIndex)
       }
     return(
-      <div className='LineStatus' onClick={this.props.handleClick}>
-        <div className='Card'>
-          <div className={`row lineColor ${line.id}`}></div>
-          <div className='row'>
-            <h1>{line.name}</h1>
-            <div className='status'>{line.status}</div>
-          </div>
-          <div className='row'>
-            <div className='data'>
-              {disruptionReason}
+      <div className='LineStatus'>
+        <Link to={`/line/${line.id}`}>
+          <div className='Card'>
+            <div className={`row lineColor ${line.id}`}></div>
+            <div className='row titleRow'>
+              <h1>{line.name}</h1>
+              <div className='status'>{line.status}</div>
+            </div>
+            <div className='row'>
+              <div className='data'>
+                {disruptionReason}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     )
   }
