@@ -14,10 +14,6 @@ class LineStops extends Component{
     }
   }
 
-  goToStatuses = () => {
-    this.props.history.push(`/`);
-  }
-
   render(){
     const { line } = this.props
 

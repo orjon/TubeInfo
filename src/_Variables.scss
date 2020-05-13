@@ -2,6 +2,11 @@ $borderDev : 0px;
 $spacing: 20px;
 
 $color_FontMain: rgb(50, 50, 50);
+$color_FontL1: rgb(75, 75, 75);
+$color_FontL2: rgb(100, 100, 100);
+$color_FontL3: rgb(125, 125, 125);
+
+$color_LineThin: rgb(150, 150, 150);
 
 $color_TFL: rgb(017,059,146);
 // $color_TFL: rgb(000,025,168);
@@ -38,48 +43,12 @@ $color_Waterloo: rgb(147,206,186);
   font-size: 1.25rem;
 }
 
-.Card {
-  font-size: 1rem;
-  color: $color_FontMain;
 
-  .linkTo {
-    color: $color_FontMain;
-  }
-
-  h1 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    border: $borderDev solid red;
-  }
-  h2 {
-    font-size: 1.20rem;
-    font-weight: 600;
-    border: $borderDev solid orange;
-  }
-  h3 {
-    font-size: 1rem;
-    font-weight: 400;
-    border: $borderDev solid orange;
-  }
-  p {
-    text-align: justify;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    border: $borderDev solid yellow;
-  }
-  .data {
-    text-align: justify;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    border: $borderDev solid yellow;
-  }
-}
 
 .column {
   border: $borderDev solid lightblue;
   display: flex;
   flex-direction: column;
-  // width: 100%;
 
   &.end {
     flex: 1;

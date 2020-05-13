@@ -1,6 +1,9 @@
 @import 'Variables';
 
 .Card {
+  font-size: 1rem;
+  color: $color_FontMain;
+
   background-color: #eee;
   color: $color_FontMain;
   border-radius: 15px;
@@ -14,11 +17,22 @@
   width: 100%;
   // height: 100%;
 
+  .linkTo {
+    color: $color_FontMain;
+  }
+
+  .column {
+    
+
+
+  }
+
   .row {
     border: $borderDev solid darkgrey;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    // margin-bottom: $spacing/4;
 
     width: 100%;
 
@@ -26,57 +40,132 @@
       height: $spacing;
     }
 
-    &.titleRow {
-      margin: ($spacing/4) 0;
+    &.lineRowDivide {
+      background-color: $color-LineThin;
+      height: $spacing/20;
+      margin: 0;
+      margin-bottom: $spacing/2; 
+      margin-top: $spacing/4; 
     }
+
+    &.titleRowText {
+      margin-top: -$spacing/4;
+    }
+
+    // &.titleRow {
+    //   margin-top: -$spacing/4;
+    // }
 
     &.map {
       height: 300px;
     }
 
-    .status {
-      flex: 1;
-      text-align:right;
+  }
 
-      // padding-top: 3px;
-    }
+  .indent2{
+    margin-left: $spacing*2;
+    margin-right: $spacing*2;
+    // margin-bottom: $spacing/2;
+  }
 
-    .code {
-      flex: 1;
-      text-align:right;
-      padding-top: 3px;
-    }
+  .indent4{
+    margin-left: $spacing*4;
+    margin-right: $spacing*4;
+    // margin-bottom: $spacing/2;
+  }
 
-    .labels {
-      width: 20%;
-      text-align: right;
-      padding-right: 7px;
-      font-weight: 600;
-    }
-    .data {
-      flex: 1;
-      // height: 100px;
-      overflow-y: scroll;
-      -ms-overflow-style: none;
-    }
-    .data::-webkit-scrollbar {
-      display: none;
-    }
-
-    img {
-      margin: 10px auto;
-      width: 50%;
-      box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
-    }
-    p {
-      // font-size: 0.8em;
-      border: $borderDev solid orange;
-      // max-width: 100px;
-      word-wrap: break-word;
-      overflow: auto;
-    }
+  .dataBlock{
+    margin-bottom: $spacing;
+  }
 
 
+  .status {
+    flex: 1;
+    text-align:right;
+    color: $color_FontL1;
+    // padding-top: 3px;
+  }
+
+  .code {
+    flex: 1;
+    text-align:right;
+    padding-top: 3px;
+  }
+
+
+  .data {
+    flex: 1;
+    // height: 100px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+  }
+  .data::-webkit-scrollbar {
+    display: none;
+  }
+
+  img {
+    margin: 10px auto;
+    width: 50%;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+  }
+  p {
+    // font-size: 0.8em;
+    border: $borderDev solid orange;
+    // max-width: 100px;
+    word-wrap: break-word;
+    overflow: auto;
+  }
+
+  h1 {
+    color: $color_FontMain;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border: $borderDev solid red;
+    vertical-align: top;
+  }
+  h2 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border: $borderDev solid orange;
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    border: $borderDev solid orange;
+  }
+
+  h4 {
+    color: $color_FontL3;
+    font-size: 1rem;
+    font-weight: 400;
+    border: $borderDev solid orange;
+  }
+  .infoLabel {
+    margin-bottom: $spacing/6;
+    color: $color_FontL3;
+    text-transform: lowercase;
+    font-size: 0.8rem;
+    font-weight: 400;
+    border: $borderDev solid orange;
+  }
+    // .labels {
+  //   width: 20%;
+  //   text-align: right;
+  //   padding-right: 7px;
+  //   font-weight: 600;
+  // }
+  p {
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    border: $borderDev solid yellow;
+  }
+  .data {
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    border: $borderDev solid yellow;
   }
 }
 
@@ -92,3 +181,4 @@
 .piccadilly {background-color: $color_Piccadilly;}
 .victoria {background-color: $color_Victoria;}
 .waterloo-city {background-color: $color_Waterloo;}
+

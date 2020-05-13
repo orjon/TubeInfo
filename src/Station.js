@@ -52,11 +52,6 @@ class Station extends Component {
     this.getArrivals()
   }
 
-
-  goToStatuses = () => {
-    this.props.history.push(`/`);
-  }
-
   formatLocation(lat, lng){
     lat = lat + '°N'
     if (lng >= 0) {
@@ -92,10 +87,18 @@ class Station extends Component {
         {/* <div className='sectionTitle'>Station Details</div> */}
         <div className='CardSingle'>
           <div className='Card'> 
-            <div className='row titleRow'>
+            <div className='row titleRowText'>
               <h1>{station.name}</h1>
             </div>
-            {lineArrivals}
+            {/* <div className={`row lineRowDivide`}></div> */}
+            <div className='row'>
+              <div className='column w100'>
+                <h2>Arrivals</h2>
+                {lineArrivals}
+              </div>
+             
+            </div>
+            
             <div className='row'>
               <div className='column w50'>
                 <h2>Address</h2>
@@ -112,10 +115,13 @@ class Station extends Component {
               
             </div>
             <div className='row'>
-              <Map
-                lat={station.lat}
-                lng={station.lng}
-              />
+              <div className='column w100 indent4'>
+                <Map
+                    lat={station.lat}
+                    lng={station.lng}
+                  />
+              </div>
+
             </div>
             <div className='row'>
               <div>{location.lat} {location.lng}</div>
