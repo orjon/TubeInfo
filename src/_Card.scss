@@ -68,6 +68,12 @@
     // margin-bottom: $spacing/2;
   }
 
+  .indent3{
+    margin-left: $spacing*3;
+    margin-right: $spacing*3;
+    // margin-bottom: $spacing/2;
+  }
+
   .indent4{
     margin-left: $spacing*4;
     margin-right: $spacing*4;
@@ -76,6 +82,10 @@
 
   .dataBlock{
     margin-bottom: $spacing;
+  }
+
+  .address {
+    align-items: flex-start;
   }
 
 

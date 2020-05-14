@@ -17,16 +17,16 @@ class LineArrivals extends Component{
       .map(arrival => 
         <div className='row' key={uuid()}>
           <div className='column'>{arrival.towards}</div>
-          {/* <div className='column end'>{arrival.expected}</div> */}
-          <div className='column end'>
+          <div className='column end'>{arrival.expected}</div>
+          {/* <div className='column end'>
             <Moment fromNow>{arrival.expected}</Moment>
-          </div>
+          </div> */}
           
         </div>
       )
 
     return(
-      <div className='column dataBlock indent4'>
+      <div className='column dataBlock indent2'>
           <Link className='row' to={`/line/${line.id}`}>
             <div className='column w100 b1'>
               <div key={line} className={`row lineColor ${line.id}`}></div>

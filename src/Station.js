@@ -14,7 +14,11 @@ class Station extends Component {
       address: '',
       lat: 0,
       lng: 0,
-      lines: []
+      lines: [],
+      contact: [
+        {value: 'the address'},
+        {value: 'the phone number'}
+      ]
     }
   }
 
@@ -63,6 +67,12 @@ class Station extends Component {
   }
 
   formatAddress(address){
+    // address= address.replace(/,/g,'\n')
+    address = address.split(',')
+    address = address.map(lineOfAddress => 
+      <div>
+        {lineOfAddress}
+      </div>)
     return address
   }
 
@@ -71,6 +81,8 @@ class Station extends Component {
     return tubeLines[index]
   }
 
+ 
+
   render(){
     const { station, tubeLines } = this.props
 
@@ -78,9 +90,12 @@ class Station extends Component {
       <LineArrivals key={line} line={this.lineName(tubeLines, line)} arrivals={this.state.arrivals}/>
     )
 
+    let address = station.contact[0].value
+    address = this.formatAddress(address)
+    let phoneNo = station.contact[1].value
     let location = this.formatLocation(station.lat, station.lng)
-    let address = this.formatAddress(station.contact)
 
+    // console.log(address)
 
     return(
       <section>
@@ -96,26 +111,36 @@ class Station extends Component {
                 <h2>Arrivals</h2>
                 {lineArrivals}
               </div>
-             
+            </div>
+
+            <div className='row facilities'>
+              <div className='column w1000'>
+                <h2>Facilities</h2>
+                <div className='row facilitiesIcons indent2'>
+                  <div>fac1</div>
+                  <div>fac1</div>
+                  <div>fac1</div>
+                </div>
+              </div>
             </div>
             
-            <div className='row'>
+            <div className='row address'>
               <div className='column w50'>
                 <h2>Address</h2>
-                <p>
-                  ...Address...
-                </p>
+                <div className='column w100 dataBlock indent2'>
+                  {address}
+                </div>
               </div>
               <div className='column w50'>
                 <h2>Telephone</h2>
-                <p>
-                  0207 xxx xxx xxx
-                </p>
+                <div className='column w100 dataBlock indent2'>
+                  {phoneNo}
+                </div>
               </div>
-              
             </div>
+
             <div className='row'>
-              <div className='column w100 indent4'>
+              <div className='column w100 indent2'>
                 <Map
                     lat={station.lat}
                     lng={station.lng}
@@ -123,10 +148,15 @@ class Station extends Component {
               </div>
 
             </div>
+
             <div className='row'>
-              <div>{location.lat} {location.lng}</div>
-              <div className='code'>Station ID: {station.id}</div>
+              <div className='row indent2'>
+                <div>{location.lat} {location.lng}</div>
+                <div className='code'>Station ID: {station.id}</div>
+              </div>
             </div>
+
+
           </div>
             
         </div>
