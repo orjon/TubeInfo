@@ -9,6 +9,7 @@ $color_FontL3: rgb(125, 125, 125);
 $color_LineThin: rgb(150, 150, 150);
 
 $color_TFL: rgb(017,059,146);
+$colorFilter_TFL: invert(18%) sepia(38%) saturate(4532%) hue-rotate(210deg) brightness(91%) contrast(92%);
 // $color_TFL: rgb(000,025,168);
 $color_Emirates: rgb(220,036,031);
 $color_Buses: rgb(220,036,031);
@@ -25,6 +26,7 @@ $color_Hammersmith: rgb(244,169,190);
 $color_Piccadilly: rgb(000,025,168);
 $color_Victoria: rgb(000,152,216);
 $color_Waterloo: rgb(147,206,186);
+
 
 .AppTitle{
   font-size: 2rem;

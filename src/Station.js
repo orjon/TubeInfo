@@ -4,6 +4,10 @@ import Map from './Map';
 import LineArrivals from './LineArrivals';
 import './Section.scss';
 import './Station.scss';
+// import IconWifi from './icons/wifi.svg';
+import IconWifi from './icons/wifi.svg';
+import IconATM from './icons/atm.svg';
+
 
 class Station extends Component {
   static defaultProps={
@@ -117,6 +121,9 @@ class Station extends Component {
               <div className='column w1000'>
                 <h2>Facilities</h2>
                 <div className='row facilitiesIcons indent2'>
+                  {/* <IconWifi /> */}
+                <img src={IconWifi} className='icon' alt="Wifi Icon" />
+                <img src={IconATM} className='icon' alt="ATM Icon" />
                   <div>fac1</div>
                   <div>fac1</div>
                   <div>fac1</div>

@@ -21,6 +21,13 @@
     color: $color_FontMain;
   }
 
+  .icon{
+    box-shadow: none;
+    // background-color: blue;
+    color: blue;
+    filter: $colorFilter_TFL;
+  }
+
   .column {
     
 

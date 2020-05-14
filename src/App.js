@@ -160,14 +160,6 @@ class App extends Component {
         } 
       });
 
-    
-      // if (address) {
-      //   address = address.value
-      //   postCode = address.slice((address.lastIndexOf(','))+1)
-      // }
-      // let phone = properties.find(x => x.key === 'PhoneNo')
-      // let CarPark = false
-
       return lineStations.push({
         key: station.id,
         id: station.id,
