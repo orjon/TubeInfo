@@ -3,4 +3,9 @@ function kebabCase(inputString){
   return outputString
 }
 
-export {kebabCase}
+function lineName(tubeLines, line){
+  let index = tubeLines.findIndex(lineX => lineX.id === line);
+  return tubeLines[index]
+}
+
+export { kebabCase, lineName }

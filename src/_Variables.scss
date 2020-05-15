@@ -10,7 +10,10 @@ $color_LineThin: rgb(150, 150, 150);
 
 $color_TFL: rgb(017,059,146);
 $colorFilter_TFL: invert(18%) sepia(38%) saturate(4532%) hue-rotate(210deg) brightness(91%) contrast(92%);
-// $color_TFL: rgb(000,025,168);
+//filter generator: https://codepen.io/sosuke/pen/Pjoqqp
+
+// $color_TFL2: #0019a8;
+// $colorFilter_TFL2: invert(11%) sepia(95%) saturate(4864%) hue-rotate(212deg) brightness(83%) contrast(152%);
 $color_Emirates: rgb(220,036,031);
 $color_Buses: rgb(220,036,031);
 $color_DLR: rgb(000,175,173);
@@ -26,6 +29,18 @@ $color_Hammersmith: rgb(244,169,190);
 $color_Piccadilly: rgb(000,025,168);
 $color_Victoria: rgb(000,152,216);
 $color_Waterloo: rgb(147,206,186);
+
+.bakerloo {background-color: $color_Bakerloo;}
+.central {background-color: $color_Central;}
+.circle {background-color: $color_Circle;}
+.district {background-color: $color_District;}
+.northern {background-color: $color_Northern;}
+.metropolitan {background-color: $color_Metropolitan;}
+.jubilee {background-color: $color_Jubilee;}
+.hammersmith-city {background-color: $color_Hammersmith;}
+.piccadilly {background-color: $color_Piccadilly;}
+.victoria {background-color: $color_Victoria;}
+.waterloo-city {background-color: $color_Waterloo;}
 
 
 .AppTitle{
@@ -56,6 +71,11 @@ $color_Waterloo: rgb(147,206,186);
     flex: 1;
     text-align: right;
   }
+}
+
+.end {
+  flex: 1;
+  text-align: right;
 }
 
 

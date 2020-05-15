@@ -16,12 +16,8 @@ class LineArrivals extends Component{
       .filter(arrival => arrival.lineId === line.id)
       .map(arrival => 
         <div className='row' key={uuid()}>
-          <div className='column'>{arrival.towards}</div>
-          <div className='column end'>{arrival.expected}</div>
-          {/* <div className='column end'>
-            <Moment fromNow>{arrival.expected}</Moment>
-          </div> */}
-          
+          <div >{arrival.towards}</div>
+          <div className='end'>{arrival.expected}</div>
         </div>
       )
 
@@ -29,17 +25,17 @@ class LineArrivals extends Component{
       <div className='column dataBlock indent2'>
           <Link className='row' to={`/line/${line.id}`}>
             <div className='column w100 b1'>
-              <div key={line} className={`row lineColor ${line.id}`}></div>
+              <div key={line.id} className={`row lineColor ${line.id}`}></div>
               <div className='row linkTo'>
                 <h3 >{line.name}</h3>
                 <div className='status'>{line.status}</div>
               </div>
             </div>
-
           </Link>
+
             <div className='row'>
-              <h4 className='column infoLabel'>Towards</h4>
-              <h4 className='column infoLabel end'>Expected Arrival</h4>
+              <h4 className='infoLabel'>Towards</h4>
+              <h4 className='infoLabel end'>Expected Arrival</h4>
             </div>
           {/* {(line.status !== 'Planned Closure') &&
             <div className='row'>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {v4 as uuid} from 'uuid';
 import Map from './Map';
 import LineArrivals from './LineArrivals';
 import './Section.scss';
 import './Station.scss';
-// import IconWifi from './icons/wifi.svg';
 import IconWifi from './icons/wifi.svg';
 import IconATM from './icons/atm.svg';
 
@@ -71,16 +71,14 @@ class Station extends Component {
   }
 
   formatAddress(address){
-    // address= address.replace(/,/g,'\n')
     address = address.split(',')
     address = address.map(lineOfAddress => 
-      <div>
-        {lineOfAddress}
-      </div>)
+      <p key={uuid()}>{lineOfAddress}</p>
+    )
     return address
   }
 
-  lineName(tubeLines, line){
+  findLine(tubeLines, line){
     let index = tubeLines.findIndex(lineX => lineX.id === line);
     return tubeLines[index]
   }
@@ -91,7 +89,7 @@ class Station extends Component {
     const { station, tubeLines } = this.props
 
     let lineArrivals = station.lines.map(line => 
-      <LineArrivals key={line} line={this.lineName(tubeLines, line)} arrivals={this.state.arrivals}/>
+      <LineArrivals key={line} line={this.findLine(tubeLines, line)} arrivals={this.state.arrivals}/>
     )
 
     let address = station.contact[0].value
@@ -106,9 +104,11 @@ class Station extends Component {
         {/* <div className='sectionTitle'>Station Details</div> */}
         <div className='CardSingle'>
           <div className='Card'> 
-            <div className='row titleRowText'>
+
+            <div className='row'>
               <h1>{station.name}</h1>
             </div>
+
             {/* <div className={`row lineRowDivide`}></div> */}
             <div className='row'>
               <div className='column w100'>
@@ -121,12 +121,9 @@ class Station extends Component {
               <div className='column w1000'>
                 <h2>Facilities</h2>
                 <div className='row facilitiesIcons indent2'>
-                  {/* <IconWifi /> */}
-                <img src={IconWifi} className='icon' alt="Wifi Icon" />
-                <img src={IconATM} className='icon' alt="ATM Icon" />
-                  <div>fac1</div>
-                  <div>fac1</div>
-                  <div>fac1</div>
+                    {/* <IconWifi /> */}
+                  <img src={IconWifi} className='icon' alt="Wifi Icon" />
+                  <img src={IconATM} className='icon' alt="ATM Icon" />
                 </div>
               </div>
             </div>
@@ -134,33 +131,30 @@ class Station extends Component {
             <div className='row address'>
               <div className='column w50'>
                 <h2>Address</h2>
-                <div className='column w100 dataBlock indent2'>
+                <div className='column dataBlock indent2'>
                   {address}
                 </div>
               </div>
               <div className='column w50'>
                 <h2>Telephone</h2>
-                <div className='column w100 dataBlock indent2'>
+                <div className='column dataBlock indent2'>
                   {phoneNo}
                 </div>
               </div>
             </div>
 
-            <div className='row'>
+            <div className='row rowLast'>
               <div className='column w100 indent2'>
                 <Map
                     lat={station.lat}
                     lng={station.lng}
                   />
+                <div className='row'>
+                  <div>{location.lat} {location.lng}</div>
+                  <div className='code'>Station ID: {station.id}</div>
+                </div>
               </div>
 
-            </div>
-
-            <div className='row'>
-              <div className='row indent2'>
-                <div>{location.lat} {location.lng}</div>
-                <div className='code'>Station ID: {station.id}</div>
-              </div>
             </div>
 
 

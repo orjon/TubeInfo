@@ -3,7 +3,6 @@
 .Card {
   font-size: 1rem;
   color: $color_FontMain;
-
   background-color: #eee;
   color: $color_FontMain;
   border-radius: 15px;
@@ -29,9 +28,8 @@
   }
 
   .column {
-    
-
-
+    display: flex;
+    flex-direction: column;
   }
 
   .row {
@@ -40,28 +38,16 @@
     flex-direction: row;
     align-items: flex-end;
     // margin-bottom: $spacing/4;
-
     width: 100%;
 
     &.lineColor {
       height: $spacing;
     }
 
-    &.lineRowDivide {
-      background-color: $color-LineThin;
-      height: $spacing/20;
-      margin: 0;
-      margin-bottom: $spacing/2; 
-      margin-top: $spacing/4; 
+    &.rowLast{
+      margin-bottom: $spacing;
     }
 
-    &.titleRowText {
-      margin-top: -$spacing/4;
-    }
-
-    // &.titleRow {
-    //   margin-top: -$spacing/4;
-    // }
 
     &.map {
       height: 300px;
@@ -69,23 +55,7 @@
 
   }
 
-  .indent2{
-    margin-left: $spacing*2;
-    margin-right: $spacing*2;
-    // margin-bottom: $spacing/2;
-  }
-
-  .indent3{
-    margin-left: $spacing*3;
-    margin-right: $spacing*3;
-    // margin-bottom: $spacing/2;
-  }
-
-  .indent4{
-    margin-left: $spacing*4;
-    margin-right: $spacing*4;
-    // margin-bottom: $spacing/2;
-  }
+  
 
   .dataBlock{
     margin-bottom: $spacing;
@@ -118,6 +88,47 @@
   }
   .data::-webkit-scrollbar {
     display: none;
+  }
+
+  .lineBlock {
+    width: 125px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: left;
+  }
+
+
+  .infoLabel {
+    margin-bottom: $spacing/6;
+    color: $color_FontL3;
+    text-transform: lowercase;
+    font-size: 0.8rem;
+    font-weight: 400;
+    border: $borderDev solid orange;
+  }
+    // .labels {
+  //   width: 20%;
+  //   text-align: right;
+  //   padding-right: 7px;
+  //   font-weight: 600;
+  // }
+
+  p {
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    border: $borderDev solid yellow;
+  }
+  .data {
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 0.9rem;
+    border: $borderDev solid yellow;
+  }
+
+  .end {
+    flex: 1;
+    justify-content: flex-end;
   }
 
   img {
@@ -158,44 +169,26 @@
     font-weight: 400;
     border: $borderDev solid orange;
   }
-  .infoLabel {
-    margin-bottom: $spacing/6;
-    color: $color_FontL3;
-    text-transform: lowercase;
-    font-size: 0.8rem;
-    font-weight: 400;
-    border: $borderDev solid orange;
+
+  .indent2{
+    margin-left: $spacing*2;
+    margin-right: $spacing*2;
+    // margin-bottom: $spacing/2;
   }
-    // .labels {
-  //   width: 20%;
-  //   text-align: right;
-  //   padding-right: 7px;
-  //   font-weight: 600;
-  // }
-  p {
-    text-align: justify;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    border: $borderDev solid yellow;
+
+  .indent3{
+    margin-left: $spacing*3;
+    margin-right: $spacing*3;
+    // margin-bottom: $spacing/2;
   }
-  .data {
-    text-align: justify;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    border: $borderDev solid yellow;
+
+  .indent4{
+    margin-left: $spacing*4;
+    margin-right: $spacing*4;
+    // margin-bottom: $spacing/2;
   }
+
 }
 
 
-.bakerloo {background-color: $color_Bakerloo;}
-.central {background-color: $color_Central;}
-.circle {background-color: $color_Circle;}
-.district {background-color: $color_District;}
-.northern {background-color: $color_Northern;}
-.metropolitan {background-color: $color_Metropolitan;}
-.jubilee {background-color: $color_Jubilee;}
-.hammersmith-city {background-color: $color_Hammersmith;}
-.piccadilly {background-color: $color_Piccadilly;}
-.victoria {background-color: $color_Victoria;}
-.waterloo-city {background-color: $color_Waterloo;}
 
