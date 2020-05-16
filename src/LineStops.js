@@ -20,22 +20,38 @@ class LineStops extends Component{
       <LineStop key={station.id} station={station} tubeLines={tubeLines}/>
     )
 
+
+
+
+    // let lines = []
+    // lines = station.lines.map(line => {
+    //   let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+    //   let lightColor = ''
+
+    //   if (lightColors.includes(line)){
+    //     lightColor = 'lightColor'
+    //   }
+
     return(
+
+
+
       <section>
         {/* <div className='sectionTitle'>Line Details</div> */}
         <div className='CardSingle'> 
           <div className='Card'>
             
-            <div className={`row lineColor ${line.id}`}></div>
-
-            <div className='row'>
-              <h1>{line.name}</h1>
-              <div className='status'>Stations: {line.stations.length}</div>
+            <div className={`row lineColor ${line.id}`}>
+              <h2>{line.name}</h2>
             </div>
 
+            {/* <div className='row'>
+              <div className='status'>Stations: {line.stations.length}</div>
+            </div> */}
+
             <div className='row'>
-              <div className='column w100'>
-                <h2>Stations Served</h2>
+              <div className='column w100 indent1'>
+                <h2>Stations Served ({line.stations.length})</h2>
                 <div className='column indent2'>
                   {/* <div className='row'>
                     <h4 className='infoLabel'>Station</h4>

@@ -3,10 +3,11 @@ import axios from 'axios';
 import {v4 as uuid} from 'uuid';
 import Map from './Map';
 import LineArrivals from './LineArrivals';
+import Facilities from './Facilties';
 import './Section.scss';
 import './Station.scss';
-import IconWifi from './icons/wifi.svg';
-import IconATM from './icons/atm.svg';
+// import IconWifi from './icons/wifi.svg';
+// import IconATM from './icons/atm.svg';
 
 
 class Station extends Component {
@@ -73,7 +74,7 @@ class Station extends Component {
   formatAddress(address){
     address = address.split(',')
     address = address.map(lineOfAddress => 
-      <p key={uuid()}>{lineOfAddress}</p>
+      <div key={uuid()}>{lineOfAddress}</div>
     )
     return address
   }
@@ -91,6 +92,8 @@ class Station extends Component {
     let lineArrivals = station.lines.map(line => 
       <LineArrivals key={line} line={this.findLine(tubeLines, line)} arrivals={this.state.arrivals}/>
     )
+
+    
 
     let address = station.contact[0].value
     address = this.formatAddress(address)
@@ -111,31 +114,27 @@ class Station extends Component {
 
             {/* <div className={`row lineRowDivide`}></div> */}
             <div className='row'>
-              <div className='column w100'>
+              <div className='column w100 indent1'>
                 <h2>Arrivals</h2>
                 {lineArrivals}
               </div>
             </div>
 
             <div className='row facilities'>
-              <div className='column w1000'>
+              <div className='column w100 indent1'>
                 <h2>Facilities</h2>
-                <div className='row facilitiesIcons indent2'>
-                    {/* <IconWifi /> */}
-                  <img src={IconWifi} className='icon' alt="Wifi Icon" />
-                  <img src={IconATM} className='icon' alt="ATM Icon" />
-                </div>
+                <Facilities facilities={station.facilities}/>
               </div>
             </div>
             
             <div className='row address'>
-              <div className='column w50'>
+              <div className='column w50 indent1'>
                 <h2>Address</h2>
                 <div className='column dataBlock indent2'>
                   {address}
                 </div>
-              </div>
-              <div className='column w50'>
+              </div> 
+              <div className='column w50 indent1'>
                 <h2>Telephone</h2>
                 <div className='column dataBlock indent2'>
                   {phoneNo}

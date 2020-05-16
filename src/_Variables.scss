@@ -84,6 +84,30 @@ $color_Waterloo: rgb(147,206,186);
 .w75 {width: 50%}
 .w100 {width: 100%}
 
+.indent1{
+  margin-left: $spacing;
+  margin-right: $spacing;
+  // margin-bottom: $spacing/2;
+}
+
+.indent2{
+  margin-left: $spacing*2;
+  margin-right: $spacing*2;
+  // margin-bottom: $spacing/2;
+}
+
+.indent3{
+  margin-left: $spacing*3;
+  margin-right: $spacing*3;
+  // margin-bottom: $spacing/2;
+}
+
+.indent4{
+  margin-left: $spacing*4;
+  margin-right: $spacing*4;
+  // margin-bottom: $spacing/2;
+}
+
 
 .hidden {
 	display: none;

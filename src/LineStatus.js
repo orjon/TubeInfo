@@ -15,11 +15,15 @@ class LineStatus extends Component {
       <div className='LineStatus'>
         <Link to={`/line/${line.id}`}>
           <div className='Card'>
-            <div className={`row lineColor ${line.id}`}></div>
+          <div className={`row lineColor ${line.id}`}>
+              <h2>{line.name}</h2>
+            </div>
+            
             <div className='row titleRow'>
-              <h1>{line.name}</h1>
+              {/* <h1>{line.name}</h1> */}
               <div className='status'>{line.status}</div>
             </div>
+
             <div className='row'>
               <div className='data'>
                 {disruptionReason}
