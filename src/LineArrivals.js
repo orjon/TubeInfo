@@ -21,6 +21,12 @@ class LineArrivals extends Component{
         </div>
       )
 
+      let noArrivals = false;
+
+      if (arrivals.length === 0){
+        noArrivals = true;
+      }
+
     return(
       <div className='column dataBlock indent2'>
           <Link className='row' to={`/line/${line.id}`}>
@@ -33,16 +39,18 @@ class LineArrivals extends Component{
             </div>
           </Link>
 
+            {/* <div className='row'>
+              <h4 className='infoLabel'>Towards</h4>
+              <h4 className='infoLabel end'>Expected Arrival</h4>
+            </div> */}
+
+          { !noArrivals &&
             <div className='row'>
               <h4 className='infoLabel'>Towards</h4>
               <h4 className='infoLabel end'>Expected Arrival</h4>
             </div>
-          {/* {(line.status !== 'Planned Closure') &&
-            <div className='row'>
-              <h4 className='column infoLabel'>Towards</h4>
-              <h4 className='column infoLabel end'>Expected Arrival</h4>
-            </div>
-           } */}
+           }
+
           {/* <div className={`row lineRowDivide`}></div> */}
           {arrivals}
           {/* <div className={`row lineRowDivide`}></div> */}

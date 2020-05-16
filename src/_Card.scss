@@ -36,7 +36,7 @@
     border: $borderDev solid darkgrey;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    // align-items: flex-end;
     // margin-bottom: $spacing/4;
     width: 100%;
 
@@ -68,8 +68,11 @@
 
   .status {
     flex: 1;
+    display: flex;
     text-align:right;
     color: $color_FontL1;
+    align-items: flex-end;
+    justify-content: flex-end;
     // padding-top: 3px;
   }
 
@@ -90,12 +93,7 @@
     display: none;
   }
 
-  .lineBlock {
-    width: 125px;
-    font-size: 0.8rem;
-    font-weight: 400;
-    text-align: left;
-  }
+
 
 
   .infoLabel {

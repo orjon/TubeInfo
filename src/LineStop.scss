@@ -1,6 +1,50 @@
 @import 'Variables';
 
-.LineStop{
+.lineStop{
   border: $borderDev solid magenta;
+  color: red;
+  text-align: right;
+  display: flex;
+  margin: 0 0 $spacing 0;
+}
+
+.lineName {
+  color:$color_FontMain;
+  margin: $spacing/4;
+}
+
+.linesBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+
+
+}
+
+.flex1 {
+  flex:1;
+}
+
+// .flex2 {
+//   flex:2;
+// }
+
+
+.lineCell {
+  height: $spacing;
+  width: 125px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: left;
+  color: white;
+  padding-left: $spacing/8;
+  border: $borderDev solid orange;
+  display: flex;
+  align-items: center;
+  &.lightColor {
+    color: $color_TFL;
+  }
 }
 

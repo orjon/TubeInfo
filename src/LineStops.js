@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import LineStop from './LineStop';
 import './Section.scss';
 
@@ -38,10 +37,10 @@ class LineStops extends Component{
               <div className='column w100'>
                 <h2>Stations Served</h2>
                 <div className='column indent2'>
-                  <div className='row'>
+                  {/* <div className='row'>
                     <h4 className='infoLabel'>Station</h4>
                     <h4 className='infoLabel end'>Lines Served</h4>
-                  </div>
+                  </div> */}
                   {lineStops}
                 </div>
               </div>

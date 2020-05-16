@@ -27,24 +27,31 @@ class LineStop extends Component{
 
 
 
+    lines = station.lines.map(line => {
+      let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+      let lightColor = ''
 
-    
-    lines = station.lines.map(line => 
-      <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
-        <div className={`lineBlock ${line}`}>
+      if (lightColors.includes(line)){
+        lightColor = 'lightColor'
+      }
+
+      return <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
+        <div className={`lineCell ${line} ${lightColor}`}>
           {this.lineName(tubeLines, line)}
         </div>
       </Link>
+    }
+
 
     )
   
     return(
-      <div className='row LineStop'>
-        <Link to={`/station/${station.url}`}>
+      <div className='row lineStop'>
+        <Link className='w50 lineName' to={`/station/${station.url}`}>
           {station.name}
         </Link>
 
-        <div className='row end'>
+        <div className='column w50 linesBlock'>
           {lines}
         </div>
         
