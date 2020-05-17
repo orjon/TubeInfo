@@ -27,13 +27,26 @@ class LineArrivals extends Component{
         noArrivals = true;
       }
 
+    
+    let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+    let lightColor = ''
+
+      if (lightColors.includes(line.id)){
+        lightColor = 'lightColor'
+      }
+  
+
     return(
       <div className='column dataBlock indent2'>
           <Link className='row' to={`/line/${line.id}`}>
             <div className='column w100 b1'>
-              <div key={line.id} className={`row lineColor ${line.id}`}></div>
+              <div key={line.id} className={`row lineColor ${line.id}`}>
+                <div className={`${lightColor}`}>{line.name}</div>
+              </div>
+
+
               <div className='row linkTo'>
-                <h3 >{line.name}</h3>
+                {/* <h3 >{line.name}</h3> */}
                 <div className='status'>{line.status}</div>
               </div>
             </div>

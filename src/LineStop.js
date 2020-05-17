@@ -36,10 +36,10 @@ class LineStop extends Component{
       }
 
       return <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
-        <div className={`lineCell ${line} ${lightColor}`}>
-          {this.lineName(tubeLines, line)}
-        </div>
-      </Link>
+                <div className={`lineCell ${line} ${lightColor}`}>
+                  {this.lineName(tubeLines, line)}
+                </div>
+              </Link>
     }
 
 

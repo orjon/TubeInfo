@@ -20,17 +20,13 @@ class LineStops extends Component{
       <LineStop key={station.id} station={station} tubeLines={tubeLines}/>
     )
 
+    let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+    let lightColor = ''
 
+      if (lightColors.includes(line.id)){
+        lightColor = 'lightColor'
+      }
 
-
-    // let lines = []
-    // lines = station.lines.map(line => {
-    //   let lightColors = ['hammersmith-city','waterloo-city', 'circle']
-    //   let lightColor = ''
-
-    //   if (lightColors.includes(line)){
-    //     lightColor = 'lightColor'
-    //   }
 
     return(
 
@@ -42,7 +38,7 @@ class LineStops extends Component{
           <div className='Card'>
             
             <div className={`row lineColor ${line.id}`}>
-              <h2>{line.name}</h2>
+              <div className={`${lightColor}`}>{line.name}</div>
             </div>
 
             {/* <div className='row'>

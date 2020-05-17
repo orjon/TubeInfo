@@ -113,35 +113,46 @@ class App extends Component {
         {key: 'Address', value: undefined},
         {key: 'PhoneNo', value: undefined}
       ]
-      let properties = [
-        {key: 'Boarding Ramp', value: undefined},
-        {key: 'Cash Machines', value: undefined},
-        {key: 'Waiting Room', value: undefined},
+      let facility = [
+        {key: 'Ticket Halls', value: undefined},
+        {key: 'Toilets', value: undefined},
         {key: 'Lifts', value: undefined},
         {key: 'Escalators', value: undefined},
-        {key: 'ASDA Click and Collect', value: undefined},
-        {key: 'Ticket Halls', value: undefined},
-        {key: 'Car park', value: undefined},
-        {key: 'Amazon Lockers', value: undefined},
-        {key: 'Euro Cash Machines', value: undefined},
-        {key: 'Payphones', value: undefined},
-        {key: 'Gates', value: undefined},
-        {key: 'Toilets', value: undefined},
-        {key: 'Help Points', value: undefined},
         {key: 'WiFi', value: undefined},
+        {key: 'Help Points', value: undefined},
+        {key: 'Payphones', value: undefined},
+        {key: 'Boarding Ramp', value: undefined},
+        {key: 'Cash Machines', value: undefined},
+        {key: 'Euro Cash Machines', value: undefined},
+        {key: 'Waiting Room', value: undefined},
+        // {key: 'Gates', value: undefined},
+        {key: 'TaxiRankOutsideStation', value: undefined},
+        {key: 'Car park', value: undefined},
         {key: 'Left Luggage', value: undefined},
         {key: 'Photo Booths', value: undefined},
-        {key: 'TaxiRankOutsideStation', value: undefined}
+        {key: 'Amazon Lockers', value: undefined},
+        {key: 'ASDA Click and Collect', value: undefined},
       ]
 
-      let validProperties = []
-      let rejectedValues = ['no', '0']
 
-      properties.forEach(property => {
-        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
-        if (propertyObject && !rejectedValues.includes(propertyObject.value)){
-          property.value = propertyObject.value
-          validProperties.push(property)
+      let validFacilities = []
+      let rejectedValues = ['no', '0']
+      let renamedFacilityKeys = ['TaxiRankOutsideStation']
+      
+
+      facility.forEach(facility => {
+        let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
+
+        
+
+        if (facilityObject && renamedFacilityKeys.includes(facility.key)) {
+          facility.key = 'Taxi Rank'
+        }
+
+
+        if (facilityObject && !rejectedValues.includes(facilityObject.value)){
+          facility.value = facilityObject.value
+          validFacilities.push(facility)
           return
         } 
       });
@@ -168,7 +179,7 @@ class App extends Component {
         lat: station.lat,
         lng: station.lon,
         contact: [...validContacts],
-        facilities: validProperties
+        facilities: validFacilities
       })
     })
     return lineStations;

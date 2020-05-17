@@ -1,0 +1,7 @@
+@import 'Variables';
+
+.Facilities {
+  display: flex;
+  flex-flow: row wrap;
+  border: $borderDev solid orange;
+}

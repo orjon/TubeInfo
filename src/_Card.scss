@@ -40,20 +40,6 @@
     // margin-bottom: $spacing/4;
     width: 100%;
 
-    &.lineColor {
-      height: $spacing*2;
-      color: white;
-      padding-left: $spacing/2;
-      border: $borderDev solid orange;
-      display: flex;
-      align-items: center;
-      &.lightColor {
-        color: $color_TFL;
-      }
-    }
-
-
-  
 
 
     &.rowLast{
@@ -80,6 +66,24 @@
     align-items: flex-end;
     justify-content: flex-end;
     // padding-top: 3px;
+  }
+
+
+  .lightColor {
+    color: $color_TFL;
+  }
+
+
+  .lineColor {
+    height: $spacing*2;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-left: $spacing/2;
+    border: $borderDev solid orange;
+    display: flex;
+    align-items: center;
+
   }
 
   .code {
@@ -129,6 +133,7 @@
     font-size: 0.9rem;
     border: $borderDev solid yellow;
   }
+
 
   .end {
     flex: 1;

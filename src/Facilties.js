@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Facilities.scss';
 
 class Facilties extends Component {
   static defaultProps={
@@ -9,15 +10,16 @@ class Facilties extends Component {
     let { facilities } = this.props
 
     facilities = facilities.map(facility => 
-      <div key={facility.key} className='row'>
+      <div key={facility.key} className='w25 column'>
         {facility.key}
       </div>
     )
 
     return(
-      <div className='column dataBlock indent2'>
+        <div className='Facilities dataBlock indent2'>
         {facilities}
-      </div>
+        </div>
+
 
 
       // {/* <div className='row facilitiesIcons indent2'> */

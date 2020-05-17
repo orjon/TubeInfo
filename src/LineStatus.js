@@ -11,12 +11,23 @@ class LineStatus extends Component {
         var cropIndex = disruptionReason.indexOf(':') + 1
         disruptionReason = disruptionReason.substring(cropIndex)
       }
+
+
+    let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+    let lightColor = ''
+
+      if (lightColors.includes(line.id)){
+        lightColor = 'lightColor'
+      }
+
+
     return(
       <div className='LineStatus'>
         <Link to={`/line/${line.id}`}>
           <div className='Card'>
-          <div className={`row lineColor ${line.id}`}>
-              <h2>{line.name}</h2>
+
+            <div className={`row lineColor ${line.id}`}>
+                <div className={`${lightColor}`}>{line.name}</div>
             </div>
             
             <div className='row titleRow'>
