@@ -4,10 +4,17 @@ import './LineStop.scss';
 
 class LineStop extends Component{
   static defaultProps={
-    station: {
+    thisStation: {
       lines: []
+    },
+    station: {
+      id : undefined
     }
+  }
 
+  constructor(props){
+    super(props);
+    this.findStationFromId = this.findStationFromId.bind(this)
   }
 
   lineName(tubeLines, line){
@@ -20,30 +27,40 @@ class LineStop extends Component{
     return tubeLines[index].id
   }
 
+  findStationFromId = (stationToFind) => {
+    return this.props.stations.filter( station => station.id === stationToFind);
+  }
+
 
   render(){
-    let { station, tubeLines } = this.props
+    let { station, tubeLines, stations, thisStation} = this.props
     let lines = []
 
+    thisStation = this.findStationFromId(station.id).pop()
+    // console.log('thisStation: ',thisStation.lines)
 
 
-    lines = station.lines.map(line => {
-      let lightColors = ['hammersmith-city','waterloo-city', 'circle']
-      let lightColor = ''
 
-      if (lightColors.includes(line)){
-        lightColor = 'lightColor'
-      }
+      lines = thisStation.lines.map(line => {
+
+      // Check for light color to format text color if needed
+        let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+        let lightColor = ''
+
+        if (lightColors.includes(line)){
+          lightColor = 'lightColor'
+        }
+      //
+
 
       return <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
                 <div className={`lineCell ${line} ${lightColor}`}>
                   {this.lineName(tubeLines, line)}
                 </div>
               </Link>
-    }
+    })
 
 
-    )
   
     return(
       <div className='row lineStop'>

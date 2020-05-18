@@ -10,14 +10,15 @@ class LineStops extends Component{
       stations: []
     },
     tubeLines: {
-    }
+    },
+    stations: []
   }
 
   render(){
-    const { line, tubeLines } = this.props
+    const { line, tubeLines, stations } = this.props
 
     let lineStops = line.stations.map(station => 
-      <LineStop key={station.id} station={station} tubeLines={tubeLines}/>
+      <LineStop key={station.id} station={station} stations={stations} tubeLines={tubeLines}/>
     )
 
     let lightColors = ['hammersmith-city','waterloo-city', 'circle']
@@ -26,6 +27,9 @@ class LineStops extends Component{
       if (lightColors.includes(line.id)){
         lightColor = 'lightColor'
       }
+
+    console.log('line: ',line.id)
+
 
 
     return(

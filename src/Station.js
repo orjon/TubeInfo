@@ -89,10 +89,11 @@ class Station extends Component {
   render(){
     const { station, tubeLines } = this.props
 
-    let lineArrivals = station.lines.map(line => 
-      <LineArrivals key={line} line={this.findLine(tubeLines, line)} arrivals={this.state.arrivals}/>
-    )
-
+    // Loops through each line served by station
+      let lineArrivals = station.lines.map(line => 
+        <LineArrivals key={line} line={this.findLine(tubeLines, line)} arrivals={this.state.arrivals}/>
+      )
+    //
     
 
     let address = station.contact[0].value

@@ -48,10 +48,11 @@ class App extends Component {
         lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
-      console.log('lines in stations', )
+      // console.log('lines in stations', )
     }
     stations.sort( this.compare );
-    console.log(stations.sort())
+    // console.log('stations: ',stations)
+    // console.log(stations.sort())
     this.setState({
       tubeLines: lines,
       stations: stations
@@ -74,11 +75,13 @@ class App extends Component {
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: line.lineStatuses[0].reason,
         stopOrder: [],
-        stations: []
+        // stations: []
       })
     )
     return lines
   }
+
+  
 
   
   async getStopOrder(lineId){
@@ -276,7 +279,9 @@ class App extends Component {
               <LineStops
                 {...routeProps} 
                 tubeLines={this.state.tubeLines}
+                stations={this.state.stations}
                 line={this.findLine(routeProps.match.params.id)}
+
                 // lineIndex={this.findLineIndex(routeProps.match.params.id)}
               />
             )}
