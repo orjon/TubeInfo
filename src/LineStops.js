@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LineStop from './LineStop';
 import './Section.scss';
+import './LineStops.scss';
 
 class LineStops extends Component{
   static defaultProps={
@@ -52,7 +53,7 @@ class LineStops extends Component{
             <div className='row'>
               <div className='column w100 indent1'>
                 <h2>Stations Served ({line.stations.length})</h2>
-                <div className='column indent2'>
+                <div className='LineStops dataBlock indent2'>
                   {/* <div className='row'>
                     <h4 className='infoLabel'>Station</h4>
                     <h4 className='infoLabel end'>Lines Served</h4>

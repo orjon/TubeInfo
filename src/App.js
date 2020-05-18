@@ -292,9 +292,10 @@ class App extends Component {
             render={(routeProps) => (
               <Station
                 {...routeProps} 
+                tubeLines={this.state.tubeLines}
                 apiString={this.props.apiString}
                 station={this.findStationFromUrl(routeProps.match.params.url)}
-                tubeLines={this.state.tubeLines}
+                getInfo={this.getInfo}
               />
             )}
           />

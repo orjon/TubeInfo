@@ -30,14 +30,15 @@ class Station extends Component {
   constructor(props){
     super(props);
     this.state={
-      arrivals:[]
+      arrivals:[],
+      station: this.props.station
     }
     this.getArrivals = this.getArrivals.bind(this)
   }
 
   async getArrivals(){
-    const { apiString } = this.props
-    const stationId = this.props.station.id
+    const { apiString, station } = this.props
+    const stationId = station.id
     let arrivals = []
     let response = await axios.get(`https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
       headers : {Accept: 'application/json'}
@@ -58,6 +59,8 @@ class Station extends Component {
   }
 
   componentDidMount(){
+    const { getInfo } = this.props
+    // getInfo()
     this.getArrivals()
   }
 

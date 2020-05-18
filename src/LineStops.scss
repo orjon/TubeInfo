@@ -1,0 +1,7 @@
+@import 'Variables';
+
+.LineStops {
+  display: flex;
+  flex-flow: row wrap;
+  border: $borderDev solid orange;
+}
