@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/dev/examples/tfl/static/css/main.ac190e57.chunk.css",
+    "main.js": "/dev/examples/tfl/static/js/main.16d90dee.chunk.js",
+    "main.js.map": "/dev/examples/tfl/static/js/main.16d90dee.chunk.js.map",
+    "runtime-main.js": "/dev/examples/tfl/static/js/runtime-main.198c2978.js",
+    "runtime-main.js.map": "/dev/examples/tfl/static/js/runtime-main.198c2978.js.map",
+    "static/js/2.dfe87022.chunk.js": "/dev/examples/tfl/static/js/2.dfe87022.chunk.js",
+    "static/js/2.dfe87022.chunk.js.map": "/dev/examples/tfl/static/js/2.dfe87022.chunk.js.map",
+    "index.html": "/dev/examples/tfl/index.html",
+    "precache-manifest.6b4e73396dadd7613456bc5dbdbdd8b2.js": "/dev/examples/tfl/precache-manifest.6b4e73396dadd7613456bc5dbdbdd8b2.js",
+    "service-worker.js": "/dev/examples/tfl/service-worker.js",
+    "static/css/main.ac190e57.chunk.css.map": "/dev/examples/tfl/static/css/main.ac190e57.chunk.css.map",
+    "static/js/2.dfe87022.chunk.js.LICENSE.txt": "/dev/examples/tfl/static/js/2.dfe87022.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.198c2978.js",
+    "static/js/2.dfe87022.chunk.js",
+    "static/css/main.ac190e57.chunk.css",
+    "static/js/main.16d90dee.chunk.js"
+  ]
+}

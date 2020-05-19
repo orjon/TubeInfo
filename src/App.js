@@ -295,7 +295,6 @@ class App extends Component {
                 tubeLines={this.state.tubeLines}
                 apiString={this.props.apiString}
                 station={this.findStationFromUrl(routeProps.match.params.url)}
-                getInfo={this.getInfo}
               />
             )}
           />

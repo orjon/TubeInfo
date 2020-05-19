@@ -29,6 +29,8 @@ class Map extends React.Component {
     // this.map.on('click', this.props.onClick)
     // this.setMarkers()
 
+
+
     new mapboxgl.Map({
       container: this.mapDiv,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -38,9 +40,8 @@ class Map extends React.Component {
 
   }
 
-  // componentDidUpdate() {
-  //   this.setMarkers()
-  // }
+
+
 
   // setMarkers() {
   //   this.markers.forEach(marker => marker.remove())
@@ -53,6 +54,7 @@ class Map extends React.Component {
   // }
 
   render() {
+
     return(
       <div className='row map' ref={el => this.mapDiv = el} />
     )

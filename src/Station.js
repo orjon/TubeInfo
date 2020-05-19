@@ -38,6 +38,8 @@ class Station extends Component {
 
   async getArrivals(){
     const { apiString, station } = this.props
+    if (station.id === undefined){ return }
+    // let station = this.findStationFromUrl(this.props.routeProps.match.params.url)
     const stationId = station.id
     let arrivals = []
     let response = await axios.get(`https://api.tfl.gov.uk/StopPoint/${stationId}/Arrivals?${apiString}`, {
@@ -54,7 +56,20 @@ class Station extends Component {
       })
     )
     this.setState({
-      arrivals: [...arrivals]
+      arrivals: [...arrivals],
+      station: {
+      id: undefined,
+      url: 'loading...',
+      name: 'loading...',
+      address: '',
+      lat: 0,
+      lng: 0,
+      lines: [],
+      contact: [
+        {value: 'the address'},
+        {value: 'the phone number'}
+      ]
+    }
     })
   }
 
@@ -91,6 +106,12 @@ class Station extends Component {
 
   render(){
     const { station, tubeLines } = this.props
+
+    if (this.state.arrivals.length === 0){
+      this.getArrivals()
+    }
+
+    
 
     // Loops through each line served by station
       let lineArrivals = station.lines.map(line => 
