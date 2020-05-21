@@ -7,8 +7,8 @@ import LineStops from './LineStops'
 import LineStatuses from './LineStatuses';
 import Station from './Station';
 import './App.scss';
-import Moment from 'react-moment';
-import 'moment-timezone';
+// import Moment from 'react-moment';
+// import 'moment-timezone';
 
 
 class App extends Component {
