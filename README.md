@@ -23,3 +23,7 @@ Station information page with upcoming expected train arrival for each line serv
  - Line headers are clickable links to line information pages.
  - Interactive map is rendered with Mapbox.
 ![Screen shot](/src/screenshots/screenshot-station.jpg)
+
+### Header
+The header is always displayed. Clicking on the App title links to Statuses / Home.
+The current local time and date are displayed top-right

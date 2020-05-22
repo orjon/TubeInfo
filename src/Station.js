@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import axios from 'axios';
 import {v4 as uuid} from 'uuid';
 import Map from './Map';
@@ -102,9 +102,18 @@ class Station extends Component {
     return tubeLines[index]
   }
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [])
+
  
 
   render(){
+
+
+
+
+
     const { station, tubeLines } = this.props
 
     if (this.state.arrivals.length === 0){
