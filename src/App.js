@@ -252,16 +252,7 @@ class App extends Component {
           <Nav />
         </header>
         <Switch>
-        <Route
-            exact
-            path='/'
-            render={(routeProps) => (
-              <LineStatuses
-                {...routeProps}
-                tubeLines={this.state.tubeLines}
-                />
-            )}
-          />
+          <Route exact path='/' component = { LineStatuses }/>
           <Route
             exact
             path='/tube/status'
@@ -298,7 +289,6 @@ class App extends Component {
               />
             )}
           />
-
         </Switch>
   
         <footer className='right'>
@@ -312,110 +302,3 @@ class App extends Component {
 }
 
 export default App;
-
-// [
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Accessibility",
-//     "availableKeys": [
-//       "SpecificEntranceRequired",
-//       "TaxiRankOutsideStation",
-//       "SpecificEntranceInstructions",
-//       "Toilet",
-//       "AddtionalInformation",
-//       "LimitedCapacityLift",
-//       "AccessViaLift",
-//       "BlueBadgeCarParkSpaces",
-//       "ToiletNote"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Address",
-//     "availableKeys": [
-//       "Address",
-//       "PhoneNo"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Direction",
-//     "availableKeys": [
-//       "Towards",
-//       "CompassPoint"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "key",
-//     "availableKeys": [
-//       "Boarding Ramp",
-//       "Lifts",
-//       "Boarding Ramps",
-//       "Escalators",
-//       "Cash Machines",
-//       "Waiting Room",
-//       "Bridge",
-//       "Car park",
-//       "Euro Cash Machines",
-//       "Payphones",
-//       "ASDA Click and Collect",
-//       "Ticket Halls",
-//       "Amazon Lockers",
-//       "Other Facilities",
-//       "Help Points",
-//       "WiFi",
-//       "Gates",
-//       "Toilets",
-//       "Left Luggage",
-//       "Photo Booths"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Geo",
-//     "availableKeys": [
-//       "Zone"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "NearestPlaces",
-//     "availableKeys": [
-//       "SourceSystemPlaceId"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "Opening Time",
-//     "availableKeys": [
-//       "SatFrom",
-//       "MonFriTo",
-//       "SatTo",
-//       "SunTo",
-//       "MonFriFrom",
-//       "SunFrom"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "ServiceInfo",
-//     "availableKeys": [
-//       "Night"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "StationOwnedByTfl",
-//     "availableKeys": [
-//       "OwnedByTfl"
-//     ]
-//   },
-//   {
-//     "$type": "Tfl.Api.Presentation.Entities.StopPointCategory, Tfl.Api.Presentation.Entities",
-//     "category": "VisitorCentre",
-//     "availableKeys": [
-//       "Location"
-//     ]
-//   }
-// ]

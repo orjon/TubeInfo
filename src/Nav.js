@@ -13,14 +13,14 @@ class Nav extends Component {
   }
 
   render(){
-    const dateToFormat = '1976-04-19T12:59-0500';
+    // const dateToFormat = '1976-04-19T12:59-0500';
     return(
       <div className='Nav'>
         <Link to='/'>
           <div className='AppTitle'>The Tube</div>
         </Link>
         <div className='dateTime'>
-          <Clock className = 'Time'format={'HH:mm'} ticking={true}/>
+          <Clock className = 'Time' format={'HH:mm'} ticking={true}/>
           <Clock className = 'Date' format={'DD-MMM-YYYY'} ticking={true}/>
         </div>
       </div>
