@@ -252,7 +252,7 @@ class App extends Component {
           <Nav />
         </header>
         <Switch>
-          <Route exact path='/' component = { LineStatuses }/>
+          
           {/* <Route exact path='/tube/status'
             render={(routeProps) => (
               <LineStatuses
@@ -283,6 +283,8 @@ class App extends Component {
               />
             )}
           />
+
+        <Route path='/' component = { LineStatuses }/>
         </Switch>
   
         <footer className='right'>
