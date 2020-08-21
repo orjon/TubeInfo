@@ -7,8 +7,6 @@
   color: $color_FontMain;
   border-radius: 15px;
   box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
-  //Fixed Card height?
-  // height: 150px;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -36,16 +34,11 @@
     border: $borderDev solid darkgrey;
     display: flex;
     flex-direction: row;
-    // align-items: flex-end;
-    // margin-bottom: $spacing/4;
     width: 100%;
-
-
 
     &.rowLast{
       margin-bottom: $spacing;
     }
-
 
     &.map {
       height: 300px;
@@ -53,26 +46,26 @@
 
   }
 
+  .titleRow{
+    font-weight: 600;
+    margin-top: $spacing/3;
+    margin-bottom: $spacing/3;
+  }
 
   .dataBlock{
     margin-bottom: $spacing;
   }
 
   .status {
-    flex: 1;
     display: flex;
-    text-align:right;
-    color: $color_FontL1;
+    font-size: 1.1rem;
     align-items: flex-end;
-    justify-content: flex-end;
-    // padding-top: 3px;
+    color: $color_FontMain;
   }
-
 
   .lightColor {
     color: $color_TFL;
   }
-
 
   .lineColor {
     height: $spacing*2;

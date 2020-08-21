@@ -76,6 +76,7 @@ class Station extends Component {
   componentDidMount(){
     const { getInfo } = this.props
     // getInfo()
+    window.scrollTo(0, 0);
     this.getArrivals()
   }
 

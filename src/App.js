@@ -253,33 +253,27 @@ class App extends Component {
         </header>
         <Switch>
           <Route exact path='/' component = { LineStatuses }/>
-          <Route
-            exact
-            path='/tube/status'
+          {/* <Route exact path='/tube/status'
             render={(routeProps) => (
               <LineStatuses
                 {...routeProps}
                 tubeLines={this.state.tubeLines}
               />
             )}
-          />
-          <Route
-            exact
-            path='/line/:id'
+          /> */}
+          <Route exact path='/line/:id'
             render={(routeProps) => (
               <LineStops
                 {...routeProps} 
                 tubeLines={this.state.tubeLines}
                 stations={this.state.stations}
                 line={this.findLine(routeProps.match.params.id)}
-
                 // lineIndex={this.findLineIndex(routeProps.match.params.id)}
               />
             )}
           />
-          <Route
-            exact
-            path='/station/:url'
+
+          <Route exact path='/station/:url'
             render={(routeProps) => (
               <Station
                 {...routeProps} 
