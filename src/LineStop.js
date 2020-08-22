@@ -33,7 +33,7 @@ class LineStop extends Component{
 
 
   render(){
-    let { station, tubeLines, stations, thisStation} = this.props
+    let { station, tubeLines, thisStation} = this.props
     let lines = []
 
     thisStation = this.findStationFromId(station.id).pop()

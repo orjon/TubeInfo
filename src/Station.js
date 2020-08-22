@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import {v4 as uuid} from 'uuid';
 import Map from './Map';
@@ -74,7 +74,7 @@ class Station extends Component {
   }
 
   componentDidMount(){
-    const { getInfo } = this.props
+    // const { getInfo } = this.props
     // getInfo()
     window.scrollTo(0, 0);
     this.getArrivals()
@@ -111,17 +111,12 @@ class Station extends Component {
 
   render(){
 
-
-
-
-
     const { station, tubeLines } = this.props
 
     if (this.state.arrivals.length === 0){
       this.getArrivals()
     }
 
-    
 
     // Loops through each line served by station
       let lineArrivals = station.lines.map(line => 
