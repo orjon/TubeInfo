@@ -123,9 +123,14 @@ class Station extends Component {
         <LineArrivals key={line} line={this.findLine(tubeLines, line)} arrivals={this.state.arrivals}/>
       )
     //
-    
+
+
 
     let address = station.contact[0].value
+
+    // Harrow on the Hill error fix - but not working!
+    if (station.id === 'ID940GZZLUHOH') {address = 'Station Rd, Harrow HA1 1BB'}
+
     address = this.formatAddress(address)
     let phoneNo = station.contact[1].value
     let location = this.formatLocation(station.lat, station.lng)

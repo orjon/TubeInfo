@@ -4,8 +4,8 @@
   font-size: 1rem;
   background-color: #eee;
   color: $color_FontMain;
-  border-radius: 15px;
-  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+  border-radius: $cardBorderRadius;
+  box-shadow: 0 0 5px 0 rgba(50, 50, 50, .5);
   padding: 15px;
   display: flex;
   flex-direction: column;

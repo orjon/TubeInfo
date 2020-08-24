@@ -35,8 +35,6 @@ class LineStops extends Component{
 
     return(
 
-
-
       <section>
         {/* <div className='sectionTitle'>Line Details</div> */}
         <div className='CardSingle'> 
