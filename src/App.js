@@ -301,14 +301,6 @@ class App extends Component {
           </header>
           <Switch>
             
-            <Route exact path='/'
-              render={(routeProps) => (
-                <LineStatuses
-                  {...routeProps}
-                  tubeLines={this.state.tubeLines}
-                />
-              )}
-            />
             <Route exact path='/line/:id'
               render={(routeProps) => (
                 <LineStops
@@ -333,6 +325,14 @@ class App extends Component {
             />
 
             {/* <Route path='/' component = { LineStatuses }/> */}
+            <Route path='/'
+              render={(routeProps) => (
+                <LineStatuses
+                  {...routeProps}
+                  tubeLines={this.state.tubeLines}
+                />
+              )}
+            />
           </Switch>
     
           <footer className='right'>
