@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import { kebabCase } from './Helpers';
-import Nav from './Nav';
-import LineStops from './LineStops'
-import LineStatuses from './LineStatuses';
-import Station from './Station';
-import './App.scss';
+import Nav from './components/Nav';
+import LineStops from './components/LineStops'
+import LineStatuses from './components/LineStatuses';
+import Station from './components/Station';
+import './scss/App.scss';
+
+//reduxStore
+//COnnect react & redux:
+import { Provider } from 'react-redux';
+//bring in store
+import store from './components/store';
+
 // import Moment from 'react-moment';
 // import 'moment-timezone';
 
@@ -25,32 +32,45 @@ class App extends Component {
     }
   }
 
+
   componentDidMount(){
+    //If state.tubesLines array is empty...
     if (this.state.tubeLines.length === 0){
       this.getInfo()
     }
   }
 
 
+
   async getInfo(){
+    var t0 = performance.now()
+
     console.log('Getting statuses...')
     let lines = await this.getStatuses()
+    var tStatuses = performance.now()
+    console.log('took ' + (tStatuses - t0).toFixed(1) + ' ms.')
     //----------------------------------
-    console.log('Getting stop orders...')
-    for (let i=0; i<lines.length; i++){
-      lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-    }
+    // console.log('Getting stop orders...')
+    // for (let i=0; i<lines.length; i++){
+    //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
+    // }
     //----------------------------------
+    console.log('Getting line stations...')
     let stations = []
     for (let i=0; i<lines.length; i++){
       lines[i].stations = await this.getStations(lines[i].id)
       for (let j=0; j<lines[i].stations.length; j++){
+        console.log(`${lines[i].name} Stations...`)
+
         lines[i].stations[j].lines = [lines[i].id]
         stations = this.addStation(lines[i].stations[j], stations)
       }
+      var tStation = performance.now()
+      console.log('took ' + (tStation - t0).toFixed(1) + ' ms.')
       // console.log('lines in stations', )
     }
-    stations.sort( this.compare );
+    //----------------------------------
+    // stations.sort( this.compare );
     // console.log('stations: ',stations)
     // console.log(stations.sort())
     this.setState({
@@ -58,6 +78,33 @@ class App extends Component {
       stations: stations
     })
   }
+
+  // async getInfo(){
+  //   console.log('Getting statuses...')
+  //   let lines = await this.getStatuses()
+  //   //----------------------------------
+  //   console.log('Getting stop orders...')
+  //   for (let i=0; i<lines.length; i++){
+  //     lines[i].stopOrder = await this.getStopOrder(lines[i].id)
+  //   }
+  //   //----------------------------------
+  //   let stations = []
+  //   for (let i=0; i<lines.length; i++){
+  //     lines[i].stations = await this.getStations(lines[i].id)
+  //     for (let j=0; j<lines[i].stations.length; j++){
+  //       lines[i].stations[j].lines = [lines[i].id]
+  //       stations = this.addStation(lines[i].stations[j], stations)
+  //     }
+  //     // console.log('lines in stations', )
+  //   }
+  //   stations.sort( this.compare );
+  //   // console.log('stations: ',stations)
+  //   // console.log(stations.sort())
+  //   this.setState({
+  //     tubeLines: lines,
+  //     stations: stations
+  //   })
+  // }
 
 
   async getStatuses(){
@@ -247,50 +294,53 @@ class App extends Component {
 
   render(){
     return (
-      <div className='App'>
-        <header>
-          <Nav />
-        </header>
-        <Switch>
-          
-          {/* <Route exact path='/tube/status'
-            render={(routeProps) => (
-              <LineStatuses
-                {...routeProps}
-                tubeLines={this.state.tubeLines}
-              />
-            )}
-          /> */}
-          <Route exact path='/line/:id'
-            render={(routeProps) => (
-              <LineStops
-                {...routeProps} 
-                tubeLines={this.state.tubeLines}
-                stations={this.state.stations}
-                line={this.findLine(routeProps.match.params.id)}
-                // lineIndex={this.findLineIndex(routeProps.match.params.id)}
-              />
-            )}
-          />
+      <Provider store={store}>
+        <div className='App'>
+          <header>
+            <Nav />
+          </header>
+          <Switch>
+            
+            {/* <Route exact path='/tube/status'
+              render={(routeProps) => (
+                <LineStatuses
+                  {...routeProps}
+                  tubeLines={this.state.tubeLines}
+                />
+              )}
+            /> */}
+            <Route exact path='/line/:id'
+              render={(routeProps) => (
+                <LineStops
+                  {...routeProps} 
+                  tubeLines={this.state.tubeLines}
+                  stations={this.state.stations}
+                  line={this.findLine(routeProps.match.params.id)}
+                  // lineIndex={this.findLineIndex(routeProps.match.params.id)}
+                />
+              )}
+            />
 
-          <Route exact path='/station/:url'
-            render={(routeProps) => (
-              <Station
-                {...routeProps} 
-                tubeLines={this.state.tubeLines}
-                apiString={this.props.apiString}
-                station={this.findStationFromUrl(routeProps.match.params.url)}
-              />
-            )}
-          />
+            <Route exact path='/station/:url'
+              render={(routeProps) => (
+                <Station
+                  {...routeProps} 
+                  tubeLines={this.state.tubeLines}
+                  apiString={this.props.apiString}
+                  station={this.findStationFromUrl(routeProps.match.params.url)}
+                />
+              )}
+            />
 
-        <Route path='/' component = { LineStatuses }/>
-        </Switch>
-  
-        <footer className='right'>
-          <a href='http://www.orjon.com'>orjon.com</a>
-        </footer>
-      </div>
+          <Route path='/' component = { LineStatuses }/>
+          </Switch>
+    
+          <footer className='right'>
+            <a href='http://www.orjon.com'>orjon.com</a>
+          </footer>
+        </div>
+      </Provider>
+
     );
   }
 

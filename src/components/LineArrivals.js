@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
-import './LineArrivals.scss';
+import '../scss/LineArrivals.scss';
 // import Moment from 'react-moment';
 // import 'moment-timezone';
 

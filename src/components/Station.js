@@ -4,8 +4,8 @@ import {v4 as uuid} from 'uuid';
 import Map from './Map';
 import LineArrivals from './LineArrivals';
 import Facilities from './Facilties';
-import './Section.scss';
-import './Station.scss';
+import '../scss/Section.scss';
+import '../scss/Station.scss';
 // import IconWifi from './icons/wifi.svg';
 // import IconATM from './icons/atm.svg';
 
@@ -150,13 +150,19 @@ class Station extends Component {
               </div>
             </div>
 
-            <div className='row facilities'>
-              <div className='column w100 indent1'>
-                <h2>Facilities</h2>
-                <Facilities facilities={station.facilities}/>
+            <div className='row'>
+              <div className='column w100 indent2'>
+                <Map
+                    lat={station.lat}
+                    lng={station.lng}
+                  />
+                <div className='row'>
+                  <div>{location.lat} {location.lng}</div>
+                  <div className='code'>Station ID: {station.id}</div>
+                </div>
               </div>
             </div>
-            
+
             <div className='row address'>
               <div className='column w50 indent1'>
                 <h2>Address</h2>
@@ -172,20 +178,12 @@ class Station extends Component {
               </div>
             </div>
 
-            <div className='row rowLast'>
-              <div className='column w100 indent2'>
-                <Map
-                    lat={station.lat}
-                    lng={station.lng}
-                  />
-                <div className='row'>
-                  <div>{location.lat} {location.lng}</div>
-                  <div className='code'>Station ID: {station.id}</div>
-                </div>
+            <div className='row facilities'>
+              <div className='column w100 indent1'>
+                <h2>Facilities</h2>
+                <Facilities facilities={station.facilities}/>
               </div>
-
             </div>
-
 
           </div>
             

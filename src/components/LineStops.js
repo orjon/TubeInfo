@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LineStop from './LineStop';
-import './Section.scss';
-import './LineStops.scss';
+import '../scss/Section.scss';
+import '../scss/LineStops.scss';
 
 class LineStops extends Component{
   static defaultProps={

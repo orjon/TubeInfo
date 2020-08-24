@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './LineStop.scss';
+import '../scss/LineStop.scss';
 
 class LineStop extends Component{
   static defaultProps={

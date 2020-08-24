@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LineStatus from './LineStatus';
-import './Section.scss';
+import '../scss/Section.scss';
 
 
 const LineStatuses = () => {

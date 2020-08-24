@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Facilities.scss';
+import '../scss/Facilities.scss';
 
 class Facilties extends Component {
   static defaultProps={

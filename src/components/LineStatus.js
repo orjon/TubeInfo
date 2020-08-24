@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './_Card.scss';
+import '../scss/_Card.scss';
 
 const LineStatus = ({ line }) => {
 
