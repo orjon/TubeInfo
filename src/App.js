@@ -12,7 +12,7 @@ import './scss/App.scss';
 //COnnect react & redux:
 import { Provider } from 'react-redux';
 //bring in store
-import store from './components/store';
+import store from './store';
 
 // import Moment from 'react-moment';
 // import 'moment-timezone';
@@ -36,68 +36,34 @@ class App extends Component {
   componentDidMount(){
     //If state.tubesLines array is empty...
     if (this.state.tubeLines.length === 0){
-      this.getInfo()
+      // this.getInfo()
     }
   }
 
 
-
-  async getInfo(){
-    var t0 = performance.now()
-
-    console.log('Getting statuses...')
-    let lines = await this.getStatuses()
-    var tStatuses = performance.now()
-    console.log('took ' + (tStatuses - t0).toFixed(1) + ' ms.')
-    //----------------------------------
-    // console.log('Getting stop orders...')
-    // for (let i=0; i<lines.length; i++){
-    //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-    // }
-    //----------------------------------
-    console.log('Getting line stations...')
-    let stations = []
-    for (let i=0; i<lines.length; i++){
-      lines[i].stations = await this.getStations(lines[i].id)
-      for (let j=0; j<lines[i].stations.length; j++){
-        console.log(`${lines[i].name} Stations...`)
-
-        lines[i].stations[j].lines = [lines[i].id]
-        stations = this.addStation(lines[i].stations[j], stations)
-      }
-      var tStation = performance.now()
-      console.log('took ' + (tStation - t0).toFixed(1) + ' ms.')
-      // console.log('lines in stations', )
-    }
-    //----------------------------------
-    // stations.sort( this.compare );
-    // console.log('stations: ',stations)
-    // console.log(stations.sort())
-    this.setState({
-      tubeLines: lines,
-      stations: stations
-    })
-  }
 
   // async getInfo(){
-  //   console.log('Getting statuses...')
-  //   let lines = await this.getStatuses()
+
   //   //----------------------------------
-  //   console.log('Getting stop orders...')
-  //   for (let i=0; i<lines.length; i++){
-  //     lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-  //   }
+  //   // console.log('Getting stop orders...')
+  //   // for (let i=0; i<lines.length; i++){
+  //   //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
+  //   // }
   //   //----------------------------------
+  //   console.log('Getting line stations...')
   //   let stations = []
   //   for (let i=0; i<lines.length; i++){
   //     lines[i].stations = await this.getStations(lines[i].id)
   //     for (let j=0; j<lines[i].stations.length; j++){
+  //       console.log(`${lines[i].name} Stations...`)
+
   //       lines[i].stations[j].lines = [lines[i].id]
   //       stations = this.addStation(lines[i].stations[j], stations)
   //     }
   //     // console.log('lines in stations', )
   //   }
-  //   stations.sort( this.compare );
+  //   //----------------------------------
+  //   // stations.sort( this.compare );
   //   // console.log('stations: ',stations)
   //   // console.log(stations.sort())
   //   this.setState({
@@ -107,30 +73,7 @@ class App extends Component {
   // }
 
 
-  async getStatuses(){
-    const { apiString } = this.props
-    let lines = []
-    let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
-      headers : {Accept: 'application/json'}
-    })
-    let linesInfo = response.data
-    linesInfo.map(line => 
-      lines.push({
-        key: line.id,
-        id: line.id,
-        name: line.name,
-        status: line.lineStatuses[0].statusSeverityDescription,
-        reason: line.lineStatuses[0].reason,
-        stopOrder: [],
-        // stations: []
-      })
-    )
-    return lines
-  }
 
-  
-
-  
   async getStopOrder(lineId){
     const { apiString } = this.props
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/Route/Sequence/all?${apiString}`, {
@@ -301,6 +244,7 @@ class App extends Component {
           </header>
           <Switch>
             
+          <Route exact path='/line/:id' component = { LineStops }/>
             <Route exact path='/line/:id'
               render={(routeProps) => (
                 <LineStops
@@ -313,6 +257,7 @@ class App extends Component {
               )}
             />
 
+
             <Route exact path='/station/:url'
               render={(routeProps) => (
                 <Station
@@ -324,15 +269,7 @@ class App extends Component {
               )}
             />
 
-            {/* <Route path='/' component = { LineStatuses }/> */}
-            <Route path='/'
-              render={(routeProps) => (
-                <LineStatuses
-                  {...routeProps}
-                  tubeLines={this.state.tubeLines}
-                />
-              )}
-            />
+            <Route path='/' component = { LineStatuses }/>
           </Switch>
     
           <footer className='right'>

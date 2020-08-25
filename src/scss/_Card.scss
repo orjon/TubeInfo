@@ -55,7 +55,7 @@
     margin-bottom: $spacing;
   }
 
-  .status {
+  .status, .loading {
     display: flex;
     font-size: 1.1rem;
     align-items: flex-end;
