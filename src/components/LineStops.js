@@ -13,19 +13,33 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
     if (lineStatuses.length === 0) getStatuses()
 
     //GEt stations for all Lines 
-    // for (let i=0; i< lineStatuses.length; i++ ) {
-    //   getStations(lineStatuses[i].id)
-    // }
+    if (lineStations.length === 0) {
+      for (let i=0; i< lineStatuses.length; i++ ) getStations(lineStatuses[i].id)
+    }
 
-    getStations(lineId)
+
+
+    // getStations(lineId)
   },[getStations])
+
+  //   console.log('Getting line stations...')
+  //   let stations = []
+  //   for (let i=0; i<lines.length; i++){
+  //     lines[i].stations = await this.getStations(lines[i].id)
+  //     for (let j=0; j<lines[i].stations.length; j++){
+  //       console.log(`${lines[i].name} Stations...`)
+
+  //       lines[i].stations[j].lines = [lines[i].id]
+  //       stations = this.addStation(lines[i].stations[j], stations)
+  //     }
+  //     // console.log('lines in stations', )
+  //   }
   
   console.log('--- LineStops.js ---')
-  const line = props.match.params
   const lineId = props.match.params.id
   let lineIndex = undefined
   let lineName = 'Loading...'
-  let loading = true
+  let lineStops = []
 
   // Find line name
   if (lineStatuses.length !== 0) {
@@ -34,25 +48,20 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
     lineName = lineStatuses[indexOfLine].name
   }
 
-  let lineStops = []
-
-  if (lineStations.length !== 0) {
-    let indexOfLine = lineStations.findIndex(line => line.id === lineId);
-    console.log('Index of line in Stations:',indexOfLine)
-    let stations = lineStations[indexOfLine].stations
-    console.log('Number of Stations:',stations.length)
-    console.log('Stations:',stations)
-    lineStops = stations
-      // <LineStop key={station.id} station={station}/>
-
-    // console.log('Line Stops:',lineStops)
+  if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0)) {
+    lineIndex = lineStations.findIndex(line => line.id === lineId);
+    console.log('Index of line in Stations:',lineIndex)
+    lineStops = lineStations[lineIndex].stations
+    console.log('Number of Stations:',lineStops.length)
+    console.log('Stations:',lineStops)
   }
+
 
 
   const lightColors = ['hammersmith-city','waterloo-city', 'circle']
   let lightColor = ''
 
-  if (lightColors.includes(line.id)){
+  if (lightColors.includes(lineId)){
     lightColor = 'lightColor'
   }
   
@@ -65,39 +74,25 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
         <div className={`row lineColor ${lineId}`}>
           <div className={`${lightColor}`}>{lineName}</div>
         </div>
-          {(lineStops.length === 0) ? 'NOTHING!' : 
-            <Fragment>
-              <div className='row'>
-                <div className='status'>Stations: {lineStops.length}</div>
+        {(lineStops.length === 0) ? 'NOTHING!' : 
+        <Fragment>
+          {/* <div className='row'>
+            <div className='status'>Stations: {lineStops.length}</div>
+          </div> */}
+
+          <div className='row'>
+            <div className='column w100 indent1'>
+              <h2>Stations Served ({lineStops.length})</h2>
+              <div className='LineStops dataBlock indent2'>
+                {/* <div className='row'>
+                  <h4 className='infoLabel'>Station</h4>
+                  <h4 className='infoLabel end'>Lines Served</h4>
+                </div>  */}
+                {lineStops.map(stop => <LineStop key={stop.id} station={stop}/>)}
               </div>
-              {console.log('test')}
-              {lineStops.map(station => <div key={station.id}>{station.name}</div>)}
-              {/* {lineStops.map(station => <LineStop key={station.id} station={station}/>)} */}
-              {/* {lineStops.map(stop => <LineStop key={stop.id} station={stop}/>)} */}
-              Something
-            </Fragment>}
-
-
-
-        {/* <div className='row'>
-          <div className='status'>Stations: {lineStations.length}</div>
-        </div> */}
-{/* 
-        <div className='row'>
-          <div className='column w100 indent1'>
-            <h2>Stations Served ({line.stations.length})</h2>
-            <div className='LineStops dataBlock indent2'> */}
-              {/* <div className='row'>
-                <h4 className='infoLabel'>Station</h4>
-                <h4 className='infoLabel end'>Lines Served</h4>
-              </div> */}
-              {/* {lineStops}
             </div>
           </div>
-        </div> */}
-
-
-
+        </Fragment>}
       </div>
     </div>
   </section>

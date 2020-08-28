@@ -1,18 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import '../scss/LineStop.scss';
 
-const LineStop=({tubeStatuses, ...props}) => { 
-  console.log(props.station)
+const LineStop= ({ station}) => { 
+  console.log(station.name)
   return(
     <div className='row lineStop'>
-      <Link className='w50 lineName' to={`/station/${props.station}`}>
-        {props.station}
-      </Link>
-      {/* <Link className='w50 lineName' to={`/station/${station.url}`}>
+
+      <Link className='w50 lineName' to={`/station/${station.url}`}>
         {station.name}
-      </Link> */}
+      </Link>
 
       {/* <div className='column w50 linesBlock'>
         {lines}
@@ -22,13 +19,9 @@ const LineStop=({tubeStatuses, ...props}) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tube: state.tube,
-  }
-}
 
-export default connect(mapStateToProps, { })(LineStop);
+
+export default LineStop;
 
 
 // class LineStop extends Component{

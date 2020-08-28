@@ -9,6 +9,7 @@ import { kebabCase, trimStationName } from '../Helpers';
 
 //   for (let i=0; i< lineStatuses.length; i++ ) {
 //     let lineId = lineStatuses[i].id
+//     console.log('Get line:', lineId)
 //     getStations(lineId)
 //   }
   
@@ -24,7 +25,7 @@ export const getStations = (lineId) => async dispatch => {
       headers : {Accept: 'application/json'}
     })
     console.log(lineId,'line Stations:', response.data.length)
-    // console.log(response.data)
+    // console.log('************',response.data)
     let counter = 0
     response.data.map(station => {
       // console.log(counter, station.commonName)
