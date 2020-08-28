@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import alert from './alert';
-import statuses from './statuses';
+import tube from './tube';
 
 export default combineReducers({
   alert,
-  statuses
+  tube
 });

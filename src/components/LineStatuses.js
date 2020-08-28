@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
 import LineStatus from './LineStatus';
 import LoadingCard from './LoadingCard';
-import '../scss/Section.scss';
 import { connect } from 'react-redux';
-import { getStatuses } from '../actions/statuses';
+import { getStatuses } from '../actions/tube';
+import '../scss/Section.scss';
 
 
-const LineStatuses = ({ getStatuses, statuses: { tubeStatuses, loading} }) => {
+
+const LineStatuses = ({ getStatuses, tube: { lineStatuses, loading} }) => {
+
   useEffect(() => {
     getStatuses()
   },[getStatuses])
@@ -16,14 +18,12 @@ const LineStatuses = ({ getStatuses, statuses: { tubeStatuses, loading} }) => {
         <div className='sectionBody CardGrid'>
           {loading ? 
             <Fragment>
-              <LoadingCard/>
+              <LoadingCard color='piccadilly'/>
             </Fragment>
             : 
             <Fragment>
-              {tubeStatuses.map( line => <LineStatus key={line.id} line={line}/>)}
+              {lineStatuses.map( line => <LineStatus key={line.id} line={line}/>)}
             </Fragment>}
-
-          {/* {(tubeStatuses.length !== 0)? tubeStatuses : 'Loading...'} */}
         </div>
       </section>
     )
@@ -32,7 +32,7 @@ const LineStatuses = ({ getStatuses, statuses: { tubeStatuses, loading} }) => {
 
 const mapStateToProps = (state) => {
   return {
-    statuses: state.statuses
+    tube: state.tube
   }
 }
 

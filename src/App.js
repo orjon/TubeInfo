@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch} from 'react-router-dom';
 import axios from 'axios';
-import { kebabCase } from './Helpers';
 import Nav from './components/Nav';
 import LineStops from './components/LineStops'
 import LineStatuses from './components/LineStatuses';
@@ -94,101 +93,94 @@ class App extends Component {
   }
 
 
-  async getStations(lineId){
-    const { apiString } = this.props
-    let lineStations = []
-    let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
-      headers : {Accept: 'application/json'}
-    })
-    // console.log('Line Stations:', response.data[1].additionalProperties)
-    response.data.map(station => {
-      let contact = [
-        {key: 'Address', value: undefined},
-        {key: 'PhoneNo', value: undefined}
-      ]
-      let facility = [
-        {key: 'Ticket Halls', value: undefined},
-        {key: 'Toilets', value: undefined},
-        {key: 'Lifts', value: undefined},
-        {key: 'Escalators', value: undefined},
-        {key: 'WiFi', value: undefined},
-        {key: 'Help Points', value: undefined},
-        {key: 'Payphones', value: undefined},
-        {key: 'Boarding Ramp', value: undefined},
-        {key: 'Cash Machines', value: undefined},
-        {key: 'Euro Cash Machines', value: undefined},
-        {key: 'Waiting Room', value: undefined},
-        // {key: 'Gates', value: undefined},
-        {key: 'TaxiRankOutsideStation', value: undefined},
-        {key: 'Car park', value: undefined},
-        {key: 'Left Luggage', value: undefined},
-        {key: 'Photo Booths', value: undefined},
-        {key: 'Amazon Lockers', value: undefined},
-        {key: 'ASDA Click and Collect', value: undefined},
-      ]
+  // async getStations(lineId){
+  //   const { apiString } = this.props
+  //   let lineStations = []
+  //   let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
+  //     headers : {Accept: 'application/json'}
+  //   })
+  //   // console.log('Line Stations:', response.data[1].additionalProperties)
+  //   response.data.map(station => {
+  //     let contact = [
+  //       {key: 'Address', value: undefined},
+  //       {key: 'PhoneNo', value: undefined}
+  //     ]
+  //     let facility = [
+  //       {key: 'Ticket Halls', value: undefined},
+  //       {key: 'Toilets', value: undefined},
+  //       {key: 'Lifts', value: undefined},
+  //       {key: 'Escalators', value: undefined},
+  //       {key: 'WiFi', value: undefined},
+  //       {key: 'Help Points', value: undefined},
+  //       {key: 'Payphones', value: undefined},
+  //       {key: 'Boarding Ramp', value: undefined},
+  //       {key: 'Cash Machines', value: undefined},
+  //       {key: 'Euro Cash Machines', value: undefined},
+  //       {key: 'Waiting Room', value: undefined},
+  //       // {key: 'Gates', value: undefined},
+  //       {key: 'TaxiRankOutsideStation', value: undefined},
+  //       {key: 'Car park', value: undefined},
+  //       {key: 'Left Luggage', value: undefined},
+  //       {key: 'Photo Booths', value: undefined},
+  //       {key: 'Amazon Lockers', value: undefined},
+  //       {key: 'ASDA Click and Collect', value: undefined},
+  //     ]
 
 
-      let validFacilities = []
-      let rejectedValues = ['no', '0']
-      let renamedFacilityKeys = ['TaxiRankOutsideStation']
+  //     let validFacilities = []
+  //     let rejectedValues = ['no', '0']
+  //     let renamedFacilityKeys = ['TaxiRankOutsideStation']
       
 
-      facility.forEach(facility => {
-        let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
+  //     facility.forEach(facility => {
+  //       let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
 
         
 
-        if (facilityObject && renamedFacilityKeys.includes(facility.key)) {
-          facility.key = 'Taxi Rank'
-        }
+  //       if (facilityObject && renamedFacilityKeys.includes(facility.key)) {
+  //         facility.key = 'Taxi Rank'
+  //       }
 
 
-        if (facilityObject && !rejectedValues.includes(facilityObject.value)){
-          facility.value = facilityObject.value
-          validFacilities.push(facility)
-          return
-        } 
-      });
+  //       if (facilityObject && !rejectedValues.includes(facilityObject.value)){
+  //         facility.value = facilityObject.value
+  //         validFacilities.push(facility)
+  //         return
+  //       } 
+  //     });
 
 
-      let validContacts = []
+  //     let validContacts = []
 
-      contact.forEach(property => {
-        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
-        if (propertyObject){
-          if (!rejectedValues.includes(propertyObject.value)){
-            property.value = propertyObject.value
-            validContacts.push(property)
-            return
-          }
-        } 
-      });
+  //     contact.forEach(property => {
+  //       let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+  //       if (propertyObject){
+  //         if (!rejectedValues.includes(propertyObject.value)){
+  //           property.value = propertyObject.value
+  //           validContacts.push(property)
+  //           return
+  //         }
+  //       } 
+  //     });
 
-      return lineStations.push({
-        key: station.id,
-        id: station.id,
-        url: kebabCase(this.trimStationName(station.commonName)),
-        name: this.trimStationName(station.commonName),
-        lat: station.lat,
-        lng: station.lon,
-        contact: [...validContacts],
-        facilities: validFacilities
-      })
-    })
-    return lineStations;
-  }
-
-
+  //     return lineStations.push({
+  //       key: station.id,
+  //       id: station.id,
+  //       url: kebabCase(this.trimStationName(station.commonName)),
+  //       name: this.trimStationName(station.commonName),
+  //       lat: station.lat,
+  //       lng: station.lon,
+  //       contact: [...validContacts],
+  //       facilities: validFacilities
+  //     })
+  //   })
+  //   return lineStations;
+  // }
 
 
-  trimStationName(stationName){
-    let trimmedStationName = stationName.replace('Underground Station', '')
-    let cropIndex1 = trimmedStationName.indexOf('(') + 2
-    if (cropIndex1 !== 0){
-      trimmedStationName = trimmedStationName.slice(0, (cropIndex1-2))
-    } 
-    return trimmedStationName
-  }
+
+
+
 
 
   addStation(newStation, stations){
@@ -244,13 +236,14 @@ class App extends Component {
           </header>
           <Switch>
             
-          <Route exact path='/line/:id' component = { LineStops }/>
+            {/* <Route exact path='/line/:id' component = { LineStops }/> */}
+
             <Route exact path='/line/:id'
               render={(routeProps) => (
                 <LineStops
                   {...routeProps} 
-                  tubeLines={this.state.tubeLines}
-                  stations={this.state.stations}
+                  // tubeLines={this.state.tubeLines}
+                  // stations={this.state.stations}
                   line={this.findLine(routeProps.match.params.id)}
                   // lineIndex={this.findLineIndex(routeProps.match.params.id)}
                 />

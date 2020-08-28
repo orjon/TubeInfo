@@ -1,80 +1,107 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import '../scss/LineStop.scss';
 
-class LineStop extends Component{
-  static defaultProps={
-    thisStation: {
-      lines: []
-    },
-    station: {
-      id : undefined
-    }
-  }
+const LineStop=({tubeStatuses, ...props}) => { 
+  console.log(props.station)
+  return(
+    <div className='row lineStop'>
+      <Link className='w50 lineName' to={`/station/${props.station}`}>
+        {props.station}
+      </Link>
+      {/* <Link className='w50 lineName' to={`/station/${station.url}`}>
+        {station.name}
+      </Link> */}
 
-  constructor(props){
-    super(props);
-    this.findStationFromId = this.findStationFromId.bind(this)
-  }
+      {/* <div className='column w50 linesBlock'>
+        {lines}
+      </div> */}
+      
+    </div>
+  )
+}
 
-  lineName(tubeLines, line){
-    let index = tubeLines.findIndex(lineX => lineX.id === line);
-    return tubeLines[index].name
-  }
-
-  lineId(tubeLines, line){
-    let index = tubeLines.findIndex(lineX => lineX.id === line);
-    return tubeLines[index].id
-  }
-
-  findStationFromId = (stationToFind) => {
-    return this.props.stations.filter( station => station.id === stationToFind);
-  }
-
-
-  render(){
-    let { station, tubeLines, thisStation} = this.props
-    let lines = []
-
-    thisStation = this.findStationFromId(station.id).pop()
-    // console.log('thisStation: ',thisStation.lines)
-
-
-
-      lines = thisStation.lines.map(line => {
-
-      // Check for light color to format text color if needed
-        let lightColors = ['hammersmith-city','waterloo-city', 'circle']
-        let lightColor = ''
-
-        if (lightColors.includes(line)){
-          lightColor = 'lightColor'
-        }
-      //
-
-
-      return <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
-                <div className={`lineCell ${line} ${lightColor}`}>
-                  {this.lineName(tubeLines, line)}
-                </div>
-              </Link>
-    })
-
-
-  
-    return(
-      <div className='row lineStop'>
-        <Link className='w50 lineName' to={`/station/${station.url}`}>
-          {station.name}
-        </Link>
-
-        <div className='column w50 linesBlock'>
-          {lines}
-        </div>
-        
-      </div>
-    )
+const mapStateToProps = (state) => {
+  return {
+    tube: state.tube,
   }
 }
 
-export default LineStop;
+export default connect(mapStateToProps, { })(LineStop);
+
+
+// class LineStop extends Component{
+//   static defaultProps={
+//     thisStation: {
+//       lines: []
+//     },
+//     station: {
+//       id : undefined
+//     }
+//   }
+
+//   constructor(props){
+//     super(props);
+//     this.findStationFromId = this.findStationFromId.bind(this)
+//   }
+
+//   lineName(tubeLines, line){
+//     let index = tubeLines.findIndex(lineX => lineX.id === line);
+//     return tubeLines[index].name
+//   }
+
+//   lineId(tubeLines, line){
+//     let index = tubeLines.findIndex(lineX => lineX.id === line);
+//     return tubeLines[index].id
+//   }
+
+//   findStationFromId = (stationToFind) => {
+//     return this.props.stations.filter( station => station.id === stationToFind);
+//   }
+
+
+//   render(){
+//     let { station, tubeLines, thisStation} = this.props
+//     let lines = []
+
+//     thisStation = this.findStationFromId(station.id).pop()
+//     // console.log('thisStation: ',thisStation.lines)
+
+
+//     lines = thisStation.lines.map(line => {
+//     // Check for light color to format text color if needed
+//       let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+//       let lightColor = ''
+
+//       if (lightColors.includes(line)){
+//         lightColor = 'lightColor'
+//       }
+//     //
+
+
+//       return <Link key={line} to={`/line/${this.lineId(tubeLines, line)}`}>
+//                 <div className={`lineCell ${line} ${lightColor}`}>
+//                   {this.lineName(tubeLines, line)}
+//                 </div>
+//               </Link>
+//     })
+
+
+  
+//     return(
+//       <div className='row lineStop'>
+//         <Link className='w50 lineName' to={`/station/${station.url}`}>
+//           {station.name}
+//         </Link>
+
+//         <div className='column w50 linesBlock'>
+//           {lines}
+//         </div>
+        
+//       </div>
+//     )
+//   }
+// }
+
+// export default LineStop;

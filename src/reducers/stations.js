@@ -1,6 +1,6 @@
-// STATUSES STATE
+// STATIONS STATE
 const initialState = {
-  tubeStatuses: [],
+  stations: [],
   loading: true,
   error: {}
 }
@@ -9,21 +9,21 @@ export default function(state = initialState, action){
   const { type, payload } = action;
 
   switch(type) {
-    case 'GET_STATUSES': 
+    case 'GET_LINESTATIONS':
       return {
-        ...state, 
-        tubeStatuses: payload,
+        ...state,
+        stations: [...state.stations, payload],
+        // Filters out existing match to payload.id
+        // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
         loading: false
-
       }
     case 'STATUS_ERROR':
       return {
         ...state,
         error: payload,
-        loading: true
+        loading: false
       }
     default:
       return state;
   }
 }
-
