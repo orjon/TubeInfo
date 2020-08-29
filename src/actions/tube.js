@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { kebabCase, trimStationName } from '../Helpers';
+import store from '../store';
+
 
 // export const getAllStations = (lineStatuses) => async dispatch => {
 //   console.log('Getting stations for all lines')
@@ -15,19 +17,30 @@ import { kebabCase, trimStationName } from '../Helpers';
   
 // }
 
+
+
 export const getStations = (lineId) => async dispatch => {
   console.log('Getting stations for:', lineId,'line.')
   const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
   let lineStations = []
-  let t0 = performance.now()
+  // let t0 = performance.now()
+
+  const allStations = ['A', 'B','C']
+  const state = store.getState()
+  const currentStations = state.tube.stations
+  console.log('Current state stations:', currentStations)
+
   try {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    console.log(lineId,'line Stations:', response.data.length)
+
+    // console.log('Got stations:')
+    // console.log(lineId,'line Stations:', response.data.length)
     // console.log('************',response.data)
     let counter = 0
-    response.data.map(station => {
+    let stations = response.data
+    stations.map(station => {
       // console.log(counter, station.commonName)
       counter++
       lineStations.push({
@@ -38,9 +51,14 @@ export const getStations = (lineId) => async dispatch => {
       })
     })
 
+
+    // console.log(stations)
+    // let tStations = performance.now()
+    // console.log('took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+
     //Add array of each connecting line
 
-    let payloadObject = { id: lineId, stations: lineStations}
+    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: allStations }
 
     dispatch({
       type: 'GET_LINESTATIONS',
@@ -180,6 +198,7 @@ export const getStatuses = () => async dispatch => {
     // let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
     //   headers : {Accept: 'application/json'}
     // })
+
     
     let lineStatuses = response.data
     lineStatuses.map(line => 
@@ -191,10 +210,12 @@ export const getStatuses = () => async dispatch => {
         reason: line.lineStatuses[0].reason
       })
     )
+
     console.log('Got statuses:')
     console.log(lineStatuses)
     let tStatuses = performance.now()
     console.log('took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
+  
 
     dispatch({
       type: 'GET_STATUSES',

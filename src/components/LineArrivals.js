@@ -74,21 +74,6 @@ class LineArrivals extends Component{
 
 export default LineArrivals;
 
-{/* <div className='row LineArrivals'>
-<div className='columnm w100'>
-  <Link to={`/line/${line.id}`}>
-    <div key={line} className={`row lineColor ${line.id}`}></div>
-    <div className='row linkTo'>
-      <h3 >{line.name}</h3>
-      <div className='status'>{line.status}</div>
-    </div>
-  </Link>
-  <div className='row'>
-    <h4 className='column'>Towards</h4>
-    <h4 className='column end'>Expected Arrival</h4>
-  </div>
-  {arrivals}
-</div>
-</div> */}
+
 
 

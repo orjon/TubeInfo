@@ -13,29 +13,17 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
     if (lineStatuses.length === 0) getStatuses()
 
     //GEt stations for all Lines 
+    let t0 = performance.now()
+    console.log('Getting all stations...')
     if (lineStations.length === 0) {
       for (let i=0; i< lineStatuses.length; i++ ) getStations(lineStatuses[i].id)
     }
+    let tStations = performance.now()
+    console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
 
+  },[getStations, getStatuses])
 
-
-    // getStations(lineId)
-  },[getStations])
-
-  //   console.log('Getting line stations...')
-  //   let stations = []
-  //   for (let i=0; i<lines.length; i++){
-  //     lines[i].stations = await this.getStations(lines[i].id)
-  //     for (let j=0; j<lines[i].stations.length; j++){
-  //       console.log(`${lines[i].name} Stations...`)
-
-  //       lines[i].stations[j].lines = [lines[i].id]
-  //       stations = this.addStation(lines[i].stations[j], stations)
-  //     }
-  //     // console.log('lines in stations', )
-  //   }
-  
-  console.log('--- LineStops.js ---')
+  // console.log('--- LineStops.js ---')
   const lineId = props.match.params.id
   let lineIndex = undefined
   let lineName = 'Loading...'
@@ -50,10 +38,10 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
 
   if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0)) {
     lineIndex = lineStations.findIndex(line => line.id === lineId);
-    console.log('Index of line in Stations:',lineIndex)
+    // console.log('Index of line in Stations:',lineIndex)
     lineStops = lineStations[lineIndex].stations
-    console.log('Number of Stations:',lineStops.length)
-    console.log('Stations:',lineStops)
+    // console.log('Number of Stations:',lineStops.length)
+    // console.log('Stations:',lineStops)
   }
 
 

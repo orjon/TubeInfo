@@ -2,6 +2,7 @@
 const initialState = {
   lineStatuses: [],
   lineStations: [],
+  stations: [], 
   lines: [],
   index: '',
   // lineStops: [],
@@ -23,7 +24,8 @@ export default function(state = initialState, action){
     case 'GET_LINESTATIONS':
     return {
       ...state,
-      lineStations: [...state.lineStations, payload],
+      stations: [...state.stations, payload.stations],
+      lineStations: [...state.lineStations, payload.lineStations],
       loading: false
     }
 

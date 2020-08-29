@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../scss/LineStop.scss';
 
 const LineStop= ({ station}) => { 
-  console.log(station.name)
+  // console.log(station.name)
   return(
     <div className='row lineStop'>
 
