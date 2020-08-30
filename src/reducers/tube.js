@@ -2,10 +2,10 @@
 const initialState = {
   lineStatuses: [],
   lineStations: [],
-  stations: [], 
+  stations: [{id:1}], 
+  // stations: [], 
   lines: [],
   index: '',
-  // lineStops: [],
   loading: true,
   error: {}
 }
@@ -24,7 +24,7 @@ export default function(state = initialState, action){
     case 'GET_LINESTATIONS':
     return {
       ...state,
-      stations: [...state.stations, payload.stations],
+      stations: [...state.stations, ...payload.stations],
       lineStations: [...state.lineStations, payload.lineStations],
       loading: false
     }
@@ -40,33 +40,5 @@ export default function(state = initialState, action){
   }
 }
 
-/// filters etc
 
-
-  //   case 'GET_LINESTATIONS':
-  //     {//Find index of entry to update (entry.id === payload.id)
-  //     // const idMatch = (element) => element.id === payload.id;
-  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
-  //     // console.log('Index to update:',indexToUpdate)
-
-  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
-      
-  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
-  //     // // console.log('entryToUPdate',entryToUpdate)
-  //     // entryToUpdate.stations = payload.stations
-  //     // console.log('entryToUPdate',entryToUpdate)
-
-  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
-  //     // entryToUpdate]
-
-  //     return {
-  //       ...state,
-  //       lineStations: [...state.lineStations, payload],
-  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
-  //       // Filters out existing match to payload.id
-  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
-  //       loading: false
-  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
-  //   }
-  // }
 

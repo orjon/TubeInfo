@@ -18,6 +18,49 @@ import store from '../store';
 // }
 
 
+/// filters etc
+
+
+  //   case 'GET_LINESTATIONS':
+  //     {//Find index of entry to update (entry.id === payload.id)
+  //     // const idMatch = (element) => element.id === payload.id;
+  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
+  //     // console.log('Index to update:',indexToUpdate)
+
+  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
+      
+  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
+  //     // // console.log('entryToUPdate',entryToUpdate)
+  //     // entryToUpdate.stations = payload.stations
+  //     // console.log('entryToUPdate',entryToUpdate)
+
+  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
+  //     // entryToUpdate]
+
+  //     return {
+  //       ...state,
+  //       lineStations: [...state.lineStations, payload],
+  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
+  //       // Filters out existing match to payload.id
+  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
+  //       loading: false
+  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
+  //   }
+  // }
+
+export const sortStations = () => async dispatch => {
+  const state = store.getState()
+  let currentStations = state.tube.stations
+  console.log('Sorting Stations:', currentStations.length)
+  let payload = [...new Set([...currentStations])]
+  console.log('Sorted Stations:', payload)
+
+  dispatch({
+    type: 'SORT_STATIONS',
+    payload: payload
+  })
+
+}
 
 export const getStations = (lineId) => async dispatch => {
   console.log('Getting stations for:', lineId,'line.')
@@ -25,18 +68,21 @@ export const getStations = (lineId) => async dispatch => {
   let lineStations = []
   // let t0 = performance.now()
 
-  const allStations = ['A', 'B','C']
-  const state = store.getState()
-  const currentStations = state.tube.stations
-  console.log('Current state stations:', currentStations)
+  
+  
 
   try {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
 
+    const state = store.getState()
+    let currentStations = state.tube.stations
+    console.log('Current state', currentStations)
+    console.log('Current state stations:', currentStations.length)
+
     // console.log('Got stations:')
-    // console.log(lineId,'line Stations:', response.data.length)
+    console.log(lineId,'line Stations:', response.data.length)
     // console.log('************',response.data)
     let counter = 0
     let stations = response.data
@@ -49,16 +95,34 @@ export const getStations = (lineId) => async dispatch => {
         url: kebabCase(trimStationName(station.commonName)),
         name: trimStationName(station.commonName),
       })
+
+
     })
+    // b.filter(o => !a.find(o2 => o.id === o2.id))
+    let newStations = lineStations.filter(newStation => !currentStations.find( currentStation => newStation.id === currentStation.id))
+    console.log('Current Stations:', currentStations.length)
+    console.log('Current Stations:', state.tube.stations)
+    // let newStations = [...new Set([...state.tube.stations, ...lineStations])]
+    console.log('Sorted Stations:', newStations)
+    console.log('New stations:', newStations.length)
 
+    // let newStations = lineStations
 
+    // lineStations.forEach(value => {
+    //   if(!currentStations.includes(value)) {
+    //     newStations.push(value);
+    //   }
+    // });
+
+    // newStations = newStations.concat(currentStations);
+   
     // console.log(stations)
     // let tStations = performance.now()
     // console.log('took ' + ((tStations - t0)/1000).toFixed(3) + 's')
 
     //Add array of each connecting line
 
-    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: allStations }
+    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: newStations }
 
     dispatch({
       type: 'GET_LINESTATIONS',

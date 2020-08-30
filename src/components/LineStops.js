@@ -1,27 +1,57 @@
 import React, { useEffect, Fragment } from 'react';
 import LineStop from './LineStop';
 import { connect } from 'react-redux';
-import { getStatuses, getStations } from '../actions/tube'
+import { getStatuses, getStations} from '../actions/tube'
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
 
 
 
-const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuses }, ...props }) => {
+const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
     useEffect(() => {
+    // let t0 = performance.now()
     // Load statuses for name reference if not received already
-    if (lineStatuses.length === 0) getStatuses()
+    if (lineStatuses.length === 0) {
+      console.log('Getting statuses (LineStops)..')
+      getStatuses()
+    }
+    // let tStations = performance.now()
+    // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+  },[])
 
+  useEffect(() => {
     //GEt stations for all Lines 
-    let t0 = performance.now()
+    // let t0 = performance.now()
     console.log('Getting all stations...')
     if (lineStations.length === 0) {
       for (let i=0; i< lineStatuses.length; i++ ) getStations(lineStatuses[i].id)
     }
-    let tStations = performance.now()
-    console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+  
+    // let tStations = performance.now()
+    // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+  },[lineStatuses,lineStations])
 
-  },[getStations, getStatuses])
+  // useEffect(() => {
+  //   //GEt stations for all Lines 
+  //   // let t0 = performance.now()
+  //   console.log('tube.stations changed...')
+  //   sortStations()
+  
+  //   // let tStations = performance.now()
+  //   // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+  // },[stations])
+//////////////////////
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //      const data = await getData(1);
+  //      setData(data);
+  //   }
+
+  //   fetchData();
+  // }, []);
+
+/////////////////////////////
 
   // console.log('--- LineStops.js ---')
   const lineId = props.match.params.id
@@ -62,7 +92,7 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
         <div className={`row lineColor ${lineId}`}>
           <div className={`${lightColor}`}>{lineName}</div>
         </div>
-        {(lineStops.length === 0) ? 'NOTHING!' : 
+        {(lineStops.length === 0) ? 'Loading...' : 
         <Fragment>
           {/* <div className='row'>
             <div className='status'>Stations: {lineStops.length}</div>
