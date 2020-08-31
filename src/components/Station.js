@@ -1,11 +1,10 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getStatuses, getLineStations} from '../actions/tube';
-import axios from 'axios';
+import { getStatuses, getLineStations, getStationArrivals} from '../actions/tube';
 import {v4 as uuid} from 'uuid';
 import Map from './Map';
-import LineArrivals from './LineArrivals';
 import Facilities from './Facilties';
+import LineArrivals from '../components/LineArrivals';
 import '../scss/Section.scss';
 import '../scss/Station.scss';
 // import IconWifi from './icons/wifi.svg';
@@ -13,14 +12,18 @@ import '../scss/Station.scss';
 
 
 
-const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
+const apiString =  `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
+//   mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN
+
+
+
+const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lineStations, lineStatuses, stations, arrivals }, ...props }) => {
   useEffect(() => {
     // Load statuses for name reference if not received already
     if (lineStatuses.length === 0) {
       console.log('Getting statuses (LineStops)..')
       getStatuses()
     }
-
   },[])
 
   useEffect(() => {
@@ -41,8 +44,19 @@ const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatu
 
   },[lineStatuses,lineStations])
 
+  useEffect(() => {
+    if (station) getStationArrivals(station)
+  },[stations])
 
-  function formatAddress(address){
+
+  const findLine = (idToFind) => {
+    return lineStatuses.find(function(line){
+      return line.id === idToFind;
+    })
+  }
+
+
+  const formatAddress = (address) => {
     address = address.split(',')
     address = address.map(lineOfAddress => 
       <div key={uuid()}>{lineOfAddress}</div>
@@ -50,7 +64,7 @@ const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatu
     return address
   }
 
-  function formatLocation(lat, lng){
+  const formatLocation = (lat, lng) =>{
     lat = lat + '°N'
     if (lng >= 0) {
       lng = lng + '°E'
@@ -67,6 +81,7 @@ const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatu
   let address =''
   let phoneNo = ''
   let location = ''
+  let lineArrivals = ''
 
   if (station) {
     console.log('station:',station.name)
@@ -80,6 +95,11 @@ const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatu
     location = formatLocation(station.lat, station.lng)
 
     // console.log(address)
+
+    // Loops through each line served by station
+    lineArrivals = station.lines.map(line => <LineArrivals key={line} line={(findLine(line))} arrivals={arrivals}/>)
+    
+
   }
 
 
@@ -102,7 +122,7 @@ const Station = ({ getLineStations, getStatuses, tube: { lineStations, lineStatu
               <div className='row'>
                 <div className='column w100 indent1'>
                   <h2>Arrivals</h2>
-                  {/* {lineArrivals} */}
+                  {lineArrivals}
                 </div>
               </div>
 
@@ -153,7 +173,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getStatuses, getLineStations })(Station);
+export default connect(mapStateToProps, { getStatuses, getLineStations, getStationArrivals })(Station);
 
 
 

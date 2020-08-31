@@ -4,6 +4,7 @@ const initialState = {
   lineStations: [],
   // stations: [{id:1}], 
   stations: [], 
+  allArrivals: [],
   lines: [],
   index: '',
   loading: true,
@@ -22,12 +23,19 @@ export default function(state = initialState, action){
       }
 
     case 'GET_LINESTATIONS':
-    return {
-      ...state,
-      stations: payload.stations,
-      lineStations: [...state.lineStations, payload.lineStations],
-      loading: false
-    }
+      return {
+        ...state,
+        stations: payload.stations,
+        lineStations: [...state.lineStations, payload.lineStations],
+        loading: false
+      }
+
+    case 'GET_STATIONARRIVALS':
+      return {
+        ...state,
+        allArrivals: payload,
+        loading: false
+      }
 
     case 'STATUS_ERROR':
       return {
