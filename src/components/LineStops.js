@@ -1,7 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import LineStop from './LineStop';
 import { connect } from 'react-redux';
-import { getStatuses, getStations} from '../actions/tube'
+import { getStatuses, getStations} from '../actions/tube';
+import { findLineName } from '../Helpers';
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
 
@@ -42,21 +43,22 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
   let lineName = 'Loading...'
   let lineStops = []
 
-  // Find line name
+  // // Find line name
+  // if (lineStatuses.length !== 0) {
+  //   const idMatch = (element) => element.id === lineId;
+  //   let indexOfLine = lineStatuses.findIndex(idMatch)
+  //   lineName = lineStatuses[indexOfLine].name
+  // }
+
   if (lineStatuses.length !== 0) {
-    const idMatch = (element) => element.id === lineId;
-    let indexOfLine = lineStatuses.findIndex(idMatch)
-    lineName = lineStatuses[indexOfLine].name
+    lineName = findLineName(lineStatuses, lineId)
   }
 
-
+  
 
   if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0)) {
     lineIndex = lineStations.findIndex(line => line.id === lineId);
-    // console.log('Index of line in Stations:',lineIndex)
     lineStops = lineStations[lineIndex].stations
-    // console.log('Number of Stations:',lineStops.length)
-    // console.log('Stations:',lineStops)
   }
 
 
@@ -95,7 +97,6 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
                 </div>  */}
                 {lineStops.map(stop => {
                   let station = stations.find( station => station.id === stop.id )
-                  console.log('lookup: ', stop.id)
                   return <LineStop key={station.id} station={station}/>
                   }
                 )}

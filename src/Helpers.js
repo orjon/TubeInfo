@@ -12,9 +12,9 @@ export function trimStationName(stationName){
   return trimmedStationName
 }
 
-export function lineName(tubeLines, lineId){
-  let index = tubeLines.findIndex(lineX => lineX.id === lineId);
-  return tubeLines[index]
+export function findLineName(tubeLines, lineId){
+  let index = tubeLines.findIndex(line => line.id === lineId);
+  return tubeLines[index].name
 }
 
 

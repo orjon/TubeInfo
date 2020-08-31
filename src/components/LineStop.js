@@ -1,30 +1,30 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import { Link } from 'react-router-dom';
+import { findLineName } from '../Helpers';
 import '../scss/LineStop.scss';
+import store from '../store';
 
 const LineStop= ({ station }) => { 
-  // console.log(station.name)
+  const state = store.getState()
+  let lines = []
 
-    let lines = []
-
-    // thisStation = this.findStationFromId(station.id).pop()
-    // // console.log('thisStation: ',thisStation.lines)
-
-
-    lines = station.lines.map(line => {
-// Check for light color to format text color if needed
+  lines = station.lines.map(line => {
+  // Check for light color to format text color if needed
   let lightColors = ['hammersmith-city','waterloo-city', 'circle']
   let lightColor = ''
-
   if (lightColors.includes(line)){
     lightColor = 'lightColor'
   }
 
 
+  let lineName = findLineName(state.tube.lineStatuses, line)
+
+
   return <Link key={uuid()} to={`/line/${line}`}>
               <div className={`lineCell ${line} ${lightColor}`}>
-                {line}
+                {/* FIX NAME DISPLAY */}
+                {lineName}
               </div>
             </Link>
   })
