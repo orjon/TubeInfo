@@ -17,3 +17,14 @@ export function lineName(tubeLines, lineId){
   return tubeLines[index]
 }
 
+
+export function listArrayNames(array) {
+  let list = ''
+  array.map(element => list = list + element.name + ', ')
+
+  if (list === '') {console.log('NONE')
+  } else {
+    list = list.substring(0, list.length -2)
+    console.log(list)
+  }
+}

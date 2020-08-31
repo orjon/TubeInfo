@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { kebabCase, trimStationName } from '../Helpers';
+import { kebabCase, trimStationName, listArrayNames } from '../Helpers';
 import store from '../store';
 
 
@@ -63,6 +63,13 @@ export const sortStations = () => async dispatch => {
 }
 
 export const getStations = (lineId) => async dispatch => {
+  console.log('--------------------------')
+  const state = store.getState()
+  let currentStations = state.tube.stations
+
+  console.log('Current stations: ',currentStations.length)
+  listArrayNames(currentStations)
+  console.log(currentStations)
   console.log('Getting stations for:', lineId,'line.')
   const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
   let lineStations = []
@@ -76,53 +83,65 @@ export const getStations = (lineId) => async dispatch => {
       headers : {Accept: 'application/json'}
     })
 
-    const state = store.getState()
-    let currentStations = state.tube.stations
-    console.log('Current state', currentStations)
-    console.log('Current state stations:', currentStations.length)
 
-    // console.log('Got stations:')
-    console.log(lineId,'line Stations:', response.data.length)
+    console.log('Got',lineId,'line Stations:', response.data.length)
     // console.log('************',response.data)
-    let counter = 0
     let stations = response.data
-    stations.map(station => {
-      // console.log(counter, station.commonName)
-      counter++
+    stations.map(station => 
       lineStations.push({
         key: station.id,
         id: station.id,
         url: kebabCase(trimStationName(station.commonName)),
         name: trimStationName(station.commonName),
+        lines: [lineId]
       })
-
-
-    })
-    // b.filter(o => !a.find(o2 => o.id === o2.id))
+    )
+    console.log(lineStations)
+    listArrayNames(lineStations)
+    // compare arrays and find new unique values to add.
     let newStations = lineStations.filter(newStation => !currentStations.find( currentStation => newStation.id === currentStation.id))
-    console.log('Current Stations:', currentStations.length)
-    console.log('Current Stations:', state.tube.stations)
-    // let newStations = [...new Set([...state.tube.stations, ...lineStations])]
-    console.log('Sorted Stations:', newStations)
-    console.log('New stations:', newStations.length)
+    console.log('New Stations:', newStations.length)
+    listArrayNames(newStations)
 
-    // let newStations = lineStations
+    let unchangedStations = currentStations.filter(currentStation => !lineStations.find( lineStation => currentStation.id === lineStation.id))
+    console.log('Unchanged Stations:', unchangedStations.length)
+    listArrayNames(unchangedStations)
 
-    // lineStations.forEach(value => {
-    //   if(!currentStations.includes(value)) {
-    //     newStations.push(value);
-    //   }
-    // });
-
-    // newStations = newStations.concat(currentStations);
+    let updateStations = currentStations.filter(currentStation => lineStations.find( lineStation => currentStation.id === lineStation.id))
+    // let updateStations = lineStations.filter(newStation => currentStations.find( currentStation => newStation.id === currentStation.id))
    
-    // console.log(stations)
+    console.log('Update Stations:', updateStations.length)
+    listArrayNames(updateStations)
+    console.log(updateStations)
+
+    let updatedStations = updateStations.map(station => {
+      station.lines = [...new Set([...station.lines, lineId].sort())]
+      return station
+    })
+
+    // updateStations.forEach(station => {
+    //   console.log(station)
+    //   station.lines.push(lineId)
+    // })
+    console.log(updatedStations)
+
+    // let updatedStations = updateStations.map(station => {
+    //   console.log(station)
+    //   return station.lines.push(lineId)
+    // }
+    // )
+    // console.log(updatedStations)
+
+
+
+
+    // console.log(updatedStations)
     // let tStations = performance.now()
     // console.log('took ' + ((tStations - t0)/1000).toFixed(3) + 's')
 
     //Add array of each connecting line
 
-    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: newStations }
+    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: [...newStations, ...updatedStations, ...unchangedStations] }
 
     dispatch({
       type: 'GET_LINESTATIONS',

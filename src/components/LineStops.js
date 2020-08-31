@@ -8,50 +8,33 @@ import '../scss/LineStops.scss';
 
 
 const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
-    useEffect(() => {
-    // let t0 = performance.now()
+  useEffect(() => {
     // Load statuses for name reference if not received already
     if (lineStatuses.length === 0) {
       console.log('Getting statuses (LineStops)..')
       getStatuses()
     }
-    // let tStations = performance.now()
-    // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+
   },[])
 
   useEffect(() => {
-    //GEt stations for all Lines 
-    // let t0 = performance.now()
-    console.log('Getting all stations...')
-    if (lineStations.length === 0) {
-      for (let i=0; i< lineStatuses.length; i++ ) getStations(lineStatuses[i].id)
+    //Get stations for all Lines asyncronously
+
+    const asyncApiCalls = async _ => {
+      for (let i=0; i< lineStatuses.length; i++ ){
+        let t0 = performance.now()
+        await getStations(lineStatuses[i].id)
+        let tStations = performance.now()
+        console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+      }
     }
-  
-    // let tStations = performance.now()
-    // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+
+    if (lineStations.length === 0) {
+      asyncApiCalls()
+    }
+
   },[lineStatuses,lineStations])
 
-  // useEffect(() => {
-  //   //GEt stations for all Lines 
-  //   // let t0 = performance.now()
-  //   console.log('tube.stations changed...')
-  //   sortStations()
-  
-  //   // let tStations = performance.now()
-  //   // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
-  // },[stations])
-//////////////////////
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //      const data = await getData(1);
-  //      setData(data);
-  //   }
-
-  //   fetchData();
-  // }, []);
-
-/////////////////////////////
 
   // console.log('--- LineStops.js ---')
   const lineId = props.match.params.id
@@ -65,6 +48,8 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
     let indexOfLine = lineStatuses.findIndex(idMatch)
     lineName = lineStatuses[indexOfLine].name
   }
+
+
 
   if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0)) {
     lineIndex = lineStations.findIndex(line => line.id === lineId);
@@ -82,6 +67,8 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
   if (lightColors.includes(lineId)){
     lightColor = 'lightColor'
   }
+
+  console.log('Rendering: ',lineId)
   
   return(
 
@@ -106,7 +93,12 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
                   <h4 className='infoLabel'>Station</h4>
                   <h4 className='infoLabel end'>Lines Served</h4>
                 </div>  */}
-                {lineStops.map(stop => <LineStop key={stop.id} station={stop}/>)}
+                {lineStops.map(stop => {
+                  let station = stations.find( station => station.id === stop.id )
+                  console.log('lookup: ', stop.id)
+                  return <LineStop key={station.id} station={station}/>
+                  }
+                )}
               </div>
             </div>
           </div>

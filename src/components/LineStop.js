@@ -1,9 +1,34 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import { Link } from 'react-router-dom';
 import '../scss/LineStop.scss';
 
-const LineStop= ({ station}) => { 
+const LineStop= ({ station }) => { 
   // console.log(station.name)
+
+    let lines = []
+
+    // thisStation = this.findStationFromId(station.id).pop()
+    // // console.log('thisStation: ',thisStation.lines)
+
+
+    lines = station.lines.map(line => {
+// Check for light color to format text color if needed
+  let lightColors = ['hammersmith-city','waterloo-city', 'circle']
+  let lightColor = ''
+
+  if (lightColors.includes(line)){
+    lightColor = 'lightColor'
+  }
+
+
+  return <Link key={uuid()} to={`/line/${line}`}>
+              <div className={`lineCell ${line} ${lightColor}`}>
+                {line}
+              </div>
+            </Link>
+  })
+
   return(
     <div className='row lineStop'>
 
@@ -11,9 +36,9 @@ const LineStop= ({ station}) => {
         {station.name}
       </Link>
 
-      {/* <div className='column w50 linesBlock'>
+      <div className='column w50 linesBlock'>
         {lines}
-      </div> */}
+      </div>
       
     </div>
   )
