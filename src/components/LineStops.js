@@ -1,14 +1,14 @@
 import React, { useEffect, Fragment } from 'react';
 import LineStop from './LineStop';
 import { connect } from 'react-redux';
-import { getStatuses, getStations} from '../actions/tube';
+import { getStatuses, getLineStations} from '../actions/tube';
 import { findLineName } from '../Helpers';
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
 
 
 
-const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
+const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
   useEffect(() => {
     // Load statuses for name reference if not received already
     if (lineStatuses.length === 0) {
@@ -24,7 +24,7 @@ const LineStops = ({ getStations, getStatuses, tube: { lineStations, lineStatuse
     const asyncApiCalls = async _ => {
       for (let i=0; i< lineStatuses.length; i++ ){
         let t0 = performance.now()
-        await getStations(lineStatuses[i].id)
+        await getLineStations(lineStatuses[i].id)
         let tStations = performance.now()
         console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
       }
@@ -116,7 +116,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getStatuses, getStations })(LineStops);
+export default connect(mapStateToProps, { getStatuses, getLineStations })(LineStops);
 
 
 // class LineStops extends Component{

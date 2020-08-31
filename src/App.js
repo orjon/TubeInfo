@@ -40,39 +40,6 @@ class App extends Component {
   }
 
 
-
-  // async getInfo(){
-
-  //   //----------------------------------
-  //   // console.log('Getting stop orders...')
-  //   // for (let i=0; i<lines.length; i++){
-  //   //   lines[i].stopOrder = await this.getStopOrder(lines[i].id)
-  //   // }
-  //   //----------------------------------
-  //   console.log('Getting line stations...')
-  //   let stations = []
-  //   for (let i=0; i<lines.length; i++){
-  //     lines[i].stations = await this.getStations(lines[i].id)
-  //     for (let j=0; j<lines[i].stations.length; j++){
-  //       console.log(`${lines[i].name} Stations...`)
-
-  //       lines[i].stations[j].lines = [lines[i].id]
-  //       stations = this.addStation(lines[i].stations[j], stations)
-  //     }
-  //     // console.log('lines in stations', )
-  //   }
-  //   //----------------------------------
-  //   // stations.sort( this.compare );
-  //   // console.log('stations: ',stations)
-  //   // console.log(stations.sort())
-  //   this.setState({
-  //     tubeLines: lines,
-  //     stations: stations
-  //   })
-  // }
-
-
-
   async getStopOrder(lineId){
     const { apiString } = this.props
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/Route/Sequence/all?${apiString}`, {
@@ -244,7 +211,7 @@ class App extends Component {
                   {...routeProps} 
                   // tubeLines={this.state.tubeLines}
                   // stations={this.state.stations}
-                  line={this.findLine(routeProps.match.params.id)}
+                  // line={this.findLine(routeProps.match.params.id)}
                   // lineIndex={this.findLineIndex(routeProps.match.params.id)}
                 />
               )}
@@ -255,8 +222,8 @@ class App extends Component {
               render={(routeProps) => (
                 <Station
                   {...routeProps} 
-                  tubeLines={this.state.tubeLines}
-                  apiString={this.props.apiString}
+                  // tubeLines={this.state.tubeLines}
+                  // apiString={this.props.apiString}
                   station={this.findStationFromUrl(routeProps.match.params.url)}
                 />
               )}

@@ -1,7 +1,38 @@
 import axios from 'axios';
-import { kebabCase, trimStationName } from '../Helpers';
+import { kebabCase, trimStationName, listArrayNames } from '../Helpers';
 import store from '../store';
 
+
+
+/// filters etc
+
+
+  //   case 'GET_LINESTATIONS':
+  //     {//Find index of entry to update (entry.id === payload.id)
+  //     // const idMatch = (element) => element.id === payload.id;
+  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
+  //     // console.log('Index to update:',indexToUpdate)
+
+  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
+      
+  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
+  //     // // console.log('entryToUPdate',entryToUpdate)
+  //     // entryToUpdate.stations = payload.stations
+  //     // console.log('entryToUPdate',entryToUpdate)
+
+  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
+  //     // entryToUpdate]
+
+  //     return {
+  //       ...state,
+  //       lineStations: [...state.lineStations, payload],
+  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
+  //       // Filters out existing match to payload.id
+  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
+  //       loading: false
+  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
+  //   }
+  // }
 
 // export const sortStations = () => async dispatch => {
 //   const state = store.getState()
@@ -17,7 +48,7 @@ import store from '../store';
 
 // }
 
-export const getStations = (lineId) => async dispatch => {
+export const getLineStations = (lineId) => async dispatch => {
   console.log('--------------------------')
   const state = store.getState()
   let currentStations = state.tube.stations
@@ -30,8 +61,6 @@ export const getStations = (lineId) => async dispatch => {
   let lineStations = []
   // let t0 = performance.now()
 
-  
-  
 
   try {
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
@@ -42,15 +71,76 @@ export const getStations = (lineId) => async dispatch => {
     console.log('Got',lineId,'line Stations:', response.data.length)
     // console.log('************',response.data)
     let stations = response.data
-    stations.map(station => 
+    stations.map(station => {
+      let validFacilities = []
+      let rejectedValues = ['no', '0']
+      let renamedFacilityKeys = ['TaxiRankOutsideStation']
+      let validContacts = []
+
+      let contact = [
+        {key: 'Address', value: undefined},
+        {key: 'PhoneNo', value: undefined}
+      ]
+
+      contact.forEach(property => {
+        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+        if (propertyObject){
+          if (!rejectedValues.includes(propertyObject.value)){
+            property.value = propertyObject.value
+            validContacts.push(property)
+            return
+          }
+        } 
+      });
+
+      let facility = [
+        {key: 'Ticket Halls', value: undefined},
+        {key: 'Toilets', value: undefined},
+        {key: 'Lifts', value: undefined},
+        {key: 'Escalators', value: undefined},
+        {key: 'WiFi', value: undefined},
+        {key: 'Help Points', value: undefined},
+        {key: 'Payphones', value: undefined},
+        {key: 'Boarding Ramp', value: undefined},
+        {key: 'Cash Machines', value: undefined},
+        {key: 'Euro Cash Machines', value: undefined},
+        {key: 'Waiting Room', value: undefined},
+        // {key: 'Gates', value: undefined},
+        {key: 'TaxiRankOutsideStation', value: undefined},
+        {key: 'Car park', value: undefined},
+        {key: 'Left Luggage', value: undefined},
+        {key: 'Photo Booths', value: undefined},
+        {key: 'Amazon Lockers', value: undefined},
+        {key: 'ASDA Click and Collect', value: undefined},
+      ]
+
+      facility.forEach(facility => {
+        let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
+        if (facilityObject && renamedFacilityKeys.includes(facility.key)) {
+          facility.key = 'Taxi Rank'
+        }
+        if (facilityObject && !rejectedValues.includes(facilityObject.value)){
+          facility.value = facilityObject.value
+          validFacilities.push(facility)
+          return
+        } 
+      });
+
+      // console.log('Facilities: ', validFacilities)
+
+
       lineStations.push({
         key: station.id,
         id: station.id,
         url: kebabCase(trimStationName(station.commonName)),
         name: trimStationName(station.commonName),
-        lines: [lineId]
+        lines: [lineId],
+        lat: station.lat,
+        lng: station.lon,
+        contact: [...validContacts],
+        facilities: validFacilities
       })
-    )
+    })
 
     let newStations = lineStations.filter(newStation => !currentStations.find( currentStation => newStation.id === currentStation.id))
     let unchangedStations = currentStations.filter(currentStation => !lineStations.find( lineStation => currentStation.id === lineStation.id))
@@ -96,6 +186,111 @@ export const getStations = (lineId) => async dispatch => {
 
 }
 
+export const getStationInfo = (station) => async dispatch => {
+  let lineId = station.id
+  console.log('Getting station info...', station.name)
+  const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
+  let lineStations = []
+  let t0 = performance.now()
+  try {
+    let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
+      headers : {Accept: 'application/json'}
+    })
+    console.log(lineId,'line Stations:', response.data.length)
+    // console.log(response.data)
+    let counter = 0
+    response.data.map(station => {
+      // console.log(counter, station.commonName)
+      counter++
+
+      let validFacilities = []
+      let rejectedValues = ['no', '0']
+      let renamedFacilityKeys = ['TaxiRankOutsideStation']
+      let validContacts = []
+
+      let contact = [
+        {key: 'Address', value: undefined},
+        {key: 'PhoneNo', value: undefined}
+      ]
+
+      contact.forEach(property => {
+        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+        if (propertyObject){
+          if (!rejectedValues.includes(propertyObject.value)){
+            property.value = propertyObject.value
+            validContacts.push(property)
+            return
+          }
+        } 
+      });
+
+      let facility = [
+        {key: 'Ticket Halls', value: undefined},
+        {key: 'Toilets', value: undefined},
+        {key: 'Lifts', value: undefined},
+        {key: 'Escalators', value: undefined},
+        {key: 'WiFi', value: undefined},
+        {key: 'Help Points', value: undefined},
+        {key: 'Payphones', value: undefined},
+        {key: 'Boarding Ramp', value: undefined},
+        {key: 'Cash Machines', value: undefined},
+        {key: 'Euro Cash Machines', value: undefined},
+        {key: 'Waiting Room', value: undefined},
+        // {key: 'Gates', value: undefined},
+        {key: 'TaxiRankOutsideStation', value: undefined},
+        {key: 'Car park', value: undefined},
+        {key: 'Left Luggage', value: undefined},
+        {key: 'Photo Booths', value: undefined},
+        {key: 'Amazon Lockers', value: undefined},
+        {key: 'ASDA Click and Collect', value: undefined},
+      ]
+
+      facility.forEach(facility => {
+        let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
+        if (facilityObject && renamedFacilityKeys.includes(facility.key)) {
+          facility.key = 'Taxi Rank'
+        }
+        if (facilityObject && !rejectedValues.includes(facilityObject.value)){
+          facility.value = facilityObject.value
+          validFacilities.push(facility)
+          return
+        } 
+      });
+
+      // console.log('Facilities: ', validFacilities)
+
+      lineStations.push({
+        key: station.id,
+        id: station.id,
+        url: kebabCase(trimStationName(station.commonName)),
+        name: trimStationName(station.commonName),
+        lat: station.lat,
+        lng: station.lon,
+        contact: [...validContacts],
+        facilities: validFacilities
+      })
+    })
+
+    let payloadObject = { id: lineId, stations: lineStations}
+
+    dispatch({
+      type: 'GET_LINESTATIONS',
+      payload: payloadObject
+    })
+
+  } catch (error) {
+    console.log('GET_LINESTATIONS error:', error)
+    dispatch({
+      type: 'STATUS_ERROR',
+      payload: error
+      // payload: { 
+      //   msg: error.response.statusText,
+      //   status: error.response.status
+      // }
+    })
+  }
+
+}
 
 
 
@@ -147,37 +342,6 @@ export const getStatuses = () => async dispatch => {
   }
 
 }
-
-
-/// filters etc
-
-
-  //   case 'GET_LINESTATIONS':
-  //     {//Find index of entry to update (entry.id === payload.id)
-  //     // const idMatch = (element) => element.id === payload.id;
-  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
-  //     // console.log('Index to update:',indexToUpdate)
-
-  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
-      
-  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
-  //     // // console.log('entryToUPdate',entryToUpdate)
-  //     // entryToUpdate.stations = payload.stations
-  //     // console.log('entryToUPdate',entryToUpdate)
-
-  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
-  //     // entryToUpdate]
-
-  //     return {
-  //       ...state,
-  //       lineStations: [...state.lineStations, payload],
-  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
-  //       // Filters out existing match to payload.id
-  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
-  //       loading: false
-  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
-  //   }
-  // }
 
 
 
