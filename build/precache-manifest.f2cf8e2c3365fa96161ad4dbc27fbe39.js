@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9a125c7c2c99f0a857df6dbb148d1e1a",
+    "revision": "bae53d50c1609ce2baa0c187e51d4123",
     "url": "/thetube/index.html"
   },
   {
-    "revision": "7d91ebf9e07e220dfe66",
-    "url": "/thetube/static/css/main.f103474a.chunk.css"
+    "revision": "4a2e6718ccee7d2ce18e",
+    "url": "/thetube/static/css/main.545602e0.chunk.css"
   },
   {
     "revision": "639de05d4cad5aaa4338",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/thetube/static/js/2.524110a4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7d91ebf9e07e220dfe66",
-    "url": "/thetube/static/js/main.46935274.chunk.js"
+    "revision": "4a2e6718ccee7d2ce18e",
+    "url": "/thetube/static/js/main.31d81773.chunk.js"
   },
   {
     "revision": "9a2303402bcf3dfabfb7",

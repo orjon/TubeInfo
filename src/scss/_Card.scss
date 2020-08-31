@@ -45,14 +45,24 @@
 
   }
 
-  .titleRow{
-    font-weight: 600;
-    margin-top: $spacing/3;
-    margin-bottom: $spacing/3;
+  .cardTitle{
+    margin-bottom: $spacing/2;
   }
 
-  .dataBlock{
-    margin-bottom: $spacing;
+  .titleRow{
+    font-weight: 600;
+    margin-top: $spacing/4;
+    margin-bottom: $spacing/4;
+  }
+
+  .alert{
+    font-weight: 400;
+    margin-top: $spacing/4;
+    margin-bottom: $spacing/4;
+  }
+
+  .dataBlock, .mapBlock{
+    margin-bottom: $spacing/2;
   }
 
   .status, .loading {
@@ -98,6 +108,7 @@
 
 
   .infoLabel {
+    margin-top: $spacing/6;
     margin-bottom: $spacing/6;
     color: $color_FontL3;
     text-transform: lowercase;
@@ -146,15 +157,15 @@
 
   h1 {
     color: $color_FontMain;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     border: $borderDev solid red;
     vertical-align: top;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
   }
   h2 {
     margin: 10px 0;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 400;
     border: $borderDev solid orange;
   }

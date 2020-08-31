@@ -17,13 +17,13 @@ const LineStop= ({ station }) => {
     lightColor = 'lightColor'
   }
 
+  
 
   let lineName = findLineName(state.tube.lineStatuses, line)
 
 
   return <Link key={uuid()} to={`/line/${line}`}>
               <div className={`lineCell ${line} ${lightColor}`}>
-                {/* FIX NAME DISPLAY */}
                 {lineName}
               </div>
             </Link>

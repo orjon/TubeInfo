@@ -111,7 +111,7 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
       <div className='CardSingle'>
         <div className='Card'> 
 
-          <div className='row'>
+          <div className='row cardTitle'>
             {/* <h1>Station Name</h1> */}
             {station ? <h1>{station.name}</h1> : <h1>Loading...</h1>}
           </div>
@@ -121,18 +121,8 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
             <Fragment>
               <div className='row'>
                 <div className='column w100 indent1'>
-                  <h2>Arrivals</h2>
+                  {/* <h2>Arrivals</h2> */}
                   {lineArrivals}
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='column w100 indent2'>
-                  <Map lat={station.lat} lng={station.lng}/>
-                  <div className='row'>
-                    <div>{location.lat} {location.lng}</div>
-                    <div className='code'>Station ID: {station.id}</div>
-                  </div>
                 </div>
               </div>
 
@@ -157,6 +147,17 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
                   <Facilities facilities={station.facilities}/>
                 </div>
               </div>
+
+              <div className='row mapBlock'>
+                <div className='column w100 indent1'>
+                  <Map lat={station.lat} lng={station.lng}/>
+                  <div className='row'>
+                    <div>{location.lat} {location.lng}</div>
+                    <div className='code'>Station ID: {station.id}</div>
+                  </div>
+                </div>
+              </div>
+
             </Fragment> 
           : ''}
 

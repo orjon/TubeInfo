@@ -89,7 +89,7 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
 
           <div className='row'>
             <div className='column w100 indent1'>
-              <h2>Stations Served ({lineStops.length})</h2>
+              <h2>Stations Served: {lineStops.length}</h2>
               <div className='LineStops dataBlock indent2'>
                 {/* <div className='row'>
                   <h4 className='infoLabel'>Station</h4>
