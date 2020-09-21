@@ -1,5 +1,9 @@
-$borderDev : 0px;
+$borderDev: 0px;
 $spacing: 20px;
+
+$breakpoint1: 800px;
+$breakpoint2: 1280px;
+$breakpoint3: 1700px;
 
 $color_FontMain: rgb(50, 50, 50);
 $color_FontL1: rgb(75, 75, 75);
@@ -31,6 +35,7 @@ $color_Victoria: rgb(000,152,216);
 $color_Waterloo: rgb(147,206,186);
 
 $cardBorderRadius: 3px;
+$cardShadow: 0 0 10px 0 rgba(0, 0, 0, .5);
 
 .bakerloo {background-color: $color_Bakerloo;}
 .central {background-color: $color_Central;}

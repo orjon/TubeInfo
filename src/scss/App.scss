@@ -1,9 +1,9 @@
 @import 'Variables';
 
+
 ::-webkit-scrollbar {
   display: none;
 }
-
 
 * {
 	box-sizing: border-box;
@@ -23,14 +23,12 @@ a {
   color:inherit;
 }
 
-
 .App {
   font-size: 62.5%;
   background-color: $color_TFL;
 	color: white;
   padding: $spacing;
   padding-bottom: $spacing/2;
-  // height: 100vh;
   min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -42,6 +40,7 @@ a {
 
   header {
     width: 400px;
+    width: 100%;
     border: $borderDev solid yellow;
     margin-bottom: $spacing/2;
   }
@@ -49,12 +48,14 @@ a {
   section{
     flex: 1;
     border: $borderDev solid yellow;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
   }
 
   footer {
+    width: 100%;
     text-align: right;
     margin-top: $spacing/2;
     border: $borderDev solid yellow;
@@ -63,24 +64,6 @@ a {
     }
   }
 
-
-  @media screen and (min-width: 860px){
-    header, section, footer {
-      width: 820px;
-    }
-    }
-    
-    @media screen and (min-width: 1280px){
-    header, section, footer  {
-      width: 1240px;
-    }
-    }
-    
-    @media screen and (min-width: 1700px){
-    header, section, footer  {
-      width: 1660px;
-    }
-  }
 }
 
 .App::-webkit-scrollbar {

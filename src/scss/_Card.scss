@@ -5,7 +5,7 @@
   background-color: #eee;
   color: $color_FontMain;
   border-radius: $cardBorderRadius;
-  box-shadow: 0 0 5px 0 rgba(50, 50, 50, .5);
+  box-shadow: $cardShadow;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,6 @@
   }
 
   .titleRow{
-    font-weight: 600;
     margin-top: $spacing/4;
     margin-bottom: $spacing/4;
   }
@@ -68,8 +67,10 @@
   .status, .loading {
     display: flex;
     font-size: 1.1rem;
+    font-weight: 600;
     align-items: flex-end;
     color: $color_FontMain;
+    // color: red;
   }
 
   .lightColor {

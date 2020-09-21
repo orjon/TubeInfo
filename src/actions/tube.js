@@ -6,51 +6,6 @@ import store from '../store';
 const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
   
 
-
-/// filters etc
-
-
-  //   case 'GET_LINESTATIONS':
-  //     {//Find index of entry to update (entry.id === payload.id)
-  //     // const idMatch = (element) => element.id === payload.id;
-  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
-  //     // console.log('Index to update:',indexToUpdate)
-
-  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
-      
-  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
-  //     // // console.log('entryToUPdate',entryToUpdate)
-  //     // entryToUpdate.stations = payload.stations
-  //     // console.log('entryToUPdate',entryToUpdate)
-
-  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
-  //     // entryToUpdate]
-
-  //     return {
-  //       ...state,
-  //       lineStations: [...state.lineStations, payload],
-  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
-  //       // Filters out existing match to payload.id
-  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
-  //       loading: false
-  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
-  //   }
-  // }
-
-// export const sortStations = () => async dispatch => {
-//   const state = store.getState()
-//   let currentStations = state.tube.stations
-//   console.log('Sorting Stations:', currentStations.length)
-//   let payload = [...new Set([...currentStations])]
-//   console.log('Sorted Stations:', payload)
-
-//   dispatch({
-//     type: 'SORT_STATIONS',
-//     payload: payload
-//   })
-
-// }
-
 export const getLineStations = (lineId) => async dispatch => {
   console.log('--------------------------')
   const state = store.getState()
@@ -346,7 +301,9 @@ export const getStatuses = () => async dispatch => {
     let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
-    // let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/1000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+
+    // Delayed response
+    // let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/5000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
     //   headers : {Accept: 'application/json'}
     // })
 
@@ -388,5 +345,48 @@ export const getStatuses = () => async dispatch => {
 
 
 
+/// filters etc
+
+
+  //   case 'GET_LINESTATIONS':
+  //     {//Find index of entry to update (entry.id === payload.id)
+  //     // const idMatch = (element) => element.id === payload.id;
+  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
+  //     // console.log('Index to update:',indexToUpdate)
+
+  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
+      
+  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
+  //     // // console.log('entryToUPdate',entryToUpdate)
+  //     // entryToUpdate.stations = payload.stations
+  //     // console.log('entryToUPdate',entryToUpdate)
+
+  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
+  //     // entryToUpdate]
+
+  //     return {
+  //       ...state,
+  //       lineStations: [...state.lineStations, payload],
+  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
+  //       // Filters out existing match to payload.id
+  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
+  //       loading: false
+  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
+  //   }
+  // }
+
+// export const sortStations = () => async dispatch => {
+//   const state = store.getState()
+//   let currentStations = state.tube.stations
+//   console.log('Sorting Stations:', currentStations.length)
+//   let payload = [...new Set([...currentStations])]
+//   console.log('Sorted Stations:', payload)
+
+//   dispatch({
+//     type: 'SORT_STATIONS',
+//     payload: payload
+//   })
+
+// }
 
 

@@ -19,6 +19,11 @@ export function findLineName(tubeLines, lineId){
   return tubeLines[index].name
 }
 
+export function findLine(tubeLines, lineId){
+  let index = tubeLines.findIndex(line => line.id === lineId);
+  return tubeLines[index]
+}
+
 
 export function listArrayNames(array) {
   let list = ''

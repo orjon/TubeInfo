@@ -5,28 +5,19 @@ import { connect } from 'react-redux';
 import { getStatuses } from '../actions/tube';
 import '../scss/Section.scss';
 
-
-
-const LineStatuses = ({ getStatuses, tube: { lineStatuses, loading} }) => {
+const LineStatuses = ({ getStatuses, tube: { lineStatuses, loadedStatuses} }) => {
 
   useEffect(() => {
-    getStatuses()
+    if (!loadedStatuses) getStatuses()
   },[getStatuses])
 
-    return(
-      <section>
-        <div className='sectionBody CardGrid'>
-          {loading ? 
-            <Fragment>
-              <LoadingCard color='piccadilly'/>
-            </Fragment>
-            : 
-            <Fragment>
-              {lineStatuses.map( line => <LineStatus key={line.id} line={line}/>)}
-            </Fragment>}
-        </div>
-      </section>
-    )
+  return(
+    <section>
+      <div className='sectionBody CardGrid'>
+          {lineStatuses.map( line => <LineStatus key={line.id} line={line}/>)}
+      </div>
+    </section>
+  )
   
 }
 

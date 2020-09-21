@@ -27,20 +27,22 @@ const LineStatus = ({ line }) => {
               <div className={`${lightColor}`}>{line.name}</div>
           </div>
 
-          <div className="cardBody">
+          <div className='cardBody'>
             <div className='row titleRow'>
               <div className='status'>{line.status}</div>
             </div>
 
-            <div className='row'>
-              <div className='data'>
-                {disruptionReason}
-              </div>
-            </div>
-          </div>
-          
+            {disruptionReason? 
+              <div className='row'>
+                <div className='data'>
+                  {disruptionReason}
+                </div>
+              </div>:
+              ''}
 
+          </div>
         </div>
+
       </Link>
     </div>
   )

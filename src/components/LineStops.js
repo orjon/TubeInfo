@@ -2,17 +2,18 @@ import React, { useEffect, Fragment } from 'react';
 import LineStop from './LineStop';
 import { connect } from 'react-redux';
 import { getStatuses, getLineStations} from '../actions/tube';
-import { findLineName } from '../Helpers';
+import { findLineName, findLine } from '../Helpers';
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
 
 
-
-const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineStatuses, stations }, ...props }) => {
+const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineStatuses, stations, loadedStatuses, loadedStations }, ...props }) => {
   useEffect(() => {
-    // Load statuses for name reference if not received already
-    if (lineStatuses.length === 0) {
-      console.log('Getting statuses (LineStops)..')
+    console.log('>> LineStops')
+    window.scrollTo(0, 0)
+    // Load lines statuses for name reference if not received already
+    if (lineStatuses.length === 0 || !loadedStatuses) {
+      console.log('* LineStops: No Statuses')
       getStatuses()
     }
 
@@ -20,7 +21,6 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
 
   useEffect(() => {
     //Get stations for all Lines asyncronously
-
     const asyncApiCalls = async _ => {
       for (let i=0; i< lineStatuses.length; i++ ){
         let t0 = performance.now()
@@ -41,7 +41,9 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
   const lineId = props.match.params.id
   let lineIndex = undefined
   let lineName = 'Loading...'
+  let line = undefined
   let lineStops = []
+  let disruptionReason = undefined
 
   // // Find line name
   // if (lineStatuses.length !== 0) {
@@ -52,13 +54,20 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
 
   if (lineStatuses.length !== 0) {
     lineName = findLineName(lineStatuses, lineId)
+    line = findLine(lineStatuses, lineId)
   }
 
-  
 
-  if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0)) {
+  if ((lineStations.length === lineStatuses.length) && (lineStatuses.length !== 0) && (loadedStations)) {
     lineIndex = lineStations.findIndex(line => line.id === lineId);
     lineStops = lineStations[lineIndex].stations
+  }
+
+
+  if (line.reason) {
+    disruptionReason = line.reason
+    var cropIndex = disruptionReason.indexOf(':') + 1
+    disruptionReason = disruptionReason.substring(cropIndex)
   }
 
 
@@ -74,6 +83,7 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
   
   return(
 
+
   <section>
     {/* <div className='sectionTitle'>Line Details</div> */}
     <div className='CardSingle'> 
@@ -81,27 +91,46 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
         <div className={`row lineColor ${lineId}`}>
           <div className={`${lightColor}`}>{lineName}</div>
         </div>
-        {(lineStops.length === 0) ? 'Loading...' : 
+        {(lineStops.length === 0) ?  
+         <Fragment>
+          <div className='cardBody'>
+
+            <div className='row titleRow'>
+              <div className='status'>Loading...</div>
+            </div>
+
+          </div>
+        </Fragment> : 
         <Fragment>
           {/* <div className='row'>
             <div className='status'>Stations: {lineStops.length}</div>
           </div> */}
+          <div className='cardBody'>
 
-          <div className='row'>
-            <div className='column w100 indent1'>
-              <h2>Stations Served: {lineStops.length}</h2>
-              <div className='LineStops dataBlock indent2'>
-                {/* <div className='row'>
-                  <h4 className='infoLabel'>Station</h4>
-                  <h4 className='infoLabel end'>Lines Served</h4>
-                </div>  */}
-                {lineStops.map(stop => {
-                  let station = stations.find( station => station.id === stop.id )
-                  return <LineStop key={station.id} station={station}/>
-                  }
-                )}
-              </div>
+            <div className='row titleRow'>
+              <div className='status'>{line.status}</div>
             </div>
+
+            {disruptionReason ? 
+              <div className='row'>
+                <div className='data'>
+                  {disruptionReason}
+                </div>
+              </div> : ''}
+
+
+            <div className='row titleRow'>
+              <div className='status'>Stations Served &#91;{lineStops.length}&#93;: </div>
+            </div>
+
+            <div className='LineStops dataBlock'>
+              {lineStops.map(stop => {
+                let station = stations.find( station => station.id === stop.id )
+                return <LineStop key={station.id} station={station}/>
+                }
+              )}
+            </div>
+
           </div>
         </Fragment>}
       </div>

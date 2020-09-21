@@ -5,11 +5,13 @@
   color: red;
   text-align: right;
   display: flex;
+  flex-direction: column;
   margin: 0 0 $spacing 0;
 }
 
 .lineName {
   color:$color_FontMain;
+  font-weight: 600;
   margin: $spacing/4;
 }
 
@@ -18,9 +20,6 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
-
-
 }
 
 // .flex1 {
