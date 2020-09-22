@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/_Card.scss';
+const moment = require('moment');
 
 const LineStatus = ({ line }) => {
 
   let disruptionReason = ''
+  let statusAge='fetching statuses'
+  console.log(line)
+
   if (line.reason) {
     disruptionReason = line.reason
     var cropIndex = disruptionReason.indexOf(':') + 1
@@ -17,6 +21,13 @@ const LineStatus = ({ line }) => {
   if (lightColors.includes(line.id)){
     lightColor = 'lightColor'
   }
+
+  // Calcuates age of status update
+  if (line.timeStamp) {
+    statusAge=moment(line.timeStamp).fromNow()
+    console.log(statusAge)
+  }
+
 
   return(
     <div className='LineStatus'>
@@ -39,6 +50,10 @@ const LineStatus = ({ line }) => {
                 </div>
               </div>:
               ''}
+
+              <div className='row age end'>
+                  {statusAge}
+              </div>
 
           </div>
         </div>

@@ -7,21 +7,13 @@ import Facilities from './Facilties';
 import LineArrivals from '../components/LineArrivals';
 import '../scss/Section.scss';
 import '../scss/Station.scss';
-// import IconWifi from './icons/wifi.svg';
-// import IconATM from './icons/atm.svg';
-
-
-
-const apiString =  `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
-//   mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN
-
 
 
 const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lineStations, lineStatuses, stations, arrivals }, ...props }) => {
   useEffect(() => {
     // Load statuses for name reference if not received already
     if (lineStatuses.length === 0) {
-      console.log('Getting statuses (LineStops)..')
+      console.log('Getting statuses (stations)..')
       getStatuses()
     }
   },[])
@@ -120,7 +112,7 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
               
             <Fragment>
               <div className='row'>
-                <div className='column w100 indent1'>
+                <div className='column w100'>
                   {/* <h2>Arrivals</h2> */}
                   {lineArrivals}
                 </div>

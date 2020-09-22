@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 import { connect } from 'react-redux';
 import '../scss/LineArrivals.scss';
-import {Moment} from 'react-moment';
-import 'moment-timezone';
 
 
 const moment = require('moment');

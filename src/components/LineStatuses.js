@@ -4,12 +4,16 @@ import LoadingCard from './LoadingCard';
 import { connect } from 'react-redux';
 import { getStatuses } from '../actions/tube';
 import '../scss/Section.scss';
+import moment from 'moment';
 
 const LineStatuses = ({ getStatuses, tube: { lineStatuses, loadedStatuses} }) => {
 
   useEffect(() => {
     if (!loadedStatuses) getStatuses()
   },[getStatuses])
+
+  let now = moment().format('X')
+  console.log(now)
 
   return(
     <section>

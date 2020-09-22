@@ -10,7 +10,7 @@
     "axios": "^0.19.2",
     "file-loader": "^6.0.0",
     "mapbox-gl": "^1.10.0",
-    "moment": "^2.25.3",
+    "moment": "^2.29.0",
     "moment-timezone": "^0.5.28",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
