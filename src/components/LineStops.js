@@ -8,16 +8,13 @@ import '../scss/LineStops.scss';
 const moment = require('moment');
 
 
-const LineStops = ({ getLineStations, setStatusAge, getStatuses, tube: { lineStations, lineStatuses, stations, loadedStatuses, loadedStations }, ...props }) => {
+const LineStops = ({ getLineStations, setStatusAge, getStatuses, tube: { lineStations, lineStatuses, statusesAge, stations, loadedStatuses, loadedStations }, ...props }) => {
   
-
-
+  // Status age counter
   useEffect(() => {
     const timer = setInterval(() => setStatusAge(), 1000);
     return () => clearTimeout(timer);
   }, [setStatusAge]); 
-  
-  
   
   
   useEffect(() => {
@@ -58,13 +55,7 @@ const LineStops = ({ getLineStations, setStatusAge, getStatuses, tube: { lineSta
   let disruptionReason = undefined
   let statusAgeText='...fetching'
 
-  // // Find line name
-  // if (lineStatuses.length !== 0) {
-  //   const idMatch = (element) => element.id === lineId;
-  //   let indexOfLine = lineStatuses.findIndex(idMatch)
-  //   lineName = lineStatuses[indexOfLine].name
-  // }
-
+  
   if (lineStatuses.length !== 0) {
     lineName = findLineName(lineStatuses, lineId)
     line = findLine(lineStatuses, lineId)
@@ -92,8 +83,8 @@ const LineStops = ({ getLineStations, setStatusAge, getStatuses, tube: { lineSta
     lightColor = 'lightColor'
   }
 
-  if (line.timeStamp) {
-    statusAgeText='updated '+line.statusAge+'s ago'
+  if (statusesAge) {
+    statusAgeText='updated '+statusesAge+'s ago'
   }
 
   

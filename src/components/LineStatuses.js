@@ -10,11 +10,12 @@ const LineStatuses = ({ getStatuses, setStatusAge, tube: { lineStatuses, loadedS
   useEffect(() => {
     if (!loadedStatuses) getStatuses()
 
-    const timer = setInterval(() => getStatuses(), 57000);
+    const timer = setInterval(() => getStatuses(), 19000);
     return () => clearTimeout(timer);
 
   },[getStatuses, loadedStatuses])
 
+  // Status age counter
   useEffect(() => {
     const timer = setInterval(() => setStatusAge(), 1000);
     return () => clearTimeout(timer);

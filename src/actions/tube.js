@@ -208,7 +208,6 @@ export const getStatuses = () => async dispatch => {
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: line.lineStatuses[0].reason,
         timeStamp: moment().format(),
-        statusAge: 0
       })
     )
 
@@ -216,10 +215,12 @@ export const getStatuses = () => async dispatch => {
     // console.log(lineStatuses)
     // let tStatuses = performance.now()
     // console.log('took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
+
+    let timeStamp = moment().format()
   
     dispatch({
       type: 'GET_STATUSES',
-      payload: lines
+      payload: [lines, timeStamp]
     })
 
   } catch (error) {
@@ -239,28 +240,15 @@ export const setStatusAge = () => async dispatch => {
   console.log('Action: setStatusAge')
   let now = moment()
   const state = store.getState()
-  let lineStatuses = state.tube.lineStatuses
+  let statusesTimeStamp = state.tube.statusesTimeStamp
 
-  // let t0 = performance.now()
-  let lines = []
-  
-  lineStatuses.map(line => 
-    lines.push({
-      key: line.id,
-      id: line.id,
-      name: line.name,
-      status: line.status,
-      reason: line.reason,
-      timeStamp: line.timeStamp,
-      statusAge: Math.floor(now.diff(line.timeStamp)/1000)
-    })
-  )
-
-  // console.log('lines',lines)
+  //calculate age of last status update
+  let ageInSeconds = Math.floor(now.diff(statusesTimeStamp)/1000)
+  // console.log('Age: '+ageInSeconds)
 
   dispatch({
     type: 'SET_STATUSAGE',
-    payload: lines
+    payload: ageInSeconds
   })
 
 }

@@ -6,7 +6,8 @@ import { initialStatuses } from './initialStatuses';
 const initialState = {
   lineStatuses: initialStatuses,
   loadedStatuses: false,
-  // lineStatusesTimeStamp: undefined,
+  statusesTimeStamp: undefined,
+  statusesAge: undefined,
   lineStations: [],
   stations: initialStations, 
   loadedStations: false,
@@ -25,14 +26,15 @@ export default function(state = initialState, action){
     case 'GET_STATUSES': 
       return {
         ...state, 
-        lineStatuses: payload,
+        lineStatuses: payload[0],
+        statusesTimeStamp:  payload[1],
         loadedStatuses: true
       }
 
     case 'SET_STATUSAGE':
       return {
         ...state, 
-        lineStatuses: payload,
+        statusesAge: payload,
       }
 
     case 'GET_LINESTATIONS':

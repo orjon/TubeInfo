@@ -1,12 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../scss/_Card.scss';
+import store from '../store';
+
 const moment = require('moment');
 
+
 const LineStatus = ({ line }) => {
+  const state = store.getState()
+  const statusesAge = state.tube.statusesAge
   // console.log('Component: LineStatus ('+line.name+')')
   let disruptionReason = ''
   let statusAgeText='...fetching'
+
+  console.log(statusesAge)
 
   if (line.reason) {
     disruptionReason = line.reason
@@ -24,9 +31,11 @@ const LineStatus = ({ line }) => {
 
 
   // Calcuates age of status update
-  if (line.timeStamp) {
-    statusAgeText='updated '+line.statusAge+'s ago'
+  if (statusesAge) {
+    statusAgeText='updated '+statusesAge+'s ago'
   }
+
+
 
 
   return(
