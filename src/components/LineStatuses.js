@@ -1,19 +1,26 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import LineStatus from './LineStatus';
-import LoadingCard from './LoadingCard';
 import { connect } from 'react-redux';
-import { getStatuses } from '../actions/tube';
+import { getStatuses, setStatusAge } from '../actions/tube';
 import '../scss/Section.scss';
-import moment from 'moment';
+// import moment from 'moment';
 
-const LineStatuses = ({ getStatuses, tube: { lineStatuses, loadedStatuses} }) => {
+const LineStatuses = ({ getStatuses, setStatusAge, tube: { lineStatuses, loadedStatuses} }) => {
 
   useEffect(() => {
     if (!loadedStatuses) getStatuses()
-  },[getStatuses])
+    const timer = setInterval(() => getStatuses(), 57000);
+    return () => clearTimeout(timer);
 
-  let now = moment().format('X')
-  console.log(now)
+  },[getStatuses, loadedStatuses])
+
+  useEffect(() => {
+    const timer = setInterval(() => setStatusAge(), 1000);
+    return () => clearTimeout(timer);
+  }, [setStatusAge]);
+
+  // let now = moment().format('X')
+ 
 
   return(
     <section>
@@ -31,4 +38,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getStatuses })(LineStatuses)
+export default connect(mapStateToProps, { getStatuses, setStatusAge })(LineStatuses)

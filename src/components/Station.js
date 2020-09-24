@@ -16,11 +16,10 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
       console.log('Getting statuses (stations)..')
       getStatuses()
     }
-  },[])
+  },[lineStatuses, getStatuses])
 
   useEffect(() => {
     //Get stations for all Lines asyncronously
-
     const asyncApiCalls = async _ => {
       for (let i=0; i< lineStatuses.length; i++ ){
         let t0 = performance.now()
@@ -33,12 +32,11 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
     if (lineStations.length === 0) {
       asyncApiCalls()
     }
+  },[lineStatuses,lineStations, getLineStations])
 
-  },[lineStatuses,lineStations])
-
-  useEffect(() => {
-    if (station) getStationArrivals(station)
-  },[stations])
+  // useEffect(() => {
+  //   if (station) getStationArrivals(station)
+  // },[station, getStationArrivals])
 
 
   const findLine = (idToFind) => {

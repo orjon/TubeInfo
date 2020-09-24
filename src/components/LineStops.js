@@ -17,16 +17,16 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
       getStatuses()
     }
 
-  },[])
+  },[lineStatuses, getStatuses, loadedStatuses])
 
   useEffect(() => {
     //Get stations for all Lines asyncronously
     const asyncApiCalls = async _ => {
       for (let i=0; i< lineStatuses.length; i++ ){
-        let t0 = performance.now()
+        // let t0 = performance.now()
         await getLineStations(lineStatuses[i].id)
-        let tStations = performance.now()
-        console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
+        // let tStations = performance.now()
+        // console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
       }
     }
 
@@ -34,7 +34,7 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
       asyncApiCalls()
     }
 
-  },[lineStatuses,lineStations])
+  },[lineStatuses,lineStations, getLineStations])
 
 
   // console.log('--- LineStops.js ---')
@@ -79,7 +79,6 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
     lightColor = 'lightColor'
   }
 
-  console.log('Rendering: ',lineId)
   
   return(
 

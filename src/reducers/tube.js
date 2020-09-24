@@ -6,6 +6,7 @@ import { initialStatuses } from './initialStatuses';
 const initialState = {
   lineStatuses: initialStatuses,
   loadedStatuses: false,
+  // lineStatusesTimeStamp: undefined,
   lineStations: [],
   stations: initialStations, 
   loadedStations: false,
@@ -26,6 +27,12 @@ export default function(state = initialState, action){
         ...state, 
         lineStatuses: payload,
         loadedStatuses: true
+      }
+
+    case 'SET_STATUSAGE':
+      return {
+        ...state, 
+        lineStatuses: payload,
       }
 
     case 'GET_LINESTATIONS':

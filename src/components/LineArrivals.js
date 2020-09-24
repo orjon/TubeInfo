@@ -6,7 +6,7 @@ import '../scss/LineArrivals.scss';
 
 
 const moment = require('moment');
-let now = moment()
+// let now = moment()
 
 const LineArrivals = ({tube: {allArrivals}, ...props}) => {
   const { line } = props

@@ -8,7 +8,7 @@ const moment = require('moment');
   
 
 export const getLineStations = (lineId) => async dispatch => {
-  console.log('--------------------------')
+  console.log('Action: getLineStations')
   const state = store.getState()
   let currentStations = state.tube.stations
 
@@ -19,14 +19,12 @@ export const getLineStations = (lineId) => async dispatch => {
   let lineStations = []
   // let t0 = performance.now()
 
-
   try {
-    let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/StopPoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
+    let response = await axios.get(`https://api.tfl.gov.uk/line/${lineId}/stoppoints?tflOperatedNationalRailStationsOnly=false&${apiString}`, {
       headers : {Accept: 'application/json'}
     })
 
-
-    console.log('Got',lineId,'line Stations:', response.data.length)
+    // console.log('Got',lineId,'line Stations:', response.data.length)
     // console.log('************',response.data)
     let stations = response.data
     stations.map(station => {
@@ -34,22 +32,6 @@ export const getLineStations = (lineId) => async dispatch => {
       let rejectedValues = ['no', '0']
       let renamedFacilityKeys = ['TaxiRankOutsideStation']
       let validContacts = []
-      let contact = [
-        {key: 'Address', value: undefined},
-        {key: 'PhoneNo', value: undefined}
-      ]
-
-      contact.forEach(property => {
-        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
-        if (propertyObject){
-          if (!rejectedValues.includes(propertyObject.value)){
-            property.value = propertyObject.value
-            validContacts.push(property)
-            return
-          }
-        } 
-      });
-
       let facility = [
         {key: 'Ticket Halls', value: undefined},
         {key: 'Toilets', value: undefined},
@@ -70,6 +52,21 @@ export const getLineStations = (lineId) => async dispatch => {
         {key: 'Amazon Lockers', value: undefined},
         {key: 'ASDA Click and Collect', value: undefined},
       ]
+      let contact = [
+        {key: 'Address', value: undefined},
+        {key: 'PhoneNo', value: undefined}
+      ]
+
+      contact.forEach(property => {
+        let propertyObject = station.additionalProperties.find(x => x.key === property.key)
+        if (propertyObject){
+          if (!rejectedValues.includes(propertyObject.value)){
+            property.value = propertyObject.value
+            validContacts.push(property)
+            return
+          }
+        } 
+      });
 
       facility.forEach(facility => {
         let facilityObject = station.additionalProperties.find(x => x.key === facility.key)
@@ -83,9 +80,7 @@ export const getLineStations = (lineId) => async dispatch => {
         } 
       });
 
-      // console.log('Facilities: ', validFacilities)
-
-      lineStations.push({
+      return lineStations.push({
         key: station.id,
         id: station.id,
         url: kebabCase(trimStationName(station.commonName)),
@@ -143,7 +138,7 @@ export const getLineStations = (lineId) => async dispatch => {
 }
 
 export const getStationArrivals = (station) => async dispatch => {
-  // const { apiString, station } = this.props
+  console.log('Action: getStationArrivials')
   let stationId = station.id
   let arrivals = []
 
@@ -189,8 +184,8 @@ export const getStationArrivals = (station) => async dispatch => {
 
 
 export const getStatuses = () => async dispatch => {
-  console.log('Getting statuses...')
-  let t0 = performance.now()
+  console.log('Action: getStatuses')
+  // let t0 = performance.now()
   let lines = []
   const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
   try {
@@ -199,7 +194,7 @@ export const getStatuses = () => async dispatch => {
     // })
 
     // Delayed response
-    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/5000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/2000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
 
@@ -212,19 +207,19 @@ export const getStatuses = () => async dispatch => {
         name: line.name,
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: line.lineStatuses[0].reason,
-        timeStamp: moment().format()
+        timeStamp: moment().format(),
+        statusAge: 0
       })
     )
 
-    console.log('Got statuses:')
-    console.log(lineStatuses)
-    let tStatuses = performance.now()
-    console.log('took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
+    // console.log('Got statuses:')
+    // console.log(lineStatuses)
+    // let tStatuses = performance.now()
+    // console.log('took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
   
-
     dispatch({
       type: 'GET_STATUSES',
-      payload: lines,
+      payload: lines
     })
 
   } catch (error) {
@@ -240,50 +235,35 @@ export const getStatuses = () => async dispatch => {
 
 }
 
+export const setStatusAge = () => async dispatch => {
+  console.log('Action: setStatusAge')
+  let now = moment()
+  const state = store.getState()
+  let lineStatuses = state.tube.lineStatuses
 
+  // let t0 = performance.now()
+  let lines = []
+  
+  lineStatuses.map(line => 
+    lines.push({
+      key: line.id,
+      id: line.id,
+      name: line.name,
+      status: line.status,
+      reason: line.reason,
+      timeStamp: line.timeStamp,
+      statusAge: Math.floor(now.diff(line.timeStamp)/1000)
+    })
+  )
 
-/// filters etc
+  // console.log('lines',lines)
 
+  dispatch({
+    type: 'SET_STATUSAGE',
+    payload: lines
+  })
 
-  //   case 'GET_LINESTATIONS':
-  //     {//Find index of entry to update (entry.id === payload.id)
-  //     // const idMatch = (element) => element.id === payload.id;
-  //     // let indexToUpdate = state.statuses.findIndex(idMatch)
-  //     // console.log('Index to update:',indexToUpdate)
+}
 
-  //     // // let newEntry = (state.statuses[indexToUpdate].stations = [...payload.stations])
-      
-  //     // let entryToUpdate = state.statuses.filter(function (line) { return line.id === payload.id })[0]
-  //     // // console.log('entryToUPdate',entryToUpdate)
-  //     // entryToUpdate.stations = payload.stations
-  //     // console.log('entryToUPdate',entryToUpdate)
-
-  //     // let newArray = [...state.statuses.filter(function (line) { return line.id !== payload.id }),
-  //     // entryToUpdate]
-
-  //     return {
-  //       ...state,
-  //       lineStations: [...state.lineStations, payload],
-  //       // index: state.statuses.findIndex(state.statuses.filter(function (line) { return line.id === payload.id })),
-  //       // Filters out existing match to payload.id
-  //       // stations: [...state.stations.filter(line => line.id !== payload.id), payload],
-  //       loading: false
-  //     // var results = state.statuses.filter(function (line) { return line.id === payload.id });
-  //   }
-  // }
-
-// export const sortStations = () => async dispatch => {
-//   const state = store.getState()
-//   let currentStations = state.tube.stations
-//   console.log('Sorting Stations:', currentStations.length)
-//   let payload = [...new Set([...currentStations])]
-//   console.log('Sorted Stations:', payload)
-
-//   dispatch({
-//     type: 'SORT_STATIONS',
-//     payload: payload
-//   })
-
-// }
 
 
