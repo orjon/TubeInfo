@@ -9,6 +9,7 @@ const LineStatuses = ({ getStatuses, setStatusAge, tube: { lineStatuses, loadedS
 
   useEffect(() => {
     if (!loadedStatuses) getStatuses()
+
     const timer = setInterval(() => getStatuses(), 57000);
     return () => clearTimeout(timer);
 

@@ -1,13 +1,25 @@
 import React, { useEffect, Fragment } from 'react';
 import LineStop from './LineStop';
 import { connect } from 'react-redux';
-import { getStatuses, getLineStations} from '../actions/tube';
+import { getStatuses, setStatusAge, getLineStations} from '../actions/tube';
 import { findLineName, findLine } from '../Helpers';
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
+const moment = require('moment');
 
 
-const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineStatuses, stations, loadedStatuses, loadedStations }, ...props }) => {
+const LineStops = ({ getLineStations, setStatusAge, getStatuses, tube: { lineStations, lineStatuses, stations, loadedStatuses, loadedStations }, ...props }) => {
+  
+
+
+  useEffect(() => {
+    const timer = setInterval(() => setStatusAge(), 1000);
+    return () => clearTimeout(timer);
+  }, [setStatusAge]); 
+  
+  
+  
+  
   useEffect(() => {
     console.log('>> LineStops')
     window.scrollTo(0, 0)
@@ -44,6 +56,7 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
   let line = undefined
   let lineStops = []
   let disruptionReason = undefined
+  let statusAgeText='...fetching'
 
   // // Find line name
   // if (lineStatuses.length !== 0) {
@@ -77,6 +90,10 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
 
   if (lightColors.includes(lineId)){
     lightColor = 'lightColor'
+  }
+
+  if (line.timeStamp) {
+    statusAgeText='updated '+line.statusAge+'s ago'
   }
 
   
@@ -115,7 +132,12 @@ const LineStops = ({ getLineStations, getStatuses, tube: { lineStations, lineSta
                 <div className='data'>
                   {disruptionReason}
                 </div>
-              </div> : ''}
+              </div>: ''}
+
+
+              <div className='row age end'>
+                  {statusAgeText} [{moment(line.timeStamp).format('HH:mm:ss')}]
+              </div>
 
 
             <div className='row titleRow'>
@@ -144,7 +166,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getStatuses, getLineStations })(LineStops);
+export default connect(mapStateToProps, { getStatuses, setStatusAge, getLineStations })(LineStops);
 
 
 // class LineStops extends Component{

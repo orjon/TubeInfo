@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getStatuses } from '../actions/tube';
 import '../scss/_Card.scss';
 const moment = require('moment');
 
@@ -8,7 +7,6 @@ const LineStatus = ({ line }) => {
   // console.log('Component: LineStatus ('+line.name+')')
   let disruptionReason = ''
   let statusAgeText='...fetching'
-  let now = moment()
 
   if (line.reason) {
     disruptionReason = line.reason
