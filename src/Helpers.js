@@ -1,4 +1,5 @@
-
+import store from './store';
+const state = store.getState()
 
 export function kebabCase(inputString){
   let outputString = inputString.toLowerCase().replace(/ /g, '-').replace(/'/g, '')
@@ -14,15 +15,21 @@ export function trimStationName(stationName){
   return trimmedStationName
 }
 
-export function findLineName(tubeLines, lineId){
-  let index = tubeLines.findIndex(line => line.id === lineId);
-  return tubeLines[index].name
+export function findLineName(statuses, lineId){
+  let index = statuses.findIndex(line => line.id === lineId);
+  return statuses[index].name
 }
 
-export function findLine(tubeLines, lineId){
-  let index = tubeLines.findIndex(line => line.id === lineId);
-  return tubeLines[index]
+export function findLine(statuses, lineId){
+  let index = statuses.findIndex(line => line.id === lineId);
+  return statuses[index]
 }
+
+export function findStationFromUrl(stationToFind){
+    return state.stations.find(function(station){
+      return station.url === stationToFind;
+    })
+  }
 
 
 export function listArrayNames(array) {

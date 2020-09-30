@@ -3,9 +3,11 @@
 
 ::-webkit-scrollbar {
   display: none;
+  background-color: $color_TFL;
 }
 
 * {
+
 	box-sizing: border-box;
   margin: 0px;
   font-family: sans-serif;
@@ -65,11 +67,4 @@ a {
   }
 
 }
-
-.App::-webkit-scrollbar {
-  display: none;
-}
-
-
-
 

@@ -107,12 +107,21 @@
 
 
 
-  .infoLabel, .age {
+  .infoLabel {
     // margin-top: $spacing/6;
     // margin-bottom: $spacing/6;
     color: $color_FontL3;
     text-transform: lowercase;
     font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .age {
+    // margin-top: $spacing/6;
+    // margin-bottom: $spacing/6;
+    color: $color_FontL3;
+    text-transform: lowercase;
+    font-size: 0.7rem;
     font-weight: 400;
   }
 
@@ -133,7 +142,6 @@
     text-align: justify;
     word-wrap: break-word;
     font-size: 0.9rem;
-    border: $borderDev solid yellow;
   }
 
 

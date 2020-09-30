@@ -6418,7 +6418,7 @@ export const initialStations= [
     key: '940GZZLUBST',
     id: '940GZZLUBST',
     url: 'baker-street',
-    name: 'Baker Street*',
+    name: 'Baker Street',
     lines: [
       'bakerloo',
       'circle',

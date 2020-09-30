@@ -9,21 +9,21 @@ import '../scss/Section.scss';
 import '../scss/Station.scss';
 
 
-const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lineStations, lineStatuses, stations, arrivals }, ...props }) => {
+const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lineStations, statuses, stations, arrivals }, ...props }) => {
   useEffect(() => {
     // Load statuses for name reference if not received already
-    if (lineStatuses.length === 0) {
+    if (statuses.length === 0) {
       console.log('Getting statuses (stations)..')
       getStatuses()
     }
-  },[lineStatuses, getStatuses])
+  },[statuses, getStatuses])
 
   useEffect(() => {
     //Get stations for all Lines asyncronously
     const asyncApiCalls = async _ => {
-      for (let i=0; i< lineStatuses.length; i++ ){
+      for (let i=0; i< statuses.length; i++ ){
         let t0 = performance.now()
-        await getLineStations(lineStatuses[i].id)
+        await getLineStations(statuses[i].id)
         let tStations = performance.now()
         console.log('That took ' + ((tStations - t0)/1000).toFixed(3) + 's')
       }
@@ -32,7 +32,7 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
     if (lineStations.length === 0) {
       asyncApiCalls()
     }
-  },[lineStatuses,lineStations, getLineStations])
+  },[statuses,lineStations, getLineStations])
 
   // useEffect(() => {
   //   if (station) getStationArrivals(station)
@@ -40,7 +40,7 @@ const Station = ({ getLineStations, getStatuses, getStationArrivals, tube: { lin
 
 
   const findLine = (idToFind) => {
-    return lineStatuses.find(function(line){
+    return statuses.find(function(line){
       return line.id === idToFind;
     })
   }

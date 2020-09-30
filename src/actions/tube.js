@@ -44,7 +44,6 @@ export const getLineStations = (lineId) => async dispatch => {
         {key: 'Cash Machines', value: undefined},
         {key: 'Euro Cash Machines', value: undefined},
         {key: 'Waiting Room', value: undefined},
-        // {key: 'Gates', value: undefined},
         {key: 'TaxiRankOutsideStation', value: undefined},
         {key: 'Car park', value: undefined},
         {key: 'Left Luggage', value: undefined},
@@ -101,22 +100,14 @@ export const getLineStations = (lineId) => async dispatch => {
       return station
     })
 
-    // console.log(lineStations)
-    // listArrayNames(lineStations)
-    // compare arrays and find new unique values to add. 
-    // console.log('New Stations:', newStations.length)
-    // listArrayNames(newStations)
-    // console.log('Unchanged Stations:', unchangedStations.length)
-    // listArrayNames(unchangedStations)
-    // console.log('Update Stations:', updateStations.length)
-    // listArrayNames(updateStations)
-    // console.log(updateStations)
-    // console.log(updatedStations)
-
     // let tStations = performance.now()
     // console.log('took ' + ((tStations - t0)/1000).toFixed(3) + 's')
 
-    let payloadObject = {lineStations: { id: lineId, stations: lineStations}, stations: [...newStations, ...updatedStations, ...unchangedStations] }
+    let payloadObject = {
+      lineStations: { id: lineId, stations: lineStations},
+      stations: [...newStations, ...updatedStations, ...unchangedStations],
+      timeStamp: moment().format()
+    }
 
     dispatch({
       type: 'GET_LINESTATIONS',
@@ -183,44 +174,52 @@ export const getStationArrivals = (station) => async dispatch => {
 
 
 
-export const getStatuses = () => async dispatch => {
-  console.log('Action: getStatuses')
-  // let t0 = performance.now()
+export const getStatuses = (calledFrom) => async dispatch => {
+
+  console.log(calledFrom+': AXIOS.get getStatuses')
+  let t0 = performance.now()
   let lines = []
   const apiString = `app_id=${process.env.REACT_APP_TFL_API_ID}&app_key=${process.env.REACT_APP_TFL_APP_KEY}`
-  try {
-    // let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
-    //   headers : {Accept: 'application/json'}
-    // })
 
-    // Delayed response
-    let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/2000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+
+  try {
+    let response = await axios.get(`https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
       headers : {Accept: 'application/json'}
     })
 
+    // Delayed response
+    // let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/5000/url/https://api.tfl.gov.uk/line/mode/tube/status?${apiString}`, {
+    //   headers : {Accept: 'application/json'}
+    // })
+
     
     let lineStatuses = response.data
-    lineStatuses.map(line => 
-      lines.push({
+    lineStatuses.map(line => {
+      let reason = undefined
+      if (line.lineStatuses[0].reason) {
+        var cropIndex = line.lineStatuses[0].reason.indexOf(':') + 1
+        reason = line.lineStatuses[0].reason.substring(cropIndex)
+      }
+      return lines.push({
         key: line.id,
         id: line.id,
         name: line.name,
         status: line.lineStatuses[0].statusSeverityDescription,
-        reason: line.lineStatuses[0].reason,
-        timeStamp: moment().format(),
+        reason: reason
       })
+    }
+
     )
 
-    // console.log('Got statuses:')
-    // console.log(lineStatuses)
-    // let tStatuses = performance.now()
-    // console.log('took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
+    let tStatuses = performance.now()
+    console.log('getStatuses took ' + ((tStatuses - t0)/1000).toFixed(3) + 's')
 
-    let timeStamp = moment().format()
+    let payloadObject = { timeStamp: moment().format(), lines: lines }
+
   
     dispatch({
       type: 'GET_STATUSES',
-      payload: [lines, timeStamp]
+      payload:  payloadObject
     })
 
   } catch (error) {
@@ -236,19 +235,25 @@ export const getStatuses = () => async dispatch => {
 
 }
 
-export const setStatusAge = () => async dispatch => {
-  console.log('Action: setStatusAge')
+
+export const setStatusAge = (calledFrom) => dispatch => {
+  // console.log(calledFrom+': setStatusAge')
+  let statusesUptodate = true
   let now = moment()
   const state = store.getState()
   let statusesTimeStamp = state.tube.statusesTimeStamp
 
-  //calculate age of last status update
+
+  //calculate age of
   let ageInSeconds = Math.floor(now.diff(statusesTimeStamp)/1000)
+   if (ageInSeconds >= 30) {
+     statusesUptodate = false
+   }
   // console.log('Age: '+ageInSeconds)
 
   dispatch({
     type: 'SET_STATUSAGE',
-    payload: ageInSeconds
+    payload: [ageInSeconds, statusesUptodate]
   })
 
 }
