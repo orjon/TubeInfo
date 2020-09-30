@@ -32,7 +32,6 @@ class App extends Component {
   }
 
 
-
   async getStopOrder(lineId){
     const { apiString } = this.props
     let response = await axios.get(`https://api.tfl.gov.uk/Line/${lineId}/Route/Sequence/all?${apiString}`, {
@@ -52,17 +51,6 @@ class App extends Component {
     return property
   }
 
-
-
-  // addStation(newStation, stations){
-  //   let foundIndex = stations.findIndex(station => station.id === newStation.id);
-  //   if (foundIndex !== -1){
-  //     stations[foundIndex].lines.push(newStation.lines[0])
-  //   } else {
-  //     stations = [...stations, newStation]
-  //   }
-  //   return stations
-  // }
 
   compare( stationA, stationB ) {
     if ( stationA.name < stationB.name ){
@@ -113,10 +101,6 @@ class App extends Component {
               render={(routeProps) => (
                 <LineStops
                   {...routeProps} 
-                  // tubeLines={this.state.tubeLines}
-                  // stations={this.state.stations}
-                  // line={this.findLine(routeProps.match.params.id)}
-                  // lineIndex={this.findLineIndex(routeProps.match.params.id)}
                 />
               )}
             />
@@ -126,8 +110,7 @@ class App extends Component {
               render={(routeProps) => (
                 <Station
                   {...routeProps} 
-                  // tubeLines={this.state.tubeLines}
-                  // apiString={this.props.apiString}
+
                   station={this.findStationFromUrl(routeProps.match.params.url)}
                 />
               )}
@@ -143,9 +126,7 @@ class App extends Component {
       </Provider>
 
     );
-  }
-
-  
+  } 
 }
 
 export default App;

@@ -1,20 +1,23 @@
 import { initialStations } from './initialStations';
 import { initialStatuses } from './initialStatuses';
+import { initialLineStations } from './initialLineStations';
 
 
 // tube STATE
 const initialState = {
-  lineStatuses: initialStatuses,
+  statuses: initialStatuses,
   loadedStatuses: false,
   statusesTimeStamp: undefined,
   statusesAge: undefined,
-  lineStations: [],
+
   stations: initialStations, 
   loadedStations: false,
+  stationsTimeStamp: "2020-01-01T12:00:00+00:00",
+  lineStations: initialLineStations,
+
   allArrivals: [],
-  lines: [],
   index: '',
-  loadingLineStations: true,
+
   loadingStationArrivals: true,
   error: {}
 }
@@ -26,15 +29,18 @@ export default function(state = initialState, action){
     case 'GET_STATUSES': 
       return {
         ...state, 
-        lineStatuses: payload[0],
-        statusesTimeStamp:  payload[1],
+        statuses: payload.lines,
+        statusesTimeStamp:  payload.timeStamp,
         loadedStatuses: true
       }
 
     case 'SET_STATUSAGE':
       return {
         ...state, 
-        statusesAge: payload,
+        statusesAge: payload[0],
+        loadedStatuses: payload[1]
+        // statusesAge: payload.ageInSeconds,
+        // loadedStatuses: payload.statusesUptodate
       }
 
     case 'GET_LINESTATIONS':
@@ -43,7 +49,7 @@ export default function(state = initialState, action){
         stations: payload.stations,
         loadedStations: true,
         lineStations: [...state.lineStations, payload.lineStations],
-        loadingLineStations: false
+        stationsTimeStamp: payload.timeStamp
       }
 
     case 'GET_STATIONARRIVALS':
