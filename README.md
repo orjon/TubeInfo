@@ -1,7 +1,7 @@
 # React Transport for London API
 ## Experiments with React
 
-This application collects [Transport for London API](https://api.tfl.gov.uk/) Underground status information and displays them through a simple clickable interface.
+This application collects [Transport for London API](https://api.tfl.gov.uk/) Underground information and displays them through a simple clickable interface.
 
 
 ### Statuses / Home 
