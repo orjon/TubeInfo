@@ -27,7 +27,6 @@ const Map = ({lng,lat}) => {
   return(
     <div className='row map' ref={el => (mapDiv.current = el)} />
   )
-
 }
 
 export default Map
