@@ -1,0 +1,51 @@
+h1 {
+  color: $color_FontMain;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: $borderDev solid red;
+  vertical-align: top;
+  // margin-bottom: 10px;
+}
+h2 {
+  margin: 10px 0;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border: $borderDev solid orange;
+}
+h3 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  border: $borderDev solid orange;
+}
+
+h4 {
+  color: $color_FontL3;
+  font-size: 1rem;
+  font-weight: 400;
+  border: $borderDev solid orange;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.infoLabel {
+  color: $color_FontL3;
+  text-transform: lowercase;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.mapLabel {
+  color: $color_FontL3;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.age {
+  color: $color_FontL3;
+  text-transform: lowercase;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
