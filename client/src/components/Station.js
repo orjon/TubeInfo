@@ -20,11 +20,8 @@ const Station = ({
     statuses,
     statusesTimeStamp,
     statusesExpired,
-
     stations,
-    // lineStations,
     stationsExpired,
-    // stationsTimeStamp
   }, ...props }) => {
 
   const calledFrom = 'Station'
@@ -155,10 +152,6 @@ const Station = ({
             <div className='row mapBlock'>
               <div className='column w100'>
                 <Map lat={station.lat} lng={station.lng}/>
-                {/* <div className='row'>
-                  <div className='mapLabel'>{location.lat} {location.lng}</div>
-                  <div className='mapLabel end'>Station ID: {station.id}</div>
-                </div> */}
               </div>
             </div>
 
@@ -182,6 +175,11 @@ const Station = ({
               <div className='title'>Facilities</div>
                 <Facilities facilities={station.facilities}/>
               </div>
+            </div>
+
+            <div className='row'>
+              <div className='mapLabel'>{location.lat} {location.lng}</div>
+              <div className='mapLabel end'>Station ID: {station.id}</div>
             </div>
 
           
