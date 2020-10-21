@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './scss/App.scss';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 import LineStops from './components/LineStops';
 import LineStatuses from './components/LineStatuses';
 import Station from './components/Station';
+import './scss/App.scss';
 
 //reduxStore
 //Connect react & redux:
@@ -25,9 +26,7 @@ const App =() => {
           <Route path='/' component = { LineStatuses }/>
         </Switch>
 
-        <footer className='right'>
-          <a href='http://www.orjon.com'>orjon.com</a>
-        </footer>
+        <Footer />
       </div>
     </Provider>
   );

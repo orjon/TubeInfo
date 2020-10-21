@@ -1,5 +1,5 @@
-# React Transport for London API
-## Experiments with React
+# Tube Info 
+### Full-stack React & Transport for London API info app
 
 This application collects [Transport for London API](https://api.tfl.gov.uk/) Underground information and displays them through a simple clickable interface.
 

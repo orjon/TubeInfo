@@ -15,16 +15,16 @@
   .CardGrid {
     grid-template-columns: 1fr 1fr;
   }
-  }
-  
-  @media screen and (min-width: $breakpoint2){
-  .CardGrid  {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  }
-  
-  @media screen and (min-width: $breakpoint3){
-  .CardGrid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 }
+  
+//   @media screen and (min-width: $breakpoint2){
+//   .CardGrid  {
+//     grid-template-columns: 1fr 1fr 1fr;
+//   }
+// }
+  
+//   @media screen and (min-width: $breakpoint3){
+//   .CardGrid {
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//   }
+// }

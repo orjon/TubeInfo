@@ -26,6 +26,7 @@ a {
 }
 
 .App {
+  
   font-size: 62.5%;
   background-color: $color_TFL;
 	color: white;
@@ -40,6 +41,7 @@ a {
   
 
   header {
+    max-width: 900px;
     width: 400px;
     width: 100%;
     border: $borderDev solid yellow;
@@ -50,18 +52,38 @@ a {
     flex: 1;
     border: $borderDev solid yellow;
     width: 100%;
+    max-width: 900px;
     height: 100%;
     display: flex;
     flex-direction: column;
   }
 
   footer {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    text-align: right;
+    max-width: 900px;
+    text-align: center;
     margin-top: $spacing/2;
     border: $borderDev solid yellow;
-    a {
-      color:white;
+    .legal {
+      display: flex;
+      flex-direction: column;
+      border: $borderDev solid cyan;
+      text-align: left;
+    }
+    .developer {
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: $borderDev solid magenta;
+      padding-top:5px;
+      font-weight: 600;
+      text-align: right;
+      a {
+        color:white;
+      }
     }
   }
 

@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import {v4 as uuid} from 'uuid';
 import { getStatuses, setStatusesExpired, getStations, getStationArrivals } from '../actions/tube';
 import { maxStatusesAge, maxArrivalsAge }  from '../globalSettings'
-
 import Map from './Map';
 import Facilities from './Facilties';
 import LineArrivals from '../components/LineArrivals';
 import '../scss/Section.scss';
-import '../scss/Station.scss';
 
 
 const Station = ({
@@ -130,68 +128,69 @@ const Station = ({
 
   
   return(
-    <div className='CardSingle'>
-      <div className='Card'> 
+    <section>
+      <div className='CardSingle'>
+        <div className='Card'> 
 
-        <div className='row cardTitle'>
-          {station ? 
+          <div className='row cardTitle'>
+            {station ? 
+              <Fragment>
+                <h1>{station.name}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
+              </Fragment>
+            : <h1>Loading...</h1>}
+          </div>
+
+          {station?  
+              
             <Fragment>
-              <h1>{station.name}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
-            </Fragment>
-           : <h1>Loading...</h1>}
-        </div>
+              <div className='row'>
+                <div className='column w100'>
+                  {lineArrivals}
+                </div>
+              </div>
 
-        {station?  
+              {/* <div className='row horizontalLine w100'/> */}
+
+              <div className='row mapBlock'>
+                <div className='column w100'>
+                  <Map lat={station.lat} lng={station.lng}/>
+                  {/* <div className='row'>
+                    <div className='mapLabel'>{location.lat} {location.lng}</div>
+                    <div className='mapLabel end'>Station ID: {station.id}</div>
+                  </div> */}
+                </div>
+              </div>
+
+              <div className='row titleRow'>
+                <div className='column w50'>
+                  <div className='title'>Address</div>
+                  <div className='column dataBlock'>
+                    <div className='data'>{address}</div>
+                  </div>
+                </div> 
+                <div className='column w50'>
+                  <div className='title'>Telephone</div>
+                  <div className='column dataBlock'>
+                    <div className='data'>{phoneNo}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className='row facilities'>
+                <div className='column w100'>
+                <div className='title'>Facilities</div>
+                  <Facilities facilities={station.facilities}/>
+                </div>
+              </div>
+
             
-          <Fragment>
-            <div className='row'>
-              <div className='column w100'>
-                {lineArrivals}
-              </div>
-            </div>
+            </Fragment>
 
-            {/* <div className='row horizontalLine w100'/> */}
+          : ''}
 
-            <div className='row mapBlock'>
-              <div className='column w100'>
-                <Map lat={station.lat} lng={station.lng}/>
-                {/* <div className='row'>
-                  <div className='mapLabel'>{location.lat} {location.lng}</div>
-                  <div className='mapLabel end'>Station ID: {station.id}</div>
-                </div> */}
-              </div>
-            </div>
-
-            <div className='row titleRow'>
-              <div className='column w50'>
-                <div className='title'>Address</div>
-                <div className='column dataBlock'>
-                  <div className='data'>{address}</div>
-                </div>
-              </div> 
-              <div className='column w50'>
-                <div className='title'>Telephone</div>
-                <div className='column dataBlock'>
-                  <div className='data'>{phoneNo}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className='row facilities'>
-              <div className='column w100'>
-              <div className='title'>Facilities</div>
-                <Facilities facilities={station.facilities}/>
-              </div>
-            </div>
-
-          
-          </Fragment>
-
-        : ''}
-
+        </div>
       </div>
-        
-    </div>
+    </section>
   )
 }
 

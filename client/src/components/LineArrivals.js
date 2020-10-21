@@ -5,7 +5,6 @@ import TubeLineHeader from './layout/TubeLineHeader';
 import Status from './layout/Status';
 // import TimeStamp from './layout/TimeStamp';
 import DirectionArrivals from './DirectionArrivals';
-import '../scss/LineArrivals.scss';
 
 const LineArrivals = ({line, stationArrivals, statusesTimeStamp }) => {
 
