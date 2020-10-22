@@ -1,0 +1,8 @@
+@import 'Variables';
+
+.LineArrivals {
+  justify-self: center;
+  border: $borderDev solid red;
+  width: 100%;
+  max-width: 450px;
+}

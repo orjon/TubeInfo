@@ -7,6 +7,7 @@ import Map from './Map';
 import Facilities from './Facilties';
 import LineArrivals from '../components/LineArrivals';
 import '../scss/Section.scss';
+import '../scss/Station.scss';
 
 
 const Station = ({
@@ -143,10 +144,8 @@ const Station = ({
           {station?  
               
             <Fragment>
-              <div className='row'>
-                <div className='column w100'>
+              <div className='ArrivalsGrid'>
                   {lineArrivals}
-                </div>
               </div>
 
               {/* <div className='row horizontalLine w100'/> */}

@@ -1,46 +1,47 @@
 @import 'Variables';
 
 .lineStop{
+  justify-self: center;
+  display: flex;
   border: $borderDev solid magenta;
-  color: red;
   text-align: right;
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 $spacing 0;
-}
+  max-width: 300px;
 
-.lineName {
-  color:$color_FontMain;
-  font-weight: 600;
-  margin: $spacing/4;
-}
+  .lineName {
+    color:$color_FontMain;
+    font-weight: 600;
+    margin: $spacing/4;
+    // width: 100%;
+  }
+  
+  .linesBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 4px;
+    width: 125px;
+    
 
-.linesBlock{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
+    .lineCell {
+      height: $spacing;
+      width: 125px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: left;
+      color: white;
+      padding-left: $spacing/8;
+      border: $borderDev solid orange;
+      display: flex;
+      align-items: center;
+      &.lightColor {
+        color: $color_TFL;
+      }
+    }
 
-// .flex1 {
-//   flex:1;
-// }
-
-
-
-.lineCell {
-  height: $spacing;
-  width: 125px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-align: left;
-  color: white;
-  padding-left: $spacing/8;
-  border: $borderDev solid orange;
-  display: flex;
-  align-items: center;
-  &.lightColor {
-    color: $color_TFL;
   }
 }
+
+
+
 

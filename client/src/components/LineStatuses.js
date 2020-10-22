@@ -30,7 +30,7 @@ const LineStatuses = ({
 
   return(
     <section>
-      <div className='sectionBody CardGrid'>
+      <div className='CardGrid'>
           {statuses.map( line => <LineStatus key={line.id} line={line} statusesTimeStamp={statusesTimeStamp}/>)}
       </div>
     </section>

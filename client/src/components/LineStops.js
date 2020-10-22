@@ -10,7 +10,6 @@ import TimeStamp from './layout/TimeStamp';
 import '../scss/Section.scss';
 import '../scss/LineStops.scss';
 
-
 const LineStops = ({ 
   getStatuses, setStatusesExpired, getStations,
   tube: {
@@ -67,7 +66,7 @@ const LineStops = ({
             <div className='status'>{lineStops.length} stations served: </div>
           </div>
 
-          <div className='LineStops dataBlock'>
+          <div className='lineStopGrid '>
             {lineStops.map(stop => {
               let station = stations.find( station => station.id === stop.id )
               return <LineStop key={station.id} station={station}/>

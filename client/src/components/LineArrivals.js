@@ -5,6 +5,7 @@ import TubeLineHeader from './layout/TubeLineHeader';
 import Status from './layout/Status';
 // import TimeStamp from './layout/TimeStamp';
 import DirectionArrivals from './DirectionArrivals';
+import '../scss/LineArrivals.scss';
 
 const LineArrivals = ({line, stationArrivals, statusesTimeStamp }) => {
 
@@ -39,7 +40,7 @@ const LineArrivals = ({line, stationArrivals, statusesTimeStamp }) => {
   }
 
   return(
-    <Fragment>
+    <div className='LineArrivals'>
       <Link to={`/line/${line.id}`}>
         <TubeLineHeader line={line}/>
         { (line.status !== 'Good Service') && <Status line={line} timeStamp={statusesTimeStamp}/>}
@@ -47,9 +48,7 @@ const LineArrivals = ({line, stationArrivals, statusesTimeStamp }) => {
       <div className='dataBlock indent1'>
         {groupedArrivals}
       </div>
-
-
-    </Fragment>
+    </div>
   )
 }
 

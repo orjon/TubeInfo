@@ -1,30 +1,35 @@
 @import 'Variables';
 
-.CardGrid {
-  color: black;
+.CardSingle, .CardGrid {
   width: 100%;
-  border: $borderDev solid lime;
+  border: $borderDev solid cyan;
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: $spacing;
   grid-row-gap: $spacing;
+  // overflow: scroll;
 }
-
 
 @media screen and (min-width: $breakpoint1){
-  .CardGrid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .CardGrid { grid-template-columns: 1fr 1fr }
 }
   
-//   @media screen and (min-width: $breakpoint2){
-//   .CardGrid  {
-//     grid-template-columns: 1fr 1fr 1fr;
-//   }
-// }
+@media screen and (min-width: $breakpoint2){
+  .CardGrid  { grid-template-columns: 1fr 1fr 1fr }
+}
   
-//   @media screen and (min-width: $breakpoint3){
-//   .CardGrid {
-//     grid-template-columns: 1fr 1fr 1fr 1fr;
-//   }
-// }
+@media screen and (min-width: $breakpoint3){
+  .CardGrid { grid-template-columns: 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: $breakpoint4){
+  .CardGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: $breakpoint5){
+  .CardGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: $breakpoint6){
+  .CardGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr }
+}

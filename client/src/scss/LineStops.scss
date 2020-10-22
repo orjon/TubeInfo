@@ -1,7 +1,37 @@
 @import 'Variables';
 
-.LineStops {
-  display: flex;
-  flex-flow: row wrap;
-  border: $borderDev solid orange;
+.lineStopGrid {
+  margin-top: $spacing/2;
+  width: 100%;
+  border: $borderDev solid cyan;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: $spacing;
+  grid-row-gap: $spacing;
+}
+
+$breakpointLess: 200;
+
+@media screen and (min-width: ($breakpoint1 - $breakpointLess)){
+  .lineStopGrid { grid-template-columns: 1fr 1fr }
+}
+  
+@media screen and (min-width: ($breakpoint2 - $breakpointLess)){
+  .lineStopGrid  { grid-template-columns: 1fr 1fr 1fr }
+}
+  
+@media screen and (min-width: ($breakpoint3 - $breakpointLess)){
+  .lineStopGrid { grid-template-columns: 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: ($breakpoint4 - $breakpointLess)){
+  .lineStopGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: ($breakpoint5 - $breakpointLess)){
+  .lineStopGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr }
+}
+
+@media screen and (min-width: ($breakpoint6 - $breakpointLess)){
+  .lineStopGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr }
 }

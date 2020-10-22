@@ -1,6 +1,5 @@
 @import 'Variables';
 
-
 ::-webkit-scrollbar {
   display: none;
   background-color: $color_TFL;
@@ -41,7 +40,7 @@ a {
   
 
   header {
-    max-width: 900px;
+    // max-width: 900px;
     width: 400px;
     width: 100%;
     border: $borderDev solid yellow;
@@ -52,7 +51,7 @@ a {
     flex: 1;
     border: $borderDev solid yellow;
     width: 100%;
-    max-width: 900px;
+    // max-width: 900px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -62,7 +61,7 @@ a {
     display: flex;
     flex-direction: row;
     width: 100%;
-    max-width: 900px;
+    // max-width: 900px;
     text-align: center;
     margin-top: $spacing/2;
     border: $borderDev solid yellow;
