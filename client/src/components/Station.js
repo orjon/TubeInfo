@@ -19,11 +19,8 @@ const Station = ({
     statuses,
     statusesTimeStamp,
     statusesExpired,
-
     stations,
-    // lineStations,
     stationsExpired,
-    // stationsTimeStamp
   }, ...props }) => {
 
   const calledFrom = 'Station'
@@ -81,16 +78,22 @@ const Station = ({
 
 
   //Get stations for all lines 
-  useEffect(() => {
-    if (stationsExpired && !statusesExpired) getStations(calledFrom)
-  },[statuses, stationsExpired, statusesExpired, getStations ])
+  // useEffect(() => {
+  //   if (stationsExpired && !statusesExpired) getStations(calledFrom)
+  // },[statuses, stationsExpired, statusesExpired, getStations ])
 
   //Get arrivals
+  // useEffect(() => {
+  //   if (!stationsExpired && !statusesExpired && station) {
+  //     getStationArrivals({calledFrom, stationId})
+  //   }
+  // },[stationsExpired, statusesExpired, station, stationId, getStationArrivals])
+
   useEffect(() => {
-    if (!stationsExpired && !statusesExpired && station) {
+    if (!statusesExpired && station) {
       getStationArrivals({calledFrom, stationId})
     }
-  },[stationsExpired, statusesExpired, station, stationId, getStationArrivals])
+  },[statusesExpired, station, stationId, getStationArrivals])
 
 
   if (station) {

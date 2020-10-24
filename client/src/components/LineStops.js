@@ -16,7 +16,6 @@ const LineStops = ({
     statuses,
     statusesExpired,
     statusesTimeStamp,
-
     stations,
     lineStations,
     stationsExpired,
@@ -45,9 +44,9 @@ const LineStops = ({
 
 
   //Get stations for all Lines asyncronously
-  useEffect(() => {
-    if (stationsExpired && !statusesExpired) getStations(calledFrom)
-  },[statuses, stationsExpired, getStations, statusesExpired ])
+  // useEffect(() => {
+  //   if (stationsExpired && !statusesExpired) getStations(calledFrom)
+  // },[statuses, stationsExpired, getStations, statusesExpired ])
 
   if (statuses.length !== 0) {
     line = findLine(statuses, lineId)
