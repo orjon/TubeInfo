@@ -22,7 +22,7 @@ const Map = ({lng,lat}) => {
     };
 
     if (!map) initializeMap({ setMap, mapDiv });
-  }, [map]);
+  }, [map, lat, lng]);
 
   return(
     <div className='row map' ref={el => (mapDiv.current = el)} />

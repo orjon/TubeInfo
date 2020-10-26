@@ -30,7 +30,7 @@ const Station = ({
   let address =''
   let phoneNo = ''
   let zone = ''
-  let location = ''
+  // let location = ''
   let lineArrivals = ''
 
 
@@ -48,15 +48,15 @@ const Station = ({
     return address
   }
 
-  const formatLocation = (lat, lng) =>{
-    lat = lat + '°N'
-    if (lng >= 0) {
-      lng = lng + '°E'
-    } else{
-      lng = - lng + '°W'
-    }
-    return {lat: lat, lng: lng}
-  }
+  // const formatLocation = (lat, lng) =>{
+  //   lat = lat + '°N'
+  //   if (lng >= 0) {
+  //     lng = lng + '°E'
+  //   } else{
+  //     lng = - lng + '°W'
+  //   }
+  //   return {lat: lat, lng: lng}
+  // }
 
 
   // Statuses update interval
@@ -78,22 +78,22 @@ const Station = ({
 
 
   //Get stations for all lines 
-  // useEffect(() => {
-  //   if (stationsExpired && !statusesExpired) getStations(calledFrom)
-  // },[statuses, stationsExpired, statusesExpired, getStations ])
+  useEffect(() => {
+    if (stationsExpired && !statusesExpired) getStations(calledFrom)
+  },[statuses, stationsExpired, statusesExpired, getStations ])
 
   //Get arrivals
-  // useEffect(() => {
-  //   if (!stationsExpired && !statusesExpired && station) {
-  //     getStationArrivals({calledFrom, stationId})
-  //   }
-  // },[stationsExpired, statusesExpired, station, stationId, getStationArrivals])
-
   useEffect(() => {
-    if (!statusesExpired && station) {
+    if (!stationsExpired && !statusesExpired && station) {
       getStationArrivals({calledFrom, stationId})
     }
-  },[statusesExpired, station, stationId, getStationArrivals])
+  },[stationsExpired, statusesExpired, station, stationId, getStationArrivals])
+
+  // useEffect(() => {
+  //   if (!statusesExpired && station) {
+  //     getStationArrivals({calledFrom, stationId})
+  //   }
+  // },[statusesExpired, station, stationId, getStationArrivals])
 
 
   if (station) {
@@ -107,7 +107,7 @@ const Station = ({
       if (station.contact[2]) zone = station.contact[2].value
     }
 
-    location = formatLocation(station.lat, station.lng)
+    // location = formatLocation(station.lat, station.lng)
 
     if (station.arrivals) {
     // Loops through each line served by station
@@ -139,7 +139,8 @@ const Station = ({
           <div className='row cardTitle'>
             {station ? 
               <Fragment>
-                <h1>{station.name} [{stationIndex}]{station.id}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
+                <h1>{station.name}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
+                {/* <h1>{station.name} [{stationIndex}]{station.id}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''} */}
               </Fragment>
             : <h1>Loading...</h1>}
           </div>
