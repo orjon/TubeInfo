@@ -139,7 +139,7 @@ const Station = ({
           <div className='row cardTitle'>
             {station ? 
               <Fragment>
-                <h1>{station.name}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
+                <h1>{station.name} [{stationIndex}]{station.id}</h1>{zone? <h1 className='end'>Zone {station.contact[2].value}</h1> : ''}
               </Fragment>
             : <h1>Loading...</h1>}
           </div>

@@ -17,6 +17,8 @@ const LineArrivals = ({line, stationArrivals, statusesTimeStamp }) => {
     {direction: 'Eastbound',  arrivals: []},
     {direction: 'Southbound', arrivals: []},
     {direction: 'Westbound',  arrivals: []},
+    {direction: 'Inner Rail', arrivals: []},
+    {direction: 'Outer Rail', arrivals: []},
   ]
 
   let groupedArrivals = []

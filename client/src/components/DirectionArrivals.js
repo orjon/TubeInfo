@@ -13,7 +13,7 @@ const DirectionArrivals = ({ direction, arrivals }) => {
   return(
     <Fragment>
       <div className='row titleRow'>
-        <div className='title'>{direction}</div>
+        <div className='title'>{direction} - Platform {arrivals[0].platform}</div>
       </div>
       <div className='row'>
         <h4 className='infoLabel'>Towards</h4>

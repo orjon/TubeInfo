@@ -16,15 +16,15 @@ const LineStatuses = ({
     stationsExpired } }) => {
   const calledFrom = 'LineStatuses'
 
-  // useEffect(() => {
-  //   if (statusesExpired) getStatuses(calledFrom)
-  //   else if (stationsExpired) getStations(calledFrom)
-  // },[getStatuses, statusesExpired, getStations, stationsExpired])
-
-
   useEffect(() => {
     if (statusesExpired) getStatuses(calledFrom)
-  },[getStatuses, statusesExpired])
+    else if (stationsExpired) getStations(calledFrom)
+  },[getStatuses, statusesExpired, getStations, stationsExpired])
+
+
+  // useEffect(() => {
+  //   if (statusesExpired) getStatuses(calledFrom)
+  // },[getStatuses, statusesExpired])
 
 
   // Statuses update interval
