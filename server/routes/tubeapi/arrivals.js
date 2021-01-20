@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { TFL_API_ID, TFL_APP_KEY } = require('../../../config');
+const { TFL_API_ID, TFL_APP_KEY } = require('../../config');
 const moment = require('moment');
-const statistics = require('../../../statistics/serverStatistics');
+const statistics = require('../../statistics/serverStatistics');
 
 TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`;
 
-//@router GET api/tube/arrivals/station
+//@router GET tubeapi/arrivals/station
 //@desc   profile route
 //@access Public
 router.get('/:stationId', async (req, res) => {
@@ -21,7 +21,7 @@ router.get('/:stationId', async (req, res) => {
   console.log('=================================================');
   console.log(
     moment(now).format('HH:mm:ss'),
-    'GET request /api/tube/arrivals/' + station.name
+    'GET request /tubeapi/arrivals/' + station.name
   );
   statistics.logApiArrivalsRequest();
   // console.log('current station.arrivalsTimeStamp: ',station.arrivalsTimeStamp)
@@ -108,7 +108,7 @@ router.get('/:stationId', async (req, res) => {
     console.log('Updated arrivals sent to client');
   } catch (error) {
     console.log('*********** ERROR! **************');
-    console.log('ERROR: GET api/tube/arrivals/' + station.id);
+    console.log('ERROR: GET tubeapi/arrivals/' + station.id);
     console.log(error);
     console.log('*********** ERROR! **************');
   }

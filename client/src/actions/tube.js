@@ -8,7 +8,7 @@ export const getStations = (calledFrom) => async (dispatch) => {
 
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/tube/stations`, {
+    let response = await axios.get(`/tubeapi/stations`, {
       headers: { Accept: 'application/json' },
     });
 
@@ -47,7 +47,7 @@ export const getStationArrivals = ({ calledFrom, stationId }) => async (
 
   try {
     //Get arrivals at station from server
-    let response = await axios.get(`/api/tube/arrivals/${stationId}`, {
+    let response = await axios.get(`/tubeapi/arrivals/${stationId}`, {
       headers: { Accept: 'application/json' },
     });
     console.log(
@@ -75,7 +75,7 @@ export const getStatuses = (calledFrom) => async (dispatch) => {
 
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/tube/statuses`, {
+    let response = await axios.get(`/tubeapi/statuses`, {
       headers: { Accept: 'application/json' },
     });
 

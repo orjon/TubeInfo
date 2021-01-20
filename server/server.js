@@ -3,9 +3,9 @@ const initialState = require('./initalValues/initialState');
 const moment = require('moment');
 const path = require('path');
 
-const routeTubeStatuses = require('./routes/api/tube/statuses');
-const routeTubeStations = require('./routes/api/tube/stations');
-const routeTubeArrivals = require('./routes/api/tube/arrivals');
+const routeTubeStatuses = require('./routes/tubeapi/statuses');
+const routeTubeStations = require('./routes/tubeapi/stations');
+const routeTubeArrivals = require('./routes/tubeapi/arrivals');
 
 const app = express();
 
@@ -30,9 +30,9 @@ global.serverState = {
 };
 
 //define routes
-app.use('/api/tube/statuses', routeTubeStatuses);
-app.use('/api/tube/stations', routeTubeStations);
-app.use('/api/tube/arrivals', routeTubeArrivals);
+app.use('/tubeapi/statuses', routeTubeStatuses);
+app.use('/tubeapi/stations', routeTubeStations);
+app.use('/tubeapi/arrivals', routeTubeArrivals);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
