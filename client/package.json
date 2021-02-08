@@ -2,16 +2,21 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "tubeinfo",
+  "homepage": "/tubeclient",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "mapbox-gl": "^1.10.0",
     "moment": "^2.29.0",
+    "moment-timezone": "^0.5.28",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-live-clock": "^4.0.5",
     "react-moment": "^1.0.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
@@ -19,10 +24,6 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "file-loader": "^6.0.0",
-    "mapbox-gl": "^1.10.0",
-    "moment-timezone": "^0.5.28",
-    "react-live-clock": "^4.0.5",
     "sass": "^1.26.3",
     "uuid": "^8.3.0"
   },
@@ -47,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5001"
 }
