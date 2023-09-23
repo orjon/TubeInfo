@@ -1,7 +1,6 @@
 @import 'Variables';
 
 .ArrivalsGrid {
-  margin-top: $spacing/2;
   margin-bottom: $spacing/2;
   width: 100%;
   border: $borderDev solid cyan;
@@ -13,26 +12,38 @@
 
 $breakpointMore: 100;
 
-@media screen and (min-width: ($breakpoint1 + $breakpointMore)){
-  .ArrivalsGrid { grid-template-columns: 1fr 1fr }
-}
-  
-@media screen and (min-width: ($breakpoint2 + $breakpointMore)){
-  .ArrivalsGrid  { grid-template-columns: 1fr 1fr 1fr }
-}
-  
-@media screen and (min-width: ($breakpoint3 + $breakpointMore)){
-  .ArrivalsGrid { grid-template-columns: 1fr 1fr 1fr 1fr }
+@media screen and (min-width: ($breakpoint1 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-@media screen and (min-width: ($breakpoint4 + $breakpointMore)){
-  .ArrivalsGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr }
+@media screen and (min-width: ($breakpoint2 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
-@media screen and (min-width: ($breakpoint5 + $breakpointMore)){
-  .ArrivalsGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr }
+@media screen and (min-width: ($breakpoint3 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 
-@media screen and (min-width: ($breakpoint6 + $breakpointMore)){
-  .ArrivalsGrid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr }
+@media screen and (min-width: ($breakpoint4 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: ($breakpoint5 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: ($breakpoint6 + $breakpointMore)) {
+  .ArrivalsGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
 }

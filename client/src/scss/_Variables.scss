@@ -12,48 +12,72 @@ $color_FontMain: rgb(50, 50, 50);
 $color_FontL1: rgb(75, 75, 75);
 $color_FontL2: rgb(100, 100, 100);
 $color_FontL3: rgb(125, 125, 125);
+$color_FontL4: rgb(150, 150, 150);
 
 $color_LineThin: rgb(150, 150, 150);
 
-$color_TFL: rgb(017,059,146);
-$colorFilter_TFL: invert(18%) sepia(38%) saturate(4532%) hue-rotate(210deg) brightness(91%) contrast(92%);
+$color_TFL: rgb(017, 059, 146);
+$colorFilter_TFL: invert(18%) sepia(38%) saturate(4532%) hue-rotate(210deg)
+  brightness(91%) contrast(92%);
 //filter generator: https://codepen.io/sosuke/pen/Pjoqqp
 
 // $color_TFL2: #0019a8;
 // $colorFilter_TFL2: invert(11%) sepia(95%) saturate(4864%) hue-rotate(212deg) brightness(83%) contrast(152%);
-$color_Emirates: rgb(220,036,031);
-$color_Buses: rgb(220,036,031);
-$color_DLR: rgb(000,175,173);
-$color_Overground: rgb(239,123,016);
-$color_Bakerloo: rgb(178,099,000);
-$color_Central: rgb(220,036,031);
-$color_Circle: rgb(255,211,041);
-$color_District: rgb(000,125,050);
-$color_Northern: rgb(000,000,000);
-$color_Metropolitan: rgb(155,000,088);
-$color_Jubilee: rgb(161,165,167);
-$color_Hammersmith: rgb(244,169,190);
-$color_Piccadilly: rgb(000,025,168);
-$color_Victoria: rgb(000,152,216);
-$color_Waterloo: rgb(147,206,186);
+$color_Emirates: rgb(220, 036, 031);
+$color_Buses: rgb(220, 036, 031);
+$color_DLR: rgb(000, 175, 173);
+$color_Overground: rgb(239, 123, 016);
+$color_Bakerloo: rgb(178, 099, 000);
+$color_Central: rgb(220, 036, 031);
+$color_Circle: rgb(255, 211, 041);
+$color_District: rgb(000, 125, 050);
+$color_Northern: rgb(000, 000, 000);
+$color_Metropolitan: rgb(155, 000, 088);
+$color_Jubilee: rgb(161, 165, 167);
+$color_Hammersmith: rgb(244, 169, 190);
+$color_Piccadilly: rgb(000, 025, 168);
+$color_Victoria: rgb(000, 152, 216);
+$color_Waterloo: rgb(147, 206, 186);
 
-$cardBorderRadius: 3px;
-$cardShadow: 0 0 5px 0 rgba(255, 255, 255, .5);
+$cardBorderRadius: 10px;
+// $cardShadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+$cardShadow: none;
 
-.bakerloo {background-color: $color_Bakerloo;}
-.central {background-color: $color_Central;}
-.circle {background-color: $color_Circle;}
-.district {background-color: $color_District;}
-.northern {background-color: $color_Northern;}
-.metropolitan {background-color: $color_Metropolitan;}
-.jubilee {background-color: $color_Jubilee;}
-.hammersmith-city {background-color: $color_Hammersmith;}
-.piccadilly {background-color: $color_Piccadilly;}
-.victoria {background-color: $color_Victoria;}
-.waterloo-city {background-color: $color_Waterloo;}
+.bakerloo {
+  background-color: $color_Bakerloo;
+}
+.central {
+  background-color: $color_Central;
+}
+.circle {
+  background-color: $color_Circle;
+}
+.district {
+  background-color: $color_District;
+}
+.northern {
+  background-color: $color_Northern;
+}
+.metropolitan {
+  background-color: $color_Metropolitan;
+}
+.jubilee {
+  background-color: $color_Jubilee;
+}
+.hammersmith-city {
+  background-color: $color_Hammersmith;
+}
+.piccadilly {
+  background-color: $color_Piccadilly;
+}
+.victoria {
+  background-color: $color_Victoria;
+}
+.waterloo-city {
+  background-color: $color_Waterloo;
+}
 
-
-.AppTitle{
+.AppTitle {
   font-size: 2.5rem;
   font-weight: 600;
 }
@@ -86,40 +110,43 @@ $cardShadow: 0 0 5px 0 rgba(255, 255, 255, .5);
   text-align: right;
 }
 
+.w25 {
+  width: 25%;
+}
+.w50 {
+  width: 50%;
+}
+.w75 {
+  width: 50%;
+}
+.w100 {
+  width: 100%;
+}
 
-.w25 {width: 25%}
-.w50 {width: 50%}
-.w75 {width: 50%}
-.w100 {width: 100%}
-
-.indent1{
+.indent1 {
   margin-left: $spacing;
   margin-right: $spacing;
   // margin-bottom: $spacing/2;
 }
 
-.indent2{
-  margin-left: $spacing*2;
-  margin-right: $spacing*2;
+.indent2 {
+  margin-left: $spacing * 2;
+  margin-right: $spacing * 2;
   // margin-bottom: $spacing/2;
 }
 
-.indent3{
-  margin-left: $spacing*3;
-  margin-right: $spacing*3;
+.indent3 {
+  margin-left: $spacing * 3;
+  margin-right: $spacing * 3;
   // margin-bottom: $spacing/2;
 }
 
-.indent4{
-  margin-left: $spacing*4;
-  margin-right: $spacing*4;
+.indent4 {
+  margin-left: $spacing * 4;
+  margin-right: $spacing * 4;
   // margin-bottom: $spacing/2;
 }
-
 
 .hidden {
-	display: none;
+  display: none;
 }
-
-
-

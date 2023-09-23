@@ -19,7 +19,7 @@ h3 {
 }
 
 h4 {
-  color: $color_FontL3;
+  color: $color_FontL4;
   font-size: 1rem;
   font-weight: 400;
   border: $borderDev solid orange;
@@ -30,8 +30,13 @@ h4 {
   font-weight: 600;
 }
 
+.sub-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .infoLabel {
-  color: $color_FontL3;
+  color: $color_FontL4;
   text-transform: lowercase;
   font-size: 0.8rem;
   font-weight: 400;
@@ -44,7 +49,8 @@ h4 {
 }
 
 .age {
-  color: $color_FontL3;
+  margin-top: $spacing/8;
+  color: $color_FontL4;
   text-transform: lowercase;
   font-size: 0.7rem;
   font-weight: 400;

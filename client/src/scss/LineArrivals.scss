@@ -5,4 +5,10 @@
   border: $borderDev solid red;
   width: 100%;
   max-width: 450px;
+  .LineArrivalHeader {
+    transition: all 0.15s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }

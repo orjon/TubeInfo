@@ -1,18 +1,28 @@
 @import 'Variables';
 
-.Nav{
+.Nav {
   display: flex;
   flex-direction: row;
 
-  a {
+  .AppTitle {
     color: white;
-    flex: 1;
     border: $borderDev solid green;
   }
-  Link{
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  a {
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  Link {
     border: $borderDev solid red;
   }
-  .dateTime{
+  .dateTime {
     display: flex;
     flex-direction: column;
     border: $borderDev solid red;

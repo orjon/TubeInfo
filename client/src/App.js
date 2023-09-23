@@ -1,19 +1,19 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
-import LineStops from './components/LineStops';
-import LineStatuses from './components/LineStatuses';
-import Station from './components/Station';
-import './scss/App.scss';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Nav from './components/layout/Nav'
+import Footer from './components/layout/Footer'
+import LineStops from './components/pages/LineStops'
+import LineStatuses from './components/pages/LineStatuses'
+import Station from './components/pages/Station'
+import './scss/App.scss'
 
 //reduxStore
 //Connect react & redux:
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 //bring in store
-import store from './store';
+import store from './store'
 
-const App =() => {
+const App = () => {
   return (
     <Provider store={store}>
       <div className='App'>
@@ -21,15 +21,15 @@ const App =() => {
           <Nav />
         </header>
         <Switch>
-          <Route exact path='/line/:id' component = { LineStops }/>
-          <Route exact path='/station/:url' component = { Station }/>
-          <Route path='/' component = { LineStatuses }/>
+          <Route exact path='/line/:id' component={LineStops} />
+          <Route exact path='/station/:url' component={Station} />
+          <Route path='/' component={LineStatuses} />
         </Switch>
 
         <Footer />
       </div>
     </Provider>
-  );
+  )
 }
 
-export default App;
+export default App

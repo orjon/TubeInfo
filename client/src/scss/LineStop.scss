@@ -1,27 +1,30 @@
 @import 'Variables';
 
-.lineStop{
+.lineStop {
   justify-self: center;
   display: flex;
+  flex-direction: row-reverse;
   border: $borderDev solid magenta;
   text-align: right;
   max-width: 300px;
+  transition: all 0.15s;
+  &:hover {
+    transform: scale(1.1);
+  }
 
   .lineName {
-    color:$color_FontMain;
+    color: $color_FontMain;
     font-weight: 600;
     margin: $spacing/4;
-    // width: 100%;
   }
-  
-  .linesBlock{
+
+  .linesBlock {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     padding-top: 4px;
     width: 125px;
-    
 
     .lineCell {
       height: $spacing;
@@ -37,11 +40,10 @@
       &.lightColor {
         color: $color_TFL;
       }
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(1.05);
+      }
     }
-
   }
 }
-
-
-
-

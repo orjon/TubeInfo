@@ -1,7 +1,7 @@
-import { initialStations } from './initialStations';
-import { initialStatuses } from './initialStatuses';
-import { initialLineStations } from './initialLineStations';
-import { findStationIndexFromId } from '../Helpers';
+import { initialStations } from './initialStations'
+import { initialStatuses } from './initialStatuses'
+import { initialLineStations } from './initialLineStations'
+import { findStationIndexFromId } from '../Helpers'
 
 // tube STATE
 const initialState = {
@@ -14,26 +14,26 @@ const initialState = {
   stationsExpired: true,
 
   lineStations: initialLineStations,
-  
+
   error: {}
 }
 
-export default function(state = initialState, action){
-  const { type, payload } = action;
+export default function (state = initialState, action) {
+  const { type, payload } = action
 
-  switch(type) {
-    case 'GET_STATUSES': 
+  switch (type) {
+    case 'GET_STATUSES':
       return {
-        ...state, 
+        ...state,
         statuses: payload.statuses,
-        statusesTimeStamp:  payload.statusestimeStamp,
-        statusesExpired: false,
+        statusesTimeStamp: payload.statusestimeStamp,
+        statusesExpired: false
       }
 
     case 'SET_STATUSESEXPIRED':
       return {
-        ...state, 
-        statusesExpired: true,
+        ...state,
+        statusesExpired: true
       }
 
     case 'GET_STATIONS':
@@ -42,16 +42,14 @@ export default function(state = initialState, action){
         stations: payload.stations,
         lineStations: payload.lineStations,
         stationsTimeStamp: payload.stationsTimeStamp,
-        stationsExpired: false,
+        stationsExpired: false
       }
 
     case 'GET_STATIONARRIVALS':
-      //Find index of current station
-      let stations = state.stations
-      let stationIndex = findStationIndexFromId(payload.stationId)
-      //get entrie station data
-      let station = stations[stationIndex]
-      
+      const stations = [...state.stations]
+      const stationIndex = findStationIndexFromId(stations, payload.stationId)
+      const station = stations[stationIndex]
+
       station.arrivals = payload.arrivals
       station.arrivalsTimeStamp = payload.arrivalsTimeStamp
       stations[stationIndex] = station
@@ -61,15 +59,14 @@ export default function(state = initialState, action){
         stations: stations
       }
 
-
     case 'STATUS_ERROR':
       return {
         ...state,
         error: payload,
         statusesExpired: false
       }
-      
+
     default:
-      return state;
+      return state
   }
 }
