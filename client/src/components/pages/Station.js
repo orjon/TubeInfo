@@ -115,26 +115,15 @@ const Station = ({
 
     // location = formatLocation(station.lat, station.lng)
 
-    if (station.arrivals) {
-      // Loops through each line served by station
-      lineArrivals = station.lines.map((line) => (
-        <LineArrivals
-          key={line}
-          line={findLine(line)}
-          stationArrivals={station.arrivals}
-          statusesTimeStamp={statusesTimeStamp}
-        />
-      ))
-    } else {
-      lineArrivals = station.lines.map((line) => (
-        <LineArrivals
-          key={line}
-          line={findLine(line)}
-          stationArrivals={[]}
-          statusesTimeStamp={statusesTimeStamp}
-        />
-      ))
-    }
+    // Loops through each line served by station
+    lineArrivals = station.lines.map((line) => (
+      <LineArrivals
+        key={line}
+        line={findLine(line)}
+        stationArrivals={station.arrivals}
+        statusesTimeStamp={statusesTimeStamp}
+      />
+    ))
   }
 
   return (
