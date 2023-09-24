@@ -1,57 +1,77 @@
-function logApiStationsRequest(){
-  stats.apiStationsRequests++
-  tallyRequests()
-  showApiStats()
+const stats = {
+  serverStart: 0,
+  appRequests: 0,
+  appStationsRequests: 0,
+  appStatusesRequests: 0,
+  appArrivalsRequests: 0,
+  tflRequests: 0,
+  tflStationsRequests: 0,
+  tflStatusesRequests: 0,
+  tflArrivalsRequests: 0
 }
-function logApiStatusesRequest(){
-  stats.apiStatusesRequests++
+
+function logAppStationsRequest() {
+  stats.appStationsRequests++
   tallyRequests()
-  showApiStats()
+  showAppStats()
 }
-function logApiArrivalsRequest(){
-  stats.apiArrivalsRequests++
+function logAppStatusesRequest() {
+  stats.appStatusesRequests++
   tallyRequests()
-  showApiStats()
+  showAppStats()
 }
-function logTflStationsRequest(){
+function logAppArrivalsRequest() {
+  stats.appArrivalsRequests++
+  tallyRequests()
+  showAppStats()
+}
+function logTflStationsRequest() {
   stats.tflStationsRequests++
   tallyRequests()
   showTflStats()
 }
-function logTflStatusesRequest(){
+function logTflStatusesRequest() {
   stats.tflStatusesRequests++
   tallyRequests()
   showTflStats()
-
 }
-function logTflArrivalsRequest(){
+function logTflArrivalsRequest() {
   stats.tflArrivalsRequests++
   tallyRequests()
   showTflStats()
-
 }
 
-function tallyRequests(){
-  stats.apiRequests = (stats.apiStationsRequests + stats.apiStatusesRequests + stats.apiArrivalsRequests) 
-  stats.tflRequests = (stats.tflStationsRequests +stats.tflStatusesRequests + stats.tflArrivalsRequests) 
+function tallyRequests() {
+  stats.appRequests =
+    stats.appStationsRequests +
+    stats.appStatusesRequests +
+    stats.appArrivalsRequests
+  stats.tflRequests =
+    stats.tflStationsRequests +
+    stats.tflStatusesRequests +
+    stats.tflArrivalsRequests
 }
 
-function showApiStats(){
-  console.log('API requests:',stats.apiRequests,'['+stats.apiStationsRequests+'/'+stats.apiStatusesRequests+'/'+stats.apiArrivalsRequests+']')
+function showAppStats() {
+  console.log(
+    `APP requests: ${stats.appRequests} [ Stations: ${stats.appStationsRequests} | Statuses: ${stats.appStatusesRequests} | Arrivals: ${stats.appArrivalsRequests} ]`
+  )
 }
 
-function showTflStats(){
-  console.log('TFL requests:',stats.tflRequests,'['+stats.tflStationsRequests+'/'+stats.tflStatusesRequests+'/'+stats.tflArrivalsRequests+']')
+function showTflStats() {
+  console.log(
+    `TFL requests: ${stats.tflRequests} [ Stations: ${stats.tflStationsRequests} | Statuses: ${stats.tflStatusesRequests} | Arrivals: ${stats.tflArrivalsRequests} ]`
+  )
 }
 
 module.exports = {
-  logApiStationsRequest,
-  logApiStatusesRequest,
-  logApiArrivalsRequest,
+  stats,
+  logAppStationsRequest,
+  logAppStatusesRequest,
+  logAppArrivalsRequest,
   logTflStationsRequest,
   logTflStatusesRequest,
   logTflArrivalsRequest,
-  showApiStats,
+  showAppStats,
   showTflStats
 }
-

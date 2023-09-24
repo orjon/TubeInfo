@@ -97,7 +97,7 @@ function filterStationData(station, lineId) {
 //@access Public
 router.get('/', async (req, res) => {
   let now = moment()
-  statistics.logApiStationsRequest()
+  statistics.logAppStationsRequest()
 
   // if timeStamp is set, calculate age.
   if (serverState.stationsTimeStamp) {

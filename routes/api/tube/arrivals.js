@@ -16,7 +16,7 @@ router.get('/:stationId', async (req, res) => {
   )
   let station = serverState.stations[stationIndex]
   let now = moment()
-  statistics.logApiArrivalsRequest()
+  statistics.logAppArrivalsRequest()
 
   // if timeStamp is set, calculate age.
   if (station.arrivalsTimeStamp) {

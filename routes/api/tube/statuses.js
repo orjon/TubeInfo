@@ -13,7 +13,7 @@ TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`
 
 router.get('/', async (req, res) => {
   let now = moment()
-  statistics.logApiStatusesRequest()
+  statistics.logAppStatusesRequest()
 
   // if timeStamp is set, calculate age.
   if (serverState.statusesTimeStamp) {
