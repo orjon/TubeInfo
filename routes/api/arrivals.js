@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const { TFL_API_ID, TFL_APP_KEY } = require('../../../config')
+const { TFL_API_ID, TFL_APP_KEY } = require('../../config')
 const moment = require('moment')
-const statistics = require('../../../statistics/serverStatistics')
+const statistics = require('../../statistics/serverStatistics')
 
 TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`
 

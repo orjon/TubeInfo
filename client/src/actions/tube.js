@@ -4,7 +4,7 @@ import axios from 'axios'
 export const getStations = () => async (dispatch) => {
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/tube/stations`, {
+    let response = await axios.get(`/api/stations`, {
       headers: { Accept: 'application/json' }
     })
 
@@ -31,7 +31,7 @@ export const getStations = () => async (dispatch) => {
 export const getStationArrivals = (stationId) => async (dispatch) => {
   try {
     //Get arrivals at station from server
-    let response = await axios.get(`/api/tube/arrivals/${stationId}`, {
+    let response = await axios.get(`/api/arrivals/${stationId}`, {
       headers: { Accept: 'application/json' }
     })
 
@@ -52,7 +52,7 @@ export const getStationArrivals = (stationId) => async (dispatch) => {
 export const getStatuses = () => async (dispatch) => {
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/tube/statuses`, {
+    let response = await axios.get(`/api/statuses`, {
       headers: { Accept: 'application/json' }
     })
 

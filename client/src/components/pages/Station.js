@@ -127,7 +127,7 @@ const Station = ({
   }
 
   return (
-    <section>
+    <section className='station'>
       <div className='card'>
         <div className='row cardTitle'>
           {station ? (

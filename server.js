@@ -4,9 +4,9 @@ const moment = require('moment')
 const path = require('path')
 
 const { stats } = require('./statistics/serverStatistics')
-const routeTubeStatuses = require('./routes/api/tube/statuses')
-const routeTubeStations = require('./routes/api/tube/stations')
-const routeTubeArrivals = require('./routes/api/tube/arrivals')
+const routeTubeStatuses = require('./routes/api/statuses')
+const routeTubeStations = require('./routes/api/stations')
+const routeTubeArrivals = require('./routes/api/arrivals')
 
 const app = express()
 
@@ -21,17 +21,17 @@ global.serverState = {
 }
 
 //define routes
-app.use('/api/tube/statuses', routeTubeStatuses)
-app.use('/api/tube/stations', routeTubeStations)
-app.use('/api/tube/arrivals', routeTubeArrivals)
+app.use('/api/statuses', routeTubeStatuses)
+app.use('/api/stations', routeTubeStations)
+app.use('/api/arrivals', routeTubeArrivals)
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   //set static folder
-  app.use(express.static('client/build'))
+  app.use(express.static('tuber'))
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'client', 'index.html'))
   })
 }
 
