@@ -30,25 +30,16 @@ global.serverState = {
 }
 
 //define routes
-app.use('/api/statuses', routeTubeStatuses)
-app.use('/api/stations', routeTubeStations)
-app.use('/api/arrivals', routeTubeArrivals)
+app.use('/tube-api/statuses', routeTubeStatuses)
+app.use('/tube-api/stations', routeTubeStations)
+app.use('/tube-api/arrivals', routeTubeArrivals)
 
-// // Serve static assets in production
-// if (process.env.NODE_ENV === 'production') {
-//   //set static folder
-//   app.use(express.static('tube-info/client'))
+app.use(express.static(path.join(__dirname, '../tube-client')))
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'tube-info', 'client', 'index.html'))
-//   })
-// }
-
-// deployed
-// app.use(express.static(path.join(__dirname, '../tube-info', 'client')))
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../tube-info', 'client', 'index.html'))
-// })
+app.get('*', (req, res) => {
+  console.log(req.url)
+  res.sendFile(path.join(__dirname, '../tube-client', 'index.html'))
+})
 
 const PORT = process.env.PORT || 5001
 console.log('Server Start: ', moment(stats.serverStart).format('HH:mm:ss'))

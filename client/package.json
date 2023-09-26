@@ -1,8 +1,8 @@
 {
-  "name": "client",
+  "name": "tube-info-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/tube-info/client/",
+  "homepage": "/tube-client/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

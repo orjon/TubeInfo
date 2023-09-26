@@ -1,10 +1,11 @@
 import axios from 'axios'
+axios.defaults.baseURL = '/tube-api'
 
 // --------------------------------------------------------------
 export const getStations = () => async (dispatch) => {
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/stations`, {
+    let response = await axios.get(`/stations`, {
       headers: { Accept: 'application/json' }
     })
 
@@ -31,7 +32,7 @@ export const getStations = () => async (dispatch) => {
 export const getStationArrivals = (stationId) => async (dispatch) => {
   try {
     //Get arrivals at station from server
-    let response = await axios.get(`/api/arrivals/${stationId}`, {
+    let response = await axios.get(`/arrivals/${stationId}`, {
       headers: { Accept: 'application/json' }
     })
 
@@ -52,7 +53,7 @@ export const getStationArrivals = (stationId) => async (dispatch) => {
 export const getStatuses = () => async (dispatch) => {
   try {
     // Get statuses from server
-    let response = await axios.get(`/api/statuses`, {
+    let response = await axios.get(`/statuses`, {
       headers: { Accept: 'application/json' }
     })
 

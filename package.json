@@ -1,15 +1,13 @@
 {
-  "name": "thetube",
+  "name": "tube-info-api",
   "version": "1.0.0",
-  "description": "tube user app",
-  "main": "server.js",
+  "description": "API for serving data Tube Info App. This API gets it's data from TfL Open Data",
+  "main": "tube-api.js",
   "scripts": {
     "start": "node server",
-    "build": "react-scripts build",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "orjon.com",
   "license": "MIT",
