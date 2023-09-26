@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/tuber/static/css/main.01364583.chunk.css",
-    "main.js": "/tuber/static/js/main.e73974f0.chunk.js",
-    "main.js.map": "/tuber/static/js/main.e73974f0.chunk.js.map",
-    "runtime-main.js": "/tuber/static/js/runtime-main.375acfea.js",
-    "runtime-main.js.map": "/tuber/static/js/runtime-main.375acfea.js.map",
-    "static/js/2.2bfa9172.chunk.js": "/tuber/static/js/2.2bfa9172.chunk.js",
-    "static/js/2.2bfa9172.chunk.js.map": "/tuber/static/js/2.2bfa9172.chunk.js.map",
-    "index.html": "/tuber/index.html",
-    "precache-manifest.30a8f1d883effecbb00d382c5ccad683.js": "/tuber/precache-manifest.30a8f1d883effecbb00d382c5ccad683.js",
-    "service-worker.js": "/tuber/service-worker.js",
-    "static/css/main.01364583.chunk.css.map": "/tuber/static/css/main.01364583.chunk.css.map",
-    "static/js/2.2bfa9172.chunk.js.LICENSE.txt": "/tuber/static/js/2.2bfa9172.chunk.js.LICENSE.txt"
+    "main.css": "/tube-info/client/static/css/main.eab21606.chunk.css",
+    "main.js": "/tube-info/client/static/js/main.d0beeaac.chunk.js",
+    "main.js.map": "/tube-info/client/static/js/main.d0beeaac.chunk.js.map",
+    "runtime-main.js": "/tube-info/client/static/js/runtime-main.c9978dcd.js",
+    "runtime-main.js.map": "/tube-info/client/static/js/runtime-main.c9978dcd.js.map",
+    "static/js/2.2bfa9172.chunk.js": "/tube-info/client/static/js/2.2bfa9172.chunk.js",
+    "static/js/2.2bfa9172.chunk.js.map": "/tube-info/client/static/js/2.2bfa9172.chunk.js.map",
+    "index.html": "/tube-info/client/index.html",
+    "precache-manifest.0f66439c59ada1c38f7ffa403bd9228d.js": "/tube-info/client/precache-manifest.0f66439c59ada1c38f7ffa403bd9228d.js",
+    "service-worker.js": "/tube-info/client/service-worker.js",
+    "static/css/main.eab21606.chunk.css.map": "/tube-info/client/static/css/main.eab21606.chunk.css.map",
+    "static/js/2.2bfa9172.chunk.js.LICENSE.txt": "/tube-info/client/static/js/2.2bfa9172.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.375acfea.js",
+    "static/js/runtime-main.c9978dcd.js",
     "static/js/2.2bfa9172.chunk.js",
-    "static/css/main.01364583.chunk.css",
-    "static/js/main.e73974f0.chunk.js"
+    "static/css/main.eab21606.chunk.css",
+    "static/js/main.d0beeaac.chunk.js"
   ]
 }

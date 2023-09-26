@@ -1,15 +1,3 @@
-const stats = {
-  serverStart: 0,
-  appRequests: 0,
-  appStationsRequests: 0,
-  appStatusesRequests: 0,
-  appArrivalsRequests: 0,
-  tflRequests: 0,
-  tflStationsRequests: 0,
-  tflStatusesRequests: 0,
-  tflArrivalsRequests: 0
-}
-
 function logAppStationsRequest() {
   stats.appStationsRequests++
   tallyRequests()
@@ -65,7 +53,6 @@ function showTflStats() {
 }
 
 module.exports = {
-  stats,
   logAppStationsRequest,
   logAppStatusesRequest,
   logAppArrivalsRequest,
