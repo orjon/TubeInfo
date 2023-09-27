@@ -30,15 +30,15 @@ global.serverState = {
 }
 
 //define routes
-app.use('/tube-api/statuses', routeTubeStatuses)
-app.use('/tube-api/stations', routeTubeStations)
-app.use('/tube-api/arrivals', routeTubeArrivals)
+app.use('/tubeapi/statuses', routeTubeStatuses)
+app.use('/tubeapi/stations', routeTubeStations)
+app.use('/tubeapi/arrivals', routeTubeArrivals)
 
-app.use(express.static(path.join(__dirname, '../tube-client')))
+app.use(express.static(path.join(__dirname, '../tubeclient')))
 
 app.get('*', (req, res) => {
   console.log(req.url)
-  res.sendFile(path.join(__dirname, '../tube-client', 'index.html'))
+  res.sendFile(path.join(__dirname, '../tubeclient', 'index.html'))
 })
 
 const PORT = process.env.PORT || 5001

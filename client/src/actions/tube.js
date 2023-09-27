@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = '/tube-api'
+axios.defaults.baseURL = '/tubeapi'
 
 // --------------------------------------------------------------
 export const getStations = () => async (dispatch) => {

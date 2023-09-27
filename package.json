@@ -2,7 +2,7 @@
   "name": "tube-info-api",
   "version": "1.0.0",
   "description": "API for serving data Tube Info App. This API gets it's data from TfL Open Data",
-  "main": "tube-api.js",
+  "main": "tubeapi.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
