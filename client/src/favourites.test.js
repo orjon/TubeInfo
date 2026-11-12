@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toggleFavourite, isFavourite, parseFavourites, groupByStation } from './favourites'
+import { toggleFavourite, isFavourite, parseFavourites, groupByLine } from './favourites'
 
 const kx = { stationId: 'KXX', lineId: 'northern', direction: 'Northbound' }
 
@@ -55,26 +55,26 @@ describe('parseFavourites', () => {
   })
 })
 
-describe('groupByStation', () => {
-  it('makes one group per station, in the order each station was first starred', () => {
+describe('groupByLine', () => {
+  it('makes one group per line, holding that line\'s starred directions at any station', () => {
     const list = [
+      { stationId: 'BBB', lineId: 'hammersmith-city', direction: 'Eastbound' },
       kx,
-      { stationId: 'WPL', lineId: 'district', direction: 'Eastbound' },
-      { stationId: 'KXX', lineId: 'victoria', direction: 'Southbound' }
+      { stationId: 'BST', lineId: 'hammersmith-city', direction: 'Westbound' }
     ]
-    expect(groupByStation(list)).toEqual([
+    expect(groupByLine(list)).toEqual([
       {
-        stationId: 'KXX',
+        lineId: 'hammersmith-city',
         items: [
-          { lineId: 'northern', direction: 'Northbound' },
-          { lineId: 'victoria', direction: 'Southbound' }
+          { stationId: 'BBB', direction: 'Eastbound' },
+          { stationId: 'BST', direction: 'Westbound' }
         ]
       },
-      { stationId: 'WPL', items: [{ lineId: 'district', direction: 'Eastbound' }] }
+      { lineId: 'northern', items: [{ stationId: 'KXX', direction: 'Northbound' }] }
     ])
   })
 
   it('is empty for no favourites', () => {
-    expect(groupByStation([])).toEqual([])
+    expect(groupByLine([])).toEqual([])
   })
 })

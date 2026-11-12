@@ -28,16 +28,9 @@
 }
 
 .favourites {
-  .pageTitle {
-    color: white;
-    margin: 0 0 $spacing / 2;
-  }
   .emptyFavourites {
     padding: $spacing;
     line-height: 1.5;
-  }
-  .card + .card {
-    margin-top: $spacing;
   }
   .stationLink {
     color: inherit;

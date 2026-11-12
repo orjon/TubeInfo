@@ -2,12 +2,21 @@ import DirectionArrival from './DirectionArrival'
 import FavouriteStar from './FavouriteStar'
 
 // `favourite` ({ stationId, lineId, direction }) and `label` are optional; with them the
-// direction gets a star in front of it.
-const DirectionArrivals = ({ direction, platform, arrivals, favourite, label }) => (
+// direction gets a star after it. `heading` replaces the direction as the title (the
+// favourites page uses "Station, Direction"); `emptyText` is shown when no trains are due.
+const DirectionArrivals = ({
+  direction,
+  platform,
+  arrivals,
+  favourite,
+  label,
+  heading,
+  emptyText = 'No trains due'
+}) => (
   <>
     <div className='row titleRow'>
       <div className='sub-title'>
-        {direction || 'Other trains'}
+        {heading ?? (direction || 'Other trains')}
         {favourite && direction && <FavouriteStar favourite={favourite} label={label} />}
       </div>
       <div className='sub-title end'>{platform ? `Platform ${platform}` : ''}</div>
@@ -18,7 +27,7 @@ const DirectionArrivals = ({ direction, platform, arrivals, favourite, label }) 
     </div>
     {arrivals.length === 0 ? (
       <div className='row data'>
-        <div>No trains due</div>
+        <div>{emptyText}</div>
       </div>
     ) : (
       arrivals.map((arrival, i) => (

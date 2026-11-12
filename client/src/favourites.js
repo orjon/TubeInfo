@@ -41,17 +41,17 @@ export function parseFavourites(text) {
   }
 }
 
-// The favourites page shows one card per station, in the order each station was first
-// starred, with that station's starred directions inside it.
-export function groupByStation(list) {
+// The favourites page has one block per line, each holding that line's starred
+// directions (at whatever stations), in the order they were starred.
+export function groupByLine(list) {
   const groups = []
   for (const f of list) {
-    let group = groups.find((g) => g.stationId === f.stationId)
+    let group = groups.find((g) => g.lineId === f.lineId)
     if (!group) {
-      group = { stationId: f.stationId, items: [] }
+      group = { lineId: f.lineId, items: [] }
       groups.push(group)
     }
-    group.items.push({ lineId: f.lineId, direction: f.direction })
+    group.items.push({ stationId: f.stationId, direction: f.direction })
   }
   return groups
 }

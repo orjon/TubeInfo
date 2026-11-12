@@ -11,6 +11,8 @@ import { setFavourites } from '../favouritesStore'
 vi.mock('./layout/Map', () => ({ default: () => <div>map</div> }))
 
 const KX = { id: '940GZZLUKSX', url: 'kings-cross-st.-pancras', name: "King's Cross St. Pancras" }
+const BBB = { id: '940GZZLUBBB', name: 'Bromley-by-Bow' }
+const BST = { id: '940GZZLUBST', name: 'Baker Street' }
 const soon = (minutes) => new Date(Date.now() + minutes * 60000).toISOString()
 const arrival = (lineId, platformName, towards, minutes) => ({
   lineName: lineId, lineId, platformName, towards, destinationName: towards, expectedArrival: soon(minutes)
@@ -22,7 +24,9 @@ const ARRIVALS = [
   arrival('northern', 'Northbound - Platform 7', 'High Barnet via Bank', 6),
   arrival('northern', 'Southbound - Platform 8', 'Morden via Bank', 4),
   arrival('victoria', 'Southbound - Platform 4', 'Brixton', 2),
-  arrival('victoria', 'Northbound - Platform 3', 'Walthamstow Central', 5)
+  arrival('victoria', 'Northbound - Platform 3', 'Walthamstow Central', 5),
+  arrival('hammersmith-city', 'Eastbound - Platform 2', 'Barking', 2),
+  arrival('hammersmith-city', 'Westbound - Platform 1', 'Hammersmith', 3)
 ]
 
 function renderAt(path) {
@@ -98,17 +102,19 @@ describe('the star in front of a direction on a station page', () => {
 })
 
 describe('the favourites page', () => {
-  it('says how to add one when there are none', () => {
+  it('is one card titled Favourites, and says how to add one when there are none', () => {
     renderAt('/favourites')
+    expect(screen.getAllByRole('heading', { level: 1 }).map((h) => h.textContent)).toEqual(['Favourites'])
     expect(screen.getByText(/No favourites yet/)).toBeTruthy()
   })
 
-  it("shows the station, the line and that direction's trains for a starred direction", async () => {
+  it("shows the line, the station and that direction's trains for a starred direction", async () => {
     setFavourites([{ stationId: KX.id, lineId: 'northern', direction: 'Northbound' }])
     renderAt('/favourites')
 
-    expect(await screen.findByText("King's Cross St. Pancras")).toBeTruthy()
-    expect(screen.getByText('Northern')).toBeTruthy()
+    expect(await screen.findByText('Northern')).toBeTruthy() // the line is the heading
+    expect(screen.getByRole('link', { name: "King's Cross St. Pancras" })).toBeTruthy()
+    expect(screen.getByText(/, Northbound/)).toBeTruthy()
     expect(await screen.findByText('Edgware via Bank')).toBeTruthy()
     expect(screen.getByText('High Barnet via Bank')).toBeTruthy()
     // only the starred direction: not Southbound, not the Victoria line
@@ -116,16 +122,39 @@ describe('the favourites page', () => {
     expect(screen.queryByText('Brixton')).toBeNull()
   })
 
-  it('keeps several starred directions under one station card', async () => {
-    setFavourites([
-      { stationId: KX.id, lineId: 'northern', direction: 'Northbound' },
-      { stationId: KX.id, lineId: 'victoria', direction: 'Southbound' }
-    ])
+  it('is still only one h1, with the station name as a link and not a heading of its own', async () => {
+    setFavourites([{ stationId: KX.id, lineId: 'northern', direction: 'Northbound' }])
     renderAt('/favourites')
     await screen.findByText('Edgware via Bank')
-    expect(screen.getAllByText("King's Cross St. Pancras")).toHaveLength(1)
-    expect(await screen.findByText('Brixton')).toBeTruthy()
-    expect(screen.getByText('Victoria')).toBeTruthy()
+    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
+  })
+
+  it('groups by line: two stations on one line sit under one line heading', async () => {
+    setFavourites([
+      { stationId: BBB.id, lineId: 'hammersmith-city', direction: 'Eastbound' },
+      { stationId: BST.id, lineId: 'hammersmith-city', direction: 'Westbound' }
+    ])
+    renderAt('/favourites')
+
+    expect(await screen.findAllByText('Hammersmith & City')).toHaveLength(1) // one heading
+    expect(screen.getByRole('link', { name: BBB.name })).toBeTruthy()
+    expect(screen.getByRole('link', { name: BST.name })).toBeTruthy()
+    expect(screen.getByText(/, Eastbound/)).toBeTruthy()
+    expect(screen.getByText(/, Westbound/)).toBeTruthy()
+    expect(await screen.findByText('Barking')).toBeTruthy() // Eastbound trains
+    expect(screen.getByText('Hammersmith')).toBeTruthy() // Westbound trains
+  })
+
+  it('gives each line its own block, in the home page order', async () => {
+    setFavourites([
+      { stationId: KX.id, lineId: 'victoria', direction: 'Southbound' },
+      { stationId: KX.id, lineId: 'northern', direction: 'Northbound' }
+    ])
+    renderAt('/favourites')
+    await screen.findByText('Brixton')
+    const order = screen.getAllByText(/^(Northern|Victoria)$/).map((e) => e.textContent)
+    expect(order).toEqual(['Northern', 'Victoria']) // Northern is before Victoria on the home page
+    expect(screen.getAllByRole('link', { name: "King's Cross St. Pancras" })).toHaveLength(2)
   })
 
   it('is what you get after starring a direction on the station page', async () => {
@@ -134,7 +163,7 @@ describe('the favourites page', () => {
     first.unmount()
 
     renderAt('/favourites')
-    expect(await screen.findByText("King's Cross St. Pancras")).toBeTruthy()
+    expect(await screen.findByRole('link', { name: "King's Cross St. Pancras" })).toBeTruthy()
     expect(await screen.findByText('Edgware via Bank')).toBeTruthy()
   })
 
@@ -145,10 +174,11 @@ describe('the favourites page', () => {
     await waitFor(() => expect(screen.getByText(/No favourites yet/)).toBeTruthy())
   })
 
-  it('offers to remove a favourite whose station is no longer in the data', () => {
+  it('shows a favourite whose station is no longer in the data, and lets you remove it', () => {
     setFavourites([{ stationId: 'GONE', lineId: 'northern', direction: 'Northbound' }])
     renderAt('/favourites')
-    fireEvent.click(screen.getByRole('button', { name: /Remove from favourites/ }))
+    expect(screen.getByText('Station no longer available')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: /station no longer available/ }))
     expect(screen.getByText(/No favourites yet/)).toBeTruthy()
   })
 
