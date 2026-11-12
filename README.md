@@ -1,4 +1,4 @@
-# SetOff
+# Off You Pop
 ### London train times: live line statuses and arrivals
 
 A React app and a small Express server that collects [Transport for London API](https://api.tfl.gov.uk/) data and shows it through a simple clickable interface. It installs as a PWA.
@@ -42,7 +42,7 @@ bug: when the bug is fixed the test turns red, and you delete the `.fails`.
 
 ## Deployment
 
-Pushing to `main` deploys to **orjon.com/setoff** (GitHub Action in `.github/workflows/deploy.yml`):
+Pushing to `main` deploys to **orjon.com/setoff** (the web address, folder and process keep the old working name `setoff`) (GitHub Action in `.github/workflows/deploy.yml`):
 build, smoke test, copy to the droplet, restart, smoke test the live site.
 nginx is configured in the [droplet-nginx](https://github.com/orjon/droplet-nginx) repo.
 
