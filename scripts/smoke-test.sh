@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Quick check that a running SetOff answers sensibly.
+# Quick check that a running Off You Pop answers sensibly.
 #   scripts/smoke-test.sh http://localhost:5006/setoff          (local or CI)
 #   scripts/smoke-test.sh https://orjon.com/setoff --tfl        (live; also asks TfL)
 # Waits up to 30 seconds for the server to come up, then checks each address.

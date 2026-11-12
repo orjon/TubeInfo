@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '..', '')
   const base = (env.BASE_PATH || '/setoff').replace(/\/$/, '') + '/'
-  const name = env.VITE_APP_NAME || 'SetOff'
+  const name = env.VITE_APP_NAME || 'Off You Pop'
   const shortName = env.VITE_APP_SHORT_NAME || name
   const tagline = env.VITE_APP_TAGLINE || 'London train times'
   const apiTarget = `http://localhost:${env.PORT || 5005}`
