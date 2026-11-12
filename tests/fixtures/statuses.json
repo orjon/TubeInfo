@@ -1,0 +1,30 @@
+[
+  {
+    "id": "bakerloo",
+    "name": "Bakerloo",
+    "lineStatuses": [
+      {
+        "statusSeverityDescription": "Good Service"
+      }
+    ]
+  },
+  {
+    "id": "central",
+    "name": "Central",
+    "lineStatuses": [
+      {
+        "statusSeverityDescription": "Minor Delays",
+        "reason": "CENTRAL LINE: Minor delays due to train cancellations. GOOD SERVICE on the rest of the line."
+      }
+    ]
+  },
+  {
+    "id": "victoria",
+    "name": "Victoria",
+    "lineStatuses": [
+      {
+        "statusSeverityDescription": "Good Service"
+      }
+    ]
+  }
+]

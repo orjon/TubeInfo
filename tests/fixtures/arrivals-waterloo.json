@@ -1,0 +1,50 @@
+[
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Southbound - Platform 4",
+    "destinationName": "Elephant & Castle Underground Station",
+    "towards": "Elephant and Castle",
+    "expectedArrival": "2026-11-12T15:16:48Z"
+  },
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Southbound - Platform 4",
+    "destinationName": "Elephant & Castle Underground Station",
+    "towards": "Elephant and Castle",
+    "expectedArrival": "2026-11-12T15:03:47Z"
+  },
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Southbound - Platform 4",
+    "destinationName": "Elephant & Castle Underground Station",
+    "towards": "Elephant and Castle",
+    "expectedArrival": "2026-11-12T14:59:47Z"
+  },
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Southbound - Platform 4",
+    "destinationName": "Elephant & Castle Underground Station",
+    "towards": "Elephant and Castle",
+    "expectedArrival": "2026-11-12T15:06:47Z"
+  },
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Southbound - Platform 4",
+    "destinationName": "Elephant & Castle Underground Station",
+    "towards": "Elephant and Castle",
+    "expectedArrival": "2026-11-12T15:08:47Z"
+  },
+  {
+    "lineName": "Bakerloo",
+    "lineId": "bakerloo",
+    "platformName": "Northbound - Platform 3",
+    "destinationName": "Queen's Park Underground Station",
+    "towards": "Queen's Park",
+    "expectedArrival": "2026-11-12T14:52:17Z"
+  }
+]

@@ -1,0 +1,167 @@
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { createRequire } from 'node:module'
+import request from 'supertest'
+import { stubTfl } from './helpers/tflStub'
+import statusesFixture from './fixtures/statuses.json'
+import stoppointsFixture from './fixtures/stoppoints-victoria.json'
+import arrivalsFixture from './fixtures/arrivals-waterloo.json'
+
+// Must be set before the server loads its config
+vi.hoisted(() => {
+  process.env.TFL_APP_KEY = 'SECRET-KEY-VALUE'
+})
+
+const require = createRequire(import.meta.url)
+const { app, resetState } = require('../app')
+
+const WATERLOO = '940GZZLUWLO' // a real station id in the bundled data
+const STATUSES = '/line/mode/tube/status'
+const ARRIVALS = `/stoppoint/${WATERLOO}/arrivals`
+const STOPPOINTS = '/^\\/line\\/.+\\/stoppoints/'
+
+beforeEach(() => {
+  resetState()
+  vi.spyOn(console, 'log').mockImplementation(() => {}) // the server logs every request
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+})
+afterEach(() => {
+  vi.unstubAllGlobals()
+  vi.restoreAllMocks()
+})
+
+describe('health and unknown addresses', () => {
+  it('answers the health check', async () => {
+    const res = await request(app).get('/setoff/healthz')
+    expect(res.status).toBe(200)
+    expect(res.body.ok).toBe(true)
+  })
+
+  it('gives a JSON 404 for an unknown API path', async () => {
+    const res = await request(app).get('/setoff/api/nope')
+    expect(res.status).toBe(404)
+    expect(res.body.error).toBeDefined()
+  })
+
+  it('gives a 404, not the web page, for a missing file', async () => {
+    const res = await request(app).get('/setoff/old-bundle.js')
+    expect(res.status).toBe(404)
+  })
+})
+
+describe('GET /api/statuses', () => {
+  it('returns each line with its status', async () => {
+    stubTfl({ [STATUSES]: statusesFixture })
+    const res = await request(app).get('/setoff/api/statuses')
+    expect(res.status).toBe(200)
+    expect(res.body.statuses.map((s) => s.id)).toEqual(['bakerloo', 'central', 'victoria'])
+    expect(res.body.statuses[0]).toMatchObject({ name: 'Bakerloo', status: expect.any(String) })
+    expect(res.body.statusesTimeStamp).toBeDefined()
+  })
+
+  it('removes the "LINE NAME:" prefix from a disruption reason', async () => {
+    stubTfl({ [STATUSES]: statusesFixture })
+    const res = await request(app).get('/setoff/api/statuses')
+    const central = res.body.statuses.find((s) => s.id === 'central')
+    expect(central.status).toBe('Minor Delays')
+    expect(central.reason).toBe(
+      'Minor delays due to train cancellations. GOOD SERVICE on the rest of the line.'
+    )
+  })
+
+  it('asks TfL only once for requests within 30 seconds', async () => {
+    const { calls } = stubTfl({ [STATUSES]: statusesFixture })
+    await request(app).get('/setoff/api/statuses')
+    await request(app).get('/setoff/api/statuses')
+    expect(calls).toHaveLength(1)
+  })
+
+  it('sends the key in a header and never in the URL', async () => {
+    const { calls } = stubTfl({ [STATUSES]: statusesFixture })
+    await request(app).get('/setoff/api/statuses')
+    expect(calls[0]).not.toMatch(/app_key|app_id/)
+    expect(fetch.mock.calls[0][1].headers.app_key).toBe('SECRET-KEY-VALUE')
+  })
+
+  it('answers 502 straight away when TfL fails and there is nothing saved', async () => {
+    stubTfl({}) // every call 404s
+    const res = await request(app).get('/setoff/api/statuses')
+    expect(res.status).toBe(502)
+    expect(res.body.error).toBeDefined()
+  })
+
+  it('serves the last good statuses when TfL fails later', async () => {
+    stubTfl({ [STATUSES]: statusesFixture })
+    const first = await request(app).get('/setoff/api/statuses')
+
+    global.serverState.statusesTimeStamp = '2000-01-01T00:00:00Z' // make the cache stale
+    stubTfl({}) // TfL is now down
+    const second = await request(app).get('/setoff/api/statuses')
+
+    expect(second.status).toBe(200)
+    expect(second.body.statuses).toEqual(first.body.statuses)
+  })
+
+  it('does not put the key in the log when TfL fails', async () => {
+    stubTfl({})
+    await request(app).get('/setoff/api/statuses')
+    expect(console.error).toHaveBeenCalled() // the failure was logged...
+    expect(JSON.stringify(console.error.mock.calls)).not.toContain('SECRET-KEY-VALUE') // ...without the key
+  })
+})
+
+describe('GET /api/arrivals/:stationId', () => {
+  it('returns 404 for an unknown station', async () => {
+    const { calls } = stubTfl({})
+    const res = await request(app).get('/setoff/api/arrivals/not-a-station')
+    expect(res.status).toBe(404)
+    expect(calls).toHaveLength(0) // and does not bother TfL
+  })
+
+  it('returns parsed arrivals, soonest first', async () => {
+    stubTfl({ [ARRIVALS]: arrivalsFixture })
+    const res = await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(res.status).toBe(200)
+    expect(res.body.stationId).toBe(WATERLOO)
+    const times = res.body.arrivals.map((a) => new Date(a.expected).getTime())
+    expect(times).toEqual([...times].sort((a, b) => a - b))
+    expect(res.body.arrivals[0]).toMatchObject({ direction: expect.any(String), platform: expect.any(String) })
+  })
+
+  it('answers 502 when TfL fails', async () => {
+    stubTfl({})
+    const res = await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(res.status).toBe(502)
+  })
+})
+
+describe('GET /api/stations', () => {
+  it('works on a fresh server before any statuses have been fetched', async () => {
+    stubTfl({ [STOPPOINTS]: stoppointsFixture })
+    const res = await request(app).get('/setoff/api/stations')
+    expect(res.status).toBe(200)
+    expect(res.body.lineStations.length).toBeGreaterThan(0)
+    expect(res.body.stations.length).toBeGreaterThan(0)
+  })
+
+  it('merges a station served by several lines into one record', async () => {
+    stubTfl({ [STOPPOINTS]: stoppointsFixture })
+    const res = await request(app).get('/setoff/api/stations')
+    const kings = res.body.stations.filter((s) => s.id === stoppointsFixture[1].id)
+    expect(kings).toHaveLength(1)
+    expect(kings[0].lines.length).toBeGreaterThan(1)
+  })
+
+  it('keeps the stations it already has if any line fails', async () => {
+    const before = structuredClone(global.serverState.stations)
+    // every line answers except central, which TfL fails on
+    vi.stubGlobal('fetch', vi.fn(async (url) =>
+      String(url).includes('/line/central/')
+        ? new Response('{}', { status: 500 })
+        : new Response(JSON.stringify(stoppointsFixture), { status: 200 })
+    ))
+    const res = await request(app).get('/setoff/api/stations')
+    expect(res.status).toBe(200)
+    expect(res.body.stations).toEqual(before)
+    expect(global.serverState.stationsTimeStamp).toBeUndefined()
+  })
+})

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "940GZZLUBXN",
+    "commonName": "Brixton Underground Station",
+    "lat": 51.462618,
+    "lon": -0.114888,
+    "additionalProperties": [
+      {
+        "key": "PhoneNo",
+        "value": "0845 330 9880"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "0"
+      },
+      {
+        "key": "Escalators",
+        "value": "2"
+      },
+      {
+        "key": "Zone",
+        "value": "2"
+      },
+      {
+        "key": "Car park",
+        "value": "no"
+      },
+      {
+        "key": "Toilets",
+        "value": "no"
+      },
+      {
+        "key": "Address",
+        "value": "Brixton Underground Station,London Underground Ltd.,Brixton Rd,London,SW9 8HE"
+      },
+      {
+        "key": "Lifts",
+        "value": "2"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "id": "940GZZLUKSX",
+    "commonName": "King's Cross St. Pancras Underground Station",
+    "lat": 51.530663,
+    "lon": -0.123194,
+    "additionalProperties": [
+      {
+        "key": "Toilets",
+        "value": "no"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "9"
+      },
+      {
+        "key": "PhoneNo",
+        "value": "0845 330 9880"
+      },
+      {
+        "key": "Lifts",
+        "value": "10"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Zone",
+        "value": "1"
+      },
+      {
+        "key": "Address",
+        "value": "King's Cross St. Pancras,London Underground Ltd.,Euston Road,London,N1 9AL"
+      },
+      {
+        "key": "Escalators",
+        "value": "19"
+      },
+      {
+        "key": "Car park",
+        "value": "no"
+      }
+    ]
+  },
+  {
+    "id": "940GZZLUOXC",
+    "commonName": "Oxford Circus Underground Station",
+    "lat": 51.515224,
+    "lon": -0.141903,
+    "additionalProperties": [
+      {
+        "key": "Lifts",
+        "value": "0"
+      },
+      {
+        "key": "PhoneNo",
+        "value": "0845 330 9880"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Zone",
+        "value": "1"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "3"
+      },
+      {
+        "key": "Toilets",
+        "value": "no"
+      },
+      {
+        "key": "Car park",
+        "value": "no"
+      },
+      {
+        "key": "Escalators",
+        "value": "14"
+      },
+      {
+        "key": "Address",
+        "value": "Oxford Circus Station,London Underground Ltd.,Oxford St,London,W1B 3AG"
+      }
+    ]
+  }
+]

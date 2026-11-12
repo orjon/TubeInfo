@@ -35,6 +35,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Run the tests
+        run: pnpm test
+
       # The Mapbox token is public (restricted to orjon.com in Mapbox) but it is
       # baked into the page at build time, so it has to be here.
       - name: Build the client
@@ -70,7 +73,7 @@ jobs:
           DROPLET_USER: ${{ secrets.DROPLET_USER }}
         run: |
           rsync -azR -e "ssh -i ~/.ssh/deploy_key" \
-            ./server.js ./config.js ./tfl.js ./routes ./statistics ./initalValues \
+            ./server.js ./app.js ./config.js ./tfl.js ./lib ./routes ./statistics ./initalValues \
             ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./client/package.json \
             "$DROPLET_USER@$DROPLET_IP:$DEPLOY_DIR/"
 

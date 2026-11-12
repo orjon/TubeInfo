@@ -3,6 +3,7 @@ const router = express.Router()
 const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
+const { parseArrivals } = require('../../lib/arrivals')
 
 //@router GET api/tube/arrivals/station
 //@desc   profile route
@@ -38,35 +39,7 @@ router.get('/:stationId', async (req, res) => {
     const tflArrivals = await tflGet(
       `/stoppoint/${encodeURIComponent(station.id)}/arrivals`
     )
-    tflArrivals.map((arrival) => {
-      //Get direction and platform number from plaformName (eg 'Eastbound - Platform 5')
-      let direction = ''
-      if (arrival.platformName) {
-        var cropIndex = arrival.platformName.indexOf(' - ')
-        direction = arrival.platformName.substring(0, cropIndex)
-      }
-
-      let platform = ''
-      if (arrival.platformName) {
-        var cropIndex = arrival.platformName.indexOf('Platform ') + 9
-        platform = arrival.platformName.substring(cropIndex)
-      }
-
-      arrivals.push({
-        lineName: arrival.lineName,
-        lineId: arrival.lineId,
-        platform: platform,
-        destination: arrival.destination,
-        towards: arrival.towards,
-        expected: arrival.expectedArrival,
-        direction: direction
-      })
-    })
-
-    //Sort arrivals by time
-    arrivals.sort(function (a, b) {
-      return moment(a.expected) - moment(b.expected)
-    })
+    arrivals = parseArrivals(tflArrivals)
 
     statistics.logTflArrivalsRequest()
     serverState.stations[stationIndex].arrivals = arrivals

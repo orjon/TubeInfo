@@ -21,6 +21,18 @@ scripts/smoke-test.sh http://localhost:5005/setoff
 The app name is set by `VITE_APP_NAME`, `VITE_APP_SHORT_NAME` and `VITE_APP_TAGLINE` in `.env`.
 Use `http://localhost:5173`, not `127.0.0.1`, because the Mapbox token only allows `localhost`.
 
+## Tests
+
+```sh
+pnpm test          # server tests (tests/) and client tests (client/src/*.test.js), with Vitest
+pnpm test:watch    # re-run server tests as you edit
+```
+
+The server tests call the Express app directly and replace `fetch`, so they never reach TfL; the
+sample TfL responses they use are in `tests/fixtures/`. A test marked `.fails` documents a known
+bug: when the bug is fixed the test turns red, and you delete the `.fails`.
+`scripts/smoke-test.sh` is separate: it checks a *running* server (used in the deploy).
+
 ## Deployment
 
 Pushing to `main` deploys to **orjon.com/setoff** (GitHub Action in `.github/workflows/deploy.yml`):
