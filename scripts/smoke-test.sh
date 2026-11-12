@@ -13,8 +13,8 @@ fetch() { curl -s -m 10 -o /tmp/smoke-body -w '%{http_code}' "$1"; }
 
 # 1. wait for the server
 for i in $(seq 1 30); do
-  [ "$(fetch "$BASE/healthz")" = "200" ] && break
-  [ "$i" = 30 ] && { echo "FAIL  $BASE/healthz never answered 200"; exit 1; }
+  [ "$(fetch "$BASE/api/healthz")" = "200" ] && break
+  [ "$i" = 30 ] && { echo "FAIL  $BASE/api/healthz never answered 200"; exit 1; }
   sleep 1
 done
 
@@ -27,12 +27,12 @@ check() { # name, path, expected status, text the body must contain (optional)
   echo "ok    $1"
 }
 
-check "health check"        /healthz               200 '"ok":true'
+check "health check"        /api/healthz               200 '"ok":true'
 check "web page"            /                      200 '<title>'
 check "deep link"           /station/waterloo      200 '<title>'
 check "PWA manifest"        /manifest.webmanifest  200 'short_name'
 check "unknown api path"    /api/nope              404
-check "missing file"        /missing.js            404
+check "missing asset"       /assets/missing.js     404
 if [ "$WITH_TFL" = "--tfl" ]; then
   check "line statuses"     /api/statuses          200 '"statuses"'
   check "station arrivals"  /api/arrivals/940GZZLUWLO 200 '"arrivals"'

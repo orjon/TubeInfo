@@ -40,8 +40,9 @@ function resetState() {
 }
 resetState()
 
-// health check, for monitoring and deploys
-app.get(`${BASE_PATH}/healthz`, (req, res) => {
+// health check, for monitoring and deploys. It lives under /api because nginx only
+// forwards /setoff/api/ to this server; every other /setoff/ path is the web page.
+app.get(`${BASE_PATH}/api/healthz`, (req, res) => {
   res.json({ ok: true, uptimeSeconds: Math.round(process.uptime()) })
 })
 

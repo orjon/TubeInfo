@@ -32,7 +32,7 @@ afterEach(() => {
 
 describe('health and unknown addresses', () => {
   it('answers the health check', async () => {
-    const res = await request(app).get('/setoff/healthz')
+    const res = await request(app).get('/setoff/api/healthz')
     expect(res.status).toBe(200)
     expect(res.body.ok).toBe(true)
   })
