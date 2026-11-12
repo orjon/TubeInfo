@@ -66,6 +66,7 @@ const Station = () => {
                 <LineArrivals
                   key={lineId}
                   line={line}
+                  station={station}
                   stationArrivals={arrivals}
                   isError={isError}
                   statusesTimeStamp={statusesTimeStamp}

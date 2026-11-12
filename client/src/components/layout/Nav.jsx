@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { appName } from '../../config'
+import Star from './Star'
 import '../../scss/Nav.scss'
 
 const timeFormat = new Intl.DateTimeFormat('en-GB', {
@@ -27,6 +28,9 @@ const Nav = () => {
 
   return (
     <div className='Nav'>
+      <Link to='/favourites' className='favouritesLink' aria-label='Favourites' title='Favourites'>
+        <Star />
+      </Link>
       <Link to='/'>
         <div className='AppTitle'>{appName}</div>
       </Link>

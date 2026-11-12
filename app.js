@@ -13,7 +13,7 @@ const app = express()
 
 // Everything lives under one base path, e.g. orjon.com/setoff
 const BASE_PATH = (process.env.BASE_PATH || '/setoff').replace(/\/$/, '')
-const CLIENT_DIR = path.join(__dirname, 'client', 'dist')
+const CLIENT_DIR = process.env.CLIENT_DIR || path.join(__dirname, 'client', 'dist')
 
 // Server-wide counters and cached data. Tests call resetState() between runs.
 function resetState() {
@@ -58,10 +58,12 @@ app.use(`${BASE_PATH}/api`, (req, res) => {
 
 app.use(BASE_PATH, express.static(CLIENT_DIR))
 
-// Any other address is the web app's one page, but a missing file (anything
-// with an extension, e.g. /setoff/old.js) is a real 404
+// Any other address is the web app's one page, but a missing file is a real 404.
+// A file name ends in a dot and a short extension (/setoff/old.js). A station URL can
+// contain a dot too (/setoff/station/kings-cross-st.-pancras) and must still get the page.
+const looksLikeAFile = /\.[a-z0-9]{1,5}$/i
 app.get(`${BASE_PATH}/*`, (req, res) => {
-  if (path.extname(req.path)) return res.status(404).send('Not found')
+  if (looksLikeAFile.test(req.path)) return res.status(404).send('Not found')
   res.sendFile(path.join(CLIENT_DIR, 'index.html'))
 })
 

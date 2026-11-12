@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { createRequire } from 'node:module'
 import request from 'supertest'
+import { mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { stubTfl } from './helpers/tflStub'
 import statusesFixture from './fixtures/statuses.json'
 import stoppointsFixture from './fixtures/stoppoints-victoria.json'
@@ -41,6 +44,19 @@ describe('health and unknown addresses', () => {
     const res = await request(app).get('/setoff/api/nope')
     expect(res.status).toBe(404)
     expect(res.body.error).toBeDefined()
+  })
+
+  it('gives the web page for a station URL that contains a dot', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'client-'))
+    writeFileSync(join(dir, 'index.html'), '<title>the app</title>')
+    // CLIENT_DIR is read when app.js loads, so load a fresh copy of it that uses the folder
+    process.env.CLIENT_DIR = dir
+    delete require.cache[require.resolve('../app')]
+    const { app: freshApp } = require('../app')
+    delete process.env.CLIENT_DIR
+    const res = await request(freshApp).get('/setoff/station/kings-cross-st.-pancras')
+    expect(res.status).toBe(200)
+    expect(res.text).toContain('the app')
   })
 
   it('gives a 404, not the web page, for a missing file', async () => {

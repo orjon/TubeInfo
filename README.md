@@ -21,6 +21,14 @@ scripts/smoke-test.sh http://localhost:5005/setoff
 The app name is set by `VITE_APP_NAME`, `VITE_APP_SHORT_NAME` and `VITE_APP_TAGLINE` in `.env`.
 Use `http://localhost:5173`, not `127.0.0.1`, because the Mapbox token only allows `localhost`.
 
+## Favourites
+
+A star in front of each direction on a station page adds that direction of that line at that station
+(for example King's Cross, Northern, Northbound) to the Favourites page, which the star in the header
+opens. They are saved in the browser's local storage (key `setoff.favourites.v1`), so there is no login
+and they stay on one device. All the sites on orjon.com share one browser storage, so the key is fixed
+and does not use the app name.
+
 ## Station data
 
 `data/stations.json` and `data/lineStations.json` are the stations the app starts with (the server

@@ -5,7 +5,7 @@ import DirectionArrivals from './DirectionArrivals'
 import { groupArrivals } from '../../Helpers'
 import '../../scss/LineArrivals.scss'
 
-const LineArrivals = ({ line, stationArrivals, isError, statusesTimeStamp }) => {
+const LineArrivals = ({ line, station, stationArrivals, isError, statusesTimeStamp }) => {
   let body
   if (stationArrivals) {
     const groups = groupArrivals(stationArrivals, line.id)
@@ -13,7 +13,12 @@ const LineArrivals = ({ line, stationArrivals, isError, statusesTimeStamp }) => 
     body = (
       <div className='dataBlock'>
         {groups.map((group) => (
-          <DirectionArrivals key={`${group.direction}-${group.platform}`} {...group} />
+          <DirectionArrivals
+            key={`${group.direction}-${group.platform}`}
+            {...group}
+            favourite={{ stationId: station.id, lineId: line.id, direction: group.direction }}
+            label={`${station.name}, ${line.name}, ${group.direction}`}
+          />
         ))}
       </div>
     )

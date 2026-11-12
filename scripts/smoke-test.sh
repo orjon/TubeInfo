@@ -30,6 +30,7 @@ check() { # name, path, expected status, text the body must contain (optional)
 check "health check"        /api/healthz               200 '"ok":true'
 check "web page"            /                      200 '<title>'
 check "deep link"           /station/waterloo      200 '<title>'
+check "deep link with a dot" /station/kings-cross-st.-pancras 200 '<title>'
 check "PWA manifest"        /manifest.webmanifest  200 'short_name'
 check "unknown api path"    /api/nope              404
 check "missing asset"       /assets/missing.js     404
