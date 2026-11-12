@@ -18,6 +18,7 @@ NVM_VERSION=v0.40.1
 PUBLIC_KEY="${1:-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrpI0T0HV3Zl/DDVcOMPJCpIjcf/hqsjmUGbRBJ7GH3 setoff-deploy (github actions, orjon/TubeInfo)}"
 
 [ "$(id -u)" = 0 ] || { echo "Run as root (use sudo)."; exit 1; }
+cd / # so the commands run as another user do not complain about /root
 
 echo "1/5 user"
 id "$APP_USER" >/dev/null 2>&1 || adduser --disabled-password --gecos "SetOff deploy" "$APP_USER"
@@ -58,8 +59,11 @@ npm install --global pm2
 AS_USER
 
 echo "5/5 start pm2 on boot"
-NODE_BIN="$(sudo -u "$APP_USER" -H bash -lc 'dirname "$(command -v node)"')"
-env PATH="$PATH:$NODE_BIN" "$NODE_BIN/pm2" startup systemd -u "$APP_USER" --hp "/home/$APP_USER" >/dev/null
+# Find the pm2 that nvm installed for the user. A plain login shell does not load nvm
+# (the droplet also has its own Node in /usr/bin), so load it explicitly.
+NODE_BIN="$(sudo -u "$APP_USER" -H bash -c 'export NVM_DIR="$HOME/.nvm"; . "$NVM_DIR/nvm.sh"; dirname "$(nvm which default)"')"
+[ -x "$NODE_BIN/pm2" ] || { echo "pm2 not found in $NODE_BIN"; exit 1; }
+env PATH="$PATH:$NODE_BIN" "$NODE_BIN/pm2" startup systemd -u "$APP_USER" --hp "/home/$APP_USER"
 
 echo
 echo "Done. Next:"
