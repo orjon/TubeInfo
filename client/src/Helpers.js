@@ -1,3 +1,5 @@
+import { arrivalsShown } from './globalSettings'
+
 export function findLine(statuses, lineId) {
   return statuses.find((line) => line.id === lineId)
 }
@@ -36,7 +38,7 @@ const directionOrder = [
 // One line's arrivals at a station, split into a group for each direction and
 // platform (a merged station such as Paddington has the same line on two
 // platforms). Each group keeps at most `limit` arrivals, soonest first.
-export function groupArrivals(arrivals, lineId, limit = 5) {
+export function groupArrivals(arrivals, lineId, limit = arrivalsShown) {
   const groups = []
   for (const arrival of arrivals.filter((a) => a.lineId === lineId)) {
     let group = groups.find(

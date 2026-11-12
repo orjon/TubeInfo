@@ -71,9 +71,21 @@ describe('groupArrivals', () => {
     expect(groups.map((g) => [g.platform, g.arrivals.length])).toEqual([['2', 1], ['15', 2]])
   })
 
-  it('keeps the first five of each group', () => {
-    const many = Array.from({ length: 8 }, (_, i) => arrival('x', 'Northbound', '1', i))
-    expect(groupArrivals(many, 'x')[0].arrivals).toHaveLength(5)
+  it('keeps the first eight of each group, soonest first', () => {
+    const many = Array.from({ length: 12 }, (_, i) => arrival('x', 'Northbound', '1', i))
+    const shown = groupArrivals(many, 'x')[0].arrivals
+    expect(shown).toHaveLength(8)
+    expect(shown.map((a) => a.expected)).toEqual(many.slice(0, 8).map((a) => a.expected))
+  })
+
+  it('shows all of them when there are fewer than eight', () => {
+    const few = Array.from({ length: 3 }, (_, i) => arrival('x', 'Northbound', '1', i))
+    expect(groupArrivals(few, 'x')[0].arrivals).toHaveLength(3)
+  })
+
+  it('takes a different limit when asked', () => {
+    const many = Array.from({ length: 9 }, (_, i) => arrival('x', 'Northbound', '1', i))
+    expect(groupArrivals(many, 'x', 4)[0].arrivals).toHaveLength(4)
   })
 
   it('puts Elizabeth line Outbound and Inbound groups after the compass directions', () => {
