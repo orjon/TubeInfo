@@ -1,8 +1,50 @@
-# Tube Info 
-### Full-stack React & Transport for London API info app
+# SetOff
+### London train times: live line statuses and arrivals
 
-This application collects [Transport for London API](https://api.tfl.gov.uk/) Underground information and displays them through a simple clickable interface.
+A React app and a small Express server that collects [Transport for London API](https://api.tfl.gov.uk/) data and shows it through a simple clickable interface. It installs as a PWA.
 
+Powered by TfL Open Data. Not affiliated with Transport for London.
+
+## Develop
+
+Needs Node 22 (`nvm use`) and [pnpm](https://pnpm.io) (`corepack enable`).
+
+```sh
+cp .env.example .env     # then fill in the TfL key and the Mapbox token
+pnpm install
+pnpm dev                 # app on http://localhost:5173/setoff/, API on :5005
+pnpm build               # builds the client into client/dist
+pnpm start               # server on :5005 serving the built client
+scripts/smoke-test.sh http://localhost:5005/setoff
+```
+
+The app name is set by `VITE_APP_NAME`, `VITE_APP_SHORT_NAME` and `VITE_APP_TAGLINE` in `.env`.
+Use `http://localhost:5173`, not `127.0.0.1`, because the Mapbox token only allows `localhost`.
+
+## Deployment
+
+Pushing to `main` deploys to **orjon.com/setoff** (GitHub Action in `.github/workflows/deploy.yml`):
+build, smoke test, copy to the droplet, restart, smoke test the live site.
+nginx is configured in the [droplet-nginx](https://github.com/orjon/droplet-nginx) repo.
+
+On the droplet the app lives in `/var/www/setoff` (server files, `.env`, `client/dist`) and runs
+as the PM2 process `setoff` on port 5006. The old TubeInfo app is separate and is not touched.
+
+### One-time setup
+
+1. **Droplet.** As the deploy user: `mkdir -p /var/www/setoff`, make sure `pnpm` is available
+   (`corepack enable`) and `pm2` is installed.
+2. **`/var/www/setoff/.env`** (never committed):
+   ```
+   PORT=5006
+   BASE_PATH=/setoff
+   TFL_APP_KEY=...   # a TfL key not used by the other app
+   ```
+3. **nginx.** Merge the `/setoff` block from the droplet-nginx repo (it deploys itself on push).
+4. **GitHub repo secrets** (Settings, Secrets and variables, Actions):
+   `SSH_PRIVATE_KEY`, `DROPLET_IP`, `DROPLET_USER` (same values as the verbi repo) and
+   `MAPBOX_TOKEN` (a public `pk.` token restricted to `https://orjon.com`).
+   Optional variables: `APP_NAME`, `APP_SHORT_NAME`, `APP_TAGLINE`.
 
 ### Statuses / Home 
 Shows Underground line statuses in cards.

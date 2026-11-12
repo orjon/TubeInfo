@@ -1,0 +1,112 @@
+name: Deploy
+
+# Every push to main is built, checked and copied to the droplet, which serves it
+# at orjon.com/setoff (nginx config lives in the droplet-nginx repo).
+# This never touches the old TubeInfo app (/var/www/tubeclient, /var/www/tubeapi).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# A newer push replaces a deploy that is still running.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+env:
+  DEPLOY_DIR: /var/www/setoff
+  PM2_NAME: setoff
+  PORT: 5006
+  LIVE_URL: https://orjon.com/setoff
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The pnpm version is the one pinned in package.json.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # The Mapbox token is public (restricted to orjon.com in Mapbox) but it is
+      # baked into the page at build time, so it has to be here.
+      - name: Build the client
+        run: pnpm build
+        env:
+          VITE_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          VITE_APP_NAME: ${{ vars.APP_NAME }}
+          VITE_APP_SHORT_NAME: ${{ vars.APP_SHORT_NAME }}
+          VITE_APP_TAGLINE: ${{ vars.APP_TAGLINE }}
+
+      # Start the server on the runner and check it answers. No TfL key here,
+      # so the TfL endpoints are only checked after the live deploy.
+      - name: Smoke test before deploying
+        run: |
+          node server.js &
+          scripts/smoke-test.sh "http://localhost:${PORT}/setoff"
+
+      - name: Set up SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$DROPLET_IP" >> ~/.ssh/known_hosts
+
+      # Server files first. No --delete here: .env and node_modules live in this
+      # folder on the droplet and must stay.
+      - name: Copy the server to the droplet
+        env:
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          DROPLET_USER: ${{ secrets.DROPLET_USER }}
+        run: |
+          rsync -azR -e "ssh -i ~/.ssh/deploy_key" \
+            ./server.js ./config.js ./tfl.js ./routes ./statistics ./initalValues \
+            ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./client/package.json \
+            "$DROPLET_USER@$DROPLET_IP:$DEPLOY_DIR/"
+
+      - name: Install server dependencies and restart
+        env:
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          DROPLET_USER: ${{ secrets.DROPLET_USER }}
+        run: |
+          # The quoted heredoc is sent as-is; the two variables are passed separately
+          ssh -i ~/.ssh/deploy_key "$DROPLET_USER@$DROPLET_IP" \
+            "DEPLOY_DIR=$DEPLOY_DIR PM2_NAME=$PM2_NAME bash -s" <<'REMOTE'
+          set -euo pipefail
+          # A non-interactive ssh session does not load nvm, so do it here
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+          cd "$DEPLOY_DIR"
+          test -f .env || { echo ".env is missing in $DEPLOY_DIR (see README, Deployment)"; exit 1; }
+          pnpm install --prod --frozen-lockfile --filter .
+          if pm2 describe "$PM2_NAME" >/dev/null 2>&1; then
+            pm2 restart "$PM2_NAME" --update-env
+          else
+            pm2 start server.js --name "$PM2_NAME" --cwd "$DEPLOY_DIR"
+          fi
+          pm2 save
+          REMOTE
+
+      # The built client last. Files arrive together at the end, so a visitor
+      # never sees a half-updated site.
+      - name: Copy the client to the droplet
+        env:
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          DROPLET_USER: ${{ secrets.DROPLET_USER }}
+        run: |
+          rsync -az --checksum --delay-updates --delete-after \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            client/dist/ "$DROPLET_USER@$DROPLET_IP:$DEPLOY_DIR/client/dist/"
+
+      - name: Smoke test the live site
+        run: scripts/smoke-test.sh "$LIVE_URL" --tfl
