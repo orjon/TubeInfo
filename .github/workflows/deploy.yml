@@ -2,7 +2,8 @@ name: Deploy
 
 # Every push to main is built, checked and copied to the droplet, which serves it
 # at orjon.com/setoff (nginx config lives in the droplet-nginx repo).
-# This never touches the old TubeInfo app (/var/www/tubeclient, /var/www/tubeapi).
+# It runs as the `setoff` user on the droplet, so it can only write to /var/www/setoff and
+# never touches the old TubeInfo app (/var/www/tubeclient, /var/www/tubeapi).
 on:
   push:
     branches: [main]

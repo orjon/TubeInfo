@@ -51,17 +51,16 @@ as the PM2 process `setoff` on port 5006. The old TubeInfo app is separate and i
 
 ### One-time setup
 
-1. **Droplet.** As the deploy user: `mkdir -p /var/www/setoff`, make sure `pnpm` is available
-   (`corepack enable`) and `pm2` is installed.
-2. **`/var/www/setoff/.env`** (never committed):
-   ```
-   PORT=5006
-   BASE_PATH=/setoff
-   TFL_APP_KEY=...   # a TfL key not used by the other app
-   ```
+1. **Droplet user.** The deploy runs as its own user, `setoff`, which can only reach `/var/www/setoff`.
+   Create it with `deploy/setup-droplet.sh`, run once as an admin (see the comment at the top of the script):
+   `ssh <your-admin-login>@46.101.44.86 'sudo bash -s' < deploy/setup-droplet.sh`
+   It installs Node 22, pnpm and pm2 for that user only, and does not touch nginx or other sites.
+2. **`/var/www/setoff/.env`** (the script creates it; never commit it): set `TFL_APP_KEY` to a TfL key
+   not used by the other app. It also holds `PORT=5006` and `BASE_PATH=/setoff`.
 3. **nginx.** Merge the `/setoff` block from the droplet-nginx repo (it deploys itself on push).
-4. **GitHub repo secrets** (Settings, Secrets and variables, Actions):
-   `SSH_PRIVATE_KEY`, `DROPLET_IP`, `DROPLET_USER` (same values as the verbi repo) and
+4. **GitHub repo secrets** (Settings, Secrets and variables, Actions): `DROPLET_USER` = `setoff`,
+   `DROPLET_IP`, `SSH_PRIVATE_KEY` (the private half of the key whose public half is in
+   `deploy/setup-droplet.sh`; kept in `~/.ssh/setoff_deploy` on the maintainer's Mac) and
    `MAPBOX_TOKEN` (a public `pk.` token restricted to `https://orjon.com`).
    Optional variables: `APP_NAME`, `APP_SHORT_NAME`, `APP_TAGLINE`.
 
