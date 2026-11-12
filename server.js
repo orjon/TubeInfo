@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const initialState = require('./initalValues/initialState')
 const moment = require('moment')
@@ -8,6 +9,10 @@ const routeTubeStations = require('./routes/api/stations')
 const routeTubeArrivals = require('./routes/api/arrivals')
 
 const app = express()
+
+// Everything lives under one base path, e.g. orjon.com/setoff
+const BASE_PATH = (process.env.BASE_PATH || '/setoff').replace(/\/$/, '')
+const CLIENT_DIR = path.join(__dirname, 'client', 'build')
 
 global.stats = {
   serverStart: moment().format(),
@@ -30,15 +35,14 @@ global.serverState = {
 }
 
 //define routes
-app.use('/tubeapi/statuses', routeTubeStatuses)
-app.use('/tubeapi/stations', routeTubeStations)
-app.use('/tubeapi/arrivals', routeTubeArrivals)
+app.use(`${BASE_PATH}/api/statuses`, routeTubeStatuses)
+app.use(`${BASE_PATH}/api/stations`, routeTubeStations)
+app.use(`${BASE_PATH}/api/arrivals`, routeTubeArrivals)
 
-app.use(express.static(path.join(__dirname, '../tubeclient')))
+app.use(BASE_PATH, express.static(CLIENT_DIR))
 
-app.get('*', (req, res) => {
-  console.log(req.url)
-  res.sendFile(path.join(__dirname, '../tubeclient', 'index.html'))
+app.get(`${BASE_PATH}/*`, (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'index.html'))
 })
 
 const PORT = process.env.PORT || 5001
