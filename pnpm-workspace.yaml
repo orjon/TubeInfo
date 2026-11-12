@@ -1,0 +1,5 @@
+packages:
+  - client
+allowBuilds:
+  '@parcel/watcher': false
+  nodemon: false
