@@ -10,7 +10,8 @@
     "dev": "concurrently \"pnpm server\" \"pnpm client\"",
     "build": "pnpm --filter setoff-client build",
     "test": "vitest run && pnpm --filter setoff-client test",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "refresh-data": "node scripts/refresh-station-data.js"
   },
   "author": "orjon.com",
   "license": "MIT",

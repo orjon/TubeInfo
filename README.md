@@ -21,6 +21,13 @@ scripts/smoke-test.sh http://localhost:5005/setoff
 The app name is set by `VITE_APP_NAME`, `VITE_APP_SHORT_NAME` and `VITE_APP_TAGLINE` in `.env`.
 Use `http://localhost:5173`, not `127.0.0.1`, because the Mapbox token only allows `localhost`.
 
+## Station data
+
+`data/stations.json` and `data/lineStations.json` are the stations the app starts with (the server
+refreshes them from TfL about daily). Rebuild them with `pnpm refresh-data` after changing the lines in
+`lib/lines.js`. Stations that TfL splits into several stops but passengers see as one (Edgware Road,
+Hammersmith, Paddington) are merged by a hand-written list in `lib/mergedStations.js`.
+
 ## Tests
 
 ```sh

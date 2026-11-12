@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
-const { filterStationData } = require('../../lib/stationData')
+const { buildStations } = require('../../lib/buildStations')
 
 //@router GET api/tube/stations
 //@desc   profile route
@@ -38,51 +37,7 @@ router.get('/', async (req, res) => {
     ? serverState.statuses.map((status) => status.id)
     : serverState.lineStations.map((line) => line.id)
 
-  let lineStations = []
-  let allStations = []
-  let failedLines = []
-  //Loop through all lines
-  for (const lineId of lineIds) {
-    let thisLineStations = []
-
-    try {
-      const stations = await tflGet(
-        `/line/${encodeURIComponent(lineId)}/stoppoints?tflOperatedNationalRailStationsOnly=false`
-      )
-
-      statistics.logTflStationsRequest()
-
-      stations.map((station) => {
-        return thisLineStations.push(filterStationData(station, lineId))
-      })
-
-      // Filter out only stations not alreasy in allStations.
-      let newStations = thisLineStations.filter(
-        (newStation) =>
-          !allStations.find((station) => newStation.id === station.id)
-      )
-      let unchangedStations = allStations.filter(
-        (station) =>
-          !thisLineStations.find((lineStation) => station.id === lineStation.id)
-      )
-      let updateStations = allStations.filter((station) =>
-        thisLineStations.find((lineStation) => station.id === lineStation.id)
-      )
-      let updatedStations = updateStations.map((station) => {
-        station.lines = [...new Set([...station.lines, lineId].sort())]
-        return station
-      })
-
-      allStations = [...newStations, ...updatedStations, ...unchangedStations]
-      lineStations = [
-        ...lineStations,
-        { id: lineId, stations: thisLineStations }
-      ]
-    } catch (error) {
-      console.error(`GET stations, line ${lineId}:`, error.message)
-      failedLines.push(lineId)
-    }
-  }
+  const { stations, lineStations, failedLines } = await buildStations(lineIds)
 
   // An incomplete result must not replace the stations already held
   if (failedLines.length) {
@@ -95,7 +50,7 @@ router.get('/', async (req, res) => {
 
   now = moment().format()
   serverState.lineStations = lineStations
-  serverState.stations = allStations
+  serverState.stations = stations
   serverState.stationsTimeStamp = now
 
   let payloadObject = {

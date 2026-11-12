@@ -5,53 +5,34 @@ const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
 const { parseArrivals } = require('../../lib/arrivals')
 
-//@router GET api/tube/arrivals/station
-//@desc   profile route
+//@router GET api/arrivals/:stationId
+//@desc   arrivals at a station, soonest first
 //@access Public
 router.get('/:stationId', async (req, res) => {
-  let stationIndex = serverState.stations.findIndex(
-    (station) => station.id === req.params.stationId
-  )
-  if (stationIndex === -1) {
-    return res.status(404).json({ error: 'Unknown station' })
-  }
-  let station = serverState.stations[stationIndex]
-  let now = moment()
+  const station = serverState.stations.find((s) => s.id === req.params.stationId)
+  if (!station) return res.status(404).json({ error: 'Unknown station' })
   statistics.logAppArrivalsRequest()
 
-  // if timeStamp is set, calculate age.
-  if (station.arrivalsTimeStamp) {
-    let ageInSeconds = Math.floor(now.diff(station.arrivalsTimeStamp) / 1000)
-    // If age is less than 30sec, send existing statuses to client
-    if (ageInSeconds < 30) {
-      let currentArrivals = {
-        stationId: station.id,
-        arrivals: station.arrivals,
-        arrivalsTimeStamp: station.arrivalsTimeStamp
-      }
-      return res.send(currentArrivals)
-    }
+  // Arrivals fetched in the last 30 seconds are sent again as they are
+  const cached = serverState.arrivals[station.id]
+  if (cached && moment().diff(cached.arrivalsTimeStamp, 'seconds') < 30) {
+    return res.send({ stationId: station.id, ...cached })
   }
 
-  let arrivals = []
-
   try {
-    const tflArrivals = await tflGet(
-      `/stoppoint/${encodeURIComponent(station.id)}/arrivals`
+    // A merged station (e.g. Paddington) is several TfL stops
+    const stopIds = station.ids || [station.id]
+    const responses = await Promise.all(
+      stopIds.map((id) => tflGet(`/stoppoint/${encodeURIComponent(id)}/arrivals`))
     )
-    arrivals = parseArrivals(tflArrivals)
+    stopIds.forEach(() => statistics.logTflArrivalsRequest())
 
-    statistics.logTflArrivalsRequest()
-    serverState.stations[stationIndex].arrivals = arrivals
-    serverState.stations[stationIndex].arrivalsTimeStamp = moment().format()
-
-    let payloadObject = {
-      stationId: station.id,
-      arrivals: arrivals,
+    const result = {
+      arrivals: parseArrivals(responses.flat()),
       arrivalsTimeStamp: moment().format()
     }
-
-    res.send(payloadObject)
+    serverState.arrivals[station.id] = result
+    res.send({ stationId: station.id, ...result })
   } catch (error) {
     console.error(`GET arrivals/${station.id}:`, error.message)
     res.status(502).json({ error: 'Could not get arrivals from TfL' })

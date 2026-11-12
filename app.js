@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
-const initialState = require('./initalValues/initialState')
+const initialStations = require('./data/stations.json')
+const initialLineStations = require('./data/lineStations.json')
 const moment = require('moment')
 const path = require('path')
 
@@ -31,8 +32,9 @@ function resetState() {
   global.serverState = {
     statuses: [],
     statusesTimeStamp: undefined,
-    stations: structuredClone(initialState.stations),
-    lineStations: structuredClone(initialState.lineStations),
+    stations: structuredClone(initialStations),
+    lineStations: structuredClone(initialLineStations),
+    arrivals: {}, // by station id: { arrivals, arrivalsTimeStamp }
     stationsTimeStamp: undefined
   }
 }

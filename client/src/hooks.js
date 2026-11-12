@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchJson } from './api'
 import { maxStatusesAge, maxArrivalsAge } from './globalSettings'
 import { initialStatuses } from './data/initialStatuses'
-import { initialStations } from './data/initialStations'
-import { initialLineStations } from './data/initialLineStations'
+import initialStations from '../../data/stations.json'
+import initialLineStations from '../../data/lineStations.json'
 
 // Bundled data is shown straight away; initialDataUpdatedAt: 0 marks it stale
 // so the live data is fetched immediately.

@@ -73,7 +73,7 @@ jobs:
           DROPLET_USER: ${{ secrets.DROPLET_USER }}
         run: |
           rsync -azR -e "ssh -i ~/.ssh/deploy_key" \
-            ./server.js ./app.js ./config.js ./tfl.js ./lib ./routes ./statistics ./initalValues \
+            ./server.js ./app.js ./config.js ./tfl.js ./lib ./routes ./statistics ./data \
             ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./client/package.json \
             "$DROPLET_USER@$DROPLET_IP:$DEPLOY_DIR/"
 

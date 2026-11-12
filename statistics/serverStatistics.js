@@ -1,3 +1,18 @@
+// Request counters live in a global so app.js can reset them. Create them here
+// if nothing has yet (e.g. when a script uses this module without the server).
+if (!global.stats) {
+  global.stats = {
+    appRequests: 0,
+    appStationsRequests: 0,
+    appStatusesRequests: 0,
+    appArrivalsRequests: 0,
+    tflRequests: 0,
+    tflStationsRequests: 0,
+    tflStatusesRequests: 0,
+    tflArrivalsRequests: 0
+  }
+}
+
 function logAppStationsRequest() {
   stats.appStationsRequests++
   tallyRequests()

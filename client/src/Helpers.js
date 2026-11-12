@@ -21,3 +21,38 @@ export function formatDueIn(expectedTime, now = Date.now()) {
   if (mins === 1) return `${mins} min`
   return secs >= 0 ? 'due' : 'overdue'
 }
+
+const directionOrder = [
+  'Northbound',
+  'Eastbound',
+  'Southbound',
+  'Westbound',
+  'Inner Rail',
+  'Outer Rail'
+]
+
+// One line's arrivals at a station, split into a group for each direction and
+// platform (a merged station such as Paddington has the same line on two
+// platforms). Each group keeps at most `limit` arrivals, soonest first.
+export function groupArrivals(arrivals, lineId, limit = 5) {
+  const groups = []
+  for (const arrival of arrivals.filter((a) => a.lineId === lineId)) {
+    let group = groups.find(
+      (g) => g.direction === arrival.direction && g.platform === arrival.platform
+    )
+    if (!group) {
+      group = { direction: arrival.direction, platform: arrival.platform, arrivals: [] }
+      groups.push(group)
+    }
+    group.arrivals.push(arrival)
+  }
+  const rank = (d) => (directionOrder.includes(d) ? directionOrder.indexOf(d) : 99)
+  return groups
+    .filter((g) => directionOrder.includes(g.direction))
+    .sort(
+      (a, b) =>
+        rank(a.direction) - rank(b.direction) ||
+        a.platform.localeCompare(b.platform, undefined, { numeric: true })
+    )
+    .map((g) => ({ ...g, arrivals: g.arrivals.slice(0, limit) }))
+}

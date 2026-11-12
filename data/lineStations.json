@@ -1,0 +1,1206 @@
+[
+  {
+    "id": "bakerloo",
+    "stations": [
+      {
+        "id": "940GZZLUBST"
+      },
+      {
+        "id": "940GZZLUCHX"
+      },
+      {
+        "id": "940GZZLUEAC"
+      },
+      {
+        "id": "940GZZLUEMB"
+      },
+      {
+        "id": "940GZZLUERC"
+      },
+      {
+        "id": "940GZZLUHAW"
+      },
+      {
+        "id": "940GZZLUHSN"
+      },
+      {
+        "id": "940GZZLUKEN"
+      },
+      {
+        "id": "940GZZLUKPK"
+      },
+      {
+        "id": "940GZZLUKSL"
+      },
+      {
+        "id": "940GZZLULBN"
+      },
+      {
+        "id": "940GZZLUMVL"
+      },
+      {
+        "id": "940GZZLUMYB"
+      },
+      {
+        "id": "940GZZLUNWY"
+      },
+      {
+        "id": "940GZZLUOXC"
+      },
+      {
+        "id": "940GZZLUPAC"
+      },
+      {
+        "id": "940GZZLUPCC"
+      },
+      {
+        "id": "940GZZLUQPS"
+      },
+      {
+        "id": "940GZZLURGP"
+      },
+      {
+        "id": "940GZZLUSGP"
+      },
+      {
+        "id": "940GZZLUSKT"
+      },
+      {
+        "id": "940GZZLUWJN"
+      },
+      {
+        "id": "940GZZLUWKA"
+      },
+      {
+        "id": "940GZZLUWLO"
+      },
+      {
+        "id": "940GZZLUWYC"
+      }
+    ]
+  },
+  {
+    "id": "central",
+    "stations": [
+      {
+        "id": "940GZZLUBKE"
+      },
+      {
+        "id": "940GZZLUBKH"
+      },
+      {
+        "id": "940GZZLUBLG"
+      },
+      {
+        "id": "940GZZLUBND"
+      },
+      {
+        "id": "940GZZLUBNK"
+      },
+      {
+        "id": "940GZZLUCHL"
+      },
+      {
+        "id": "940GZZLUCWL"
+      },
+      {
+        "id": "940GZZLUDBN"
+      },
+      {
+        "id": "940GZZLUEAN"
+      },
+      {
+        "id": "940GZZLUEBY"
+      },
+      {
+        "id": "940GZZLUEPG"
+      },
+      {
+        "id": "940GZZLUFLP"
+      },
+      {
+        "id": "940GZZLUGFD"
+      },
+      {
+        "id": "940GZZLUGGH"
+      },
+      {
+        "id": "940GZZLUGTH"
+      },
+      {
+        "id": "940GZZLUHBN"
+      },
+      {
+        "id": "940GZZLUHGR"
+      },
+      {
+        "id": "940GZZLUHLT"
+      },
+      {
+        "id": "940GZZLUHPK"
+      },
+      {
+        "id": "940GZZLULGN"
+      },
+      {
+        "id": "940GZZLULGT"
+      },
+      {
+        "id": "940GZZLULVT"
+      },
+      {
+        "id": "940GZZLULYN"
+      },
+      {
+        "id": "940GZZLULYS"
+      },
+      {
+        "id": "940GZZLUMBA"
+      },
+      {
+        "id": "940GZZLUMED"
+      },
+      {
+        "id": "940GZZLUNAN"
+      },
+      {
+        "id": "940GZZLUNBP"
+      },
+      {
+        "id": "940GZZLUNHG"
+      },
+      {
+        "id": "940GZZLUNHT"
+      },
+      {
+        "id": "940GZZLUOXC"
+      },
+      {
+        "id": "940GZZLUPVL"
+      },
+      {
+        "id": "940GZZLUQWY"
+      },
+      {
+        "id": "940GZZLURBG"
+      },
+      {
+        "id": "940GZZLURSG"
+      },
+      {
+        "id": "940GZZLURVY"
+      },
+      {
+        "id": "940GZZLUSBC"
+      },
+      {
+        "id": "940GZZLUSNB"
+      },
+      {
+        "id": "940GZZLUSPU"
+      },
+      {
+        "id": "940GZZLUSRP"
+      },
+      {
+        "id": "940GZZLUSTD"
+      },
+      {
+        "id": "940GZZLUSWF"
+      },
+      {
+        "id": "940GZZLUTCR"
+      },
+      {
+        "id": "940GZZLUTHB"
+      },
+      {
+        "id": "940GZZLUWCY"
+      },
+      {
+        "id": "940GZZLUWOF"
+      },
+      {
+        "id": "940GZZLUWRP"
+      },
+      {
+        "id": "940GZZLUWSD"
+      },
+      {
+        "id": "940GZZLUWTA"
+      }
+    ]
+  },
+  {
+    "id": "circle",
+    "stations": [
+      {
+        "id": "940GZZLUALD"
+      },
+      {
+        "id": "940GZZLUBBN"
+      },
+      {
+        "id": "940GZZLUBKF"
+      },
+      {
+        "id": "940GZZLUBST"
+      },
+      {
+        "id": "940GZZLUBWT"
+      },
+      {
+        "id": "940GZZLUCST"
+      },
+      {
+        "id": "940GZZLUEMB"
+      },
+      {
+        "id": "940GZZLUERC"
+      },
+      {
+        "id": "940GZZLUESQ"
+      },
+      {
+        "id": "940GZZLUFCN"
+      },
+      {
+        "id": "940GZZLUGHK"
+      },
+      {
+        "id": "940GZZLUGPS"
+      },
+      {
+        "id": "940GZZLUGTR"
+      },
+      {
+        "id": "940GZZLUHSD"
+      },
+      {
+        "id": "940GZZLUHSK"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLULAD"
+      },
+      {
+        "id": "940GZZLULRD"
+      },
+      {
+        "id": "940GZZLULVT"
+      },
+      {
+        "id": "940GZZLUMGT"
+      },
+      {
+        "id": "940GZZLUMMT"
+      },
+      {
+        "id": "940GZZLUMSH"
+      },
+      {
+        "id": "940GZZLUNHG"
+      },
+      {
+        "id": "940GZZLUPAC"
+      },
+      {
+        "id": "940GZZLURYO"
+      },
+      {
+        "id": "940GZZLUSBM"
+      },
+      {
+        "id": "940GZZLUSJP"
+      },
+      {
+        "id": "940GZZLUSKS"
+      },
+      {
+        "id": "940GZZLUSSQ"
+      },
+      {
+        "id": "940GZZLUTMP"
+      },
+      {
+        "id": "940GZZLUTWH"
+      },
+      {
+        "id": "940GZZLUVIC"
+      },
+      {
+        "id": "940GZZLUWLA"
+      },
+      {
+        "id": "940GZZLUWSM"
+      },
+      {
+        "id": "940GZZLUWSP"
+      }
+    ]
+  },
+  {
+    "id": "district",
+    "stations": [
+      {
+        "id": "940GZZLUACT"
+      },
+      {
+        "id": "940GZZLUADE"
+      },
+      {
+        "id": "940GZZLUBBB"
+      },
+      {
+        "id": "940GZZLUBEC"
+      },
+      {
+        "id": "940GZZLUBKF"
+      },
+      {
+        "id": "940GZZLUBKG"
+      },
+      {
+        "id": "940GZZLUBSC"
+      },
+      {
+        "id": "940GZZLUBWR"
+      },
+      {
+        "id": "940GZZLUBWT"
+      },
+      {
+        "id": "940GZZLUCST"
+      },
+      {
+        "id": "940GZZLUCWP"
+      },
+      {
+        "id": "940GZZLUDGE"
+      },
+      {
+        "id": "940GZZLUDGY"
+      },
+      {
+        "id": "940GZZLUEBY"
+      },
+      {
+        "id": "940GZZLUECM"
+      },
+      {
+        "id": "940GZZLUECT"
+      },
+      {
+        "id": "940GZZLUEHM"
+      },
+      {
+        "id": "940GZZLUEMB"
+      },
+      {
+        "id": "940GZZLUEPK"
+      },
+      {
+        "id": "940GZZLUEPY"
+      },
+      {
+        "id": "940GZZLUERC"
+      },
+      {
+        "id": "940GZZLUFBY"
+      },
+      {
+        "id": "940GZZLUGBY"
+      },
+      {
+        "id": "940GZZLUGTR"
+      },
+      {
+        "id": "940GZZLUHCH"
+      },
+      {
+        "id": "940GZZLUHSD"
+      },
+      {
+        "id": "940GZZLUHSK"
+      },
+      {
+        "id": "940GZZLUKOY"
+      },
+      {
+        "id": "940GZZLUKWG"
+      },
+      {
+        "id": "940GZZLUMED"
+      },
+      {
+        "id": "940GZZLUMMT"
+      },
+      {
+        "id": "940GZZLUMSH"
+      },
+      {
+        "id": "940GZZLUNHG"
+      },
+      {
+        "id": "940GZZLUPAC"
+      },
+      {
+        "id": "940GZZLUPLW"
+      },
+      {
+        "id": "940GZZLUPSG"
+      },
+      {
+        "id": "940GZZLUPYB"
+      },
+      {
+        "id": "940GZZLURMD"
+      },
+      {
+        "id": "940GZZLURVP"
+      },
+      {
+        "id": "940GZZLUSFB"
+      },
+      {
+        "id": "940GZZLUSFS"
+      },
+      {
+        "id": "940GZZLUSGN"
+      },
+      {
+        "id": "940GZZLUSJP"
+      },
+      {
+        "id": "940GZZLUSKS"
+      },
+      {
+        "id": "940GZZLUSSQ"
+      },
+      {
+        "id": "940GZZLUTMP"
+      },
+      {
+        "id": "940GZZLUTNG"
+      },
+      {
+        "id": "940GZZLUTWH"
+      },
+      {
+        "id": "940GZZLUUPB"
+      },
+      {
+        "id": "940GZZLUUPK"
+      },
+      {
+        "id": "940GZZLUUPM"
+      },
+      {
+        "id": "940GZZLUUPY"
+      },
+      {
+        "id": "940GZZLUVIC"
+      },
+      {
+        "id": "940GZZLUWBN"
+      },
+      {
+        "id": "940GZZLUWHM"
+      },
+      {
+        "id": "940GZZLUWIM"
+      },
+      {
+        "id": "940GZZLUWIP"
+      },
+      {
+        "id": "940GZZLUWKN"
+      },
+      {
+        "id": "940GZZLUWPL"
+      },
+      {
+        "id": "940GZZLUWSM"
+      }
+    ]
+  },
+  {
+    "id": "hammersmith-city",
+    "stations": [
+      {
+        "id": "940GZZLUADE"
+      },
+      {
+        "id": "940GZZLUBBB"
+      },
+      {
+        "id": "940GZZLUBBN"
+      },
+      {
+        "id": "940GZZLUBKG"
+      },
+      {
+        "id": "940GZZLUBST"
+      },
+      {
+        "id": "940GZZLUBWR"
+      },
+      {
+        "id": "940GZZLUEHM"
+      },
+      {
+        "id": "940GZZLUERC"
+      },
+      {
+        "id": "940GZZLUESQ"
+      },
+      {
+        "id": "940GZZLUFCN"
+      },
+      {
+        "id": "940GZZLUGHK"
+      },
+      {
+        "id": "940GZZLUGPS"
+      },
+      {
+        "id": "940GZZLUHSD"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLULAD"
+      },
+      {
+        "id": "940GZZLULRD"
+      },
+      {
+        "id": "940GZZLULVT"
+      },
+      {
+        "id": "940GZZLUMED"
+      },
+      {
+        "id": "940GZZLUMGT"
+      },
+      {
+        "id": "940GZZLUPAC"
+      },
+      {
+        "id": "940GZZLUPLW"
+      },
+      {
+        "id": "940GZZLURYO"
+      },
+      {
+        "id": "940GZZLUSBM"
+      },
+      {
+        "id": "940GZZLUSGN"
+      },
+      {
+        "id": "940GZZLUUPK"
+      },
+      {
+        "id": "940GZZLUWHM"
+      },
+      {
+        "id": "940GZZLUWLA"
+      },
+      {
+        "id": "940GZZLUWPL"
+      },
+      {
+        "id": "940GZZLUWSP"
+      }
+    ]
+  },
+  {
+    "id": "jubilee",
+    "stations": [
+      {
+        "id": "940GZZLUBMY"
+      },
+      {
+        "id": "940GZZLUBND"
+      },
+      {
+        "id": "940GZZLUBST"
+      },
+      {
+        "id": "940GZZLUCGT"
+      },
+      {
+        "id": "940GZZLUCPK"
+      },
+      {
+        "id": "940GZZLUCWR"
+      },
+      {
+        "id": "940GZZLUCYF"
+      },
+      {
+        "id": "940GZZLUDOH"
+      },
+      {
+        "id": "940GZZLUFYR"
+      },
+      {
+        "id": "940GZZLUGPK"
+      },
+      {
+        "id": "940GZZLUKBN"
+      },
+      {
+        "id": "940GZZLUKBY"
+      },
+      {
+        "id": "940GZZLULNB"
+      },
+      {
+        "id": "940GZZLUNDN"
+      },
+      {
+        "id": "940GZZLUNGW"
+      },
+      {
+        "id": "940GZZLUQBY"
+      },
+      {
+        "id": "940GZZLUSJW"
+      },
+      {
+        "id": "940GZZLUSTD"
+      },
+      {
+        "id": "940GZZLUSTM"
+      },
+      {
+        "id": "940GZZLUSWC"
+      },
+      {
+        "id": "940GZZLUSWK"
+      },
+      {
+        "id": "940GZZLUWHM"
+      },
+      {
+        "id": "940GZZLUWHP"
+      },
+      {
+        "id": "940GZZLUWIG"
+      },
+      {
+        "id": "940GZZLUWLO"
+      },
+      {
+        "id": "940GZZLUWSM"
+      },
+      {
+        "id": "940GZZLUWYP"
+      }
+    ]
+  },
+  {
+    "id": "metropolitan",
+    "stations": [
+      {
+        "id": "940GZZLUALD"
+      },
+      {
+        "id": "940GZZLUAMS"
+      },
+      {
+        "id": "940GZZLUBBN"
+      },
+      {
+        "id": "940GZZLUBST"
+      },
+      {
+        "id": "940GZZLUCAL"
+      },
+      {
+        "id": "940GZZLUCSM"
+      },
+      {
+        "id": "940GZZLUCXY"
+      },
+      {
+        "id": "940GZZLUCYD"
+      },
+      {
+        "id": "940GZZLUEAE"
+      },
+      {
+        "id": "940GZZLUESQ"
+      },
+      {
+        "id": "940GZZLUFCN"
+      },
+      {
+        "id": "940GZZLUFYR"
+      },
+      {
+        "id": "940GZZLUGPS"
+      },
+      {
+        "id": "940GZZLUHGD"
+      },
+      {
+        "id": "940GZZLUHOH"
+      },
+      {
+        "id": "940GZZLUICK"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLULVT"
+      },
+      {
+        "id": "940GZZLUMGT"
+      },
+      {
+        "id": "940GZZLUMPK"
+      },
+      {
+        "id": "940GZZLUNHA"
+      },
+      {
+        "id": "940GZZLUNKP"
+      },
+      {
+        "id": "940GZZLUNOW"
+      },
+      {
+        "id": "940GZZLUNWH"
+      },
+      {
+        "id": "940GZZLUPNR"
+      },
+      {
+        "id": "940GZZLUPRD"
+      },
+      {
+        "id": "940GZZLURKW"
+      },
+      {
+        "id": "940GZZLURSM"
+      },
+      {
+        "id": "940GZZLURSP"
+      },
+      {
+        "id": "940GZZLURYL"
+      },
+      {
+        "id": "940GZZLUUXB"
+      },
+      {
+        "id": "940GZZLUWAF"
+      },
+      {
+        "id": "940GZZLUWHW"
+      },
+      {
+        "id": "940GZZLUWIG"
+      },
+      {
+        "id": "940GZZLUWYP"
+      }
+    ]
+  },
+  {
+    "id": "northern",
+    "stations": [
+      {
+        "id": "940GZZBPSUST"
+      },
+      {
+        "id": "940GZZLUACY"
+      },
+      {
+        "id": "940GZZLUAGL"
+      },
+      {
+        "id": "940GZZLUBLM"
+      },
+      {
+        "id": "940GZZLUBNK"
+      },
+      {
+        "id": "940GZZLUBOR"
+      },
+      {
+        "id": "940GZZLUBTK"
+      },
+      {
+        "id": "940GZZLUBTX"
+      },
+      {
+        "id": "940GZZLUBZP"
+      },
+      {
+        "id": "940GZZLUCFM"
+      },
+      {
+        "id": "940GZZLUCHX"
+      },
+      {
+        "id": "940GZZLUCND"
+      },
+      {
+        "id": "940GZZLUCPC"
+      },
+      {
+        "id": "940GZZLUCPN"
+      },
+      {
+        "id": "940GZZLUCPS"
+      },
+      {
+        "id": "940GZZLUCSD"
+      },
+      {
+        "id": "940GZZLUCTN"
+      },
+      {
+        "id": "940GZZLUEAC"
+      },
+      {
+        "id": "940GZZLUEFY"
+      },
+      {
+        "id": "940GZZLUEGW"
+      },
+      {
+        "id": "940GZZLUEMB"
+      },
+      {
+        "id": "940GZZLUEUS"
+      },
+      {
+        "id": "940GZZLUFYC"
+      },
+      {
+        "id": "940GZZLUGDG"
+      },
+      {
+        "id": "940GZZLUGGN"
+      },
+      {
+        "id": "940GZZLUHBT"
+      },
+      {
+        "id": "940GZZLUHCL"
+      },
+      {
+        "id": "940GZZLUHGT"
+      },
+      {
+        "id": "940GZZLUHTD"
+      },
+      {
+        "id": "940GZZLUKNG"
+      },
+      {
+        "id": "940GZZLUKSH"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLULNB"
+      },
+      {
+        "id": "940GZZLULSQ"
+      },
+      {
+        "id": "940GZZLUMDN"
+      },
+      {
+        "id": "940GZZLUMGT"
+      },
+      {
+        "id": "940GZZLUMHL"
+      },
+      {
+        "id": "940GZZLUMTC"
+      },
+      {
+        "id": "940GZZLUODS"
+      },
+      {
+        "id": "940GZZLUOVL"
+      },
+      {
+        "id": "940GZZLUSKW"
+      },
+      {
+        "id": "940GZZLUSWN"
+      },
+      {
+        "id": "940GZZLUTAW"
+      },
+      {
+        "id": "940GZZLUTBC"
+      },
+      {
+        "id": "940GZZLUTBY"
+      },
+      {
+        "id": "940GZZLUTCR"
+      },
+      {
+        "id": "940GZZLUTFP"
+      },
+      {
+        "id": "940GZZLUWFN"
+      },
+      {
+        "id": "940GZZLUWLO"
+      },
+      {
+        "id": "940GZZLUWOP"
+      },
+      {
+        "id": "940GZZLUWRR"
+      },
+      {
+        "id": "940GZZNEUGST"
+      }
+    ]
+  },
+  {
+    "id": "piccadilly",
+    "stations": [
+      {
+        "id": "940GZZLUACT"
+      },
+      {
+        "id": "940GZZLUALP"
+      },
+      {
+        "id": "940GZZLUASG"
+      },
+      {
+        "id": "940GZZLUASL"
+      },
+      {
+        "id": "940GZZLUBDS"
+      },
+      {
+        "id": "940GZZLUBOS"
+      },
+      {
+        "id": "940GZZLUBSC"
+      },
+      {
+        "id": "940GZZLUCAR"
+      },
+      {
+        "id": "940GZZLUCGN"
+      },
+      {
+        "id": "940GZZLUCKS"
+      },
+      {
+        "id": "940GZZLUEAE"
+      },
+      {
+        "id": "940GZZLUECM"
+      },
+      {
+        "id": "940GZZLUECT"
+      },
+      {
+        "id": "940GZZLUFPK"
+      },
+      {
+        "id": "940GZZLUGPK"
+      },
+      {
+        "id": "940GZZLUGTR"
+      },
+      {
+        "id": "940GZZLUHBN"
+      },
+      {
+        "id": "940GZZLUHGD"
+      },
+      {
+        "id": "940GZZLUHNX"
+      },
+      {
+        "id": "940GZZLUHPC"
+      },
+      {
+        "id": "940GZZLUHR4"
+      },
+      {
+        "id": "940GZZLUHR5"
+      },
+      {
+        "id": "940GZZLUHRC"
+      },
+      {
+        "id": "940GZZLUHSD"
+      },
+      {
+        "id": "940GZZLUHWC"
+      },
+      {
+        "id": "940GZZLUHWE"
+      },
+      {
+        "id": "940GZZLUHWT"
+      },
+      {
+        "id": "940GZZLUHWY"
+      },
+      {
+        "id": "940GZZLUICK"
+      },
+      {
+        "id": "940GZZLUKNB"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLULSQ"
+      },
+      {
+        "id": "940GZZLUMRH"
+      },
+      {
+        "id": "940GZZLUNEN"
+      },
+      {
+        "id": "940GZZLUNFD"
+      },
+      {
+        "id": "940GZZLUOAK"
+      },
+      {
+        "id": "940GZZLUOSY"
+      },
+      {
+        "id": "940GZZLUPCC"
+      },
+      {
+        "id": "940GZZLUPKR"
+      },
+      {
+        "id": "940GZZLURSM"
+      },
+      {
+        "id": "940GZZLURSP"
+      },
+      {
+        "id": "940GZZLURSQ"
+      },
+      {
+        "id": "940GZZLURYL"
+      },
+      {
+        "id": "940GZZLUSEA"
+      },
+      {
+        "id": "940GZZLUSGT"
+      },
+      {
+        "id": "940GZZLUSHH"
+      },
+      {
+        "id": "940GZZLUSKS"
+      },
+      {
+        "id": "940GZZLUSUH"
+      },
+      {
+        "id": "940GZZLUSUT"
+      },
+      {
+        "id": "940GZZLUTNG"
+      },
+      {
+        "id": "940GZZLUTPN"
+      },
+      {
+        "id": "940GZZLUUXB"
+      },
+      {
+        "id": "940GZZLUWOG"
+      }
+    ]
+  },
+  {
+    "id": "victoria",
+    "stations": [
+      {
+        "id": "940GZZLUBLR"
+      },
+      {
+        "id": "940GZZLUBXN"
+      },
+      {
+        "id": "940GZZLUEUS"
+      },
+      {
+        "id": "940GZZLUFPK"
+      },
+      {
+        "id": "940GZZLUGPK"
+      },
+      {
+        "id": "940GZZLUHAI"
+      },
+      {
+        "id": "940GZZLUKSX"
+      },
+      {
+        "id": "940GZZLUOXC"
+      },
+      {
+        "id": "940GZZLUPCO"
+      },
+      {
+        "id": "940GZZLUSKW"
+      },
+      {
+        "id": "940GZZLUSVS"
+      },
+      {
+        "id": "940GZZLUTMH"
+      },
+      {
+        "id": "940GZZLUVIC"
+      },
+      {
+        "id": "940GZZLUVXL"
+      },
+      {
+        "id": "940GZZLUWRR"
+      },
+      {
+        "id": "940GZZLUWWL"
+      }
+    ]
+  },
+  {
+    "id": "waterloo-city",
+    "stations": [
+      {
+        "id": "940GZZLUBNK"
+      },
+      {
+        "id": "940GZZLUWLO"
+      }
+    ]
+  }
+]

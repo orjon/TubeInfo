@@ -132,6 +132,39 @@ describe('GET /api/arrivals/:stationId', () => {
     const res = await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
     expect(res.status).toBe(502)
   })
+
+  it('asks TfL once for requests within 30 seconds', async () => {
+    const { calls } = stubTfl({ [ARRIVALS]: arrivalsFixture })
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(calls).toHaveLength(1)
+  })
+
+  it('asks TfL about both stops of a merged station and combines the answers', async () => {
+    const PADDINGTON = '940GZZLUPAC' // merged with 940GZZLUPAH
+    const stop = (id) => `/stoppoint/${id}/arrivals`
+    const { calls } = stubTfl({
+      [stop('940GZZLUPAC')]: [{ ...arrivalsFixture[0], lineId: 'bakerloo', platformName: 'Southbound - Platform 4', expectedArrival: '2026-01-01T10:05:00Z' }],
+      [stop('940GZZLUPAH')]: [{ ...arrivalsFixture[0], lineId: 'circle', platformName: 'Eastbound - Platform 15', expectedArrival: '2026-01-01T10:01:00Z' }]
+    })
+    const res = await request(app).get(`/setoff/api/arrivals/${PADDINGTON}`)
+    expect(res.status).toBe(200)
+    expect(calls.sort()).toEqual([stop('940GZZLUPAC'), stop('940GZZLUPAH')])
+    expect(res.body.arrivals.map((a) => a.lineId)).toEqual(['circle', 'bakerloo']) // soonest first
+  })
+
+  it('answers 502 if either stop of a merged station fails', async () => {
+    stubTfl({ ['/stoppoint/940GZZLUPAC/arrivals']: arrivalsFixture }) // the other stop 404s
+    const res = await request(app).get('/setoff/api/arrivals/940GZZLUPAC')
+    expect(res.status).toBe(502)
+  })
+
+  it('does not add arrivals to the station list', async () => {
+    stubTfl({ [ARRIVALS]: arrivalsFixture })
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(global.serverState.arrivals[WATERLOO].arrivals.length).toBeGreaterThan(0) // cached separately...
+    expect(global.serverState.stations.find((s) => s.id === WATERLOO)).not.toHaveProperty('arrivals') // ...not on the station
+  })
 })
 
 describe('GET /api/stations', () => {
@@ -141,6 +174,14 @@ describe('GET /api/stations', () => {
     expect(res.status).toBe(200)
     expect(res.body.lineStations.length).toBeGreaterThan(0)
     expect(res.body.stations.length).toBeGreaterThan(0)
+  })
+
+  it('lists the stations of each line by id only', async () => {
+    stubTfl({ [STOPPOINTS]: stoppointsFixture })
+    const res = await request(app).get('/setoff/api/stations')
+    for (const line of res.body.lineStations) {
+      for (const stop of line.stations) expect(Object.keys(stop)).toEqual(['id'])
+    }
   })
 
   it('merges a station served by several lines into one record', async () => {
