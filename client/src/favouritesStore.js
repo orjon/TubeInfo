@@ -18,10 +18,22 @@ const listeners = new Set()
 
 const notify = () => listeners.forEach((l) => l())
 
+// Browsers may clear a site's storage when the device is short of space. When something
+// is saved, ask the browser to keep ours, unless it already does. It may say no (or may
+// not have the feature); the favourites still work either way.
+async function askToKeepStorage() {
+  try {
+    if (!(await navigator.storage?.persisted?.())) await navigator.storage?.persist?.()
+  } catch {
+    // not available: nothing to do
+  }
+}
+
 function save(list) {
   current = list
   try {
     window.localStorage.setItem(KEY, JSON.stringify(list))
+    if (list.length > 0) askToKeepStorage()
   } catch {
     // not saved: the favourites last until the page is closed
   }

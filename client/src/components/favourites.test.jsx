@@ -101,6 +101,47 @@ describe('the star in front of a direction on a station page', () => {
   })
 })
 
+describe('keeping the favourites in the browser', () => {
+  const setStorageApi = (value) =>
+    Object.defineProperty(navigator, 'storage', { value, configurable: true })
+  afterEach(() => setStorageApi(undefined))
+
+  it('asks the browser to keep the storage when something is starred', async () => {
+    const persist = vi.fn(async () => true)
+    setStorageApi({ persisted: async () => false, persist })
+    renderAt(`/station/${KX.url}`)
+    fireEvent.click(await star('Northern, Northbound'))
+    await waitFor(() => expect(persist).toHaveBeenCalled())
+  })
+
+  it('does not ask if the browser already keeps it', async () => {
+    const persist = vi.fn(async () => true)
+    setStorageApi({ persisted: async () => true, persist })
+    renderAt(`/station/${KX.url}`)
+    fireEvent.click(await star('Northern, Northbound'))
+    await new Promise((r) => setTimeout(r, 50))
+    expect(persist).not.toHaveBeenCalled()
+  })
+
+  it('still saves the favourite when the browser does not have that feature', async () => {
+    setStorageApi(undefined)
+    renderAt(`/station/${KX.url}`)
+    fireEvent.click(await star('Northern, Northbound'))
+    expect(JSON.parse(window.localStorage.getItem('setoff.favourites.v1'))).toHaveLength(1)
+  })
+
+  it('still works when saving fails (storage blocked), until the page is closed', async () => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new Error('blocked')
+    })
+    renderAt(`/station/${KX.url}`)
+    const northern = await star('Northern, Northbound')
+    fireEvent.click(northern)
+    expect(northern.getAttribute('aria-pressed')).toBe('true') // the star still reflects it
+    vi.restoreAllMocks()
+  })
+})
+
 describe('the favourites page', () => {
   it('is one card titled Favourites, and says how to add one when there are none', () => {
     renderAt('/favourites')
