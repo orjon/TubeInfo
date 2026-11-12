@@ -12,7 +12,7 @@ const app = express()
 
 // Everything lives under one base path, e.g. orjon.com/setoff
 const BASE_PATH = (process.env.BASE_PATH || '/setoff').replace(/\/$/, '')
-const CLIENT_DIR = path.join(__dirname, 'client', 'build')
+const CLIENT_DIR = path.join(__dirname, 'client', 'dist')
 
 global.stats = {
   serverStart: moment().format(),

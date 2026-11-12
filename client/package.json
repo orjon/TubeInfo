@@ -1,51 +1,24 @@
 {
-  "name": "tube-info-client",
-  "version": "0.1.0",
+  "name": "setoff-client",
+  "version": "2.0.0",
   "private": true,
-  "homepage": "/setoff/",
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.20.0",
-    "moment": "^2.29.0",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-moment": "^1.0.0",
-    "react-redux": "^7.2.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "file-loader": "^6.0.0",
-    "mapbox-gl": "^1.10.0",
-    "moment-timezone": "^0.5.28",
-    "react-live-clock": "^4.0.5",
-    "sass": "^1.26.3",
-    "uuid": "^8.3.0"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@tanstack/react-query": "^5.107.1",
+    "mapbox-gl": "^3.34.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:5005"
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.3.0",
+    "sass": "^1.108.2",
+    "vite": "^8.3.8",
+    "vite-plugin-pwa": "^2.0.0"
+  }
 }
