@@ -11,71 +11,80 @@ import '../../scss/Section.scss'
 import '../../scss/Station.scss'
 import '../../scss/Favourites.scss'
 
-// One starred direction at one station: "Bromley-by-Bow, Eastbound" and its trains
-const FavouriteDirection = ({ station, line, direction }) => {
-  const { arrivals, isError } = useArrivals(station.id)
-  const favourite = { stationId: station.id, lineId: line.id, direction }
+// One station on a line: its name, then each starred direction there with its trains
+const FavouriteStation = ({ stationId, station, line, directions }) => {
+  const { arrivals, isError } = useArrivals(station?.id)
 
-  const heading = (
+  return (
     <>
-      <Link className='stationLink' to={`/station/${station.url}`}>
-        {station.name}
-      </Link>
-      {`, ${direction}`}
+      {/* same style, and so the same size, as the line's status ("Good Service") */}
+      <div className='row titleRow status'>
+        {station ? (
+          <Link className='stationLink' to={`/station/${station.url}`}>
+            {station.name}
+          </Link>
+        ) : (
+          'Station no longer available'
+        )}
+      </div>
+
+      {directions.map((direction) => {
+        const favourite = { stationId, lineId: line.id, direction }
+        const label = station
+          ? `${station.name}, ${line.name}, ${direction}`
+          : `${line.name}, ${direction}: station no longer available`
+
+        if (!station) {
+          return (
+            <DirectionArrivals
+              key={direction}
+              direction={direction}
+              arrivals={[]}
+              emptyText='Tap the star to remove it'
+              favourite={favourite}
+              label={label}
+            />
+          )
+        }
+        if (!arrivals) {
+          return (
+            <DirectionArrivals
+              key={direction}
+              direction={direction}
+              arrivals={[]}
+              emptyText={isError ? 'Could not load arrival times' : 'Loading arrival times...'}
+              favourite={favourite}
+              label={label}
+            />
+          )
+        }
+
+        const groups = groupArrivals(arrivals, line.id).filter((g) => g.direction === direction)
+        return groups.length === 0 ? (
+          <DirectionArrivals
+            key={direction}
+            direction={direction}
+            arrivals={[]}
+            favourite={favourite}
+            label={label}
+          />
+        ) : (
+          groups.map((group) => (
+            <DirectionArrivals
+              key={`${direction}-${group.platform}`}
+              {...group}
+              favourite={favourite}
+              label={label}
+            />
+          ))
+        )
+      })}
     </>
   )
-  const label = `${station.name}, ${line.name}, ${direction}`
-
-  if (!arrivals) {
-    return (
-      <>
-        <div className='row titleRow'>
-          <div className='sub-title'>{heading}</div>
-        </div>
-        <div className='row data'>
-          <div>{isError ? 'Could not load arrival times' : 'Loading arrival times...'}</div>
-        </div>
-      </>
-    )
-  }
-
-  const groups = groupArrivals(arrivals, line.id).filter((g) => g.direction === direction)
-  if (groups.length === 0) {
-    return (
-      <DirectionArrivals
-        heading={heading}
-        direction={direction}
-        arrivals={[]}
-        favourite={favourite}
-        label={label}
-      />
-    )
-  }
-  return groups.map((group) => (
-    <DirectionArrivals
-      key={group.platform}
-      {...group}
-      heading={heading}
-      favourite={favourite}
-      label={label}
-    />
-  ))
 }
 
-// A favourite whose station is no longer in the data. It can still be removed.
-const MissingStation = ({ stationId, line, direction }) => (
-  <DirectionArrivals
-    heading='Station no longer available'
-    direction={direction}
-    arrivals={[]}
-    emptyText='Tap the star to remove it'
-    favourite={{ stationId, lineId: line.id, direction }}
-    label={`${line.name}, ${direction}: station no longer available`}
-  />
-)
-
-// One line: its coloured header, its status, then each starred direction on it
-const FavouriteLine = ({ line, items, stations, statusesTimeStamp }) => (
+// One line: its coloured header and status, then its stations
+const FavouriteLine = ({ line, stations: lineStations, allStations, statusesTimeStamp }) => (
   <div className='LineArrivals'>
     <Link to={`/line/${line.id}`}>
       <div className='LineArrivalHeader'>
@@ -84,24 +93,15 @@ const FavouriteLine = ({ line, items, stations, statusesTimeStamp }) => (
       <Status line={line} timeStamp={statusesTimeStamp} />
     </Link>
     <div className='dataBlock'>
-      {items.map(({ stationId, direction }) => {
-        const station = stations.find((s) => s.id === stationId)
-        return station ? (
-          <FavouriteDirection
-            key={`${stationId}-${direction}`}
-            station={station}
-            line={line}
-            direction={direction}
-          />
-        ) : (
-          <MissingStation
-            key={`${stationId}-${direction}`}
-            stationId={stationId}
-            line={line}
-            direction={direction}
-          />
-        )
-      })}
+      {lineStations.map(({ stationId, directions }) => (
+        <FavouriteStation
+          key={stationId}
+          stationId={stationId}
+          station={allStations.find((s) => s.id === stationId)}
+          line={line}
+          directions={directions}
+        />
+      ))}
     </div>
   </div>
 )
@@ -114,8 +114,8 @@ const Favourites = () => {
   // lines in the same order as the home page; a line that is no longer known is left out
   const groups = groupByLine(favourites)
   const lines = statuses
-    .map((line) => ({ line, items: groups.find((g) => g.lineId === line.id)?.items }))
-    .filter((entry) => entry.items)
+    .map((line) => ({ line, stations: groups.find((g) => g.lineId === line.id)?.stations }))
+    .filter((entry) => entry.stations)
 
   return (
     <section className='station favourites'>
@@ -131,12 +131,12 @@ const Favourites = () => {
           </p>
         ) : (
           <div className='ArrivalsGrid'>
-            {lines.map(({ line, items }) => (
+            {lines.map(({ line, stations: lineStations }) => (
               <FavouriteLine
                 key={line.id}
                 line={line}
-                items={items}
-                stations={stations}
+                stations={lineStations}
+                allStations={stations}
                 statusesTimeStamp={statusesTimeStamp}
               />
             ))}

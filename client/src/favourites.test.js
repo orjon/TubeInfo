@@ -56,22 +56,37 @@ describe('parseFavourites', () => {
 })
 
 describe('groupByLine', () => {
-  it('makes one group per line, holding that line\'s starred directions at any station', () => {
-    const list = [
-      { stationId: 'BBB', lineId: 'hammersmith-city', direction: 'Eastbound' },
-      kx,
-      { stationId: 'BST', lineId: 'hammersmith-city', direction: 'Westbound' }
-    ]
+  const list = [
+    { stationId: 'BBB', lineId: 'hammersmith-city', direction: 'Eastbound' },
+    kx,
+    { stationId: 'BST', lineId: 'hammersmith-city', direction: 'Westbound' },
+    { stationId: 'BBB', lineId: 'hammersmith-city', direction: 'Westbound' }
+  ]
+
+  it('makes one group per line, and inside it one entry per station', () => {
     expect(groupByLine(list)).toEqual([
       {
         lineId: 'hammersmith-city',
-        items: [
-          { stationId: 'BBB', direction: 'Eastbound' },
-          { stationId: 'BST', direction: 'Westbound' }
+        stations: [
+          { stationId: 'BBB', directions: ['Eastbound', 'Westbound'] },
+          { stationId: 'BST', directions: ['Westbound'] }
         ]
       },
-      { lineId: 'northern', items: [{ stationId: 'KXX', direction: 'Northbound' }] }
+      { lineId: 'northern', stations: [{ stationId: 'KXX', directions: ['Northbound'] }] }
     ])
+  })
+
+  it('names a station once even when two of its directions are starred', () => {
+    const [hc] = groupByLine(list)
+    expect(hc.stations.filter((s) => s.stationId === 'BBB')).toHaveLength(1)
+  })
+
+  it('does not mix the same station on two different lines', () => {
+    const both = groupByLine([
+      { stationId: 'KXX', lineId: 'northern', direction: 'Northbound' },
+      { stationId: 'KXX', lineId: 'victoria', direction: 'Northbound' }
+    ])
+    expect(both.map((l) => l.lineId)).toEqual(['northern', 'victoria'])
   })
 
   it('is empty for no favourites', () => {

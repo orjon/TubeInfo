@@ -114,7 +114,7 @@ describe('the favourites page', () => {
 
     expect(await screen.findByText('Northern')).toBeTruthy() // the line is the heading
     expect(screen.getByRole('link', { name: "King's Cross St. Pancras" })).toBeTruthy()
-    expect(screen.getByText(/, Northbound/)).toBeTruthy()
+    expect(screen.getByText('Northbound')).toBeTruthy()
     expect(await screen.findByText('Edgware via Bank')).toBeTruthy()
     expect(screen.getByText('High Barnet via Bank')).toBeTruthy()
     // only the starred direction: not Southbound, not the Victoria line
@@ -139,10 +139,32 @@ describe('the favourites page', () => {
     expect(await screen.findAllByText('Hammersmith & City')).toHaveLength(1) // one heading
     expect(screen.getByRole('link', { name: BBB.name })).toBeTruthy()
     expect(screen.getByRole('link', { name: BST.name })).toBeTruthy()
-    expect(screen.getByText(/, Eastbound/)).toBeTruthy()
-    expect(screen.getByText(/, Westbound/)).toBeTruthy()
+    expect(screen.getByText('Eastbound')).toBeTruthy()
+    expect(screen.getByText('Westbound')).toBeTruthy()
     expect(await screen.findByText('Barking')).toBeTruthy() // Eastbound trains
     expect(screen.getByText('Hammersmith')).toBeTruthy() // Westbound trains
+  })
+
+  it('names a station once when two of its directions are starred', async () => {
+    setFavourites([
+      { stationId: BBB.id, lineId: 'hammersmith-city', direction: 'Eastbound' },
+      { stationId: BBB.id, lineId: 'hammersmith-city', direction: 'Westbound' }
+    ])
+    renderAt('/favourites')
+    await screen.findByText('Barking')
+    expect(screen.getAllByRole('link', { name: BBB.name })).toHaveLength(1) // not twice
+    expect(screen.getByText('Eastbound')).toBeTruthy()
+    expect(screen.getByText('Westbound')).toBeTruthy()
+  })
+
+  it('puts the station name above its directions, in the same style as the status', async () => {
+    setFavourites([{ stationId: BBB.id, lineId: 'hammersmith-city', direction: 'Eastbound' }])
+    renderAt('/favourites')
+    const station = await screen.findByRole('link', { name: BBB.name })
+    const direction = screen.getByText('Eastbound')
+    // the station title is in a "status" row (the style of "Good Service") and comes first
+    expect(station.closest('.status')).toBeTruthy()
+    expect(station.compareDocumentPosition(direction) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 
   it('gives each line its own block, in the home page order', async () => {
