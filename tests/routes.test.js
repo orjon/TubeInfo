@@ -59,6 +59,13 @@ describe('GET /api/statuses', () => {
     expect(res.body.statusesTimeStamp).toBeDefined()
   })
 
+  it('shows the Elizabeth line as "Elizabeth", like the Tube lines, not TfL\'s "Elizabeth line"', async () => {
+    stubTfl({ [STATUSES]: statusesFixture })
+    const res = await request(app).get('/setoff/api/statuses')
+    expect(res.body.statuses.find((s) => s.id === 'elizabeth').name).toBe('Elizabeth')
+    expect(res.body.statuses.find((s) => s.id === 'victoria').name).toBe('Victoria')
+  })
+
   it('removes the "LINE NAME:" prefix from a disruption reason', async () => {
     stubTfl({ [STATUSES]: statusesFixture })
     const res = await request(app).get('/setoff/api/statuses')

@@ -10,5 +10,5 @@ export const initialStatuses = [
   { key: 'piccadilly', id: 'piccadilly', name: 'Piccadilly', status: 'Loading...'},
   { key: 'victoria', id: 'victoria', name: 'Victoria', status: 'Loading...'},
   { key: 'waterloo-city', id: 'waterloo-city', name: 'Waterloo & City', status: 'Loading...' },
-  { key: 'elizabeth', id: 'elizabeth', name: 'Elizabeth line', status: 'Loading...' }
+  { key: 'elizabeth', id: 'elizabeth', name: 'Elizabeth', status: 'Loading...' }
 ]

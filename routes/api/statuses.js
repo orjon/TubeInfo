@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { tflGet } = require('../../tfl')
-const { MODES } = require('../../lib/lines')
+const { MODES, DISPLAY_NAMES } = require('../../lib/lines')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
 
@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
       return statuses.push({
         key: line.id,
         id: line.id,
-        name: line.name,
+        name: DISPLAY_NAMES[line.id] ?? line.name,
         status: line.lineStatuses[0].statusSeverityDescription,
         reason: reason
       })
