@@ -69,6 +69,68 @@ describe('mergeStations', () => {
   })
 })
 
+describe('mergeStations by TfL hub code', () => {
+  const stop = (id, name, lines, hub, lat = 51, lng = -0.1) => ({
+    key: id, id, url: name, name, lines, lat, lng, hub,
+    contact: [{ key: 'Address', value: id }], facilities: []
+  })
+  const stations = [
+    stop('940GZZLUWPL', 'Whitechapel', ['district'], 'HUBZWL'),
+    stop('910GWCHAPXR', 'Whitechapel', ['elizabeth'], 'HUBZWL'),
+    stop('910GLIVST', 'London Liverpool Street', ['elizabeth'], 'HUBLST'),
+    stop('940GZZLULVT', 'Liverpool Street', ['central', 'circle'], 'HUBLST'),
+    stop('940GZZLUBRX', 'Brixton', ['victoria'], undefined),
+    stop('940GZZLUOXC', 'Oxford Circus', ['victoria'], 'HUBOXC') // alone in its hub
+  ]
+  const lines = [
+    { id: 'district', stations: [{ id: '940GZZLUWPL' }] },
+    { id: 'elizabeth', stations: [{ id: '910GWCHAPXR' }, { id: '910GLIVST' }] },
+    { id: 'victoria', stations: [{ id: '940GZZLUBRX' }, { id: '940GZZLUOXC' }] }
+  ]
+  const result = mergeStations(stations, lines, [])
+
+  it('merges stops that share a hub code and leaves others alone', () => {
+    expect(result.stations.map((s) => s.name).sort()).toEqual(['Brixton', 'Liverpool Street', 'Oxford Circus', 'Whitechapel'])
+  })
+
+  it('takes the Tube stop as the main one, so the name is the Tube name', () => {
+    const liverpool = result.stations.find((s) => s.name === 'Liverpool Street')
+    expect(liverpool.id).toBe('940GZZLULVT')
+    expect(liverpool.ids.sort()).toEqual(['910GLIVST', '940GZZLULVT'])
+    expect(liverpool.lines).toEqual(['central', 'circle', 'elizabeth'])
+  })
+
+  it('works out the URL from the name', () => {
+    expect(result.stations.find((s) => s.name === 'Liverpool Street').url).toBe('liverpool-street')
+  })
+
+  it('moves the Elizabeth line stop onto the main stop', () => {
+    expect(result.lineStations.find((l) => l.id === 'elizabeth').stations).toEqual([
+      { id: '940GZZLUWPL' },
+      { id: '940GZZLULVT' }
+    ])
+  })
+
+  it('removes a bracketed suffix from a merged station\'s name', () => {
+    const merged = mergeStations(
+      [stop('A', 'Foo (Blue Line)', ['blue'], 'H1'), stop('B', 'Foo (Red Line)', ['red'], 'H1')],
+      [], []
+    )
+    expect(merged.stations[0].name).toBe('Foo')
+  })
+
+  it('fills in contact details the main stop lacks from the other stops', () => {
+    const merged = mergeStations(
+      [
+        { ...stop('940GZZLUA', 'A', ['blue'], 'H'), contact: [{ key: 'Address', value: 'main' }] },
+        { ...stop('910GA', 'A', ['red'], 'H'), contact: [{ key: 'Address', value: 'other' }, { key: 'Zone', value: '2' }] }
+      ],
+      [], []
+    )
+    expect(merged.stations[0].contact).toEqual([{ key: 'Address', value: 'main' }, { key: 'Zone', value: '2' }])
+  })
+})
+
 describe('the list of merged stations', () => {
   it('has Edgware Road, Hammersmith and Paddington', () => {
     expect(MERGED_STATIONS.map((m) => m.name)).toEqual(['Edgware Road', 'Hammersmith', 'Paddington'])

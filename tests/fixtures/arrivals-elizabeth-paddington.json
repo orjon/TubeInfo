@@ -1,0 +1,29 @@
+[
+  {
+    "lineName": "Elizabeth line",
+    "lineId": "elizabeth",
+    "platformName": "B",
+    "direction": "outbound",
+    "destinationName": "Heathrow Terminal 4 Rail Station",
+    "towards": "",
+    "expectedArrival": "2026-11-12T15:54:00Z"
+  },
+  {
+    "lineName": "Elizabeth line",
+    "lineId": "elizabeth",
+    "platformName": "A",
+    "direction": "inbound",
+    "destinationName": "Abbey Wood",
+    "towards": "",
+    "expectedArrival": "2026-11-12T15:53:00Z"
+  },
+  {
+    "lineName": "Elizabeth line",
+    "lineId": "elizabeth",
+    "platformName": "B",
+    "direction": "",
+    "destinationName": "Paddington",
+    "towards": "",
+    "expectedArrival": "2026-11-12T15:56:09Z"
+  }
+]

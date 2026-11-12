@@ -3,8 +3,8 @@ import DirectionArrival from './DirectionArrival'
 const DirectionArrivals = ({ direction, platform, arrivals }) => (
   <>
     <div className='row titleRow'>
-      <div className='sub-title'>{direction}</div>
-      <div className='sub-title end'>Platform {platform}</div>
+      <div className='sub-title'>{direction || 'Other trains'}</div>
+      <div className='sub-title end'>{platform ? `Platform ${platform}` : ''}</div>
     </div>
     <div className='row infoRow'>
       <h4 className='infoLabel'>Towards</h4>

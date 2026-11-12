@@ -76,7 +76,16 @@ describe('groupArrivals', () => {
     expect(groupArrivals(many, 'x')[0].arrivals).toHaveLength(5)
   })
 
-  it('leaves out arrivals with a direction the page does not know', () => {
-    expect(groupArrivals([arrival('x', '', '1', 1)], 'x')).toEqual([])
+  it('puts Elizabeth line Outbound and Inbound groups after the compass directions', () => {
+    const groups = groupArrivals(
+      [arrival('e', 'Inbound', 'A', 1), arrival('e', 'Outbound', 'B', 2), arrival('e', 'Eastbound', '1', 3)],
+      'e'
+    )
+    expect(groups.map((g) => g.direction)).toEqual(['Eastbound', 'Outbound', 'Inbound'])
+  })
+
+  it('keeps arrivals with no direction, in a group of their own at the end', () => {
+    const groups = groupArrivals([arrival('x', '', 'B', 1), arrival('x', 'Northbound', '1', 2)], 'x')
+    expect(groups.map((g) => g.direction)).toEqual(['Northbound', ''])
   })
 })

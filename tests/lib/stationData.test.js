@@ -24,6 +24,12 @@ describe('trimStationName', () => {
     expect(trimStationName('Kensington (Olympia) Underground Station')).toBe('Kensington (Olympia)')
   })
 
+  it('removes "Rail Station", "DLR Station" and "Tram Stop" too', () => {
+    expect(trimStationName('Abbey Wood Rail Station')).toBe('Abbey Wood')
+    expect(trimStationName('Canary Wharf DLR Station')).toBe('Canary Wharf')
+    expect(trimStationName('Wimbledon Tram Stop')).toBe('Wimbledon')
+  })
+
   it('never leaves a space at either end', () => {
     expect(trimStationName('  Edgware Road (Bakerloo) Underground Station ')).toBe('Edgware Road (Bakerloo)')
   })
@@ -54,6 +60,20 @@ describe('filterStationData', () => {
       expect(['no', '0']).not.toContain(facility.value)
       expect(facility.value).toBeDefined()
     }
+  })
+
+  it('matches facility names however TfL capitalises them ("Help points", "Boarding Ramps")', () => {
+    const rail = {
+      id: 'x', commonName: 'Test Rail Station', lat: 1, lon: 2, hubNaptanCode: 'HUBTST',
+      additionalProperties: [
+        { key: 'Help points', value: 'yes' },
+        { key: 'Boarding Ramps', value: 'yes' },
+        { key: 'Car Park', value: '0' }
+      ]
+    }
+    const result = filterStationData(rail, 'elizabeth')
+    expect(result.facilities.map((f) => f.key)).toEqual(['Help Points', 'Boarding Ramp'])
+    expect(result.hub).toBe('HUBTST')
   })
 
   it('does not fail on a station with no additional properties', () => {

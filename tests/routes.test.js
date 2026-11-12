@@ -5,6 +5,7 @@ import { stubTfl } from './helpers/tflStub'
 import statusesFixture from './fixtures/statuses.json'
 import stoppointsFixture from './fixtures/stoppoints-victoria.json'
 import arrivalsFixture from './fixtures/arrivals-waterloo.json'
+import elizabethFixture from './fixtures/arrivals-elizabeth-paddington.json'
 
 // Must be set before the server loads its config
 vi.hoisted(() => {
@@ -15,7 +16,7 @@ const require = createRequire(import.meta.url)
 const { app, resetState } = require('../app')
 
 const WATERLOO = '940GZZLUWLO' // a real station id in the bundled data
-const STATUSES = '/line/mode/tube/status'
+const STATUSES = '/line/mode/tube,elizabeth-line/status'
 const ARRIVALS = `/stoppoint/${WATERLOO}/arrivals`
 const STOPPOINTS = '/^\\/line\\/.+\\/stoppoints/'
 
@@ -53,8 +54,8 @@ describe('GET /api/statuses', () => {
     stubTfl({ [STATUSES]: statusesFixture })
     const res = await request(app).get('/setoff/api/statuses')
     expect(res.status).toBe(200)
-    expect(res.body.statuses.map((s) => s.id)).toEqual(['bakerloo', 'central', 'victoria'])
-    expect(res.body.statuses[0]).toMatchObject({ name: 'Bakerloo', status: expect.any(String) })
+    expect(res.body.statuses.map((s) => s.id).sort()).toEqual(['bakerloo', 'central', 'elizabeth', 'victoria'])
+    expect(res.body.statuses.find((s) => s.id === 'bakerloo')).toMatchObject({ name: 'Bakerloo', status: expect.any(String) })
     expect(res.body.statusesTimeStamp).toBeDefined()
   })
 
@@ -140,17 +141,19 @@ describe('GET /api/arrivals/:stationId', () => {
     expect(calls).toHaveLength(1)
   })
 
-  it('asks TfL about both stops of a merged station and combines the answers', async () => {
-    const PADDINGTON = '940GZZLUPAC' // merged with 940GZZLUPAH
+  it('asks TfL about every stop of a merged station and combines the answers', async () => {
+    const PADDINGTON = '940GZZLUPAC' // merged with PAH and the two Elizabeth line stops
     const stop = (id) => `/stoppoint/${id}/arrivals`
     const { calls } = stubTfl({
       [stop('940GZZLUPAC')]: [{ ...arrivalsFixture[0], lineId: 'bakerloo', platformName: 'Southbound - Platform 4', expectedArrival: '2026-01-01T10:05:00Z' }],
-      [stop('940GZZLUPAH')]: [{ ...arrivalsFixture[0], lineId: 'circle', platformName: 'Eastbound - Platform 15', expectedArrival: '2026-01-01T10:01:00Z' }]
+      [stop('940GZZLUPAH')]: [{ ...arrivalsFixture[0], lineId: 'circle', platformName: 'Eastbound - Platform 15', expectedArrival: '2026-01-01T10:03:00Z' }],
+      [stop('910GPADTLL')]: [{ ...elizabethFixture[0], expectedArrival: '2026-01-01T10:01:00Z' }],
+      [stop('910GPADTON')]: []
     })
     const res = await request(app).get(`/setoff/api/arrivals/${PADDINGTON}`)
     expect(res.status).toBe(200)
-    expect(calls.sort()).toEqual([stop('940GZZLUPAC'), stop('940GZZLUPAH')])
-    expect(res.body.arrivals.map((a) => a.lineId)).toEqual(['circle', 'bakerloo']) // soonest first
+    expect(calls.sort()).toEqual(['940GZZLUPAC', '940GZZLUPAH', '910GPADTLL', '910GPADTON'].map(stop).sort())
+    expect(res.body.arrivals.map((a) => a.lineId)).toEqual(['elizabeth', 'circle', 'bakerloo']) // soonest first
   })
 
   it('answers 502 if either stop of a merged station fails', async () => {

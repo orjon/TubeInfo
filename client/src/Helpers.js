@@ -28,7 +28,9 @@ const directionOrder = [
   'Southbound',
   'Westbound',
   'Inner Rail',
-  'Outer Rail'
+  'Outer Rail',
+  'Outbound',
+  'Inbound'
 ]
 
 // One line's arrivals at a station, split into a group for each direction and
@@ -48,7 +50,6 @@ export function groupArrivals(arrivals, lineId, limit = 5) {
   }
   const rank = (d) => (directionOrder.includes(d) ? directionOrder.indexOf(d) : 99)
   return groups
-    .filter((g) => directionOrder.includes(g.direction))
     .sort(
       (a, b) =>
         rank(a.direction) - rank(b.direction) ||

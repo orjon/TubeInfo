@@ -24,7 +24,15 @@ describe('data/stations.json and data/lineStations.json', () => {
     expect(find('Hammersmith')).toHaveLength(1)
     expect(find('Paddington')).toHaveLength(1)
     expect(find('Edgware Road')[0].lines).toEqual(['bakerloo', 'circle', 'district', 'hammersmith-city'])
-    expect(find('Paddington')[0].ids).toHaveLength(2)
+    expect(find('Paddington')[0].ids).toHaveLength(4) // two Tube stops, two Elizabeth line stops
+  })
+
+  it('covers the Elizabeth line, merged with the Tube at shared stations', () => {
+    const line = lineStations.find((l) => l.id === 'elizabeth')
+    expect(line.stations.length).toBeGreaterThan(35)
+    const whitechapel = stations.find((s) => s.name === 'Whitechapel')
+    expect(whitechapel.lines).toEqual(expect.arrayContaining(['district', 'elizabeth', 'hammersmith-city']))
+    expect(stations.filter((s) => s.name === 'Whitechapel')).toHaveLength(1)
   })
 
   it('every station is on at least one line, and every line stop is a station', () => {

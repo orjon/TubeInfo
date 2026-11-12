@@ -38,6 +38,8 @@ $color_Hammersmith: rgb(244, 169, 190);
 $color_Piccadilly: rgb(000, 025, 168);
 $color_Victoria: rgb(000, 152, 216);
 $color_Waterloo: rgb(147, 206, 186);
+// TfL Elizabeth line Design Idiom: Pantone 266c, #6950A1. A print standard; check on screen.
+$color_Elizabeth: rgb(105, 80, 161);
 
 $cardBorderRadius: 10px;
 // $cardShadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
@@ -75,6 +77,9 @@ $cardShadow: none;
 }
 .waterloo-city {
   background-color: $color_Waterloo;
+}
+.elizabeth {
+  background-color: $color_Elizabeth;
 }
 
 .AppTitle {

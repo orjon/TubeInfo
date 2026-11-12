@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { tflGet } = require('../../tfl')
+const { MODES } = require('../../lib/lines')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
 
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
   let statuses = []
 
   try {
-    let lineStatuses = await tflGet('/line/mode/tube/status')
+    let lineStatuses = await tflGet(`/line/mode/${MODES.join(',')}/status`)
     statistics.logTflStatusesRequest()
     lineStatuses.map((line) => {
       let reason = undefined

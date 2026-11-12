@@ -1202,5 +1202,133 @@
         "id": "940GZZLUWLO"
       }
     ]
+  },
+  {
+    "id": "elizabeth",
+    "stations": [
+      {
+        "id": "910GABWDXR"
+      },
+      {
+        "id": "910GACTONML"
+      },
+      {
+        "id": "910GBNHAM"
+      },
+      {
+        "id": "940GZZLUBND"
+      },
+      {
+        "id": "910GBRTWOOD"
+      },
+      {
+        "id": "940GZZLUCYF"
+      },
+      {
+        "id": "910GCHDWLHT"
+      },
+      {
+        "id": "910GCUSTMHS"
+      },
+      {
+        "id": "940GZZLUEBY"
+      },
+      {
+        "id": "940GZZLUFCN"
+      },
+      {
+        "id": "910GFRSTGT"
+      },
+      {
+        "id": "910GGIDEAPK"
+      },
+      {
+        "id": "910GGODMAYS"
+      },
+      {
+        "id": "910GHANWELL"
+      },
+      {
+        "id": "910GHAYESAH"
+      },
+      {
+        "id": "910GHRLDWOD"
+      },
+      {
+        "id": "940GZZLUHRC"
+      },
+      {
+        "id": "940GZZLUHR4"
+      },
+      {
+        "id": "940GZZLUHR5"
+      },
+      {
+        "id": "910GILFORD"
+      },
+      {
+        "id": "910GIVER"
+      },
+      {
+        "id": "910GLANGLEY"
+      },
+      {
+        "id": "940GZZLULVT"
+      },
+      {
+        "id": "910GMANRPK"
+      },
+      {
+        "id": "910GMDNHEAD"
+      },
+      {
+        "id": "910GMRYLAND"
+      },
+      {
+        "id": "940GZZLUPAC"
+      },
+      {
+        "id": "910GRDNGSTN"
+      },
+      {
+        "id": "910GROMFORD"
+      },
+      {
+        "id": "910GSHENFLD"
+      },
+      {
+        "id": "910GSLOUGH"
+      },
+      {
+        "id": "940GZZLUSTD"
+      },
+      {
+        "id": "910GSTHALL"
+      },
+      {
+        "id": "910GSVNKNGS"
+      },
+      {
+        "id": "910GTAPLOW"
+      },
+      {
+        "id": "940GZZLUTCR"
+      },
+      {
+        "id": "910GTWYFORD"
+      },
+      {
+        "id": "940GZZLUWPL"
+      },
+      {
+        "id": "910GWDRYTON"
+      },
+      {
+        "id": "910GWEALING"
+      },
+      {
+        "id": "910GWOLWXR"
+      }
+    ]
   }
 ]

@@ -34,9 +34,10 @@ const Station = () => {
     )
   }
 
-  let address = ''
-  let phoneNo = ''
-  let zone = ''
+  const contact = (key) => station.contact.find((c) => c.key === key)?.value ?? ''
+  let address = contact('Address') ? contact('Address').split(',') : ''
+  let phoneNo = contact('PhoneNo')
+  const zone = contact('Zone')
 
   // Harrow on the Hill has bad contact data from TfL
   if (station.id === '940GZZLUHOH') {
@@ -47,10 +48,6 @@ const Station = () => {
       'Harrow HA1 1BB'
     ]
     phoneNo = '0800 022 3720'
-  } else {
-    if (station.contact[0]) address = station.contact[0].value.split(',')
-    if (station.contact[1]) phoneNo = station.contact[1].value
-    if (station.contact[2]) zone = station.contact[2].value
   }
 
   return (

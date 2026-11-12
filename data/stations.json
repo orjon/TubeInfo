@@ -1,5 +1,84 @@
 [
   {
+    "key": "910GABWDXR",
+    "id": "910GABWDXR",
+    "url": "abbey-wood",
+    "name": "Abbey Wood",
+    "lines": [
+      "elizabeth"
+    ],
+    "hub": "HUBABW",
+    "lat": 51.491284,
+    "lng": 0.121087,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Abbey Wood station,\r\n            Wilton Road,\r\n            Abbey Wood,\r\n            Greater London,\r\n            SE2 9RH"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GACTONML",
+    "id": "910GACTONML",
+    "url": "acton-main-line",
+    "name": "Acton Main Line",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.51718,
+    "lng": -0.266756,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Acton Main Line station,\r\n            Horn Lane,\r\n            Acton,\r\n            Greater London,\r\n            W3 9EH"
+      },
+      {
+        "key": "Zone",
+        "value": "3"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUACT",
     "id": "940GZZLUACT",
     "url": "acton-town",
@@ -222,6 +301,7 @@
     "lines": [
       "metropolitan"
     ],
+    "hub": "HUBAMR",
     "lat": 51.674126,
     "lng": -0.607714,
     "contact": [
@@ -548,6 +628,7 @@
     "lines": [
       "northern"
     ],
+    "hub": "HUBBAL",
     "lat": 51.443288,
     "lng": -0.152997,
     "contact": [
@@ -597,6 +678,7 @@
       "northern",
       "waterloo-city"
     ],
+    "hub": "HUBBAN",
     "lat": 51.513132,
     "lng": -0.090047,
     "contact": [
@@ -706,6 +788,7 @@
       "district",
       "hammersmith-city"
     ],
+    "hub": "HUBBKG",
     "lat": 51.539321,
     "lng": 0.081053,
     "contact": [
@@ -746,6 +829,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes London Overground only"
       },
       {
         "key": "Cash Machines",
@@ -1135,6 +1222,7 @@
       "circle",
       "district"
     ],
+    "hub": "HUBBFR",
     "lat": 51.511581,
     "lng": -0.103659,
     "contact": [
@@ -1178,6 +1266,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBBHO",
     "lat": 51.586919,
     "lng": -0.04115,
     "contact": [
@@ -1228,10 +1317,12 @@
     "name": "Bond Street",
     "lines": [
       "central",
+      "elizabeth",
       "jubilee"
     ],
-    "lat": 51.514304,
-    "lng": -0.149723,
+    "hub": "HUBBDS",
+    "lat": 51.513997,
+    "lng": -0.14962,
     "contact": [
       {
         "key": "Address",
@@ -1275,6 +1366,10 @@
         "key": "Euro Cash Machines",
         "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUBND",
+      "910GBONDST"
     ]
   },
   {
@@ -1514,6 +1609,53 @@
     ]
   },
   {
+    "key": "910GBRTWOOD",
+    "id": "910GBRTWOOD",
+    "url": "brentwood",
+    "name": "Brentwood",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.613605,
+    "lng": 0.299586,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Brentwood station,\r\n            Warley Hill,\r\n            Brentwood,\r\n            Essex,\r\n            CM14 4EW"
+      },
+      {
+        "key": "Zone",
+        "value": "9"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUBXN",
     "id": "940GZZLUBXN",
     "url": "brixton",
@@ -1521,6 +1663,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBBRX",
     "lat": 51.462618,
     "lng": -0.114888,
     "contact": [
@@ -1663,6 +1806,45 @@
       },
       {
         "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GBNHAM",
+    "id": "910GBNHAM",
+    "url": "burnham-berks",
+    "name": "Burnham (Berks)",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.523506,
+    "lng": -0.646374,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Burnham station,\r\n            Station Road,\r\n            Burnham,\r\n            Buckinghamshire,\r\n            SL1 6JT"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
         "value": "yes"
       }
     ]
@@ -1824,6 +2006,7 @@
     "lines": [
       "jubilee"
     ],
+    "hub": "HUBZCW",
     "lat": 51.497931,
     "lng": -0.049405,
     "contact": [
@@ -1885,10 +2068,12 @@
     "url": "canary-wharf",
     "name": "Canary Wharf",
     "lines": [
+      "elizabeth",
       "jubilee"
     ],
-    "lat": 51.503488,
-    "lng": -0.018246,
+    "hub": "HUBCAW",
+    "lat": 51.504846,
+    "lng": -0.01854,
     "contact": [
       {
         "key": "Address",
@@ -1944,6 +2129,10 @@
         "key": "Taxi Rank",
         "value": "No"
       }
+    ],
+    "ids": [
+      "940GZZLUCYF",
+      "910GCANWHRF"
     ]
   },
   {
@@ -1954,6 +2143,7 @@
     "lines": [
       "jubilee"
     ],
+    "hub": "HUBCAN",
     "lat": 51.513584,
     "lng": 0.008322,
     "contact": [
@@ -2014,6 +2204,7 @@
       "circle",
       "district"
     ],
+    "hub": "HUBCST",
     "lat": 51.51151,
     "lng": -0.090432,
     "contact": [
@@ -2121,6 +2312,49 @@
     ]
   },
   {
+    "key": "910GCHDWLHT",
+    "id": "910GCHDWLHT",
+    "url": "chadwell-heath",
+    "name": "Chadwell Heath",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.568039,
+    "lng": 0.128958,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Chadwell Heath station,\r\n            Station Road,\r\n            Chadwell Heath,\r\n            Greater London,\r\n            RM6 4BU"
+      },
+      {
+        "key": "Zone",
+        "value": "5"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUCAL",
     "id": "940GZZLUCAL",
     "url": "chalfont-&-latimer",
@@ -2128,6 +2362,7 @@
     "lines": [
       "metropolitan"
     ],
+    "hub": "HUBCFO",
     "lat": 51.667985,
     "lng": -0.560689,
     "contact": [
@@ -2290,6 +2525,7 @@
       "bakerloo",
       "northern"
     ],
+    "hub": "HUBCHX",
     "lat": 51.50741,
     "lng": -0.127277,
     "contact": [
@@ -2498,6 +2734,7 @@
     "lines": [
       "metropolitan"
     ],
+    "hub": "HUBCLW",
     "lat": 51.654358,
     "lng": -0.518461,
     "contact": [
@@ -2946,6 +3183,42 @@
     ]
   },
   {
+    "key": "910GCUSTMHS",
+    "id": "910GCUSTMHS",
+    "url": "custom-house",
+    "name": "Custom House",
+    "lines": [
+      "elizabeth"
+    ],
+    "hub": "HUBCUS",
+    "lat": 51.509769,
+    "lng": 0.02673,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Custom House station,\r\n            Victoria Dock Road,\r\n            Canning Town,\r\n            London,\r\n            E16 1DR"
+      },
+      {
+        "key": "Zone",
+        "value": "3"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUDGE",
     "id": "940GZZLUDGE",
     "url": "dagenham-east",
@@ -3164,10 +3437,12 @@
     "name": "Ealing Broadway",
     "lines": [
       "central",
-      "district"
+      "district",
+      "elizabeth"
     ],
-    "lat": 51.515017,
-    "lng": -0.301457,
+    "hub": "HUBEAL",
+    "lat": 51.514929,
+    "lng": -0.301604,
     "contact": [
       {
         "key": "Address",
@@ -3198,7 +3473,15 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUEBY",
+      "910GEALINGB"
     ]
   },
   {
@@ -3306,6 +3589,10 @@
       {
         "key": "Payphones",
         "value": "6"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Cash Machines",
@@ -3464,6 +3751,10 @@
       {
         "key": "Payphones",
         "value": "3"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Taxi Rank",
@@ -3687,8 +3978,8 @@
       }
     ],
     "ids": [
-      "940GZZLUERC",
-      "940GZZLUERB"
+      "940GZZLUERB",
+      "940GZZLUERC"
     ]
   },
   {
@@ -3700,6 +3991,7 @@
       "bakerloo",
       "northern"
     ],
+    "hub": "HUBEPH",
     "lat": 51.494536,
     "lng": -0.100606,
     "contact": [
@@ -3791,6 +4083,10 @@
       {
         "key": "Payphones",
         "value": "1"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Waiting Room",
@@ -3906,6 +4202,10 @@
         "value": "1"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -3932,6 +4232,7 @@
       "northern",
       "victoria"
     ],
+    "hub": "HUBEUS",
     "lat": 51.527999,
     "lng": -0.133785,
     "contact": [
@@ -3972,6 +4273,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes London Overgrounnd and National Rail only"
       },
       {
         "key": "Cash Machines",
@@ -4102,11 +4407,13 @@
     "name": "Farringdon",
     "lines": [
       "circle",
+      "elizabeth",
       "hammersmith-city",
       "metropolitan"
     ],
-    "lat": 51.520252,
-    "lng": -0.104913,
+    "hub": "HUBZFD",
+    "lat": 51.520221,
+    "lng": -0.104914,
     "contact": [
       {
         "key": "Address",
@@ -4143,6 +4450,10 @@
         "value": "1"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -4150,6 +4461,10 @@
         "key": "Taxi Rank",
         "value": "No"
       }
+    ],
+    "ids": [
+      "940GZZLUFCN",
+      "910GFRNDXR"
     ]
   },
   {
@@ -4280,6 +4595,7 @@
       "piccadilly",
       "victoria"
     ],
+    "hub": "HUBFPK",
     "lat": 51.564158,
     "lng": -0.106825,
     "contact": [
@@ -4332,6 +4648,45 @@
     ]
   },
   {
+    "key": "910GFRSTGT",
+    "id": "910GFRSTGT",
+    "url": "forest-gate",
+    "name": "Forest Gate",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.549432,
+    "lng": 0.024353,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Forest Gate station,\r\n            Woodgrange Road,\r\n            Forest Gate,\r\n            Greater London,\r\n            E7 0NF"
+      },
+      {
+        "key": "Zone",
+        "value": "3"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUFBY",
     "id": "940GZZLUFBY",
     "url": "fulham-broadway",
@@ -4375,6 +4730,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Cash Machines",
@@ -4430,6 +4789,53 @@
       {
         "key": "Payphones",
         "value": "1"
+      }
+    ]
+  },
+  {
+    "key": "910GGIDEAPK",
+    "id": "910GGIDEAPK",
+    "url": "gidea-park",
+    "name": "Gidea Park",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.581904,
+    "lng": 0.205964,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Gidea Park station,\r\n            Station Road,\r\n            Gidea Park,\r\n            Greater London,\r\n            RM2 6BX"
+      },
+      {
+        "key": "Zone",
+        "value": "6"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
       }
     ]
   },
@@ -4629,6 +5035,49 @@
     ]
   },
   {
+    "key": "910GGODMAYS",
+    "id": "910GGODMAYS",
+    "url": "goodmayes",
+    "name": "Goodmayes",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.565579,
+    "lng": 0.110807,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Goodmayes station,\r\n            Goodmayes Road,\r\n            Goodmayes,\r\n            Greater London,\r\n            IG3 9UH"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUGGH",
     "id": "940GZZLUGGH",
     "url": "grange-hill",
@@ -4793,6 +5242,7 @@
     "lines": [
       "central"
     ],
+    "hub": "HUBGFD",
     "lat": 51.542424,
     "lng": -0.34605,
     "contact": [
@@ -4856,6 +5306,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBGUN",
     "lat": 51.491803,
     "lng": -0.275267,
     "contact": [
@@ -4937,6 +5388,10 @@
         "value": "1"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -4961,6 +5416,7 @@
       "hammersmith-city",
       "piccadilly"
     ],
+    "hub": "HUBHMS",
     "lat": 51.492845,
     "lng": -0.224325,
     "contact": [
@@ -4997,6 +5453,10 @@
       {
         "key": "Payphones",
         "value": "3"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes Piccadilly line only"
       },
       {
         "key": "Cash Machines",
@@ -5123,6 +5583,49 @@
     ]
   },
   {
+    "key": "910GHANWELL",
+    "id": "910GHANWELL",
+    "url": "hanwell",
+    "name": "Hanwell",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.511835,
+    "lng": -0.338583,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Hanwell station,\r\n            Campbell Road,\r\n            Hanwell,\r\n            Greater London,\r\n            W7 3EB"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUHSN",
     "id": "940GZZLUHSN",
     "url": "harlesden",
@@ -5130,6 +5633,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBHDN",
     "lat": 51.53631,
     "lng": -0.257883,
     "contact": [
@@ -5162,6 +5666,49 @@
     ]
   },
   {
+    "key": "910GHRLDWOD",
+    "id": "910GHRLDWOD",
+    "url": "harold-wood",
+    "name": "Harold Wood",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.592766,
+    "lng": 0.233129,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Harold Wood station,\r\n            Gubbins Lane,\r\n            Harold Wood,\r\n            Greater London,\r\n            RM3 0BL"
+      },
+      {
+        "key": "Zone",
+        "value": "6"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUHAW",
     "id": "940GZZLUHAW",
     "url": "harrow-&-wealdstone",
@@ -5169,6 +5716,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBHRW",
     "lat": 51.592268,
     "lng": -0.335217,
     "contact": [
@@ -5236,6 +5784,7 @@
     "lines": [
       "metropolitan"
     ],
+    "hub": "HUBHOH",
     "lat": 51.579195,
     "lng": -0.337225,
     "contact": [
@@ -5335,15 +5884,60 @@
     ]
   },
   {
+    "key": "910GHAYESAH",
+    "id": "910GHAYESAH",
+    "url": "hayes-&-harlington",
+    "name": "Hayes & Harlington",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.503096,
+    "lng": -0.420683,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Hayes & Harlington station,\r\n            Station Road,\r\n            Hayes,\r\n            Greater London,\r\n            UB3 4BX"
+      },
+      {
+        "key": "Zone",
+        "value": "5"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUHR4",
     "id": "940GZZLUHR4",
     "url": "heathrow-terminal-4",
     "name": "Heathrow Terminal 4",
     "lines": [
+      "elizabeth",
       "piccadilly"
     ],
-    "lat": 51.458524,
-    "lng": -0.445771,
+    "hub": "HUBHX4",
+    "lat": 51.458396,
+    "lng": -0.445617,
     "contact": [
       {
         "key": "Address",
@@ -5378,7 +5972,15 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Left Luggage",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUHR4",
+      "910GHTRWTM4"
     ]
   },
   {
@@ -5387,10 +5989,12 @@
     "url": "heathrow-terminal-5",
     "name": "Heathrow Terminal 5",
     "lines": [
+      "elizabeth",
       "piccadilly"
     ],
-    "lat": 51.470052,
-    "lng": -0.49056,
+    "hub": "HUBHX5",
+    "lat": 51.470053,
+    "lng": -0.490574,
     "contact": [
       {
         "key": "Address",
@@ -5421,7 +6025,19 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Left Luggage",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUHR5",
+      "910GHTRWTM5"
     ]
   },
   {
@@ -5430,10 +6046,12 @@
     "url": "heathrow-terminals-2-&-3",
     "name": "Heathrow Terminals 2 & 3",
     "lines": [
+      "elizabeth",
       "piccadilly"
     ],
-    "lat": 51.471235,
-    "lng": -0.452265,
+    "hub": "HUBH13",
+    "lat": 51.471611,
+    "lng": -0.453526,
     "contact": [
       {
         "key": "Address",
@@ -5484,7 +6102,19 @@
       {
         "key": "Taxi Rank",
         "value": "Yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Left Luggage",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUHRC",
+      "910GHTRWAPT"
     ]
   },
   {
@@ -5657,6 +6287,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBHHY",
     "lat": 51.54635,
     "lng": -0.103324,
     "contact": [
@@ -5697,6 +6328,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes London Overground Only"
       }
     ]
   },
@@ -5808,6 +6443,10 @@
       {
         "key": "Payphones",
         "value": "1"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes Metropolitan only"
       },
       {
         "key": "Cash Machines",
@@ -6129,6 +6768,10 @@
         "value": "2"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -6309,6 +6952,88 @@
     ]
   },
   {
+    "key": "910GILFORD",
+    "id": "910GILFORD",
+    "url": "ilford",
+    "name": "Ilford",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.559118,
+    "lng": 0.06968,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Ilford station,\r\n            Ilford Hill,\r\n            Ilford,\r\n            Greater London,\r\n            IG1 2DG"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GIVER",
+    "id": "910GIVER",
+    "url": "iver",
+    "name": "Iver",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.508503,
+    "lng": -0.506726,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Iver station,\r\n            Wellesey Avenue,\r\n            Richings Park,\r\n            Iver,\r\n            Buckinghamshire,\r\n            SL0 9AU"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUKNG",
     "id": "940GZZLUKNG",
     "url": "kennington",
@@ -6367,6 +7092,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBKNL",
     "lat": 51.530539,
     "lng": -0.225016,
     "contact": [
@@ -6402,6 +7128,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBKPA",
     "lat": 51.497624,
     "lng": -0.210015,
     "contact": [
@@ -6440,6 +7167,10 @@
         "value": "2"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes London Overground only"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -6457,6 +7188,7 @@
     "lines": [
       "northern"
     ],
+    "hub": "HUBKTN",
     "lat": 51.550312,
     "lng": -0.140733,
     "contact": [
@@ -6500,6 +7232,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBKNT",
     "lat": 51.581756,
     "lng": -0.31691,
     "contact": [
@@ -6539,6 +7272,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBKWG",
     "lat": 51.477058,
     "lng": -0.285241,
     "contact": [
@@ -6571,6 +7305,10 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes District line only"
       },
       {
         "key": "Cash Machines",
@@ -6705,6 +7443,7 @@
       "piccadilly",
       "victoria"
     ],
+    "hub": "HUBKGX",
     "lat": 51.530663,
     "lng": -0.123194,
     "contact": [
@@ -7013,6 +7752,49 @@
     ]
   },
   {
+    "key": "910GLANGLEY",
+    "id": "910GLANGLEY",
+    "url": "langley-berks",
+    "name": "Langley (Berks)",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.508062,
+    "lng": -0.541756,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Langley station,\r\n            Station Road,\r\n            Langley,\r\n            Berkshire,\r\n            SL3 6DB"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLULRD",
     "id": "940GZZLULRD",
     "url": "latimer-road",
@@ -7226,11 +8008,13 @@
     "lines": [
       "central",
       "circle",
+      "elizabeth",
       "hammersmith-city",
       "metropolitan"
     ],
-    "lat": 51.517372,
-    "lng": -0.083182,
+    "hub": "HUBLST",
+    "lat": 51.517695,
+    "lng": -0.082217,
     "contact": [
       {
         "key": "Address",
@@ -7285,7 +8069,16 @@
       {
         "key": "Taxi Rank",
         "value": "Yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLULVT",
+      "910GLIVSTLL",
+      "910GLIVST"
     ]
   },
   {
@@ -7297,6 +8090,7 @@
       "jubilee",
       "northern"
     ],
+    "hub": "HUBLBG",
     "lat": 51.505721,
     "lng": -0.088873,
     "contact": [
@@ -7451,6 +8245,53 @@
     ]
   },
   {
+    "key": "910GMDNHEAD",
+    "id": "910GMDNHEAD",
+    "url": "maidenhead",
+    "name": "Maidenhead",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.518669,
+    "lng": -0.72266,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Maidenhead station,\r\n            Station Approach,\r\n            Maidenhead,\r\n            Berkshire,\r\n            SL6 1EW"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUMRH",
     "id": "940GZZLUMRH",
     "url": "manor-house",
@@ -7494,6 +8335,49 @@
       {
         "key": "Payphones",
         "value": "2"
+      }
+    ]
+  },
+  {
+    "key": "910GMANRPK",
+    "id": "910GMANRPK",
+    "url": "manor-park",
+    "name": "Manor Park",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.552477,
+    "lng": 0.046342,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Manor Park station,\r\n            Station Road,\r\n            Manor Park,\r\n            Greater London,\r\n            E12 5EP"
+      },
+      {
+        "key": "Zone",
+        "value": "3+4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
     ]
   },
@@ -7593,6 +8477,49 @@
     ]
   },
   {
+    "key": "910GMRYLAND",
+    "id": "910GMRYLAND",
+    "url": "maryland",
+    "name": "Maryland",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.546081,
+    "lng": 0.005815,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Maryland station,\r\n            Leytonstone Road,\r\n            Maryland Point,\r\n            Greater London,\r\n            E15 1SA"
+      },
+      {
+        "key": "Zone",
+        "value": "3"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUMYB",
     "id": "940GZZLUMYB",
     "url": "marylebone",
@@ -7600,6 +8527,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBMYB",
     "lat": 51.522322,
     "lng": -0.163207,
     "contact": [
@@ -7857,6 +8785,7 @@
       "metropolitan",
       "northern"
     ],
+    "hub": "HUBZMG",
     "lat": 51.518176,
     "lng": -0.088322,
     "contact": [
@@ -8095,6 +9024,10 @@
         "value": "1"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -8265,6 +9198,7 @@
     "lines": [
       "jubilee"
     ],
+    "hub": "HUBNGW",
     "lat": 51.50047,
     "lng": 0.004287,
     "contact": [
@@ -8387,6 +9321,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBNWB",
     "lat": 51.562551,
     "lng": -0.304,
     "contact": [
@@ -8801,6 +9736,7 @@
     "lines": [
       "northern"
     ],
+    "hub": "HUBOLD",
     "lat": 51.525864,
     "lng": -0.08777,
     "contact": [
@@ -9016,10 +9952,12 @@
       "bakerloo",
       "circle",
       "district",
+      "elizabeth",
       "hammersmith-city"
     ],
-    "lat": 51.517384,
-    "lng": -0.176997,
+    "hub": "HUBPAD",
+    "lat": 51.516803,
+    "lng": -0.176819,
     "contact": [
       {
         "key": "Address",
@@ -9066,10 +10004,28 @@
       {
         "key": "Taxi Rank",
         "value": "No"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
       }
     ],
     "ids": [
+      "910GPADTON",
       "940GZZLUPAC",
+      "910GPADTLL",
       "940GZZLUPAH"
     ]
   },
@@ -9550,6 +10506,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBQPW",
     "lat": 51.534158,
     "lng": -0.204574,
     "contact": [
@@ -9787,6 +10744,61 @@
     ]
   },
   {
+    "key": "910GRDNGSTN",
+    "id": "910GRDNGSTN",
+    "url": "reading",
+    "name": "Reading",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.458786,
+    "lng": -0.971863,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Reading station,\r\n            Station Hill,\r\n            Reading,\r\n            Berkshire,\r\n            RG1 1LZ"
+      },
+      {
+        "key": "PhoneNo",
+        "value": "03457 000 125"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLURBG",
     "id": "940GZZLURBG",
     "url": "redbridge",
@@ -9888,6 +10900,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBRMD",
     "lat": 51.463237,
     "lng": -0.301336,
     "contact": [
@@ -9930,6 +10943,10 @@
         "value": "2"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       }
@@ -9943,6 +10960,7 @@
     "lines": [
       "metropolitan"
     ],
+    "hub": "HUBRIC",
     "lat": 51.640207,
     "lng": -0.473703,
     "contact": [
@@ -9979,6 +10997,10 @@
       {
         "key": "Payphones",
         "value": "1"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Waiting Room",
@@ -10032,8 +11054,59 @@
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Taxi Rank",
         "value": "No"
+      }
+    ]
+  },
+  {
+    "key": "910GROMFORD",
+    "id": "910GROMFORD",
+    "url": "romford",
+    "name": "Romford",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.574829,
+    "lng": 0.183237,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Romford station,\r\n            South Street,\r\n            Romford,\r\n            Greater London,\r\n            RM1 1SX"
+      },
+      {
+        "key": "Zone",
+        "value": "6"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
       }
     ]
   },
@@ -10296,6 +11369,49 @@
     ]
   },
   {
+    "key": "910GSVNKNGS",
+    "id": "910GSVNKNGS",
+    "url": "seven-kings",
+    "name": "Seven Kings",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.564026,
+    "lng": 0.0971,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Seven Kings station,\r\n            High Road,\r\n            Seven Kings,\r\n            Greater London,\r\n            IG3 8RE"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUSVS",
     "id": "940GZZLUSVS",
     "url": "seven-sisters",
@@ -10303,6 +11419,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBSVS",
     "lat": 51.58333,
     "lng": -0.072584,
     "contact": [
@@ -10351,6 +11468,57 @@
     ]
   },
   {
+    "key": "910GSHENFLD",
+    "id": "910GSHENFLD",
+    "url": "shenfield",
+    "name": "Shenfield",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.630877,
+    "lng": 0.329851,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Shenfield station,\r\n            Hutton Road,\r\n            Shenfield,\r\n            Essex,\r\n            CM15 8JD"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUSBC",
     "id": "940GZZLUSBC",
     "url": "shepherds-bush-central",
@@ -10358,6 +11526,7 @@
     "lines": [
       "central"
     ],
+    "hub": "HUBSPB",
     "lat": 51.504376,
     "lng": -0.218813,
     "contact": [
@@ -10482,6 +11651,57 @@
       {
         "key": "Payphones",
         "value": "2"
+      }
+    ]
+  },
+  {
+    "key": "910GSLOUGH",
+    "id": "910GSLOUGH",
+    "url": "slough",
+    "name": "Slough",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.51188,
+    "lng": -0.59151,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Slough station,\r\n            Brunel Way,\r\n            Slough,\r\n            Berkshire,\r\n            SL1 1XW"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Cash Machines",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
       }
     ]
   },
@@ -10715,6 +11935,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBSOK",
     "lat": 51.570232,
     "lng": -0.308433,
     "contact": [
@@ -10754,6 +11975,7 @@
     "lines": [
       "central"
     ],
+    "hub": "HUBSRU",
     "lat": 51.556853,
     "lng": -0.398915,
     "contact": [
@@ -10882,6 +12104,10 @@
         "value": "1"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes Eastbound only"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -10891,6 +12117,49 @@
       },
       {
         "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GSTHALL",
+    "id": "910GSTHALL",
+    "url": "southall",
+    "name": "Southall",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.505957,
+    "lng": -0.37861,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Southall station,\r\n            South Road,\r\n            Southall,\r\n            Greater London,\r\n            UB2 4AA"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
         "value": "yes"
       }
     ]
@@ -10939,6 +12208,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Taxi Rank",
@@ -11307,6 +12580,10 @@
         "value": "2"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -11428,6 +12705,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBSBP",
     "lat": 51.543959,
     "lng": -0.275892,
     "contact": [
@@ -11466,10 +12744,12 @@
     "name": "Stratford",
     "lines": [
       "central",
+      "elizabeth",
       "jubilee"
     ],
-    "lat": 51.541806,
-    "lng": -0.003458,
+    "hub": "HUBSRA",
+    "lat": 51.54185,
+    "lng": -0.003427,
     "contact": [
       {
         "key": "Address",
@@ -11514,6 +12794,10 @@
         "value": "8"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "4"
       },
@@ -11521,6 +12805,10 @@
         "key": "Euro Cash Machines",
         "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUSTD",
+      "910GSTFD"
     ]
   },
   {
@@ -11689,6 +12977,45 @@
     ]
   },
   {
+    "key": "910GTAPLOW",
+    "id": "910GTAPLOW",
+    "url": "taplow",
+    "name": "Taplow",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.523562,
+    "lng": -0.68137,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Taplow station,\r\n            Station Road,\r\n            Taplow,\r\n            Berkshire,\r\n            SL6 0NU"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUTMP",
     "id": "940GZZLUTMP",
     "url": "temple",
@@ -11772,6 +13099,10 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes Eastbound only"
       },
       {
         "key": "Waiting Room",
@@ -11896,10 +13227,12 @@
     "name": "Tottenham Court Road",
     "lines": [
       "central",
+      "elizabeth",
       "northern"
     ],
-    "lat": 51.516426,
-    "lng": -0.13041,
+    "hub": "HUBTCR",
+    "lat": 51.515716,
+    "lng": -0.130403,
     "contact": [
       {
         "key": "Address",
@@ -11935,6 +13268,10 @@
         "key": "Payphones",
         "value": "4"
       }
+    ],
+    "ids": [
+      "940GZZLUTCR",
+      "910GTOTCTRD"
     ]
   },
   {
@@ -11945,6 +13282,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBTOM",
     "lat": 51.588108,
     "lng": -0.060241,
     "contact": [
@@ -12234,6 +13572,53 @@
     ]
   },
   {
+    "key": "910GTWYFORD",
+    "id": "910GTWYFORD",
+    "url": "twyford",
+    "name": "Twyford",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.475534,
+    "lng": -0.863293,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Twyford station,\r\n            Station Road,\r\n            Twyford,\r\n            Berkshire,\r\n            RG10 9NA"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      },
+      {
+        "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
     "key": "940GZZLUUPM",
     "id": "940GZZLUUPM",
     "url": "upminster",
@@ -12241,6 +13626,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBUPM",
     "lat": 51.559063,
     "lng": 0.250882,
     "contact": [
@@ -12377,6 +13763,10 @@
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -12477,6 +13867,10 @@
         "value": "4"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes Metropolitan only"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -12502,6 +13896,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBVXH",
     "lat": 51.485743,
     "lng": -0.124204,
     "contact": [
@@ -12563,6 +13958,7 @@
       "district",
       "victoria"
     ],
+    "hub": "HUBVIC",
     "lat": 51.496359,
     "lng": -0.143102,
     "contact": [
@@ -12609,6 +14005,10 @@
         "value": "4"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -12626,6 +14026,7 @@
     "lines": [
       "victoria"
     ],
+    "hub": "HUBWHC",
     "lat": 51.582965,
     "lng": -0.019885,
     "contact": [
@@ -12818,6 +14219,7 @@
       "northern",
       "waterloo-city"
     ],
+    "hub": "HUBWAT",
     "lat": 51.503299,
     "lng": -0.11478,
     "contact": [
@@ -12932,6 +14334,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBWMB",
     "lat": 51.552304,
     "lng": -0.296852,
     "contact": [
@@ -13026,6 +14429,10 @@
         "value": "2"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Cash Machines",
         "value": "1"
       },
@@ -13094,6 +14501,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBWBP",
     "lat": 51.487268,
     "lng": -0.195599,
     "contact": [
@@ -13130,6 +14538,88 @@
       {
         "key": "Payphones",
         "value": "1"
+      }
+    ]
+  },
+  {
+    "key": "910GWDRYTON",
+    "id": "910GWDRYTON",
+    "url": "west-drayton",
+    "name": "West Drayton",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.510055,
+    "lng": -0.472234,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "West Drayton station,\r\n            Station Approach,\r\n            West Drayton,\r\n            Greater London,\r\n            UB7 9DY"
+      },
+      {
+        "key": "Zone",
+        "value": "6"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
+        "key": "Waiting Room",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GWEALING",
+    "id": "910GWEALING",
+    "url": "west-ealing",
+    "name": "West Ealing",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.513506,
+    "lng": -0.320133,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "West Ealing station,\r\n            Manor Road,\r\n            Ealing,\r\n            Greater London,\r\n            W13 0LJ"
+      },
+      {
+        "key": "Zone",
+        "value": "3"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "Ticket Halls",
+        "value": "yes"
+      },
+      {
+        "key": "Toilets",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
+        "value": "yes"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
     ]
   },
@@ -13175,6 +14665,10 @@
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -13194,6 +14688,7 @@
       "hammersmith-city",
       "jubilee"
     ],
+    "hub": "HUBWEH",
     "lat": 51.528136,
     "lng": 0.005055,
     "contact": [
@@ -13234,6 +14729,10 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
     ]
   },
@@ -13245,6 +14744,7 @@
     "lines": [
       "jubilee"
     ],
+    "hub": "HUBWHD",
     "lat": 51.546638,
     "lng": -0.191059,
     "contact": [
@@ -13394,6 +14894,7 @@
     "lines": [
       "central"
     ],
+    "hub": "HUBWRU",
     "lat": 51.569688,
     "lng": -0.437886,
     "contact": [
@@ -13495,6 +14996,7 @@
       "district",
       "jubilee"
     ],
+    "hub": "HUBWSM",
     "lat": 51.50132,
     "lng": -0.124861,
     "contact": [
@@ -13535,6 +15037,10 @@
       {
         "key": "Payphones",
         "value": "4"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes Circle and District lines only"
       },
       {
         "key": "Cash Machines",
@@ -13612,10 +15118,12 @@
     "name": "Whitechapel",
     "lines": [
       "district",
+      "elizabeth",
       "hammersmith-city"
     ],
-    "lat": 51.519518,
-    "lng": -0.059971,
+    "hub": "HUBZWL",
+    "lat": 51.519955,
+    "lng": -0.060046,
     "contact": [
       {
         "key": "Address",
@@ -13642,7 +15150,15 @@
       {
         "key": "Payphones",
         "value": "2"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       }
+    ],
+    "ids": [
+      "940GZZLUWPL",
+      "910GWCHAPXR"
     ]
   },
   {
@@ -13713,6 +15229,7 @@
     "lines": [
       "bakerloo"
     ],
+    "hub": "HUBWIJ",
     "lat": 51.532259,
     "lng": -0.244283,
     "contact": [
@@ -13745,6 +15262,10 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes London Overground only"
       }
     ]
   },
@@ -13756,6 +15277,7 @@
     "lines": [
       "district"
     ],
+    "hub": "HUBWIM",
     "lat": 51.421207,
     "lng": -0.206573,
     "contact": [
@@ -13788,6 +15310,10 @@
       {
         "key": "Help Points",
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Car park",
@@ -13928,6 +15454,10 @@
         "value": "0 on platforms, 0 in ticket halls, 0 elsewhere"
       },
       {
+        "key": "Boarding Ramp",
+        "value": "yes"
+      },
+      {
         "key": "Waiting Room",
         "value": "yes"
       },
@@ -13981,6 +15511,10 @@
       {
         "key": "Payphones",
         "value": "1"
+      },
+      {
+        "key": "Boarding Ramp",
+        "value": "yes"
       },
       {
         "key": "Cash Machines",
@@ -14055,6 +15589,37 @@
       },
       {
         "key": "Car park",
+        "value": "yes"
+      }
+    ]
+  },
+  {
+    "key": "910GWOLWXR",
+    "id": "910GWOLWXR",
+    "url": "woolwich",
+    "name": "Woolwich",
+    "lines": [
+      "elizabeth"
+    ],
+    "lat": 51.492168,
+    "lng": 0.070593,
+    "contact": [
+      {
+        "key": "Address",
+        "value": "Woolwich station,\r\n            Dial Arch Square,\r\n            Major Draper Street,\r\n            Woolwich,\r\n            London,\r\n            SE18 6GD"
+      },
+      {
+        "key": "Zone",
+        "value": "4"
+      }
+    ],
+    "facilities": [
+      {
+        "key": "WiFi",
+        "value": "yes"
+      },
+      {
+        "key": "Help Points",
         "value": "yes"
       }
     ]
