@@ -6,3 +6,6 @@
 .env
 client/.env
 .DS_Store
+
+# Local notes (not committed)
+/notes

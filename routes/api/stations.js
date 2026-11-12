@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios')
-const { TFL_API_ID, TFL_APP_KEY } = require('../../config')
+const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
-
-TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`
 
 function kebabCase(inputString) {
   return inputString.toLowerCase().replace(/ /g, '-').replace(/'/g, '')
@@ -119,25 +116,25 @@ router.get('/', async (req, res) => {
     }
   }
 
-  let statuses = serverState.statuses
+  // Line ids come from the latest statuses; before any statuses have been
+  // fetched, fall back to the lines in the bundled data.
+  const lineIds = serverState.statuses.length
+    ? serverState.statuses.map((status) => status.id)
+    : serverState.lineStations.map((line) => line.id)
 
   let lineStations = []
   let allStations = []
+  let failedLines = []
   //Loop through all lines
-  for (let i = 0; i < statuses.length; i++) {
-    let lineId = statuses[i].id
+  for (const lineId of lineIds) {
     let thisLineStations = []
 
     try {
-      let response = await axios.get(
-        `https://api.tfl.gov.uk/line/${lineId}/stoppoints?tflOperatedNationalRailStationsOnly=false&${TFLAccess}`,
-        {
-          headers: { Accept: 'application/json' }
-        }
+      const stations = await tflGet(
+        `/line/${encodeURIComponent(lineId)}/stoppoints?tflOperatedNationalRailStationsOnly=false`
       )
 
       statistics.logTflStationsRequest()
-      let stations = response.data
 
       stations.map((station) => {
         return thisLineStations.push(filterStationData(station, lineId))
@@ -166,11 +163,18 @@ router.get('/', async (req, res) => {
         { id: lineId, stations: thisLineStations }
       ]
     } catch (error) {
-      console.log('*********** ERROR! **************')
-      console.log('GET api/tube/stations error at:', lineId)
-      console.log(error)
-      console.log('*********** ERROR! **************')
+      console.error(`GET stations, line ${lineId}:`, error.message)
+      failedLines.push(lineId)
     }
+  }
+
+  // An incomplete result must not replace the stations already held
+  if (failedLines.length) {
+    return res.send({
+      stations: serverState.stations,
+      lineStations: serverState.lineStations,
+      stationsTimeStamp: serverState.stationsTimeStamp
+    })
   }
 
   now = moment().format()

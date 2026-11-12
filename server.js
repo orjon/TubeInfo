@@ -34,17 +34,30 @@ global.serverState = {
   stationsTimeStamp: undefined
 }
 
+// health check, for monitoring and deploys
+app.get(`${BASE_PATH}/healthz`, (req, res) => {
+  res.json({ ok: true, uptimeSeconds: Math.round(process.uptime()) })
+})
+
 //define routes
 app.use(`${BASE_PATH}/api/statuses`, routeTubeStatuses)
 app.use(`${BASE_PATH}/api/stations`, routeTubeStations)
 app.use(`${BASE_PATH}/api/arrivals`, routeTubeArrivals)
 
+// Unknown API paths are errors, not the web page
+app.use(`${BASE_PATH}/api`, (req, res) => {
+  res.status(404).json({ error: 'Not found' })
+})
+
 app.use(BASE_PATH, express.static(CLIENT_DIR))
 
+// Any other address is the web app's one page, but a missing file (anything
+// with an extension, e.g. /setoff/old.js) is a real 404
 app.get(`${BASE_PATH}/*`, (req, res) => {
+  if (path.extname(req.path)) return res.status(404).send('Not found')
   res.sendFile(path.join(CLIENT_DIR, 'index.html'))
 })
 
 const PORT = process.env.PORT || 5001
 console.log('Server Start: ', moment(stats.serverStart).format('HH:mm:ss'))
-app.listen(PORT, () => console.log(`Tube-Info server running on ${PORT}`))
+app.listen(PORT, () => console.log(`SetOff server running on ${PORT}`))

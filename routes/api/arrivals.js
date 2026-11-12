@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios')
-const { TFL_API_ID, TFL_APP_KEY } = require('../../config')
+const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
-
-TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`
 
 //@router GET api/tube/arrivals/station
 //@desc   profile route
@@ -14,6 +11,9 @@ router.get('/:stationId', async (req, res) => {
   let stationIndex = serverState.stations.findIndex(
     (station) => station.id === req.params.stationId
   )
+  if (stationIndex === -1) {
+    return res.status(404).json({ error: 'Unknown station' })
+  }
   let station = serverState.stations[stationIndex]
   let now = moment()
   statistics.logAppArrivalsRequest()
@@ -35,13 +35,10 @@ router.get('/:stationId', async (req, res) => {
   let arrivals = []
 
   try {
-    let response = await axios.get(
-      `https://api.tfl.gov.uk/stoppoint/${station.id}/arrivals?${TFLAccess}`,
-      {
-        headers: { Accept: 'application/json' }
-      }
+    const tflArrivals = await tflGet(
+      `/stoppoint/${encodeURIComponent(station.id)}/arrivals`
     )
-    response.data.map((arrival) => {
+    tflArrivals.map((arrival) => {
       //Get direction and platform number from plaformName (eg 'Eastbound - Platform 5')
       let direction = ''
       if (arrival.platformName) {
@@ -83,10 +80,8 @@ router.get('/:stationId', async (req, res) => {
 
     res.send(payloadObject)
   } catch (error) {
-    console.log('*********** ERROR! **************')
-    console.log('ERROR: GET api/tube/arrivals/' + station.id)
-    console.log(error)
-    console.log('*********** ERROR! **************')
+    console.error(`GET arrivals/${station.id}:`, error.message)
+    res.status(502).json({ error: 'Could not get arrivals from TfL' })
   }
 })
 

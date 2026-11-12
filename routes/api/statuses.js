@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const axios = require('axios')
-const { TFL_API_ID, TFL_APP_KEY } = require('../../config')
+const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
-
-TFLAccess = `app_id=${TFL_API_ID}&app_key=${TFL_APP_KEY}`
 
 //@router GET api/tube/statuses
 //@desc   profile route
@@ -34,20 +31,8 @@ router.get('/', async (req, res) => {
   let statuses = []
 
   try {
-    let response = await axios.get(
-      `https://api.tfl.gov.uk/line/mode/tube/status?${TFLAccess}`,
-      {
-        headers: { Accept: 'application/json' }
-      }
-    )
+    let lineStatuses = await tflGet('/line/mode/tube/status')
     statistics.logTflStatusesRequest()
-    // Delayed response
-    // let response = await axios.get(`http://slowwly.robertomurray.co.uk/delay/5000/url/https://api.tfl.gov.uk/line/mode/tube/status?${TFLAccess}`, {
-    //   headers : {Accept: 'application/json'}
-    // })
-
-    let lineStatuses = response.data
-
     lineStatuses.map((line) => {
       let reason = undefined
       //Remove text in front of colon.
@@ -74,8 +59,15 @@ router.get('/', async (req, res) => {
 
     res.send(newStatuses)
   } catch (error) {
-    console.log('*********** ERROR! **************')
-    console.log(error)
+    console.error('GET statuses:', error.message)
+    // Serve the last good statuses if there are any, otherwise report the failure
+    if (serverState.statuses.length) {
+      return res.send({
+        statuses: serverState.statuses,
+        statusesTimeStamp: serverState.statusesTimeStamp
+      })
+    }
+    res.status(502).json({ error: 'Could not get line statuses from TfL' })
   }
 })
 
