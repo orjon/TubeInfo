@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { createRequire } from 'node:module'
 import request from 'supertest'
+import moment from 'moment'
 import { mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -157,11 +158,25 @@ describe('GET /api/arrivals/:stationId', () => {
     expect(res.status).toBe(502)
   })
 
-  it('asks TfL once for requests within 30 seconds', async () => {
+  it('asks TfL once for requests close together', async () => {
     const { calls } = stubTfl({ [ARRIVALS]: arrivalsFixture })
     await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
     await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
     expect(calls).toHaveLength(1)
+  })
+
+  it('uses the saved arrivals for 15 seconds, then asks TfL again', async () => {
+    const { calls } = stubTfl({ [ARRIVALS]: arrivalsFixture })
+    const age = (seconds) => {
+      global.serverState.arrivals[WATERLOO].arrivalsTimeStamp = moment().subtract(seconds, 'seconds').format()
+    }
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    age(10)
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(calls).toHaveLength(1) // 10 seconds old: still used
+    age(20)
+    await request(app).get(`/setoff/api/arrivals/${WATERLOO}`)
+    expect(calls).toHaveLength(2) // 20 seconds old: asked again
   })
 
   it('asks TfL about every stop of a merged station and combines the answers', async () => {

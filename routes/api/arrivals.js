@@ -4,6 +4,7 @@ const { tflGet } = require('../../tfl')
 const moment = require('moment')
 const statistics = require('../../statistics/serverStatistics')
 const { parseArrivals } = require('../../lib/arrivals')
+const { ARRIVALS_CACHE_SECONDS } = require('../../config')
 
 //@router GET api/arrivals/:stationId
 //@desc   arrivals at a station, soonest first
@@ -13,9 +14,9 @@ router.get('/:stationId', async (req, res) => {
   if (!station) return res.status(404).json({ error: 'Unknown station' })
   statistics.logAppArrivalsRequest()
 
-  // Arrivals fetched in the last 30 seconds are sent again as they are
+  // Arrivals fetched recently are sent again as they are
   const cached = serverState.arrivals[station.id]
-  if (cached && moment().diff(cached.arrivalsTimeStamp, 'seconds') < 30) {
+  if (cached && moment().diff(cached.arrivalsTimeStamp, 'seconds') < ARRIVALS_CACHE_SECONDS) {
     return res.send({ stationId: station.id, ...cached })
   }
 
