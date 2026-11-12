@@ -7,8 +7,8 @@ const DirectionArrivals = ({ direction, platform, arrivals, favourite, label }) 
   <>
     <div className='row titleRow'>
       <div className='sub-title'>
-        {favourite && direction && <FavouriteStar favourite={favourite} label={label} />}
         {direction || 'Other trains'}
+        {favourite && direction && <FavouriteStar favourite={favourite} label={label} />}
       </div>
       <div className='sub-title end'>{platform ? `Platform ${platform}` : ''}</div>
     </div>

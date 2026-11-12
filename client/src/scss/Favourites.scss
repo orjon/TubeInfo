@@ -4,9 +4,10 @@
 .starButton {
   background: none;
   border: 0;
-  // a bigger tap area than the star itself, without moving the text
-  padding: 8px 6px 8px 0;
-  margin: -8px 0;
+  // a bigger tap area than the star itself, without moving the text; the star sits
+  // right after the direction with only a small gap
+  padding: 8px 8px 8px 3px;
+  margin: -8px -8px -8px 0;
   font-size: 1.15rem;
   line-height: 1;
   vertical-align: -0.2em;
