@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { parseFavourites, toggleFavourite, isFavourite } from './favourites'
+import { parseFavourites, cycleFavourite, removeFavourite, favouriteColour } from './favourites'
 
 // All the sites on orjon.com share one browser storage, so the key is specific to this
 // app and does not use the display name, which can change.
@@ -63,7 +63,8 @@ export function useFavourites() {
   const favourites = useSyncExternalStore(subscribe, () => current)
   return {
     favourites,
-    isFavourite: (f) => isFavourite(favourites, f),
-    toggle: (f) => save(toggleFavourite(current, f))
+    colourOf: (f) => favouriteColour(favourites, f), // null when not a favourite
+    cycle: (f) => save(cycleFavourite(current, f)),
+    remove: (f) => save(removeFavourite(current, f))
   }
 }

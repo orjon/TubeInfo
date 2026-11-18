@@ -2,20 +2,24 @@ import DirectionArrival from './DirectionArrival'
 import FavouriteStar from './FavouriteStar'
 
 // `favourite` ({ stationId, lineId, direction }) and `label` are optional; with them the
-// direction gets a star after it. `emptyText` is shown when there are no trains to list.
+// direction gets a star after it, which does `starTap` ('cycle' or 'remove', see
+// FavouriteStar). `emptyText` is shown when there are no trains to list.
 const DirectionArrivals = ({
   direction,
   platform,
   arrivals,
   favourite,
   label,
+  starTap,
   emptyText = 'No trains due'
 }) => (
   <>
     <div className='row titleRow'>
       <div className='sub-title'>
         {direction || 'Other trains'}
-        {favourite && direction && <FavouriteStar favourite={favourite} label={label} />}
+        {favourite && direction && (
+          <FavouriteStar favourite={favourite} label={label} onTap={starTap} />
+        )}
       </div>
       <div className='sub-title end'>{platform ? `Platform ${platform}` : ''}</div>
     </div>

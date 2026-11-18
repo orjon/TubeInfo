@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { findLine, groupArrivals } from '../../Helpers'
-import { groupByLine } from '../../favourites'
+import { groupByLine, withColour } from '../../favourites'
 import { useFavourites } from '../../favouritesStore'
+import { useSelectedColour } from '../../selectedColourStore'
 import { useArrivals, useStations, useStatuses } from '../../hooks'
+import ColourPicker from '../layout/ColourPicker'
 import DirectionArrivals from '../layout/DirectionArrivals'
 import Star from '../layout/Star'
 import Status from '../layout/Status'
@@ -29,10 +31,11 @@ const FavouriteStation = ({ stationId, station, line, directions }) => {
       </div>
 
       {directions.map((direction) => {
-        const favourite = { stationId, lineId: line.id, direction }
         const label = station
           ? `${station.name}, ${line.name}, ${direction}`
           : `${line.name}, ${direction}: station no longer available`
+        // on this page the star removes the favourite rather than changing its colour
+        const star = { favourite: { stationId, lineId: line.id, direction }, label, starTap: 'remove' }
 
         if (!station) {
           return (
@@ -41,8 +44,7 @@ const FavouriteStation = ({ stationId, station, line, directions }) => {
               direction={direction}
               arrivals={[]}
               emptyText='Tap the star to remove it'
-              favourite={favourite}
-              label={label}
+              {...star}
             />
           )
         }
@@ -53,29 +55,17 @@ const FavouriteStation = ({ stationId, station, line, directions }) => {
               direction={direction}
               arrivals={[]}
               emptyText={isError ? 'Could not load arrival times' : 'Loading arrival times...'}
-              favourite={favourite}
-              label={label}
+              {...star}
             />
           )
         }
 
         const groups = groupArrivals(arrivals, line.id).filter((g) => g.direction === direction)
         return groups.length === 0 ? (
-          <DirectionArrivals
-            key={direction}
-            direction={direction}
-            arrivals={[]}
-            favourite={favourite}
-            label={label}
-          />
+          <DirectionArrivals key={direction} direction={direction} arrivals={[]} {...star} />
         ) : (
           groups.map((group) => (
-            <DirectionArrivals
-              key={`${direction}-${group.platform}`}
-              {...group}
-              favourite={favourite}
-              label={label}
-            />
+            <DirectionArrivals key={`${direction}-${group.platform}`} {...group} {...star} />
           ))
         )
       })}
@@ -108,11 +98,13 @@ const FavouriteLine = ({ line, stations: lineStations, allStations, statusesTime
 
 const Favourites = () => {
   const { favourites } = useFavourites()
+  const [colour, setColour] = useSelectedColour()
   const { stations } = useStations()
   const { statuses, statusesTimeStamp } = useStatuses()
 
-  // lines in the same order as the home page; a line that is no longer known is left out
-  const groups = groupByLine(favourites)
+  // only the selected colour, with the lines in the same order as the home page; a line
+  // that is no longer known is left out
+  const groups = groupByLine(withColour(favourites, colour))
   const lines = statuses
     .map((line) => ({ line, stations: groups.find((g) => g.lineId === line.id)?.stations }))
     .filter((entry) => entry.stations)
@@ -122,12 +114,13 @@ const Favourites = () => {
       <div className='card'>
         <div className='row cardTitle'>
           <h1>Favourites</h1>
+          <ColourPicker selected={colour} onSelect={setColour} />
         </div>
 
         {lines.length === 0 ? (
           <p className='emptyFavourites'>
-            No favourites yet. Open a station and tap the star <Star filled={false} /> after a
-            direction, such as Northbound, to add it here.
+            No {colour} favourites yet. Open a station and tap the star <Star filled={false} />{' '}
+            after a direction, such as Northbound, until it turns {colour}.
           </p>
         ) : (
           <div className='ArrivalsGrid'>

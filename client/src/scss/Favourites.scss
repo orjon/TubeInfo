@@ -1,5 +1,22 @@
 @import 'Variables';
 
+// The favourite colours, in the order the star cycles through them. Yellow is the
+// original star colour; the others are TfL-like and read well on white.
+$favouriteColours: (
+  yellow: #e6a700,
+  green: #00843d,
+  blue: #0019a8,
+  red: #dc241f
+);
+
+@mixin starColours {
+  @each $name, $value in $favouriteColours {
+    &.#{$name} {
+      color: $value;
+    }
+  }
+}
+
 // The star in front of a direction
 .starButton {
   background: none;
@@ -14,9 +31,7 @@
   color: #7a7a7a;
   cursor: pointer;
 
-  &.on {
-    color: #e6a700;
-  }
+  @include starColours;
   &:hover {
     transform: scale(1.15);
   }
@@ -24,6 +39,40 @@
     outline: 2px solid #1c3f94;
     outline-offset: 1px;
     border-radius: 4px;
+  }
+}
+
+// The four coloured stars beside the Favourites title; the selected one has a ring
+.colourPicker {
+  display: flex;
+  gap: 4px;
+  margin-left: $spacing / 2;
+
+  .colourButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+
+    @include starColours;
+    &.selected {
+      border-color: $color_FontMain;
+    }
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:focus-visible {
+      outline: 2px solid #1c3f94;
+      outline-offset: 1px;
+    }
   }
 }
 

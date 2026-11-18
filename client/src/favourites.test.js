@@ -1,45 +1,107 @@
 import { describe, it, expect } from 'vitest'
-import { toggleFavourite, isFavourite, parseFavourites, groupByLine } from './favourites'
+import {
+  COLOURS,
+  cycleFavourite,
+  removeFavourite,
+  nextColour,
+  favouriteColour,
+  withColour,
+  isFavourite,
+  parseFavourites,
+  groupByLine
+} from './favourites'
 
 const kx = { stationId: 'KXX', lineId: 'northern', direction: 'Northbound' }
+const yellowKx = { ...kx, colour: 'yellow' }
 
-describe('toggleFavourite', () => {
-  it('adds a favourite that is not there', () => {
-    expect(toggleFavourite([], kx)).toEqual([kx])
-  })
-
-  it('removes one that is', () => {
-    expect(toggleFavourite([kx], kx)).toEqual([])
-  })
-
-  it('treats another direction, line or station as a different favourite', () => {
-    const list = toggleFavourite([kx], { ...kx, direction: 'Southbound' })
-    expect(list).toHaveLength(2)
-    expect(toggleFavourite(list, { ...kx, lineId: 'victoria' })).toHaveLength(3)
-    expect(toggleFavourite(list, { ...kx, stationId: 'OTHER' })).toHaveLength(3)
-  })
-
-  it('does not change the list it was given', () => {
-    const list = [kx]
-    toggleFavourite(list, { ...kx, direction: 'Southbound' })
-    expect(list).toHaveLength(1)
-  })
-
-  it('keeps only the three fields, whatever else is passed in', () => {
-    expect(toggleFavourite([], { ...kx, junk: 1 })).toEqual([kx])
+describe('nextColour', () => {
+  it('goes none, yellow, green, blue, red, none', () => {
+    const seen = []
+    let colour = null
+    for (let i = 0; i <= COLOURS.length; i++) {
+      colour = nextColour(colour)
+      seen.push(colour)
+    }
+    expect(seen).toEqual(['yellow', 'green', 'blue', 'red', null])
   })
 })
 
-describe('isFavourite', () => {
-  it('finds a favourite by station, line and direction', () => {
-    expect(isFavourite([kx], { ...kx })).toBe(true)
-    expect(isFavourite([kx], { ...kx, direction: 'Southbound' })).toBe(false)
+describe('cycleFavourite', () => {
+  it('adds a favourite that is not there, as yellow', () => {
+    expect(cycleFavourite([], kx)).toEqual([yellowKx])
+  })
+
+  it('moves one that is there on to the next colour, keeping its place', () => {
+    const other = { ...kx, direction: 'Southbound', colour: 'red' }
+    const list = cycleFavourite([yellowKx, other], kx)
+    expect(list).toEqual([{ ...kx, colour: 'green' }, other])
+  })
+
+  it('removes one that is red', () => {
+    expect(cycleFavourite([{ ...kx, colour: 'red' }], kx)).toEqual([])
+  })
+
+  it('treats another direction, line or station as a different favourite', () => {
+    const list = cycleFavourite([yellowKx], { ...kx, direction: 'Southbound' })
+    expect(list).toHaveLength(2)
+    expect(cycleFavourite(list, { ...kx, lineId: 'victoria' })).toHaveLength(3)
+    expect(cycleFavourite(list, { ...kx, stationId: 'OTHER' })).toHaveLength(3)
+  })
+
+  it('does not change the list it was given', () => {
+    const list = [yellowKx]
+    cycleFavourite(list, kx)
+    cycleFavourite(list, { ...kx, direction: 'Southbound' })
+    expect(list).toEqual([yellowKx])
+  })
+
+  it('keeps only the four fields, whatever else is passed in', () => {
+    expect(cycleFavourite([], { ...kx, junk: 1 })).toEqual([yellowKx])
+  })
+})
+
+describe('removeFavourite', () => {
+  it('takes the favourite out whatever its colour, leaving the others', () => {
+    const other = { ...kx, direction: 'Southbound', colour: 'yellow' }
+    expect(removeFavourite([{ ...kx, colour: 'blue' }, other], kx)).toEqual([other])
+  })
+
+  it('does nothing when it is not there', () => {
+    expect(removeFavourite([yellowKx], { ...kx, direction: 'Southbound' })).toEqual([yellowKx])
+  })
+})
+
+describe('favouriteColour and isFavourite', () => {
+  it('find a favourite by station, line and direction', () => {
+    expect(isFavourite([yellowKx], { ...kx })).toBe(true)
+    expect(isFavourite([yellowKx], { ...kx, direction: 'Southbound' })).toBe(false)
+    expect(favouriteColour([{ ...kx, colour: 'blue' }], kx)).toBe('blue')
+    expect(favouriteColour([yellowKx], { ...kx, direction: 'Southbound' })).toBeNull()
+  })
+})
+
+describe('withColour', () => {
+  it('keeps only the favourites of that colour, in order', () => {
+    const a = { ...kx, colour: 'green' }
+    const b = { ...kx, direction: 'Southbound', colour: 'blue' }
+    const c = { ...kx, lineId: 'victoria', colour: 'green' }
+    expect(withColour([a, b, c], 'green')).toEqual([a, c])
+    expect(withColour([a, b, c], 'red')).toEqual([])
   })
 })
 
 describe('parseFavourites', () => {
   it('reads back what was saved', () => {
-    expect(parseFavourites(JSON.stringify([kx]))).toEqual([kx])
+    const blue = { ...kx, colour: 'blue' }
+    expect(parseFavourites(JSON.stringify([blue]))).toEqual([blue])
+  })
+
+  it('reads a favourite saved before there were colours as yellow', () => {
+    expect(parseFavourites(JSON.stringify([kx]))).toEqual([yellowKx])
+  })
+
+  it('reads an unknown colour as yellow', () => {
+    expect(parseFavourites(JSON.stringify([{ ...kx, colour: 'pink' }]))).toEqual([yellowKx])
   })
 
   it.each([[null], [''], ['not json'], ['{"a":1}'], ['42'], [undefined]])(
@@ -51,7 +113,7 @@ describe('parseFavourites', () => {
 
   it('leaves out items that are wrong or have no direction, and repeats', () => {
     const saved = JSON.stringify([kx, { stationId: 'A' }, null, 7, { ...kx, direction: '' }, kx])
-    expect(parseFavourites(saved)).toEqual([kx])
+    expect(parseFavourites(saved)).toEqual([yellowKx])
   })
 })
 
